@@ -53,7 +53,7 @@ aws s3 cp \
     s3://www.blogreader.com.au
 
 aws cloudfront create-invalidation \
-    --distribution-id E3POAE6U18ZSQ3 \
+    --distribution-id XXXXXXXXXXXX \
     --paths "/*"
 
 # # Clean up so you don't shoot yourself in the foot when doing dev work.
