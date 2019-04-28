@@ -1,0 +1,32 @@
+@import '~semantic-ui-css/semantic.css';
+@import 'colors.scss';
+
+@font-face {
+  font-family: 'Lato';
+  font-display: swap;
+}
+
+.ui.primary.button,
+.ui.blue.button {
+  background-color: $primary;
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+html, body {
+  font-family: Lato, sans-serif;
+  color: $text;
+}
+
+#app {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  &:visited {
+    color: inherit;
+  }
+}

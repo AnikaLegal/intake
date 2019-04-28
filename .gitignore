@@ -1,0 +1,28 @@
+# Python
+*.pyc
+env/
+output/
+
+# Project
+*secret*
+
+# Docker
+.env
+
+# Random crap
+*.sqlite3
+*.log
+*.retry
+*.pid
+*.db
+
+# frontend
+dist/
+node_modules/
+
+# tests
+test_media/
+.pytest_cache
+
+# database backups
+dumps/
