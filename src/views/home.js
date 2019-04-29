@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Container} from 'semantic-ui-react'
+import { Button } from 'antd'
 
 import { QUESTIONS, Q_TYPES } from 'questions'
+import { Page } from 'components'
 
 export class HomeView extends Component {
 
@@ -19,10 +20,10 @@ export class HomeView extends Component {
   render() {
     const { idx } = this.state
     return (
-      <Container>
+      <Page>
         {renderQuestion(QUESTIONS[idx])}
-        <Button onClick={this.onNext}>Next</Button>
-      </Container>
+        <Button type="primary" onClick={this.onNext}>Next</Button>
+      </Page>
     )
   }
 }
