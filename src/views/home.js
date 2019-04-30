@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Button } from 'antd'
+import { Form as AntForm, Button } from 'antd'
+import { InputNumber } from 'antd';
 
-import { QUESTIONS, Q_TYPES } from 'questions'
+import { FIELD_TYPES } from 'consts'
+import { FORMS } from 'questions'
 import { Page } from 'components'
 
 export class HomeView extends Component {
@@ -12,7 +14,7 @@ export class HomeView extends Component {
 
   onNext = () => {
     const { idx } = this.state
-    if (idx + 1 < QUESTIONS.length) {
+    if (idx + 1 < FORMS.length) {
       this.setState({ idx: idx + 1 })
     }
   }
@@ -21,22 +23,65 @@ export class HomeView extends Component {
     const { idx } = this.state
     return (
       <Page>
-        {renderQuestion(QUESTIONS[idx])}
+        <Form {...FORMS[idx]} />
         <Button type="primary" onClick={this.onNext}>Next</Button>
       </Page>
     )
   }
 }
 
-const renderQuestion = ({ prompt, type, children }) => {
-  if (type === Q_TYPES.FORM) {
-    return (
-      <div>
-        <p key={prompt}>{prompt}</p>
-        {children.map(renderQuestion)}
-      </div>
-    )
-  } else {
-    return <p key={prompt}>{prompt}</p>
+const Form = ({ name, fields, prompt, help }) => (
+  <AntForm>
+    <h2>{prompt}</h2>
+    {fields.map(f => <Field key={f.name} {...f} />)}
+  </AntForm>
+)
+
+const Field = ({
+  name,
+  type,
+  prompt,
+  placeholder,
+  help,
+  options,
+}) => {
+  // AntForm.Item
+  switch (type) {
+    case FIELD_TYPES.MULTICHOICE:
+      return (
+        <p>{prompt}</p>
+      )
+    case FIELD_TYPES.TEXTAREA:
+      return (
+        <p>{prompt}</p>
+      )
+    case FIELD_TYPES.FILE:
+      return (
+        <p>{prompt}</p>
+      )
+    case FIELD_TYPES.DATE:
+      return (
+        <p>{prompt}</p>
+      )
+    case FIELD_TYPES.BOOLEAN:
+      return (
+        <p>{prompt}</p>
+      )
+    case FIELD_TYPES.TEXT:
+      return (
+        <p>{prompt}</p>
+      )
+    case FIELD_TYPES.NUMBER:
+      return (
+        <Form.Item>
+          <p>{prompt}</p>
+          <InputNumber
+            min={1}
+            max={10}
+            defaultValue={3}
+            onChange={() => {}}
+          />
+        </Form.Item>
+      )
   }
 }
