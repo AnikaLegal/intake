@@ -1,7 +1,10 @@
 @import '~antd/dist/antd.css';
 
+$grey-light: #fefefe;
+
 html, body {
   height: 100%;
+  background-color: $grey-light;
 }
 
 #app {
