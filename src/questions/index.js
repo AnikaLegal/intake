@@ -14,7 +14,7 @@ export const FieldShape = {
 
 export const FormShape = {
   name: PropTypes.string.isRequired,
-  fields: PropTypes.arrayOf(FieldShape).isRequired,
+  fields: PropTypes.arrayOf(PropTypes.shape(FieldShape)).isRequired,
   prompt: PropTypes.string,
   help: PropTypes.string,
 }

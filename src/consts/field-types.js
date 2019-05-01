@@ -1,4 +1,5 @@
 export const FIELD_TYPES = {
+  DROPDOWN: 'DROPDOWN',
   MULTICHOICE: 'MULTICHOICE',
   TEXTAREA: 'TEXTAREA',
   FILE: 'FILE',
@@ -6,4 +7,5 @@ export const FIELD_TYPES = {
   BOOLEAN: 'BOOLEAN',
   TEXT: 'TEXT',
   NUMBER: 'NUMBER',
+  DOLLAR: 'DOLLAR',
 }

@@ -3,8 +3,9 @@ import { FIELD_TYPES } from 'consts'
 const DEFECT_TYPE = {
   name: 'DEFECT_TYPE',
   prompt: 'What does the defect relate to?',
-  help: 'If none apply, please select \'other\'',
-  type: FIELD_TYPES.MULTICHOICE,
+  placeholder: 'Select the type of defect',
+  help: "If none apply, please select 'other'",
+  type: FIELD_TYPES.DROPDOWN,
   options: [
     'Toilet',
     'Water',
@@ -22,8 +23,10 @@ const DEFECT_TYPE = {
 
 const DEFECT_PHOTO = {
   name: 'DEFECT_PHOTO',
-  prompt: 'If you have a photo of the defect, please upload it (as it will help us to assist you)',
-  help: 'If you do not have a photo of the defect to upload, that’s completely okay',
+  prompt:
+    'If you have a photo of the defect, please upload it (as it will help us to assist you)',
+  help:
+    'If you do not have a photo of the defect to upload, that’s completely okay',
   type: FIELD_TYPES.FILE,
 }
 
@@ -37,9 +40,5 @@ const DEFECT_DESCRIPTION = {
 export const DEFECT_FORM = {
   name: 'DEFECT_FORM',
   prompt: 'Tell us about your rental issue',
-  fields: [
-    DEFECT_TYPE,
-    DEFECT_DESCRIPTION,
-    DEFECT_PHOTO,
-  ]
+  fields: [DEFECT_TYPE, DEFECT_DESCRIPTION, DEFECT_PHOTO],
 }
