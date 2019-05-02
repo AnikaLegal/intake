@@ -8,8 +8,14 @@ const LETTER_PERMISSION = {
     'Letters sent from Anika will place more pressure on the landlord because they will notify the landlord that you have engaged legal advisors to act for you. Letters that are sent personally by you to the landlord will be more "gentle" because legal advisors are not involved.',
   type: FIELD_TYPES.MULTICHOICE,
   options: [
-    'I would prefer Anika to send any letters or notices to my landlord.',
-    'I would prefer Anika to prepare the letters or notices so that I can personally send them to my landlord',
+    {
+      label: 'I would prefer Anika to send any letters or notices to my landlord.',
+      value: 'anika',
+    },
+    {
+      label: 'I would prefer Anika to prepare the letters or notices so that I can personally send them to my landlord',
+      value: 'personal',
+    }
   ],
 }
 
@@ -53,7 +59,10 @@ const CLIENT_CONTACT_METHOD = {
   name: 'CLIENT_CONTACT_METHOD',
   prompt: 'How would you like to be contacted you?',
   type: FIELD_TYPES.MULTICHOICE,
-  options: ['Phone and email (we prefer this)', 'Email only'],
+  options: [
+    { label: 'Phone and email (we prefer this)', value: 'phone and email' },
+    { label: 'Email only', value: 'email' },
+  ],
 }
 
 const CLIENT_REFERRAL = {

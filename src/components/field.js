@@ -35,9 +35,9 @@ export const Field = ({
             onChange={onChange}
             placeholder={placeholder}
           >
-            {options.map(o => (
-              <Select.Option key={o} value={o}>
-                {o}
+            {options.map(({ label, value }) => (
+              <Select.Option key={label} value={value}>
+                {label}
               </Select.Option>
             ))}
           </Select>
@@ -47,9 +47,9 @@ export const Field = ({
       return (
         <FormItem prompt={prompt}>
           <Radio.Group onChange={e => onChange(e.target.value)} value={value}>
-            {options.map(o => (
-              <Radio key={o} style={radioStyle} value={o}>
-                {o}
+            {options.map(({ label, value }) => (
+              <Radio key={label} style={radioStyle} value={value}>
+                {label}
               </Radio>
             ))}
           </Radio.Group>

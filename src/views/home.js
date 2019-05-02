@@ -9,15 +9,21 @@ export class HomeView extends Component {
     idx: 0,
     data: {},
   }
-  onNext = () => {
-    const { idx } = this.state
-    if (idx + 1 < FORMS.length) {
+  onNext = idx => () => {
+    const { data } = this.state
+    if (idx + 1 >= FORMS.length) return
+    if (FORMS[idx + 1].when && !FORMS[idx + 1].when(data)) {
+      this.onNext(idx + 1)()
+    } else {
       this.setState({ idx: idx + 1 })
     }
   }
-  onBack = () => {
-    const { idx } = this.state
-    if (idx - 1 >= 0) {
+  onBack = idx => () => {
+    const { data } = this.state
+    if (idx - 1 < 0) return
+    if (FORMS[idx - 1].when && !FORMS[idx - 1].when(data)) {
+      this.onBack(idx - 1)()
+    } else {
       this.setState({ idx: idx - 1 })
     }
   }
@@ -35,8 +41,8 @@ export class HomeView extends Component {
           data={data}
           hasNext={hasNext}
           hasBack={hasBack}
-          onNext={this.onNext}
-          onBack={this.onBack}
+          onNext={this.onNext(idx)}
+          onBack={this.onBack(idx)}
           onChange={this.onChange}
         />
       </Page>

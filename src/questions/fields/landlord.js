@@ -6,10 +6,18 @@ const HAS_CONTACTED_LANDLORD = {
     'Have you contacted or attempted to contact your landlord (or your landlord’s agent) to ask them to fix the defect?',
   type: FIELD_TYPES.MULTICHOICE,
   options: [
-    'Yes, I have contacted my landlord (or my landlord’s agent) and have asked them to fix the defect.',
-    'I have tried contacting my landlord (or my landlord’s agent) and have left a message for them.',
-    'No, I have not yet made any attempts to contact my landlord or (or my landlord’s agent).',
-    // (If "no", go straight to "you should contact your landlord")
+    {
+      label: 'Yes, I have contacted my landlord (or my landlord’s agent) and have asked them to fix the defect.',
+      value: 'yes',
+    },
+    {
+      label: 'I have tried contacting my landlord (or my landlord’s agent) and have left a message for them.',
+      value: 'attempted',
+    },
+    {
+      label: 'No, I have not yet made any attempts to contact my landlord or (or my landlord’s agent).',
+      value: 'no',
+    },
   ],
 }
 
@@ -17,7 +25,13 @@ const LANDLORD_CONTACT_METHOD = {
   name: 'LANDLORD_CONTACT_METHOD',
   prompt: 'How did you contact your landlord (or your landlord’s agent)?',
   type: FIELD_TYPES.MULTICHOICE,
-  options: ['Phone', 'Email', 'SMS', 'Letter', 'In person'],
+  options: [
+    { label: 'Phone', value: 'phone' },
+    { label: 'Email', value: 'email' },
+    { label: 'SMS', value: 'sms' },
+    { label: 'Letter', value: 'letter' },
+    { label: 'In person', value: 'in person' },
+  ],
 }
 
 const LANDLORD_CONTACT_DATE = {
@@ -34,7 +48,12 @@ const LANDLORD_CONTACT_ATTEMPTS = {
   help:
     'It doesn’t matter if you have contacted your landlord once or three times, it’s just helpful for us to know.',
   type: FIELD_TYPES.MULTICHOICE,
-  options: ['Once', 'Twice', 'Three times', 'More than three'],
+  options: [
+    { label: 'Once', value: '1' },
+    { label: 'Twice', value: '2' },
+    { label: 'Three times', value: '3' },
+    { label: 'More than three', value: '>3' },
+  ],
 }
 
 const LANDLORD_CONTACT_RECORDS = {
@@ -45,9 +64,8 @@ const LANDLORD_CONTACT_RECORDS = {
     'Records could include emails or text messages you sent. It could also be the call log in your phone saying you called them on a certain day.',
   type: FIELD_TYPES.MULTICHOICE,
   options: [
-    'Yes, I have records.',
-    'No, I do not have any records.',
-    // If no, you need to get records.
+    { label: 'Yes, I have records.', value: 'yes' },
+    { label: 'No, I do not have any records.', value: 'no' },
   ],
 }
 
@@ -55,7 +73,10 @@ const LANDLORD_HAS_AGENT = {
   name: 'LANDLORD_HAS_AGENT',
   prompt: 'Does your landlord use an agent to manage the property?',
   type: FIELD_TYPES.MULTICHOICE,
-  options: ['Yes', 'No'],
+  options: [
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' },
+  ],
 }
 
 const LANDLORD_NAME = {
@@ -83,7 +104,10 @@ const IS_VCAT_OK = {
   help:
     'VCAT is a tribunal that hears and decides disputes between tenants and landlord. VCAT performs similar functions to a court, but is cheaper, faster and more informal than a court. A common reason why a tenant may not want to commence VCAT proceedings is they do not want to aggravate their relationship with their landlord because they are trying to secure an upcoming lease renewal.',
   type: FIELD_TYPES.MULTICHOICE,
-  options: ['Yes.', 'No.'],
+  options: [
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' },
+  ],
 }
 
 const VCAT_AVOID_REASON = {
@@ -101,6 +125,7 @@ export const LANDLORD_COMMS_CHECK_FORM = {
 
 export const LANDLORD_COMMS_DETAILS_FORM = {
   name: 'LANDLORD_COMMS_DETAILS_FORM',
+  when: data => data['HAS_CONTACTED_LANDLORD'] !== 'no',
   prompt: 'Tell us about your landlord',
   fields: [
     LANDLORD_CONTACT_METHOD,
@@ -124,6 +149,7 @@ export const LANDLORD_DETAILS_FORM = {
 
 export const VCAT_AVOID_REASON_FORM = {
   name: 'VCAT_AVOID_REASON_FORM',
+  when: data => data['IS_VCAT_OK'] === 'no',
   prompt: 'Tell us more',
   fields: [VCAT_AVOID_REASON],
 }

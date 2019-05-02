@@ -7,8 +7,14 @@ const HAS_QUOTE = {
   help: 'It doesn’t matter if you haven’t obtained a quote yet.',
   type: FIELD_TYPES.MULTICHOICE,
   options: [
-    'Yes, I have obtained a quote.',
-    'No, I have not obtained a quote.',
+    {
+      label: 'Yes, I have obtained a quote.',
+      value: 'yes',
+    },
+    {
+      label: 'No, I have not obtained a quote.',
+      value: 'no',
+    }
   ],
 }
 
@@ -25,7 +31,10 @@ const CAN_PAY_QUOTE = {
   help:
     'Paying for the repairs yourself (and then seeking reimbursement from your landlord) is the fastest way to get the defect fixed. However, we expect that most tenants will not wish to pay for the repairs themselves.',
   type: FIELD_TYPES.MULTICHOICE,
-  options: ['Yes', 'No'],
+  options: [
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' },
+  ],
 }
 
 export const HAS_QUOTE_FORM = {
@@ -36,6 +45,7 @@ export const HAS_QUOTE_FORM = {
 
 export const QUOTE_COST_FORM = {
   name: 'QUOTE_COST_FORM',
+  when: data => data['HAS_QUOTE'] === 'yes',
   prompt: 'Repair quote',
   fields: [QUOTE_COST, CAN_PAY_QUOTE],
 }
