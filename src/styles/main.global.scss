@@ -1,10 +1,20 @@
 @import '~antd/dist/antd.css';
+@import './colors';
+@import './fonts';
 
-$grey-light: #fefefe;
 
 html, body {
   height: 100%;
+  font-family: Montserrat, sans-serif;
   background-color: $grey-light;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+h2, h3, h4, h5 {
+  font-weight: 500;
 }
 
 #app {

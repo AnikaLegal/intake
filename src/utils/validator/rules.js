@@ -37,6 +37,26 @@ const isURL = validatePredicate(isURLPredicate, 'This must be a valid URL')
 const isTruthyPredicate = v => Boolean(v) || v === 0
 const isTruthy = validatePredicate(isTruthyPredicate, 'This is required')
 
+// Truthy validator for objects - `0` is truthy.
+const isAllTruthyValuesPredicate = obj =>
+  obj &&
+  Object.values(obj).length > 0 &&
+  Object.values(obj).every(v => Boolean(v) || v === 0)
+const isAllTruthyValues = validatePredicate(
+  isAllTruthyValuesPredicate,
+  'This is required'
+)
+
+// Truthy validator for objects - `0` is truthy.
+const isSomeTruthyValuesPredicate = obj =>
+  obj &&
+  Object.values(obj).length > 0 &&
+  Object.values(obj).some(v => Boolean(v) || v === 0)
+const isSomeTruthyValues = validatePredicate(
+  isSomeTruthyValuesPredicate,
+  'This is required'
+)
+
 // Number validatior
 const isNumberPredicate = v => !v || !isNaN(v)
 const isNumber = validatePredicate(isNumberPredicate, 'This must be a number')
@@ -80,6 +100,8 @@ const isAustralianBusinessNumber = (data, key) => {
     return { valid: false, errors: ['This must be a number'] }
   }
   const abnNumbers = abnString.split('').map(parseFloat)
+  const isLength = abnNumbers.length === 11
+
   // Subtract 1 from the first (left-most) digit of the ABN to give a new 11 digit number
   abnNumbers[0] -= 1
   // Multiply each of the digits in this new number by a "weighting factor" based on its position as shown in ABN_WEIGHTS
@@ -90,7 +112,8 @@ const isAustralianBusinessNumber = (data, key) => {
 
   // Divide the sum total by 89, noting the remainder
   // If the remainder is zero the number is a valid ABN
-  return abnSum % 89 === 0
+  const isCheckSum = abnSum % 89 === 0
+  return isLength && isCheckSum
     ? { valid: true, errors: [] }
     : { valid: false, errors: ['This must be valid ABN'] }
 }
@@ -99,6 +122,8 @@ export const rules = {
   isEmail,
   isURL,
   isTruthy,
+  isAllTruthyValues,
+  isSomeTruthyValues,
   isNumber,
   isPositiveNumber,
   isLength,

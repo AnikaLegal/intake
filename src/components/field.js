@@ -11,116 +11,35 @@ import {
   Upload,
   Icon,
 } from 'antd'
-
+import styled from 'styled-components'
 import { FieldShape } from 'questions'
 import { FIELD_TYPES } from 'consts'
 
-export const Field = ({
-  name,
-  type,
-  prompt,
-  placeholder,
-  help,
-  options,
-  onChange,
-  value,
-}) => {
-  switch (type) {
-    case FIELD_TYPES.DROPDOWN:
-      return (
-        <FormItem prompt={prompt}>
-          <Select
-            size="large"
-            defaultValue=""
-            onChange={onChange}
-            placeholder={placeholder}
-          >
-            {options.map(({ label, value }) => (
-              <Select.Option key={label} value={value}>
-                {label}
-              </Select.Option>
-            ))}
-          </Select>
-        </FormItem>
-      )
-    case FIELD_TYPES.MULTICHOICE:
-      return (
-        <FormItem prompt={prompt}>
-          <Radio.Group onChange={e => onChange(e.target.value)} value={value}>
-            {options.map(({ label, value }) => (
-              <Radio key={label} style={radioStyle} value={value}>
-                {label}
-              </Radio>
-            ))}
-          </Radio.Group>
-        </FormItem>
-      )
-    case FIELD_TYPES.FILE:
-      return (
-        <FormItem prompt={prompt}>
-          <Upload>
-            <Button>
-              <Icon type="upload" /> Click to Upload
-            </Button>
-          </Upload>
-        </FormItem>
-      )
-    case FIELD_TYPES.DATE:
-      return (
-        <FormItem prompt={prompt}>
-          <DatePicker onChange={e => onChange(e._d.toDateString())} />
-        </FormItem>
-      )
-    case FIELD_TYPES.BOOLEAN:
-      return <FormItem prompt={prompt} />
-    case FIELD_TYPES.TEXT:
-      return (
-        <FormItem prompt={prompt}>
-          <Input
-            value={value}
-            placeholder={placeholder}
-            onChange={e => onChange(e.target.value)}
-          />
-        </FormItem>
-      )
-    case FIELD_TYPES.TEXTAREA:
-      return (
-        <FormItem prompt={prompt}>
-          <Input.TextArea
-            rows={4}
-            value={value}
-            placeholder={placeholder}
-            onChange={e => onChange(e.target.value)}
-          />
-        </FormItem>
-      )
-    case FIELD_TYPES.DOLLAR:
-      return (
-        <FormItem prompt={prompt}>
-          <InputNumber
-            defaultValue={0}
-            min={0}
-            formatter={value =>
-              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            }
-            parser={value => value.replace(/\$\s?|(,*)/g, '')}
-            placeholder={placeholder}
-            onChange={onChange}
-          />
-        </FormItem>
-      )
-    case FIELD_TYPES.NUMBER:
-      return (
-        <FormItem prompt={prompt}>
-          <InputNumber
-            defaultValue={0}
-            min={0}
-            placeholder={placeholder}
-            onChange={onChange}
-          />
-        </FormItem>
-      )
-  }
+export const Field = props => {
+  const {
+    name,
+    type,
+    prompt,
+    placeholder,
+    help,
+    options,
+    onChange,
+    value,
+    valid,
+    errors,
+  } = props
+  const FieldInput = FIELD_INPUTS[type]
+  return (
+    <FieldWrapper>
+      <h3>{prompt}</h3>
+      <AntForm.Item
+        validateStatus={valid ? '' : 'error'}
+        help={errors.join('. ')}
+      >
+        <FieldInput {...props} />
+      </AntForm.Item>
+    </FieldWrapper>
+  )
 }
 Field.propTypes = {
   ...FieldShape,
@@ -128,15 +47,100 @@ Field.propTypes = {
   onChange: PropTypes.func.isRequired,
 }
 
-const FormItem = ({ prompt, children }) => (
-  <div>
-    <h3>{prompt}</h3>
-    <AntForm.Item>{children}</AntForm.Item>
-  </div>
-)
+const FieldWrapper = styled.div`
+  margin-bottom: 1.5rem;
+`
 
 const radioStyle = {
   display: 'block',
   height: '30px',
   lineHeight: '30px',
+}
+
+const DropdownField = ({ onChange, placeholder, options, value }) => (
+  <Select
+    size="large"
+    onChange={onChange}
+    defaultValue={value || undefined}
+    placeholder={placeholder}
+  >
+    {options.map(({ label, value }) => (
+      <Select.Option key={label} value={value}>
+        {label}
+      </Select.Option>
+    ))}
+  </Select>
+)
+
+const MultichoiceField = ({ onChange, value, options }) => (
+  <Radio.Group onChange={e => onChange(e.target.value)} value={value}>
+    {options.map(({ label, value }) => (
+      <Radio key={label} style={radioStyle} value={value}>
+        {label}
+      </Radio>
+    ))}
+  </Radio.Group>
+)
+
+const FileField = ({}) => (
+  <Upload>
+    <Button>
+      <Icon type="upload" /> Click to Upload
+    </Button>
+  </Upload>
+)
+
+const DateField = ({ onChange }) => (
+  <DatePicker onChange={e => onChange(e._d.toDateString())} />
+)
+
+const BooleanField = ({ prompt }) => null
+
+const TextField = ({ placeholder, value, onChange }) => (
+  <Input
+    value={value}
+    placeholder={placeholder}
+    onChange={e => onChange(e.target.value)}
+  />
+)
+
+const TextAreaField = ({ value, placeholder, onChange }) => (
+  <Input.TextArea
+    rows={4}
+    value={value}
+    placeholder={placeholder}
+    onChange={e => onChange(e.target.value)}
+  />
+)
+
+const DollarField = ({ value, placeholder, onChange }) => (
+  <InputNumber
+    defaultValue={0}
+    min={0}
+    formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+    parser={value => value.replace(/\$\s?|(,*)/g, '')}
+    placeholder={placeholder}
+    onChange={onChange}
+  />
+)
+
+const NumberField = ({ placeholder, onChange }) => (
+  <InputNumber
+    defaultValue={0}
+    min={0}
+    placeholder={placeholder}
+    onChange={onChange}
+  />
+)
+
+const FIELD_INPUTS = {
+  [FIELD_TYPES.DROPDOWN]: DropdownField,
+  [FIELD_TYPES.MULTICHOICE]: MultichoiceField,
+  [FIELD_TYPES.FILE]: FileField,
+  [FIELD_TYPES.DATE]: DateField,
+  [FIELD_TYPES.BOOLEAN]: BooleanField,
+  [FIELD_TYPES.TEXT]: TextField,
+  [FIELD_TYPES.TEXTAREA]: TextAreaField,
+  [FIELD_TYPES.DOLLAR]: DollarField,
+  [FIELD_TYPES.NUMBER]: NumberField,
 }

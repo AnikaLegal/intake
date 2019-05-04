@@ -8,11 +8,14 @@ export const FieldShape = {
   prompt: PropTypes.string,
   placeholder: PropTypes.string,
   help: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  })),
-  // validations
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })
+  ),
+  valid: PropTypes.bool,
+  errors: PropTypes.array,
 }
 
 export const FormShape = {
@@ -21,6 +24,7 @@ export const FormShape = {
   prompt: PropTypes.string,
   help: PropTypes.string,
   when: PropTypes.func,
+  validations: PropTypes.object.isRequired,
 }
 
 import {

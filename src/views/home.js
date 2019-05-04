@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { FIELD_TYPES } from 'consts'
 import { FORMS } from 'questions'
-import { Form, Page } from 'components'
+import { Header, Form, Page } from 'components'
 
 export class HomeView extends Component {
   state = {
@@ -35,17 +35,21 @@ export class HomeView extends Component {
     const hasNext = idx + 1 < FORMS.length
     const hasBack = idx - 1 >= 0
     return (
-      <Page>
-        <Form
-          {...FORMS[idx]}
-          data={data}
-          hasNext={hasNext}
-          hasBack={hasBack}
-          onNext={this.onNext(idx)}
-          onBack={this.onBack(idx)}
-          onChange={this.onChange}
-        />
-      </Page>
+      <div>
+        <Header />
+        <Page>
+          <Form
+            {...FORMS[idx]}
+            key={idx}
+            data={data}
+            hasNext={hasNext}
+            hasBack={hasBack}
+            onNext={this.onNext(idx)}
+            onBack={this.onBack(idx)}
+            onChange={this.onChange}
+          />
+        </Page>
+      </div>
     )
   }
 }

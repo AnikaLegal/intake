@@ -1,4 +1,5 @@
 import { FIELD_TYPES } from 'consts'
+import { rules } from 'utils'
 
 const HAS_CONTACTED_LANDLORD = {
   name: 'HAS_CONTACTED_LANDLORD',
@@ -7,15 +8,18 @@ const HAS_CONTACTED_LANDLORD = {
   type: FIELD_TYPES.MULTICHOICE,
   options: [
     {
-      label: 'Yes, I have contacted my landlord (or my landlord’s agent) and have asked them to fix the defect.',
+      label:
+        'Yes, I have contacted my landlord (or my landlord’s agent) and have asked them to fix the defect.',
       value: 'yes',
     },
     {
-      label: 'I have tried contacting my landlord (or my landlord’s agent) and have left a message for them.',
+      label:
+        'I have tried contacting my landlord (or my landlord’s agent) and have left a message for them.',
       value: 'attempted',
     },
     {
-      label: 'No, I have not yet made any attempts to contact my landlord or (or my landlord’s agent).',
+      label:
+        'No, I have not yet made any attempts to contact my landlord or (or my landlord’s agent).',
       value: 'no',
     },
   ],
@@ -73,10 +77,7 @@ const LANDLORD_HAS_AGENT = {
   name: 'LANDLORD_HAS_AGENT',
   prompt: 'Does your landlord use an agent to manage the property?',
   type: FIELD_TYPES.MULTICHOICE,
-  options: [
-    { label: 'Yes', value: 'yes' },
-    { label: 'No', value: 'no' },
-  ],
+  options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
 }
 
 const LANDLORD_NAME = {
@@ -104,10 +105,7 @@ const IS_VCAT_OK = {
   help:
     'VCAT is a tribunal that hears and decides disputes between tenants and landlord. VCAT performs similar functions to a court, but is cheaper, faster and more informal than a court. A common reason why a tenant may not want to commence VCAT proceedings is they do not want to aggravate their relationship with their landlord because they are trying to secure an upcoming lease renewal.',
   type: FIELD_TYPES.MULTICHOICE,
-  options: [
-    { label: 'Yes', value: 'yes' },
-    { label: 'No', value: 'no' },
-  ],
+  options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
 }
 
 const VCAT_AVOID_REASON = {
@@ -121,6 +119,9 @@ export const LANDLORD_COMMS_CHECK_FORM = {
   name: 'LANDLORD_COMMS_CHECK_FORM',
   prompt: 'Tell us about your landlord',
   fields: [HAS_CONTACTED_LANDLORD],
+  validations: {
+    HAS_CONTACTED_LANDLORD: [rules.isTruthy],
+  },
 }
 
 export const LANDLORD_COMMS_DETAILS_FORM = {
@@ -133,6 +134,12 @@ export const LANDLORD_COMMS_DETAILS_FORM = {
     LANDLORD_CONTACT_ATTEMPTS,
     LANDLORD_CONTACT_RECORDS,
   ],
+  validations: {
+    LANDLORD_CONTACT_METHOD: [rules.isTruthy],
+    LANDLORD_CONTACT_DATE: [rules.isTruthy],
+    LANDLORD_CONTACT_ATTEMPTS: [rules.isTruthy],
+    LANDLORD_CONTACT_RECORDS: [rules.isTruthy],
+  },
 }
 
 export const LANDLORD_DETAILS_FORM = {
@@ -145,6 +152,13 @@ export const LANDLORD_DETAILS_FORM = {
     LANDLORD_PHONE,
     IS_VCAT_OK,
   ],
+  validations: {
+    LANDLORD_HAS_AGENT: [rules.isTruthy],
+    LANDLORD_NAME: [rules.isTruthy],
+    LANDLORD_EMAIL: [rules.isTruthy],
+    LANDLORD_PHONE: [rules.isTruthy],
+    IS_VCAT_OK: [rules.isTruthy],
+  },
 }
 
 export const VCAT_AVOID_REASON_FORM = {
@@ -152,4 +166,7 @@ export const VCAT_AVOID_REASON_FORM = {
   when: data => data['IS_VCAT_OK'] === 'no',
   prompt: 'Tell us more',
   fields: [VCAT_AVOID_REASON],
+  validations: {
+    VCAT_AVOID_REASON: [rules.isTruthy],
+  },
 }

@@ -1,4 +1,5 @@
 import { FIELD_TYPES } from 'consts'
+import { rules } from 'utils'
 
 const DEFECT_TYPE = {
   name: 'DEFECT_TYPE',
@@ -12,13 +13,21 @@ const DEFECT_TYPE = {
     { label: 'Electricity', value: 'Electricity' },
     { label: 'Cooking', value: 'Cooking' },
     { label: 'Fire', value: 'Fire' },
-    { label: 'Stairs / lift',  value: 'Stairs / lift' },
+    { label: 'Stairs / lift', value: 'Stairs / lift' },
     { label: 'Laundry', value: 'Laundry' },
     { label: 'Gas', value: 'Gas' },
     { label: 'Roof', value: 'Roof' },
     { label: 'Heating / cooling', value: 'Heating / cooling' },
     { label: 'Other', value: 'Other' },
   ],
+}
+
+const DEFECT_DESCRIPTION = {
+  name: 'DEFECT_DESCRIPTION',
+  prompt: 'Please provide a short description of the defect',
+  placeholder: 'Enter your description here',
+  help: 'Just explain it as if you were telling a friend about it',
+  type: FIELD_TYPES.TEXTAREA,
 }
 
 const DEFECT_PHOTO = {
@@ -30,15 +39,13 @@ const DEFECT_PHOTO = {
   type: FIELD_TYPES.FILE,
 }
 
-const DEFECT_DESCRIPTION = {
-  name: 'DEFECT_DESCRIPTION',
-  prompt: 'Please provide a short description of the defect',
-  help: 'Just explain it as if you were telling a friend about it',
-  type: FIELD_TYPES.TEXTAREA,
-}
-
 export const DEFECT_FORM = {
   name: 'DEFECT_FORM',
   prompt: 'Tell us about your rental issue',
   fields: [DEFECT_TYPE, DEFECT_DESCRIPTION, DEFECT_PHOTO],
+  validations: {
+    DEFECT_TYPE: [rules.isTruthy],
+    DEFECT_DESCRIPTION: [rules.isTruthy],
+    DEFECT_PHOTO: [],
+  },
 }

@@ -1,4 +1,5 @@
 import { FIELD_TYPES } from 'consts'
+import { rules } from 'utils'
 
 const HAS_QUOTE = {
   name: 'HAS_QUOTE',
@@ -14,7 +15,7 @@ const HAS_QUOTE = {
     {
       label: 'No, I have not obtained a quote.',
       value: 'no',
-    }
+    },
   ],
 }
 
@@ -31,16 +32,16 @@ const CAN_PAY_QUOTE = {
   help:
     'Paying for the repairs yourself (and then seeking reimbursement from your landlord) is the fastest way to get the defect fixed. However, we expect that most tenants will not wish to pay for the repairs themselves.',
   type: FIELD_TYPES.MULTICHOICE,
-  options: [
-    { label: 'Yes', value: 'yes' },
-    { label: 'No', value: 'no' },
-  ],
+  options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
 }
 
 export const HAS_QUOTE_FORM = {
   name: 'HAS_QUOTE_FORM',
   prompt: 'Repair quote',
   fields: [HAS_QUOTE],
+  validations: {
+    HAS_QUOTE: [rules.isTruthy],
+  },
 }
 
 export const QUOTE_COST_FORM = {
@@ -48,4 +49,8 @@ export const QUOTE_COST_FORM = {
   when: data => data['HAS_QUOTE'] === 'yes',
   prompt: 'Repair quote',
   fields: [QUOTE_COST, CAN_PAY_QUOTE],
+  validations: {
+    QUOTE_COST: [rules.isTruthy],
+    CAN_PAY_QUOTE: [rules.isTruthy],
+  },
 }

@@ -1,4 +1,5 @@
 import { FIELD_TYPES } from 'consts'
+import { rules } from 'utils'
 
 const LETTER_PERMISSION = {
   name: 'LETTER_PERMISSION',
@@ -9,13 +10,15 @@ const LETTER_PERMISSION = {
   type: FIELD_TYPES.MULTICHOICE,
   options: [
     {
-      label: 'I would prefer Anika to send any letters or notices to my landlord.',
+      label:
+        'I would prefer Anika to send any letters or notices to my landlord.',
       value: 'anika',
     },
     {
-      label: 'I would prefer Anika to prepare the letters or notices so that I can personally send them to my landlord',
+      label:
+        'I would prefer Anika to prepare the letters or notices so that I can personally send them to my landlord',
       value: 'personal',
-    }
+    },
   ],
 }
 
@@ -57,7 +60,7 @@ const CLIENT_EVENING_PHONE = {
 
 const CLIENT_CONTACT_METHOD = {
   name: 'CLIENT_CONTACT_METHOD',
-  prompt: 'How would you like to be contacted you?',
+  prompt: 'How would you like to be contacted?',
   type: FIELD_TYPES.MULTICHOICE,
   options: [
     { label: 'Phone and email (we prefer this)', value: 'phone and email' },
@@ -82,10 +85,23 @@ export const PERSONAL_DETAILS_FORM = {
     CLIENT_BUSINESS_PHONE,
     CLIENT_EVENING_PHONE,
   ],
+  validations: {
+    CLIENT_NAME: [rules.isTruthy],
+    CLIENT_RENTAL_ADDRESS: [rules.isTruthy],
+    CLIENT_PERSONAL_ADDRESS: [rules.isTruthy],
+    CLIENT_EMAIL: [rules.isTruthy],
+    CLIENT_BUSINESS_PHONE: [rules.isTruthy],
+    CLIENT_EVENING_PHONE: [rules.isTruthy],
+  },
 }
 
 export const PERSONAL_PREFERENCES_FORM = {
   name: 'PERSONAL_PREFERENCES_FORM',
   prompt: 'Tell us what you prefer',
   fields: [LETTER_PERMISSION, CLIENT_CONTACT_METHOD, CLIENT_REFERRAL],
+  validations: {
+    LETTER_PERMISSION: [rules.isTruthy],
+    CLIENT_CONTACT_METHOD: [rules.isTruthy],
+    CLIENT_REFERRAL: [],
+  },
 }
