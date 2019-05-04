@@ -5,7 +5,8 @@ import styled from 'styled-components'
 
 import { validate } from 'utils'
 import { FormShape } from 'questions'
-import { Field } from 'components'
+import { Field, FieldGroup } from 'components'
+import { FIELD_TYPES } from 'consts'
 
 export const Form = ({
   name,
@@ -33,17 +34,42 @@ export const Form = ({
     <div>
       <FormTitle>{prompt}</FormTitle>
       <AntForm>
-        {fields.map(f => (
-          <Field
-            key={f.name}
-            {...f}
-            valid={isSubmitted ? validation.fields[f.name].valid : true}
-            errors={isSubmitted ? validation.fields[f.name].errors : []}
-            value={data[f.name] || ''}
-            onChange={onChange(f.name)}
-          />
-        ))}
+        {fields.map(f => {
+          if (f.type === FIELD_TYPES.FIELD_GROUP) {
+            return (
+              <FieldGroup key={f.name} {...f}>
+                {f.fields.map(field => (
+                  <Field
+                    key={field.name}
+                    {...field}
+                    valid={
+                      isSubmitted ? validation.fields[field.name].valid : true
+                    }
+                    errors={
+                      isSubmitted ? validation.fields[field.name].errors : []
+                    }
+                    value={data[field.name] || ''}
+                    onChange={onChange(field.name)}
+                    isCompact
+                  />
+                ))}
+              </FieldGroup>
+            )
+          } else {
+            return (
+              <Field
+                key={f.name}
+                {...f}
+                valid={isSubmitted ? validation.fields[f.name].valid : true}
+                errors={isSubmitted ? validation.fields[f.name].errors : []}
+                value={data[f.name] || ''}
+                onChange={onChange(f.name)}
+              />
+            )
+          }
+        })}
       </AntForm>
+      <Divider />
       {hasBack && (
         <Button onClick={onBack} style={{ marginRight: '0.5rem' }}>
           Back
@@ -69,6 +95,13 @@ Form.propTypes = {
   onChange: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 }
+
+const Divider = styled.hr`
+  margin: 1.5rem 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.15);
+  height: 1px;
+`
 
 const FormTitle = styled.h1`
   margin-bottom: 2rem;

@@ -7,7 +7,7 @@ const LETTER_PERMISSION = {
     'If any letters or notices need to be sent to your landlord, would you prefer Anika to send those letters or notices to you landlord or would you prefer Anika to prepare the letters or notices for you to send to landlord?',
   help:
     'Letters sent from Anika will place more pressure on the landlord because they will notify the landlord that you have engaged legal advisors to act for you. Letters that are sent personally by you to the landlord will be more "gentle" because legal advisors are not involved.',
-  type: FIELD_TYPES.MULTICHOICE,
+  type: FIELD_TYPES.RADIO,
   options: [
     {
       label:
@@ -24,30 +24,35 @@ const LETTER_PERMISSION = {
 
 const CLIENT_NAME = {
   name: 'CLIENT_NAME',
+  label: 'Full name',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Full name',
 }
 
 const CLIENT_RENTAL_ADDRESS = {
   name: 'CLIENT_RENTAL_ADDRESS',
+  label: 'Rental Addr',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Address of rental property in issue',
 }
 
 const CLIENT_PERSONAL_ADDRESS = {
   name: 'CLIENT_PERSONAL_ADDRESS',
+  label: 'Personal Addr',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Personal address',
 }
 
 const CLIENT_EMAIL = {
   name: 'CLIENT_EMAIL',
+  label: 'Email',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Email address',
 }
 
 const CLIENT_BUSINESS_PHONE = {
   name: 'CLIENT_BUSINESS_PHONE',
+  label: 'Phone (Day)',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Phone number (business hours)',
 }
@@ -55,13 +60,28 @@ const CLIENT_BUSINESS_PHONE = {
 const CLIENT_EVENING_PHONE = {
   name: 'CLIENT_EVENING_PHONE',
   type: FIELD_TYPES.TEXT,
+  label: 'Phone (Evening)',
   placeholder: 'Phone number (outside business hours)',
+}
+
+const CLIENT_CONTACT_DETAILS = {
+  name: 'CLIENT_CONTACT_DETAILS',
+  prompt: 'Please provide your contact details.',
+  type: FIELD_TYPES.FIELD_GROUP,
+  fields: [
+    CLIENT_NAME,
+    CLIENT_RENTAL_ADDRESS,
+    CLIENT_PERSONAL_ADDRESS,
+    CLIENT_EMAIL,
+    CLIENT_BUSINESS_PHONE,
+    CLIENT_EVENING_PHONE,
+  ],
 }
 
 const CLIENT_CONTACT_METHOD = {
   name: 'CLIENT_CONTACT_METHOD',
   prompt: 'How would you like to be contacted?',
-  type: FIELD_TYPES.MULTICHOICE,
+  type: FIELD_TYPES.RADIO,
   options: [
     { label: 'Phone and email (we prefer this)', value: 'phone and email' },
     { label: 'Email only', value: 'email' },
@@ -77,14 +97,7 @@ const CLIENT_REFERRAL = {
 export const PERSONAL_DETAILS_FORM = {
   name: 'PERSONAL_DETAILS_FORM',
   prompt: 'We need to know more about you',
-  fields: [
-    CLIENT_NAME,
-    CLIENT_RENTAL_ADDRESS,
-    CLIENT_PERSONAL_ADDRESS,
-    CLIENT_EMAIL,
-    CLIENT_BUSINESS_PHONE,
-    CLIENT_EVENING_PHONE,
-  ],
+  fields: [CLIENT_CONTACT_DETAILS],
   validations: {
     CLIENT_NAME: [rules.isTruthy],
     CLIENT_RENTAL_ADDRESS: [rules.isTruthy],

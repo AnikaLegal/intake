@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import styled, { css } from 'styled-components'
+import { Steps } from 'antd'
 
 import { FIELD_TYPES } from 'consts'
 import { FORMS } from 'questions'
@@ -35,21 +37,57 @@ export class HomeView extends Component {
     const hasNext = idx + 1 < FORMS.length
     const hasBack = idx - 1 >= 0
     return (
-      <div>
+      <Layout vertical>
         <Header />
-        <Page>
-          <Form
-            {...FORMS[idx]}
-            key={idx}
-            data={data}
-            hasNext={hasNext}
-            hasBack={hasBack}
-            onNext={this.onNext(idx)}
-            onBack={this.onBack(idx)}
-            onChange={this.onChange}
-          />
-        </Page>
-      </div>
+        <Layout>
+          <Sidebar forms={FORMS} idx={idx} />
+          <Page>
+            <Form
+              {...FORMS[idx]}
+              key={idx}
+              data={data}
+              hasNext={hasNext}
+              hasBack={hasBack}
+              onNext={this.onNext(idx)}
+              onBack={this.onBack(idx)}
+              onChange={this.onChange}
+            />
+          </Page>
+        </Layout>
+      </Layout>
     )
   }
 }
+
+const Layout = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  ${props =>
+    props.vertical &&
+    css`
+      flex-direction: column;
+    `}
+`
+
+const _Sidebar = ({ className, idx, forms }) => {
+  return (
+    <div className={className}>
+      <Steps direction="vertical" current={idx}>
+        {forms.map(form => (
+          <Steps.Step title={form.name} key={form.name} />
+        ))}
+      </Steps>
+    </div>
+  )
+}
+
+const Sidebar = styled(_Sidebar)`
+  background-color: #fff;
+  padding: 1.5rem;
+  width: 300px;
+  border-right: 2px solid rgba(21, 27, 38, 0.15);
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`

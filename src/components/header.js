@@ -11,5 +11,5 @@ export const Header = ({ children }) => (
 
 const StyledHeader = styled.div`
   padding: 1rem;
-  box-shadow: 0 1px 3px 0 rgba(21, 27, 38, 0.15);
+  border-bottom: 2px solid rgba(21, 27, 38, 0.15);
 `
