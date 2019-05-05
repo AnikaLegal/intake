@@ -26,7 +26,7 @@ aws s3 cp \
     --include '*.html' \
     --acl public-read \
     ./dist \
-    s3://www.blogreader.com.au
+    s3://anika-intake
 
 # Upload CSS + JS with cache and gzip
 echo -e "\nUploading JS + CSS"
@@ -38,7 +38,7 @@ aws s3 cp \
     --cache-control $CACHE_CONTROL \
     --acl public-read \
     ./dist \
-    s3://www.blogreader.com.au
+    s3://anika-intake
 
 # Upload everything else with cache and no gzip
 echo -e "\nUploading other assets"
@@ -50,11 +50,8 @@ aws s3 cp \
     --cache-control $CACHE_CONTROL \
     --acl public-read \
     ./dist \
-    s3://www.blogreader.com.au
+    s3://anika-intake
 
-aws cloudfront create-invalidation \
-    --distribution-id XXXXXXXXXXXX \
-    --paths "/*"
 
 # # Clean up so you don't shoot yourself in the foot when doing dev work.
 echo "Cleaning up post build..."
