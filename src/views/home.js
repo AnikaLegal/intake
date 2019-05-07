@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { Steps } from 'antd'
 
 import { FIELD_TYPES } from 'consts'
-import { FORMS } from 'questions'
+import { SECTIONS } from 'questions'
 import { Header, Form, Page } from 'components'
 
 export class HomeView extends Component {
@@ -11,10 +11,14 @@ export class HomeView extends Component {
     idx: 0,
     data: {},
   }
+  getForms = () => {
+    return SECTIONS.map(s => s.forms).reduce((arr, fs) => [...arr, ...fs], [])
+  }
   onNext = idx => () => {
     const { data } = this.state
-    if (idx + 1 >= FORMS.length) return
-    if (FORMS[idx + 1].when && !FORMS[idx + 1].when(data)) {
+    const forms = this.getForms()
+    if (idx + 1 >= forms.length) return
+    if (forms[idx + 1].when && !forms[idx + 1].when(data)) {
       this.onNext(idx + 1)()
     } else {
       this.setState({ idx: idx + 1 })
@@ -22,8 +26,9 @@ export class HomeView extends Component {
   }
   onBack = idx => () => {
     const { data } = this.state
+    const forms = this.getForms()
     if (idx - 1 < 0) return
-    if (FORMS[idx - 1].when && !FORMS[idx - 1].when(data)) {
+    if (forms[idx - 1].when && !forms[idx - 1].when(data)) {
       this.onBack(idx - 1)()
     } else {
       this.setState({ idx: idx - 1 })
@@ -34,16 +39,17 @@ export class HomeView extends Component {
   }
   render() {
     const { idx, data } = this.state
-    const hasNext = idx + 1 < FORMS.length
+    const forms = this.getForms()
+    const hasNext = idx + 1 < forms.length
     const hasBack = idx - 1 >= 0
     return (
       <Layout vertical>
         <Header />
         <Layout>
-          <Sidebar forms={FORMS} idx={idx} />
+          <Sidebar sections={SECTIONS} idx={idx} />
           <Page>
             <Form
-              {...FORMS[idx]}
+              {...forms[idx]}
               key={idx}
               data={data}
               hasNext={hasNext}
@@ -60,7 +66,7 @@ export class HomeView extends Component {
 }
 
 const Layout = styled.div`
-  height: 100%;
+  min-height: calc(100vh - 84px);
   width: 100%;
   display: flex;
   ${props =>
@@ -70,12 +76,21 @@ const Layout = styled.div`
     `}
 `
 
-const _Sidebar = ({ className, idx, forms }) => {
+const _Sidebar = ({ className, idx, sections }) => {
+  let i = 0
+  let j = 0
+  for (let section of sections) {
+    i += section.forms.length
+    if (i > idx) {
+      break
+    }
+    j++
+  }
   return (
     <div className={className}>
-      <Steps direction="vertical" current={idx}>
-        {forms.map(form => (
-          <Steps.Step title={form.name} key={form.name} />
+      <Steps direction="vertical" current={j}>
+        {sections.map(s => (
+          <Steps.Step title={s.name} key={s.name} />
         ))}
       </Steps>
     </div>
@@ -85,6 +100,7 @@ const _Sidebar = ({ className, idx, forms }) => {
 const Sidebar = styled(_Sidebar)`
   background-color: #fff;
   padding: 1.5rem;
+  min-height: calc(100vh - 84px);
   width: 300px;
   border-right: 2px solid rgba(21, 27, 38, 0.15);
   @media (max-width: 1000px) {
