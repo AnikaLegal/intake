@@ -16,16 +16,15 @@ export const _ReviewContainer = ({ complete, answers, sections }) => {
       <h1>Review your answers</h1>
       {sections.map(({ name, forms }) => (
         <div key={name}>
-          <h3>{name}</h3>
+          <h2>{name}</h2>
           {forms
             .map(f => f.fields)
             .reduce((a, f) => [...a, ...f], [])
             .filter(field => answers[field.name])
             .map(field => (
-              <div key={field.name}>
-                {field.prompt}
-                <br />
-                {answers[field.name]}
+              <div key={field.name} style={{ margin: '0 0 1rem 0.5ren' }}>
+                <h4>{field.prompt}</h4>
+                <p>{answers[field.name]}</p>
               </div>
             ))}
         </div>
