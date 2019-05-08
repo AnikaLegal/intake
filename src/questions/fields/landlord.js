@@ -28,7 +28,7 @@ const HAS_CONTACTED_LANDLORD = {
 const LANDLORD_CONTACT_METHOD = {
   name: 'LANDLORD_CONTACT_METHOD',
   prompt: 'How did you contact your landlord (or your landlord’s agent)?',
-  type: FIELD_TYPES.RADIO,
+  type: FIELD_TYPES.MULTI_SELECT,
   options: [
     { label: 'Phone', value: 'phone' },
     { label: 'Email', value: 'email' },

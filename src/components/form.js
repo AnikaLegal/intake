@@ -20,6 +20,8 @@ export const Form = ({
   onNext,
   onBack,
   onChange,
+  isComplete,
+  onComplete,
 }) => {
   const validator = validate(validations)
   const validation = validator(data)
@@ -77,10 +79,20 @@ export const Form = ({
       )}
       {hasNext && (
         <Button
+          disabled={!validation.valid}
           type={validation.valid ? 'primary' : 'secondary'}
           onClick={onSubmit}
         >
           Next
+        </Button>
+      )}
+      {isComplete && (
+        <Button
+          disabled={!validation.valid}
+          type={validation.valid ? 'primary' : 'secondary'}
+          onClick={onComplete}
+        >
+          Review
         </Button>
       )}
     </div>

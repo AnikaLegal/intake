@@ -1,109 +1,42 @@
-import React, { Component } from 'react'
-import styled, { css } from 'styled-components'
-import { Steps } from 'antd'
+import React from 'react'
+import { Button } from 'antd'
 
-import { FIELD_TYPES } from 'consts'
-import { SECTIONS } from 'questions'
-import { Header, Form, Page } from 'components'
+import { Header, Page, Layout } from 'components'
+import { NamedLink, ROUTE_NAMES } from 'components/router'
 
-export class HomeView extends Component {
-  state = {
-    idx: 0,
-    data: {},
-  }
-  getForms = () => {
-    return SECTIONS.map(s => s.forms).reduce((arr, fs) => [...arr, ...fs], [])
-  }
-  onNext = idx => () => {
-    const { data } = this.state
-    const forms = this.getForms()
-    if (idx + 1 >= forms.length) return
-    if (forms[idx + 1].when && !forms[idx + 1].when(data)) {
-      this.onNext(idx + 1)()
-    } else {
-      this.setState({ idx: idx + 1 })
-    }
-  }
-  onBack = idx => () => {
-    const { data } = this.state
-    const forms = this.getForms()
-    if (idx - 1 < 0) return
-    if (forms[idx - 1].when && !forms[idx - 1].when(data)) {
-      this.onBack(idx - 1)()
-    } else {
-      this.setState({ idx: idx - 1 })
-    }
-  }
-  onChange = key => value => {
-    this.setState({ data: { ...this.state.data, [key]: value } })
-  }
-  render() {
-    const { idx, data } = this.state
-    const forms = this.getForms()
-    const hasNext = idx + 1 < forms.length
-    const hasBack = idx - 1 >= 0
-    return (
-      <Layout vertical>
-        <Header />
-        <Layout>
-          <Sidebar sections={SECTIONS} idx={idx} />
-          <Page>
-            <Form
-              {...forms[idx]}
-              key={idx}
-              data={data}
-              hasNext={hasNext}
-              hasBack={hasBack}
-              onNext={this.onNext(idx)}
-              onBack={this.onBack(idx)}
-              onChange={this.onChange}
-            />
-          </Page>
-        </Layout>
-      </Layout>
-    )
-  }
-}
+export const HomeView = () => (
+  <Layout vertical>
+    <Header />
+    <Layout>
+      <Page>
+        <h1>Welcome to Anika</h1>
 
-const Layout = styled.div`
-  min-height: calc(100vh - 84px);
-  width: 100%;
-  display: flex;
-  ${props =>
-    props.vertical &&
-    css`
-      flex-direction: column;
-    `}
-`
-
-const _Sidebar = ({ className, idx, sections }) => {
-  let i = 0
-  let j = 0
-  for (let section of sections) {
-    i += section.forms.length
-    if (i > idx) {
-      break
-    }
-    j++
-  }
-  return (
-    <div className={className}>
-      <Steps direction="vertical" current={j}>
-        {sections.map(s => (
-          <Steps.Step title={s.name} key={s.name} />
-        ))}
-      </Steps>
-    </div>
-  )
-}
-
-const Sidebar = styled(_Sidebar)`
-  background-color: #fff;
-  padding: 1.5rem;
-  min-height: calc(100vh - 84px);
-  width: 300px;
-  border-right: 2px solid rgba(21, 27, 38, 0.15);
-  @media (max-width: 1000px) {
-    display: none;
-  }
-`
+        <p>
+          We are a free legal service operated by university students and
+          lawyers who wish to make justice accessible for everyone. You won’t
+          need to pay a cent for our services.
+        </p>
+        <p>
+          We are sorry to hear that you have had difficulty getting your
+          landlord to repair a defect at your rental property. We will do our
+          best to help you get this resolved as soon as possible.
+        </p>
+        <p>
+          So that we can provide you with the most appropriate assistance, we
+          will ask you a few questions about the nature of the defect at your
+          rental property and the communications between you and your landlord
+          (or your landlord’s agent). Don’t worry if you answer “no” to anything
+          as there are no wrong answers.
+        </p>
+        <p>
+          Once you have completed the questionnaire, one of our friendly Anika
+          team members will contact you to introduce themselves and to collect
+          any further information that we need to assist you.
+        </p>
+        <NamedLink to={ROUTE_NAMES.FORM}>
+          <Button type="primary">Start</Button>
+        </NamedLink>
+      </Page>
+    </Layout>
+  </Layout>
+)

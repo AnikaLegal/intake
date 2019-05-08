@@ -7,6 +7,7 @@ import {
   Button,
   Input,
   InputNumber,
+  Checkbox,
   Radio,
   Upload,
   Icon,
@@ -47,7 +48,11 @@ export const Field = props => {
 }
 Field.propTypes = {
   ...FieldShape,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
+  ]).isRequired,
   onChange: PropTypes.func.isRequired,
   isCompact: PropTypes.bool,
 }
@@ -71,6 +76,10 @@ const radioStyle = {
   height: '30px',
   lineHeight: '30px',
 }
+
+const MultiSelectField = ({ onChange, options }) => (
+  <Checkbox.Group onChange={onChange} options={options} />
+)
 
 const DropdownField = ({ onChange, placeholder, options, value }) => (
   <Select
@@ -167,6 +176,7 @@ const NumberField = ({ placeholder, onChange }) => (
 )
 
 const FIELD_INPUTS = {
+  [FIELD_TYPES.MULTI_SELECT]: MultiSelectField,
   [FIELD_TYPES.DROPDOWN]: DropdownField,
   [FIELD_TYPES.RADIO]: RadioField,
   [FIELD_TYPES.RADIO_BTN]: RadioButtonField,

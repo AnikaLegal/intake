@@ -7,6 +7,8 @@
 // `buildNameLookup` will fail if two routes share a view.
 const ROUTES = [
   { path: '/', view: 'HomeView' },
+  { path: '/form', view: 'FormView' },
+  { path: '/review', view: 'ReviewView' },
   { path: '/not-found', view: 'NotFoundView' },
   { path: '', view: 'NotFoundView' },
 ]
