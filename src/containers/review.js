@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button } from 'antd'
+import { Button, List } from 'antd'
 
 import { actions } from 'state'
 import { FIELD_TYPES } from 'consts'
@@ -14,22 +14,32 @@ export const _ReviewContainer = ({ complete, answers, sections }) => {
   return (
     <div>
       <h1>Review your answers</h1>
+
       {sections.map(({ name, forms }) => (
         <div key={name}>
           <h2>{name}</h2>
-          {forms
-            .map(f => f.fields)
-            .reduce((a, f) => [...a, ...f], [])
-            .filter(field => answers[field.name])
-            .map(field => (
-              <div key={field.name} style={{ margin: '0 0 1rem 0.5ren' }}>
-                <h4>{field.prompt}</h4>
-                <p>{answers[field.name]}</p>
-              </div>
-            ))}
+          <List
+            itemLayout="vertical"
+            size="large"
+            dataSource={forms
+              .map(f => f.fields)
+              .reduce((a, f) => [...a, ...f], [])
+              .filter(field => answers[field.name])}
+            renderItem={field => (
+              <List.Item key={field.name}>
+                <List.Item.Meta title={field.prompt} />
+                {answers[field.name]}
+              </List.Item>
+            )}
+          />
         </div>
       ))}
-      <Button type="primary">Submit</Button>
+      <Button
+        onClick={() => alert('Pretend this did something!')}
+        type="primary"
+      >
+        Submit
+      </Button>
     </div>
   )
 }
