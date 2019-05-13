@@ -1,0 +1,24 @@
+[ignore]
+
+[include]
+src
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper='^components' ->'<PROJECT_ROOT>/src/components'
+module.name_mapper='^consts' ->'<PROJECT_ROOT>/src/consts'
+module.name_mapper='^containers' ->'<PROJECT_ROOT>/src/containers'
+module.name_mapper='^questions' ->'<PROJECT_ROOT>/src/questions'
+module.name_mapper='^state' ->'<PROJECT_ROOT>/src/state'
+module.name_mapper='^stories' ->'<PROJECT_ROOT>/src/stories'
+module.name_mapper='^styles' ->'<PROJECT_ROOT>/src/styles'
+module.name_mapper='^types' ->'<PROJECT_ROOT>/src/types'
+module.name_mapper='^utils' ->'<PROJECT_ROOT>/src/utils'
+module.name_mapper='^views' ->'<PROJECT_ROOT>/src/views'
+
+suppress_comment= \\(.\\|\n\\)*\\@noflow
+
+[strict]
