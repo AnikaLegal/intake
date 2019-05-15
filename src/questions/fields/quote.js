@@ -3,7 +3,7 @@ import { FIELD_TYPES } from 'consts'
 import { rules } from 'utils'
 import type { Field, Form } from 'types'
 
-const HAS_QUOTE: Field = {
+export const HAS_QUOTE: Field = {
   name: 'HAS_QUOTE',
   prompt:
     'Have you obtained  a quote (i.e. an estimate) for the cost of the repairs to fix the defect?',
@@ -21,13 +21,13 @@ const HAS_QUOTE: Field = {
   ],
 }
 
-const QUOTE_COST: Field = {
+export const QUOTE_COST: Field = {
   name: 'QUOTE_COST',
   prompt: 'What was the quote for the cost of the repairs to fix the defect?',
   type: FIELD_TYPES.DOLLAR,
 }
 
-const CAN_PAY_QUOTE: Field = {
+export const CAN_PAY_QUOTE: Field = {
   name: 'CAN_PAY_QUOTE',
   prompt:
     'Do you have the money (and would you be willing) to pay for the repairs yourself and then seek reimbursement from your landlord?',

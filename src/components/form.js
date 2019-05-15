@@ -42,7 +42,7 @@ export const Form = ({
     }
   }
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <FormTitle>{prompt}</FormTitle>
       <AntForm>
         {form.fields.map(f => {

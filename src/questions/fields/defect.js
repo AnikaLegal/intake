@@ -3,7 +3,7 @@ import { FIELD_TYPES } from 'consts'
 import { rules } from 'utils'
 import type { Field, Form } from 'types'
 
-const DEFECT_TYPE: Field = {
+export const DEFECT_TYPE: Field = {
   name: 'DEFECT_TYPE',
   prompt: 'What does the defect relate to?',
   placeholder: 'Select the type of defect',
@@ -24,7 +24,7 @@ const DEFECT_TYPE: Field = {
   ],
 }
 
-const DEFECT_DESCRIPTION: Field = {
+export const DEFECT_DESCRIPTION: Field = {
   name: 'DEFECT_DESCRIPTION',
   prompt: 'Please provide a short description of the defect',
   placeholder: 'Enter your description here',
@@ -32,7 +32,7 @@ const DEFECT_DESCRIPTION: Field = {
   type: FIELD_TYPES.TEXTAREA,
 }
 
-const DEFECT_PHOTO: Field = {
+export const DEFECT_PHOTO: Field = {
   name: 'DEFECT_PHOTO',
   prompt:
     'If you have a photo of the defect, please upload it (as it will help us to assist you)',

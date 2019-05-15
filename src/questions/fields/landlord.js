@@ -3,7 +3,7 @@ import { FIELD_TYPES } from 'consts'
 import { rules } from 'utils'
 import type { Field, Form } from 'types'
 
-const HAS_CONTACTED_LANDLORD: Field = {
+export const HAS_CONTACTED_LANDLORD: Field = {
   name: 'HAS_CONTACTED_LANDLORD',
   prompt:
     'Have you contacted or attempted to contact your landlord (or your landlord’s agent) to ask them to fix the defect?',
@@ -27,7 +27,7 @@ const HAS_CONTACTED_LANDLORD: Field = {
   ],
 }
 
-const LANDLORD_CONTACT_METHOD: Field = {
+export const LANDLORD_CONTACT_METHOD: Field = {
   name: 'LANDLORD_CONTACT_METHOD',
   prompt: 'How did you contact your landlord (or your landlord’s agent)?',
   type: FIELD_TYPES.MULTI_SELECT,
@@ -40,14 +40,14 @@ const LANDLORD_CONTACT_METHOD: Field = {
   ],
 }
 
-const LANDLORD_CONTACT_DATE: Field = {
+export const LANDLORD_CONTACT_DATE: Field = {
   name: 'LANDLORD_CONTACT_DATE',
   prompt:
     'When did you first contact or attempt to contact your landlord (or your landlord’s agent)?',
   type: FIELD_TYPES.DATE,
 }
 
-const LANDLORD_CONTACT_ATTEMPTS: Field = {
+export const LANDLORD_CONTACT_ATTEMPTS: Field = {
   name: 'LANDLORD_CONTACT_ATTEMPTS',
   prompt:
     'How many times have you contacted your landlord (or your landlord’s agent)?',
@@ -62,7 +62,7 @@ const LANDLORD_CONTACT_ATTEMPTS: Field = {
   ],
 }
 
-const LANDLORD_CONTACT_RECORDS: Field = {
+export const LANDLORD_CONTACT_RECORDS: Field = {
   name: 'LANDLORD_CONTACT_RECORDS',
   prompt:
     'Do you have records of your communications with your landlord (or your landlord’s agent) in which you asked for the defect to be fixed?',
@@ -75,35 +75,35 @@ const LANDLORD_CONTACT_RECORDS: Field = {
   ],
 }
 
-const LANDLORD_HAS_AGENT: Field = {
+export const LANDLORD_HAS_AGENT: Field = {
   name: 'LANDLORD_HAS_AGENT',
   prompt: 'Does your landlord use an agent to manage the property?',
   type: FIELD_TYPES.RADIO_BTN,
   options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
 }
 
-const LANDLORD_NAME = {
+export const LANDLORD_NAME = {
   name: 'LANDLORD_NAME',
   label: 'Full Name',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their full name',
 }
 
-const LANDLORD_EMAIL: Field = {
+export const LANDLORD_EMAIL: Field = {
   name: 'LANDLORD_EMAIL',
   type: FIELD_TYPES.TEXT,
   label: 'Email',
   placeholder: 'Enter their email address',
 }
 
-const LANDLORD_PHONE: Field = {
+export const LANDLORD_PHONE: Field = {
   name: 'LANDLORD_PHONE',
   type: FIELD_TYPES.TEXT,
   label: 'Phone',
   placeholder: 'Enter their phone number',
 }
 
-const LANDLORD_CONTACT_DETAILS: Field = {
+export const LANDLORD_CONTACT_DETAILS: Field = {
   name: 'LANDLORD_CONTACT_DETAILS',
   prompt:
     'Please provide the details of your landlord or your landlord’s agent.',
@@ -111,7 +111,7 @@ const LANDLORD_CONTACT_DETAILS: Field = {
   fields: [LANDLORD_NAME, LANDLORD_EMAIL, LANDLORD_PHONE],
 }
 
-const IS_VCAT_OK: Field = {
+export const IS_VCAT_OK: Field = {
   name: 'IS_VCAT_OK',
   prompt:
     'Sometimes the only way to force a landlord to fix defects is to commence VCAT proceedings against the landlord. Would you be comfortable bringing VCAT proceedings against your landlord?',
@@ -121,7 +121,7 @@ const IS_VCAT_OK: Field = {
   options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
 }
 
-const VCAT_AVOID_REASON: Field = {
+export const VCAT_AVOID_REASON: Field = {
   name: 'VCAT_AVOID_REASON',
   prompt:
     'Can you please explain why you wouldn’t be comfortable bringing VCAT proceedings against your landlord?',
