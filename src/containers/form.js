@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -5,16 +6,27 @@ import { actions } from 'state'
 import { FIELD_TYPES } from 'consts'
 import { Form } from 'components'
 import { NamedRedirect, ROUTE_NAMES } from 'components/router'
+import type { Section, Data, Redux } from 'types'
+
+type Props = {
+  sections: Array<Section>,
+  answers: Data,
+  current: number,
+  complete: boolean,
+  setProgress: Function,
+  setComplete: Function,
+  setAnswer: Function,
+}
 
 export const _FormContainer = ({
   current,
   complete,
   answers,
+  sections,
   setProgress,
   setComplete,
   setAnswer,
-  sections,
-}) => {
+}: Props) => {
   if (complete) {
     return <NamedRedirect to={ROUTE_NAMES.REVIEW} />
   }
@@ -23,7 +35,8 @@ export const _FormContainer = ({
     .reduce((arr, fs) => [...arr, ...fs], [])
   const onNext = idx => () => {
     if (idx + 1 >= forms.length) return
-    if (forms[idx + 1].when && !forms[idx + 1].when(answers)) {
+    const nextForm = forms[idx + 1]
+    if (nextForm.when && !nextForm.when(answers)) {
       onNext(idx + 1)()
     } else {
       setProgress(idx + 1)
@@ -31,7 +44,8 @@ export const _FormContainer = ({
   }
   const onBack = idx => () => {
     if (idx - 1 < 0) return
-    if (forms[idx - 1].when && !forms[idx - 1].when(answers)) {
+    const prevForm = forms[idx - 1]
+    if (prevForm.when && !prevForm.when(answers)) {
       onBack(idx - 1)()
     } else {
       setProgress(idx - 1)
@@ -45,8 +59,7 @@ export const _FormContainer = ({
   const isComplete = current + 1 === forms.length
   return (
     <Form
-      {...forms[current]}
-      key={current}
+      form={forms[current]}
       data={answers}
       hasNext={hasNext}
       hasBack={hasBack}
@@ -59,7 +72,7 @@ export const _FormContainer = ({
   )
 }
 
-const mapState = state => ({
+const mapState = (state: Redux) => ({
   current: state.form.current,
   answers: state.form.answers,
   complete: state.form.complete,

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, List } from 'antd'
@@ -6,8 +7,15 @@ import { actions } from 'state'
 import { FIELD_TYPES } from 'consts'
 import { Form } from 'components'
 import { NamedRedirect, ROUTE_NAMES } from 'components/router'
+import type { Redux, Data, Section } from 'types'
 
-export const _ReviewContainer = ({ complete, answers, sections }) => {
+type Props = {
+  complete: boolean,
+  answers: Data,
+  sections: Array<Section>,
+}
+
+export const _ReviewContainer = ({ complete, answers, sections }: Props) => {
   if (!complete) {
     return <NamedRedirect to={ROUTE_NAMES.HOME} />
   }
@@ -44,7 +52,7 @@ export const _ReviewContainer = ({ complete, answers, sections }) => {
   )
 }
 
-const mapState = state => ({
+const mapState = (state: Redux) => ({
   answers: state.form.answers,
   complete: state.form.complete,
 })

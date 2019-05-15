@@ -1,26 +1,23 @@
-/*
-Debounces user input. Example usage:
-
-  // Create a function which will debounce every 300ms
-  debounce300 = debounce(300)
-
-  // Add a callback
-  const alertHello = () => alert('hello')
-  alertDebounce = debounce300(alertHello)
-
-  // Call the debouncer. If it is not called again in the next 300ms,
-  // then it will call `alertHello`
-  alertDebounce()
-
-*/
-const debounce = delay => {
+// @flow
+// Debounce user input
+export const debounce = (delay: number) => {
   let timer = null
-  return callback => {
-    return (...args) => {
+  return (func: Function) => {
+    return (...args: Array<any>) => {
       clearTimeout(timer)
-      timer = setTimeout(() => callback(...args), delay)
+      timer = setTimeout(() => func(...args), delay)
     }
   }
 }
 
-export { debounce }
+// Debounce user input, returns a promise
+export const debouncePromise = (delay: number) => {
+  let timer = null
+  return (func: Function) => {
+    return (...args: Array<any>): Promise<any> =>
+      new Promise(resolve => {
+        clearTimeout(timer)
+        timer = setTimeout(() => func(...args).then(resolve), delay)
+      })
+  }
+}

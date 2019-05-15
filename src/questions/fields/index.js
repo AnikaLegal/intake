@@ -1,3 +1,4 @@
+// @flow
 export * from './defect'
 export * from './landlord'
 export * from './quote'

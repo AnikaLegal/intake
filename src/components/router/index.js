@@ -1,4 +1,5 @@
-import ROUTES from 'routes/route-list'
+// @flow
+import { ROUTES } from 'routes/route-list'
 import NamedLinkFactory from './named-link'
 import NamedRedirectFactory from './named-redirect'
 import { buildNameLookup } from './utils'

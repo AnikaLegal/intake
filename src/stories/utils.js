@@ -1,7 +1,12 @@
 import React from 'react'
 import { number } from '@storybook/addon-knobs'
 
-export const TestBox = ({ children, flex = false, width = null, height = null }) => {
+export const TestBox = ({
+  children,
+  flex = false,
+  width = null,
+  height = null,
+}) => {
   const w = number('Test Box Width', width, { min: 0 })
   const h = number('Test Box Height', height, { min: 0 })
   return (

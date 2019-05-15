@@ -1,5 +1,5 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
   Form as AntForm,
   Select,
@@ -13,48 +13,51 @@ import {
   Icon,
 } from 'antd'
 import styled, { css } from 'styled-components'
-import { FieldShape } from 'questions'
-import { FIELD_TYPES } from 'consts'
+import type { Node, AbstractComponent } from 'react'
 
-export const FieldGroup = ({ prompt, children }) => (
+import { FIELD_TYPES } from 'consts'
+import type { Field as FieldType } from 'types'
+
+type FieldGroupProps = {
+  field: FieldType,
+  children: Node,
+}
+
+export const FieldGroup = ({ field, children }: FieldGroupProps) => (
   <FieldWrapper>
-    <h3 css={'margin-bottom: 1rem;'}>{prompt}</h3>
+    <h3 css={'margin-bottom: 1rem;'}>{field.prompt}</h3>
     {children}
   </FieldWrapper>
 )
 
-export const Field = props => {
-  const FieldInput = FIELD_INPUTS[props.type]
+type FieldProps = {
+  field: FieldType,
+  onChange: Function,
+  isCompact?: boolean,
+}
+
+export const Field = ({ field, onChange, isCompact }: FieldProps) => {
+  const FieldInput = FIELD_INPUTS[field.type]
   const itemProps = {}
-  if (props.label) {
+  if (field.label) {
     itemProps['labelCol'] = { span: 4 }
     itemProps['wrapperCol'] = { span: 17 }
-    itemProps['label'] = props.label
+    itemProps['label'] = field.label
   }
   return (
-    <FieldWrapper compact={props.isCompact}>
-      <h3>{props.prompt}</h3>
-      {props.help && <Help>{props.help}</Help>}
+    <FieldWrapper compact={isCompact}>
+      <h3>{field.prompt}</h3>
+      {field.help && <Help>{field.help}</Help>}
       <AntForm.Item
-        validateStatus={props.valid ? '' : 'error'}
-        help={props.errors.join('. ')}
+        validateStatus={field.valid ? '' : 'error'}
+        help={field.errors ? field.errors.join('. ') : ''}
         style={{ margin: '0' }}
         {...itemProps}
       >
-        <FieldInput {...props} />
+        <FieldInput field={field} onChange={onChange} />
       </AntForm.Item>
     </FieldWrapper>
   )
-}
-Field.propTypes = {
-  ...FieldShape,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.array,
-  ]).isRequired,
-  onChange: PropTypes.func.isRequired,
-  isCompact: PropTypes.bool,
 }
 
 const Help = styled.p`
@@ -77,50 +80,53 @@ const radioStyle = {
   lineHeight: '30px',
 }
 
-const MultiSelectField = ({ onChange, options }) => (
-  <Checkbox.Group onChange={onChange} options={options} />
+const MultiSelectField = ({ onChange, field }: FieldProps) => (
+  <Checkbox.Group onChange={onChange} options={field.options} />
 )
 
-const DropdownField = ({ onChange, placeholder, options, value }) => (
+const DropdownField = ({ onChange, field }: FieldProps) => (
   <Select
     size="large"
     onChange={onChange}
-    defaultValue={value || undefined}
-    placeholder={placeholder}
+    defaultValue={field.value || undefined}
+    placeholder={field.placeholder}
   >
-    {options.map(({ label, value }) => (
-      <Select.Option key={label} value={value}>
-        {label}
-      </Select.Option>
-    ))}
+    {field.options &&
+      field.options.map(({ label, value }) => (
+        <Select.Option key={label} value={value}>
+          {label}
+        </Select.Option>
+      ))}
   </Select>
 )
 
-const RadioField = ({ onChange, value, options }) => (
-  <Radio.Group onChange={e => onChange(e.target.value)} value={value}>
-    {options.map(({ label, value }) => (
-      <Radio key={label} style={radioStyle} value={value}>
-        {label}
-      </Radio>
-    ))}
+const RadioField = ({ onChange, field }: FieldProps) => (
+  <Radio.Group onChange={e => onChange(e.target.value)} value={field.value}>
+    {field.options &&
+      field.options.map(({ label, value }) => (
+        <Radio key={label} style={radioStyle} value={value}>
+          {label}
+        </Radio>
+      ))}
   </Radio.Group>
 )
 
-const RadioButtonField = ({ onChange, value, options }) => (
+const RadioButtonField = ({ onChange, field }: FieldProps) => (
   <Radio.Group
     buttonStyle="solid"
     onChange={e => onChange(e.target.value)}
-    value={value}
+    value={field.value}
   >
-    {options.map(({ label, value }) => (
-      <Radio.Button key={label} value={value}>
-        {label}
-      </Radio.Button>
-    ))}
+    {field.options &&
+      field.options.map(({ label, value }) => (
+        <Radio.Button key={label} value={value}>
+          {label}
+        </Radio.Button>
+      ))}
   </Radio.Group>
 )
 
-const FileField = ({}) => (
+const FileField = ({  }: FieldProps) => (
   <Upload>
     <Button>
       <Icon type="upload" /> Click to Upload
@@ -128,54 +134,56 @@ const FileField = ({}) => (
   </Upload>
 )
 
-const DateField = ({ onChange }) => (
+const DateField = ({ onChange }: FieldProps) => (
   <DatePicker onChange={e => onChange(e._d.toDateString())} />
 )
 
-const BooleanField = ({ prompt }) => null
+const BooleanField = ({  }: FieldProps) => null
 
-const TextField = ({ placeholder, value, onChange }) => (
+const TextField = ({ field, onChange }: FieldProps) => (
   <Input
-    value={value}
-    placeholder={placeholder}
+    value={field.value}
+    placeholder={field.placeholder}
     onChange={e => onChange(e.target.value)}
   />
 )
 
-const TextAreaField = ({ value, placeholder, onChange }) => (
+const TextAreaField = ({ field, onChange }: FieldProps) => (
   <Input.TextArea
     rows={4}
-    value={value}
-    placeholder={placeholder}
+    value={field.value}
+    placeholder={field.placeholder}
     onChange={e => onChange(e.target.value)}
   />
 )
 
-const DollarField = ({ value, placeholder, onChange }) => (
+const DollarField = ({ field, onChange }: FieldProps) => (
   <InputNumber
     size="large"
     defaultValue={0}
     min={0}
-    formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+    formatter={value =>
+      `$ ${String(field.value)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
     parser={value => value.replace(/\$\s?|(,*)/g, '')}
-    placeholder={placeholder}
+    placeholder={field.placeholder}
     onChange={onChange}
     style={{ width: '300px ' }}
   />
 )
 
-const NumberField = ({ placeholder, onChange }) => (
+const NumberField = ({ field, onChange }: FieldProps) => (
   <InputNumber
     size="large"
     defaultValue={0}
     min={0}
-    placeholder={placeholder}
+    placeholder={field.placeholder}
     onChange={onChange}
     style={{ width: '300px ' }}
   />
 )
 
-const FIELD_INPUTS = {
+const FIELD_INPUTS: { [string]: AbstractComponent<FieldProps> } = {
   [FIELD_TYPES.MULTI_SELECT]: MultiSelectField,
   [FIELD_TYPES.DROPDOWN]: DropdownField,
   [FIELD_TYPES.RADIO]: RadioField,

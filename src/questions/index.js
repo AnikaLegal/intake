@@ -1,33 +1,6 @@
-import PropTypes from 'prop-types'
-
+// @flow
 import { FIELD_TYPES } from 'consts'
-
-export const FieldShape = {
-  name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(Object.values(FIELD_TYPES)).isRequired,
-  prompt: PropTypes.string,
-  placeholder: PropTypes.string,
-  help: PropTypes.string,
-  label: PropTypes.string,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ),
-  valid: PropTypes.bool,
-  errors: PropTypes.array,
-}
-
-export const FormShape = {
-  name: PropTypes.string.isRequired,
-  fields: PropTypes.arrayOf(PropTypes.shape(FieldShape)).isRequired,
-  prompt: PropTypes.string,
-  help: PropTypes.string,
-  section: PropTypes.string,
-  when: PropTypes.func,
-  validations: PropTypes.object.isRequired,
-}
+import type { Section } from 'types'
 
 import {
   DEFECT_FORM,
@@ -41,7 +14,7 @@ import {
   PERSONAL_PREFERENCES_FORM,
 } from './fields'
 
-export const SECTIONS = [
+export const SECTIONS: Array<Section> = [
   {
     name: 'Your rental issue',
     forms: [DEFECT_FORM, HAS_QUOTE_FORM, QUOTE_COST_FORM],

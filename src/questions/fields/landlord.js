@@ -1,7 +1,9 @@
+// @flow
 import { FIELD_TYPES } from 'consts'
 import { rules } from 'utils'
+import type { Field, Form } from 'types'
 
-const HAS_CONTACTED_LANDLORD = {
+const HAS_CONTACTED_LANDLORD: Field = {
   name: 'HAS_CONTACTED_LANDLORD',
   prompt:
     'Have you contacted or attempted to contact your landlord (or your landlord’s agent) to ask them to fix the defect?',
@@ -25,7 +27,7 @@ const HAS_CONTACTED_LANDLORD = {
   ],
 }
 
-const LANDLORD_CONTACT_METHOD = {
+const LANDLORD_CONTACT_METHOD: Field = {
   name: 'LANDLORD_CONTACT_METHOD',
   prompt: 'How did you contact your landlord (or your landlord’s agent)?',
   type: FIELD_TYPES.MULTI_SELECT,
@@ -38,14 +40,14 @@ const LANDLORD_CONTACT_METHOD = {
   ],
 }
 
-const LANDLORD_CONTACT_DATE = {
+const LANDLORD_CONTACT_DATE: Field = {
   name: 'LANDLORD_CONTACT_DATE',
   prompt:
     'When did you first contact or attempt to contact your landlord (or your landlord’s agent)?',
   type: FIELD_TYPES.DATE,
 }
 
-const LANDLORD_CONTACT_ATTEMPTS = {
+const LANDLORD_CONTACT_ATTEMPTS: Field = {
   name: 'LANDLORD_CONTACT_ATTEMPTS',
   prompt:
     'How many times have you contacted your landlord (or your landlord’s agent)?',
@@ -60,7 +62,7 @@ const LANDLORD_CONTACT_ATTEMPTS = {
   ],
 }
 
-const LANDLORD_CONTACT_RECORDS = {
+const LANDLORD_CONTACT_RECORDS: Field = {
   name: 'LANDLORD_CONTACT_RECORDS',
   prompt:
     'Do you have records of your communications with your landlord (or your landlord’s agent) in which you asked for the defect to be fixed?',
@@ -73,7 +75,7 @@ const LANDLORD_CONTACT_RECORDS = {
   ],
 }
 
-const LANDLORD_HAS_AGENT = {
+const LANDLORD_HAS_AGENT: Field = {
   name: 'LANDLORD_HAS_AGENT',
   prompt: 'Does your landlord use an agent to manage the property?',
   type: FIELD_TYPES.RADIO_BTN,
@@ -87,21 +89,21 @@ const LANDLORD_NAME = {
   placeholder: 'Enter their full name',
 }
 
-const LANDLORD_EMAIL = {
+const LANDLORD_EMAIL: Field = {
   name: 'LANDLORD_EMAIL',
   type: FIELD_TYPES.TEXT,
   label: 'Email',
   placeholder: 'Enter their email address',
 }
 
-const LANDLORD_PHONE = {
+const LANDLORD_PHONE: Field = {
   name: 'LANDLORD_PHONE',
   type: FIELD_TYPES.TEXT,
   label: 'Phone',
   placeholder: 'Enter their phone number',
 }
 
-const LANDLORD_CONTACT_DETAILS = {
+const LANDLORD_CONTACT_DETAILS: Field = {
   name: 'LANDLORD_CONTACT_DETAILS',
   prompt:
     'Please provide the details of your landlord or your landlord’s agent.',
@@ -109,7 +111,7 @@ const LANDLORD_CONTACT_DETAILS = {
   fields: [LANDLORD_NAME, LANDLORD_EMAIL, LANDLORD_PHONE],
 }
 
-const IS_VCAT_OK = {
+const IS_VCAT_OK: Field = {
   name: 'IS_VCAT_OK',
   prompt:
     'Sometimes the only way to force a landlord to fix defects is to commence VCAT proceedings against the landlord. Would you be comfortable bringing VCAT proceedings against your landlord?',
@@ -119,14 +121,14 @@ const IS_VCAT_OK = {
   options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
 }
 
-const VCAT_AVOID_REASON = {
+const VCAT_AVOID_REASON: Field = {
   name: 'VCAT_AVOID_REASON',
   prompt:
     'Can you please explain why you wouldn’t be comfortable bringing VCAT proceedings against your landlord?',
   type: FIELD_TYPES.TEXTAREA,
 }
 
-export const LANDLORD_COMMS_CHECK_FORM = {
+export const LANDLORD_COMMS_CHECK_FORM: Form = {
   name: 'LANDLORD_COMMS_CHECK_FORM',
   prompt: 'Tell us about your landlord',
   fields: [HAS_CONTACTED_LANDLORD],
@@ -135,7 +137,7 @@ export const LANDLORD_COMMS_CHECK_FORM = {
   },
 }
 
-export const LANDLORD_COMMS_DETAILS_FORM = {
+export const LANDLORD_COMMS_DETAILS_FORM: Form = {
   name: 'LANDLORD_COMMS_DETAILS_FORM',
   when: data => data['HAS_CONTACTED_LANDLORD'] !== 'no',
   prompt: 'Tell us about your landlord',
@@ -153,7 +155,7 @@ export const LANDLORD_COMMS_DETAILS_FORM = {
   },
 }
 
-export const LANDLORD_DETAILS_FORM = {
+export const LANDLORD_DETAILS_FORM: Form = {
   name: 'LANDLORD_DETAILS_FORM',
   prompt: 'Tell us about your landlord',
   fields: [LANDLORD_HAS_AGENT, LANDLORD_CONTACT_DETAILS, IS_VCAT_OK],
@@ -166,7 +168,7 @@ export const LANDLORD_DETAILS_FORM = {
   },
 }
 
-export const VCAT_AVOID_REASON_FORM = {
+export const VCAT_AVOID_REASON_FORM: Form = {
   name: 'VCAT_AVOID_REASON_FORM',
   when: data => data['IS_VCAT_OK'] === 'no',
   prompt: 'Tell us more',

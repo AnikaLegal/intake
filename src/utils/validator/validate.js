@@ -1,48 +1,33 @@
-// Accepts a set of validations.
-// {
-//   url: [rule.IsPresent, rule.IsURL],
-//   name: [rule.IsPresent],
-//   age: [rule.IsPositiveNumber],
-//   occupation: [],
-// }
-// and some data
-// {
-//   url: 'https://foo.com'
-//   name: 'Matt',
-//   age: -12,
-//   occupation: '',
-// }
-// and returns a validation object
-// {
-//   valid: false,
-//   fields: {
-//     url: { valid: true, errors: [] },
-//     name: { valid: true, errors: [] },
-//     age: { valid: false, errors: ['This must be a positive number'] },
-//     occupation: { valid: true, errors: [] },
-//   }
-// }
-export const validate = validations => data => {
+// @flow
+import type { Data, Validation, Rule, Validations } from 'types'
+import { entries, values } from '../functional'
+
+// Validate form data
+export const validate = (rules: { [string]: Array<Rule> }) => (
+  data: Data
+): Validations => {
   // Determine whether each field is valid.
-  const fields = Object.entries(validations)
-    .map(getKeyResults(data))
-    .reduce((acc, [key, keyResults]) => ({ ...acc, [key]: keyResults }), {})
+  const fields: { [string]: Validation } = {}
+  for (let [fieldName, rules] of entries(rules)) {
+    fields[fieldName] = getFieldValidation(fieldName, data, rules)
+  }
   // Determine whether all the data is valid.
-  const valid = Object.values(fields).every(f => f.valid)
+  const valid = values(fields).every(f => f.valid)
   return { valid, fields }
 }
 
 // Transform a list of validations for a key into a result object.
-// Eg: { valid: true, errors: [] }
-const getKeyResults = data => ([key, keyValidations]) => {
-  const keyResults = keyValidations
-    .map(validation => validation(data, key))
+const getFieldValidation = (
+  fieldName: string,
+  data: Data,
+  rules: Array<Rule>
+): Validation =>
+  rules
+    .map(rule => rule(data, fieldName))
     .reduce(
-      (acc, result) => ({
+      (acc, result: Validation) => ({
         valid: acc.valid && result.valid,
         errors: [...acc.errors, ...result.errors],
       }),
       { valid: true, errors: [] }
     )
-  return [key, keyResults]
-}

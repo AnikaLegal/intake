@@ -1,7 +1,11 @@
+// @flow
 import React from 'react'
 import styled from 'styled-components'
+import type { Node } from 'react'
 
-export const Page = ({ children }) => <StyledPage>{children}</StyledPage>
+export const Page = ({ children }: { children: Node }) => (
+  <StyledPage>{children}</StyledPage>
+)
 
 const StyledPage = styled.div`
   max-width: 800px;

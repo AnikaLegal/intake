@@ -1,7 +1,9 @@
+// @flow
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import * as Sentry from '@sentry/browser'
-
+import type { Node } from 'react'
+// @noflow
 import styles from 'styles/generic/error-boundary.module.scss'
 
 if (SENTRY_JS_DSN) {
@@ -9,22 +11,28 @@ if (SENTRY_JS_DSN) {
   Sentry.init({ dsn: SENTRY_JS_DSN })
 }
 
-export class ErrorBoundary extends Component {
+type Props = {
+  children: Node,
+  noRender?: boolean,
+}
+
+type State = {
+  hasError: boolean,
+}
+
+export class ErrorBoundary extends Component<Props, State> {
   static propTypes = {
     children: PropTypes.node.isRequired,
     noRender: PropTypes.bool,
   }
 
-  constructor(props) {
-    super(props)
-    this.state = { hasError: false }
-  }
+  state = { hasError: false }
 
-  componentDidCatch(error, info) {
+  componentDidCatch = (error: any, info: any) => {
     console.error(error, info)
     this.setState({ hasError: true })
     if (SENTRY_JS_DSN) {
-      logger.log('Sending error report to Sentry.')
+      console.log('Sending error report to Sentry.')
       // Report error to Sentry
       Sentry.withScope(scope => {
         Object.keys(info).forEach(key => {

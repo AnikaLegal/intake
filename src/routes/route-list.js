@@ -1,16 +1,11 @@
+// @flow
 // All routes used by the app.
-//
-//    path: URL path to get to route
-//    children: child routes to be rendered under path (optional)
-//    view: view function to be rendered (optional)
-//
-// `buildNameLookup` will fail if two routes share a view.
-const ROUTES = [
+import type { Route } from 'types'
+
+export const ROUTES: Array<Route> = [
   { path: '/', view: 'HomeView' },
   { path: '/form', view: 'FormView' },
   { path: '/review', view: 'ReviewView' },
   { path: '/not-found', view: 'NotFoundView' },
   { path: '', view: 'NotFoundView' },
 ]
-
-export default ROUTES

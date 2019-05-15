@@ -1,3 +1,7 @@
+// @flow
+import { entries } from 'utils'
+import type { Route } from 'types'
+
 // Converts HelloWorld to HELLO_WORLD
 const camelCaseToUpper = str =>
   str
@@ -9,14 +13,19 @@ const camelCaseToUpper = str =>
     })
     .join('')
 
-const parseViewName = str => (str.slice(-4) === 'View' ? str.slice(0, -4) : str)
+const parseViewName = (str: string) =>
+  str.slice(-4) === 'View' ? str.slice(0, -4) : str
 
 // Transform a list of nested routes into a lookup table for NamedRedirect.
 // This will not work if two routes have the same view
-const buildNameLookup = (routes, prefix = '') =>
+export const buildNameLookup = (
+  routes: Array<Route>,
+  prefix: string = ''
+): { [string]: string } =>
   routes
-    .filter(route => route.path && route.view)
+    .filter(route => route.view)
     .map(({ path, children, view }) => {
+      if (!view) return // For Flow
       const name = camelCaseToUpper(parseViewName(view))
       const childLookup = children
         ? buildNameLookup(children, prefix + path)
@@ -31,12 +40,10 @@ const buildNameLookup = (routes, prefix = '') =>
 //    template = '/foo/:id/bar'
 //    params = { id: 1 }
 //    returns '/foo/1/bar/'
-const buildPath = (template, params = {}) => {
+export const buildPath = (template: string, params: { [string]: any } = {}) => {
   let target = template
-  for (let [key, val] of Object.entries(params)) {
+  for (let [key, val] of entries(params)) {
     target = target.replace(`:${key}`, val)
   }
   return target
 }
-
-export { buildPath, buildNameLookup }

@@ -4,6 +4,7 @@
 src
 
 [libs]
+src/globals.js
 
 [lints]
 
@@ -18,6 +19,7 @@ module.name_mapper='^styles' ->'<PROJECT_ROOT>/src/styles'
 module.name_mapper='^types' ->'<PROJECT_ROOT>/src/types'
 module.name_mapper='^utils' ->'<PROJECT_ROOT>/src/utils'
 module.name_mapper='^views' ->'<PROJECT_ROOT>/src/views'
+module.name_mapper='^routes' ->'<PROJECT_ROOT>/src/routes'
 
 suppress_comment= \\(.\\|\n\\)*\\@noflow
 

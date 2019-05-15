@@ -1,12 +1,14 @@
+// @flow
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route as RouterRoute, Switch } from 'react-router-dom'
 
 import * as views from 'views'
 import { ErrorBoundary } from 'components/generic'
-import ROUTES from './route-list'
+import { ROUTES } from './route-list'
+import type { Route } from 'types'
 
 // Transform a list of nested routes into a flat list which can be passed to Switch.
-const buildRouteList = (routes, prefix = '') =>
+const buildRouteList = (routes: Array<Route>, prefix: string = '') =>
   routes
     .map(({ path, children, view }) => [
       view ? buildRoute(view, prefix + path) : null,
@@ -17,7 +19,7 @@ const buildRouteList = (routes, prefix = '') =>
 
 // Build a single Route
 const buildRoute = (view, path) => (
-  <Route
+  <RouterRoute
     exact
     key={path}
     path={path}

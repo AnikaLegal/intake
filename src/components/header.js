@@ -1,9 +1,10 @@
+// @flow
 import React from 'react'
 import styled from 'styled-components'
 
 import { IMAGES } from 'consts'
 
-export const Header = ({ children }) => (
+export const Header = () => (
   <StyledHeader>
     <img src={IMAGES.LOGO} height="50" />
   </StyledHeader>

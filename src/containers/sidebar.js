@@ -1,11 +1,19 @@
+// @flow
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import { Steps } from 'antd'
 import { connect } from 'react-redux'
 
 import { Header, Form, Page } from 'components'
+import type { Section } from 'types'
 
-const _Sidebar = ({ className, current, sections }) => {
+type Props = {
+  sections: Array<Section>,
+  current: number,
+  className?: string,
+}
+
+const _Sidebar = ({ className, current, sections }: Props) => {
   let answerIdx = 0
   let sectionIdx = 0
   for (let section of sections) {

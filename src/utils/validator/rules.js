@@ -1,9 +1,14 @@
+// @flow
 // Rules for the validator
 // Each rule gets a tuple (data, key)
 // and returns a validation object { valid: bool, errors: [string] }
+import type { Data, Validation, Rule } from 'types'
 
 // Ensures that this field is the same as another field.
-const isSameAs = (fieldName, displayName = null) => (data, key) => {
+const isSameAs = (fieldName: string, displayName?: string) => (
+  data: Data,
+  key: string
+): Validation => {
   const thisValue = data[key]
   const otherValue = data[fieldName]
   const name = displayName || fieldName
@@ -13,7 +18,10 @@ const isSameAs = (fieldName, displayName = null) => (data, key) => {
 }
 
 // Validator shortcut for simple independent validations
-const validatePredicate = (predicate, message) => (data, key) => {
+const validatePredicate = (predicate: Function, message: string) => (
+  data: Data,
+  key: string
+): Validation => {
   const value = data[key]
   return predicate(value)
     ? { valid: true, errors: [] }
@@ -22,7 +30,8 @@ const validatePredicate = (predicate, message) => (data, key) => {
 
 // Email validator
 const RFC2822EmailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
-const isEmailPredicate = email => !email || RFC2822EmailRegex.exec(email)
+const isEmailPredicate = (email: string) =>
+  !email || RFC2822EmailRegex.exec(email)
 const isEmail = validatePredicate(
   isEmailPredicate,
   'This must be a valid email'
@@ -30,7 +39,7 @@ const isEmail = validatePredicate(
 
 // URL validator (http://urlregex.com/)
 const URLRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
-const isURLPredicate = url => !url || URLRegex.exec(url)
+const isURLPredicate = (url: string) => !url || URLRegex.exec(url)
 const isURL = validatePredicate(isURLPredicate, 'This must be a valid URL')
 
 // Truthy validator - `0` is truthy.
@@ -38,7 +47,7 @@ const isTruthyPredicate = v => Boolean(v) || v === 0
 const isTruthy = validatePredicate(isTruthyPredicate, 'This is required')
 
 // Truthy validator for objects - `0` is truthy.
-const isAllTruthyValuesPredicate = obj =>
+const isAllTruthyValuesPredicate = (obj: Data) =>
   obj &&
   Object.values(obj).length > 0 &&
   Object.values(obj).every(v => Boolean(v) || v === 0)
@@ -48,7 +57,7 @@ const isAllTruthyValues = validatePredicate(
 )
 
 // Truthy validator for objects - `0` is truthy.
-const isSomeTruthyValuesPredicate = obj =>
+const isSomeTruthyValuesPredicate = (obj: Data) =>
   obj &&
   Object.values(obj).length > 0 &&
   Object.values(obj).some(v => Boolean(v) || v === 0)
@@ -62,6 +71,7 @@ const isNumberPredicate = v => !v || !isNaN(v)
 const isNumber = validatePredicate(isNumberPredicate, 'This must be a number')
 
 // Positive number validatior
+// @noflow
 const isPositiveNumberPredicate = v => !v || (isNumber(v) && v >= 0)
 const isPositiveNumber = validatePredicate(
   isPositiveNumberPredicate,
@@ -69,21 +79,21 @@ const isPositiveNumber = validatePredicate(
 )
 
 // Length validator
-const isLength = (length, unit) =>
+const isLength = (length: number, unit: string) =>
   validatePredicate(
     v => !isTruthyPredicate(v) || v.length >= length,
     `This must be at least ${length} ${unit} long`
   )
 
 // Greater than validator
-const isGreaterThan = number =>
+const isGreaterThan = (number: number) =>
   validatePredicate(
     v => !isTruthyPredicate(v) || (!isNaN(v) && v > number),
     `This value must be greater than ${number}`
   )
 
 // Less than validator
-const isLessThan = number =>
+const isLessThan = (number: number) =>
   validatePredicate(
     v => !isTruthyPredicate(v) || (!isNaN(v) && v < number),
     `This value must be less than ${number}`
@@ -92,7 +102,7 @@ const isLessThan = number =>
 const ABN_WEIGHTS = [10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
 
 // Checks for a valid ABN based on https://abr.business.gov.au/Help/AbnFormat
-const isAustralianBusinessNumber = (data, key) => {
+const isAustralianBusinessNumber = (data: Data, key: string) => {
   const abnString = (data[key] || '').replace(/\s/g, '')
   if (!isTruthyPredicate(abnString)) {
     return { valid: true, errors: [] }
@@ -118,6 +128,7 @@ const isAustralianBusinessNumber = (data, key) => {
     : { valid: false, errors: ['This must be valid ABN'] }
 }
 
+// FIXME: All untested except for isAustralianBusinessNumber
 export const rules = {
   isEmail,
   isURL,
