@@ -8,7 +8,7 @@ export const DEFECT_TYPE: Field = {
   prompt: 'What does the defect relate to?',
   placeholder: 'Select the type of defect',
   help: "If none apply, please select 'other'",
-  type: FIELD_TYPES.MULTI_SELECT,
+  type: FIELD_TYPES.DROPDOWN,
   options: [
     { label: 'Toilet', value: 'Toilet' },
     { label: 'Water', value: 'Water' },
