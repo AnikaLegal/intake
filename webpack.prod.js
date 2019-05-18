@@ -18,10 +18,10 @@ module.exports = {
     ...baseConfig.plugins,
     new webpack.DefinePlugin({
       // Build system envars
-      SERVER: JSON.stringify(process.env.READER_SERVER),
-      STRIPE_KEY: JSON.stringify(process.env.STRIPE_KEY),
+      STATIC_URL: JSON.stringify(
+        'http://anika-intake.s3-website-ap-southeast-2.amazonaws.com/static/'
+      ),
       SENTRY_JS_DSN: JSON.stringify(process.env.SENTRY_JS_DSN),
-      G_ADS_ID: JSON.stringify(process.env.G_ADS_ID),
       DEBUG_JS: JSON.stringify(''),
     }),
   ],

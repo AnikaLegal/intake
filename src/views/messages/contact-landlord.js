@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Header, Page, Layout } from 'components'
+import { Header, Page, Layout, Message, Letter } from 'components'
 
 export const ContactLandlordView = () => (
   <Layout vertical>
@@ -47,15 +47,3 @@ export const ContactLandlordView = () => (
     </Layout>
   </Layout>
 )
-
-const Message = styled.div`
-  background: white;
-  padding: 2rem;
-  box-shadow: 1px 1px 4px 0 #aaa;
-`
-
-const Letter = styled.div`
-  background: rgba(240, 242, 245, 0.15);
-  box-shadow: 1px 1px 4px 0 #aaa;
-  padding: 1rem;
-`

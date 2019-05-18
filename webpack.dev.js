@@ -21,11 +21,8 @@ module.exports = {
     ...baseConfig.plugins,
     new webpack.DefinePlugin({
       STATIC_URL: JSON.stringify('http://localhost:3000/static/'),
-      SERVER: JSON.stringify('http://localhost:8000'),
-      STRIPE_KEY: JSON.stringify('pk_test_zstrxIkHKZeBtjEeY2Jkne0j'),
       SENTRY_JS_DSN: JSON.stringify(''),
       DEBUG_JS: JSON.stringify('true'),
-      G_ADS_ID: JSON.stringify(''),
     }),
   ],
 }

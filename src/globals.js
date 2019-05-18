@@ -1,7 +1,5 @@
 // Global variables from build system
-declare var SERVER: string
 declare var SENTRY_JS_DSN: string
-declare var STRIPE_KEY: string
 declare var DEBUG_JS: boolean
 declare var STATIC_URL: string
 
