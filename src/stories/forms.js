@@ -28,7 +28,7 @@ const FormStory = ({ form }) => {
     setData({ ...data, [k]: v })
   }
   return (
-    <TestBox flex width={900} height={400}>
+    <TestBox flex width={900}>
       <Form
         form={form}
         onChange={onChange}

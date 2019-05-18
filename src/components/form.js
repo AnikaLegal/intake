@@ -38,12 +38,13 @@ export const Form = ({
   const onSubmit = () => {
     setSubmitted(true)
     if (validation.valid) {
+      setSubmitted(false)
       onNext()
     }
   }
   return (
     <div style={{ width: '100%' }}>
-      <FormTitle>{prompt}</FormTitle>
+      <FormTitle>{form.prompt}</FormTitle>
       <AntForm>
         {form.fields.map(f => {
           if (f.type === FIELD_TYPES.FIELD_GROUP) {

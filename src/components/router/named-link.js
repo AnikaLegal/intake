@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import { buildPath } from './utils'
@@ -19,10 +18,6 @@ const NamedLinkFactory = (ROUTE_NAMES: { [string]: string }) => {
   const NamedLink = ({ to, params = {}, ...args }: Props) => {
     let target = buildPath(to, params)
     return <Link className={styles.link} to={target} {...args} />
-  }
-  NamedLink.propTypes = {
-    to: PropTypes.oneOf(Object.values(ROUTE_NAMES)).isRequired,
-    params: PropTypes.object,
   }
   return NamedLink
 }

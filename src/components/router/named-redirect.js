@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
 
 import { buildPath } from './utils'
@@ -18,10 +17,6 @@ const NamedRedirectFactory = (ROUTE_NAMES: { [string]: string }) => {
     let target = buildPath(to, params)
     console.warn(`Redirect on ${window.location.href} to ${to} as ${target}`)
     return <Redirect to={target} {...args} />
-  }
-  NamedRedirect.propTypes = {
-    to: PropTypes.oneOf(Object.values(ROUTE_NAMES)).isRequired,
-    params: PropTypes.object,
   }
   return NamedRedirect
 }

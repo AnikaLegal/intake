@@ -1,4 +1,4 @@
 // @flow
 export const IMAGES: { [string]: string } = {
-  LOGO: './static/images/anika-logo.png',
+  LOGO: `${STATIC_URL}images/anika-logo.png`,
 }

@@ -16,6 +16,7 @@ import styled, { css } from 'styled-components'
 import type { Node, AbstractComponent } from 'react'
 
 import { FIELD_TYPES } from 'consts'
+import { NamedRedirect } from 'components/router'
 import type { Field as FieldType } from 'types'
 
 type FieldGroupProps = {
@@ -32,11 +33,21 @@ export const FieldGroup = ({ field, children }: FieldGroupProps) => (
 
 type FieldProps = {
   field: FieldType,
+  valid: boolean,
+  errors: Array<string>,
+  value: string | any,
   onChange: Function,
   isCompact?: boolean,
 }
 
-export const Field = ({ field, onChange, isCompact }: FieldProps) => {
+export const Field = ({
+  field,
+  valid,
+  errors,
+  value,
+  onChange,
+  isCompact,
+}: FieldProps) => {
   const FieldInput = FIELD_INPUTS[field.type]
   const itemProps = {}
   if (field.label) {
@@ -49,19 +60,25 @@ export const Field = ({ field, onChange, isCompact }: FieldProps) => {
       <h3>{field.prompt}</h3>
       {field.help && <Help>{field.help}</Help>}
       <AntForm.Item
-        validateStatus={field.valid ? '' : 'error'}
-        help={field.errors ? field.errors.join('. ') : ''}
+        validateStatus={valid ? '' : 'error'}
+        help={errors ? errors.join('. ') : ''}
         style={{ margin: '0' }}
         {...itemProps}
       >
-        <FieldInput field={field} onChange={onChange} />
+        <FieldInput
+          field={field}
+          valid={valid}
+          errors={errors}
+          value={value}
+          onChange={onChange}
+        />
       </AntForm.Item>
     </FieldWrapper>
   )
 }
 
 const Help = styled.p`
-  margin: -0.6rem 0 1rem 0;
+  margin: -0.2rem 0 1rem 0;
   font-weight: 300;
 `
 
@@ -84,11 +101,11 @@ const MultiSelectField = ({ onChange, field }: FieldProps) => (
   <Checkbox.Group onChange={onChange} options={field.options} />
 )
 
-const DropdownField = ({ onChange, field }: FieldProps) => (
+const DropdownField = ({ onChange, field, value }: FieldProps) => (
   <Select
     size="large"
     onChange={onChange}
-    defaultValue={field.value || undefined}
+    defaultValue={value || undefined}
     placeholder={field.placeholder}
   >
     {field.options &&
@@ -100,8 +117,8 @@ const DropdownField = ({ onChange, field }: FieldProps) => (
   </Select>
 )
 
-const RadioField = ({ onChange, field }: FieldProps) => (
-  <Radio.Group onChange={e => onChange(e.target.value)} value={field.value}>
+const RadioField = ({ onChange, field, value }: FieldProps) => (
+  <Radio.Group onChange={e => onChange(e.target.value)} value={value}>
     {field.options &&
       field.options.map(({ label, value }) => (
         <Radio key={label} style={radioStyle} value={value}>
@@ -111,11 +128,11 @@ const RadioField = ({ onChange, field }: FieldProps) => (
   </Radio.Group>
 )
 
-const RadioButtonField = ({ onChange, field }: FieldProps) => (
+const RadioButtonField = ({ onChange, field, value }: FieldProps) => (
   <Radio.Group
     buttonStyle="solid"
     onChange={e => onChange(e.target.value)}
-    value={field.value}
+    value={value}
   >
     {field.options &&
       field.options.map(({ label, value }) => (
@@ -138,32 +155,30 @@ const DateField = ({ onChange }: FieldProps) => (
   <DatePicker onChange={e => onChange(e._d.toDateString())} />
 )
 
-const BooleanField = ({  }: FieldProps) => null
-
-const TextField = ({ field, onChange }: FieldProps) => (
+const TextField = ({ field, onChange, value }: FieldProps) => (
   <Input
-    value={field.value}
+    value={value}
     placeholder={field.placeholder}
     onChange={e => onChange(e.target.value)}
   />
 )
 
-const TextAreaField = ({ field, onChange }: FieldProps) => (
+const TextAreaField = ({ field, onChange, value }: FieldProps) => (
   <Input.TextArea
     rows={4}
-    value={field.value}
+    value={value}
     placeholder={field.placeholder}
     onChange={e => onChange(e.target.value)}
   />
 )
 
-const DollarField = ({ field, onChange }: FieldProps) => (
+const DollarField = ({ field, onChange, value }: FieldProps) => (
   <InputNumber
     size="large"
     defaultValue={0}
     min={0}
     formatter={value =>
-      `$ ${String(field.value)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      `$ ${String(value)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     }
     parser={value => value.replace(/\$\s?|(,*)/g, '')}
     placeholder={field.placeholder}
@@ -183,14 +198,16 @@ const NumberField = ({ field, onChange }: FieldProps) => (
   />
 )
 
+const ExitField = ({ field }: FieldProps) => <NamedRedirect to={field.name} />
+
 const FIELD_INPUTS: { [string]: AbstractComponent<FieldProps> } = {
+  [FIELD_TYPES.EXIT]: ExitField,
   [FIELD_TYPES.MULTI_SELECT]: MultiSelectField,
   [FIELD_TYPES.DROPDOWN]: DropdownField,
   [FIELD_TYPES.RADIO]: RadioField,
   [FIELD_TYPES.RADIO_BTN]: RadioButtonField,
   [FIELD_TYPES.FILE]: FileField,
   [FIELD_TYPES.DATE]: DateField,
-  [FIELD_TYPES.BOOLEAN]: BooleanField,
   [FIELD_TYPES.TEXT]: TextField,
   [FIELD_TYPES.TEXTAREA]: TextAreaField,
   [FIELD_TYPES.DOLLAR]: DollarField,

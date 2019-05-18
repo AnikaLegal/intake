@@ -137,9 +137,16 @@ export const LANDLORD_COMMS_CHECK_FORM: Form = {
   },
 }
 
+export const LANDLORD_COMMS_EXIT: Form = {
+  name: 'LANDLORD_COMMS_EXIT',
+  when: data => data['HAS_CONTACTED_LANDLORD'] === 'no',
+  fields: [{ name: '/messages/contact-landlord', type: FIELD_TYPES.EXIT }],
+  validations: {},
+  prompt: '',
+}
+
 export const LANDLORD_COMMS_DETAILS_FORM: Form = {
   name: 'LANDLORD_COMMS_DETAILS_FORM',
-  when: data => data['HAS_CONTACTED_LANDLORD'] !== 'no',
   prompt: 'Tell us about your landlord',
   fields: [
     LANDLORD_CONTACT_METHOD,

@@ -1,5 +1,6 @@
 // @flow
-export const FIELD_TYPES: { [string]: string } = {
+import type { FieldType } from 'types'
+export const FIELD_TYPES: { [string]: FieldType } = {
   FIELD_GROUP: 'FIELD_GROUP',
   DROPDOWN: 'DROPDOWN',
   MULTI_SELECT: 'MULTI_SELECT',
@@ -12,4 +13,5 @@ export const FIELD_TYPES: { [string]: string } = {
   TEXT: 'TEXT',
   NUMBER: 'NUMBER',
   DOLLAR: 'DOLLAR',
+  EXIT: 'EXIT',
 }

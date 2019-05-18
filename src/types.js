@@ -8,6 +8,21 @@ export type Route = {
   children?: Array<Route>,
 }
 
+export type FieldType =
+  | 'FIELD_GROUP'
+  | 'EXIT'
+  | 'DROPDOWN'
+  | 'MULTI_SELECT'
+  | 'RADIO'
+  | 'RADIO_BTN'
+  | 'TEXTAREA'
+  | 'FILE'
+  | 'DATE'
+  | 'BOOLEAN'
+  | 'TEXT'
+  | 'NUMBER'
+  | 'DOLLAR'
+
 export type Data = { [string]: any }
 
 export type FormState = {
@@ -53,15 +68,12 @@ export type FieldOption = {
 
 export type Field = {
   name: string,
-  type: string,
-  value?: any,
+  type: FieldType,
   prompt?: string,
   help?: string,
   placeholder?: string,
-  valid?: boolean,
   label?: string,
   options?: Array<FieldOption>,
-  errors?: Array<string>,
   fields?: Array<Field>,
 }
 
