@@ -144,8 +144,8 @@ const RadioButtonField = ({ onChange, field, value }: FieldProps) => (
   </Radio.Group>
 )
 
-const FileField = ({ value, onChange }: FieldProps) => (
-  <UploadField value={value} onChange={onChange} />
+const FileField = ({ onChange }: FieldProps) => (
+  <UploadField onChange={onChange} />
 )
 
 const DateField = ({ onChange }: FieldProps) => (

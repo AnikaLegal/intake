@@ -76,6 +76,7 @@ class _ReviewContainer extends React.Component<Props, State> {
               dataSource={forms
                 .map(f => f.fields)
                 .reduce((a, f) => [...a, ...f], [])
+                .filter(field => field.type !== 'FILE')
                 .filter(field => answers[field.name])}
               renderItem={field => (
                 <List.Item key={field.name}>

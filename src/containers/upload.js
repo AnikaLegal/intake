@@ -4,9 +4,9 @@ import { Button, Upload, Icon, message } from 'antd'
 
 import { api } from 'api'
 import { logError } from 'utils'
+import type { ImageUpload } from 'types'
 
 type Props = {
-  value: string,
   onChange: any => void,
 }
 
@@ -21,15 +21,22 @@ export class UploadField extends React.Component<Props, State> {
     isLoading: false,
   }
   onUpload = () => {
+    const { onChange } = this.props
     const { fileList } = this.state
     this.setState({ isLoading: true })
-    const promises = []
+    const promises: Array<Promise<any>> = []
+    const images: Array<ImageUpload> = []
     for (let file of fileList) {
-      promises.push(api.questions.upload(file))
+      promises.push(
+        api.questions.upload(file).then(imageUpload => {
+          images.push(imageUpload)
+        })
+      )
     }
     Promise.all(promises)
       .then(() => {
-        this.setState({ fileList: [], isLoading: false })
+        this.setState({ isLoading: false })
+        onChange(images)
         message.success('Upload successful.')
       })
       .catch((error, info) => {
@@ -47,11 +54,11 @@ export class UploadField extends React.Component<Props, State> {
   }
   onBeforeUpload = (file: File) => {
     const { fileList } = this.state
-    this.setState({ fileList: [...fileList, file] })
+    this.setState({ fileList: [...fileList, file] }, this.onUpload)
     return false
   }
   render() {
-    const { value, onChange } = this.props
+    const { onChange } = this.props
     const { fileList, isLoading } = this.state
     return (
       <div>
@@ -65,14 +72,6 @@ export class UploadField extends React.Component<Props, State> {
             <Icon type="upload" /> Click to Upload
           </Button>
         </Upload>
-        <Button
-          type="primary"
-          onClick={this.onUpload}
-          disabled={fileList.length === 0}
-          loading={isLoading}
-        >
-          {isLoading ? 'Uploading' : 'Start Upload'}
-        </Button>
       </div>
     )
   }
