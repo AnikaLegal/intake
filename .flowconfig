@@ -9,6 +9,7 @@ src/globals.js
 [lints]
 
 [options]
+module.name_mapper='^api' ->'<PROJECT_ROOT>/src/api'
 module.name_mapper='^components' ->'<PROJECT_ROOT>/src/components'
 module.name_mapper='^consts' ->'<PROJECT_ROOT>/src/consts'
 module.name_mapper='^containers' ->'<PROJECT_ROOT>/src/containers'

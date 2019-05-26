@@ -6,7 +6,7 @@ const url = (path: string) =>
   path.includes('http') ? path : `${SERVER}${path}`
 
 // HTTP helper functions.
-const http = {
+export const http = {
   // POST a JSON to URL (create new resource)
   post: (path: string, data: Data): Promise<Response> =>
     fetch(url(path), {

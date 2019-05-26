@@ -6,6 +6,8 @@ export const ROUTES: Array<Route> = [
   { path: '/', view: 'HomeView' },
   { path: '/form', view: 'FormView' },
   { path: '/review', view: 'ReviewView' },
+  { path: '/submitted', view: 'SubmittedView' },
+
   {
     path: '/messages',
     children: [{ path: '/contact-landlord', view: 'ContactLandlordView' }],

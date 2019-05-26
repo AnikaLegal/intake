@@ -1,15 +1,12 @@
 // @flow
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import * as Sentry from '@sentry/browser'
 import type { Node } from 'react'
+
+import { logError } from 'utils'
+
 // @noflow
 import styles from 'styles/generic/error-boundary.module.scss'
-
-if (SENTRY_JS_DSN) {
-  // Sentry wants this run as early as possible (ie. pre-render), but this is fine for now.
-  Sentry.init({ dsn: SENTRY_JS_DSN })
-}
 
 type Props = {
   children: Node,
@@ -29,18 +26,8 @@ export class ErrorBoundary extends Component<Props, State> {
   state = { hasError: false }
 
   componentDidCatch = (error: any, info: any) => {
-    console.error(error, info)
     this.setState({ hasError: true })
-    if (SENTRY_JS_DSN) {
-      console.log('Sending error report to Sentry.')
-      // Report error to Sentry
-      Sentry.withScope(scope => {
-        Object.keys(info).forEach(key => {
-          scope.setExtra(key, info[key])
-        })
-        Sentry.captureException(error)
-      })
-    }
+    logError(error, info)
   }
 
   render() {

@@ -20,6 +20,7 @@ module.exports = {
   plugins: [
     ...baseConfig.plugins,
     new webpack.DefinePlugin({
+      SERVER: JSON.stringify('http://localhost:8000'),
       STATIC_URL: JSON.stringify('http://localhost:3000/static/'),
       SENTRY_JS_DSN: JSON.stringify(''),
       DEBUG_JS: JSON.stringify('true'),

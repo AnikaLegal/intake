@@ -18,9 +18,8 @@ module.exports = {
     ...baseConfig.plugins,
     new webpack.DefinePlugin({
       // Build system envars
-      STATIC_URL: JSON.stringify(
-        'http://anika-intake.s3-website-ap-southeast-2.amazonaws.com/static/'
-      ),
+      SERVER: JSON.stringify('https://clerk.anikalegal.com'),
+      STATIC_URL: JSON.stringify('https://repairs.anikalegal.com/static/'),
       SENTRY_JS_DSN: JSON.stringify(process.env.SENTRY_JS_DSN),
       DEBUG_JS: JSON.stringify(''),
     }),
