@@ -31,6 +31,7 @@ class _ReviewContainer extends React.Component<Props, State> {
     const { answers, sections } = this.props
     // This is a bit messy because we have fields with fields inside
     // ... maybe that was a stupid choice.
+    this.setState({ isLoading: true })
     const questions = sections
       .map(s => s.forms.map(form => form.fields).reduce(flattenArray, []))
       .reduce(flattenArray, [])
