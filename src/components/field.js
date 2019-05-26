@@ -15,6 +15,7 @@ import {
 import styled, { css } from 'styled-components'
 import type { Node, AbstractComponent } from 'react'
 
+import { UploadField } from 'containers'
 import { FIELD_TYPES } from 'consts'
 import { NamedRedirect } from 'components/router'
 import type { Field as FieldType } from 'types'
@@ -143,12 +144,8 @@ const RadioButtonField = ({ onChange, field, value }: FieldProps) => (
   </Radio.Group>
 )
 
-const FileField = ({  }: FieldProps) => (
-  <Upload>
-    <Button>
-      <Icon type="upload" /> Click to Upload
-    </Button>
-  </Upload>
+const FileField = ({ value, onChange }: FieldProps) => (
+  <UploadField value={value} onChange={onChange} />
 )
 
 const DateField = ({ onChange }: FieldProps) => (

@@ -90,3 +90,8 @@ export type Section = {
   name: string,
   forms: Array<Form>,
 }
+
+export type ImageUpload = {
+  id: string,
+  image: string,
+}
