@@ -3,7 +3,7 @@ import React from 'react'
 import { Button } from 'antd'
 
 import { Header, Page, Layout, Message } from 'components'
-import { NamedLink, ROUTE_NAMES } from 'components/router'
+import { NamedLink, VIEWS } from 'routes'
 
 export const HomeView = () => (
   <Layout vertical>
@@ -35,7 +35,7 @@ export const HomeView = () => (
             team members will contact you to introduce themselves and to collect
             any further information that we need to assist you.
           </p>
-          <NamedLink to={ROUTE_NAMES.FORM}>
+          <NamedLink to={VIEWS.FormView}>
             <Button type="primary">Start</Button>
           </NamedLink>
         </Message>

@@ -67,7 +67,7 @@
         "semantic-ui-css": "^2.4.1",
         "semantic-ui-react": "^0.85.0",
         "styled-components": "^4.2.0",
-        "uniqid": "^5.0.3",
-        "universal-cookie": "^3.0.4"
+        "universal-cookie": "^3.0.4",
+        "uuid": "^3.3.2"
     }
 }

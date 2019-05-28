@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { actions } from 'state'
 import { FIELD_TYPES } from 'consts'
 import { Form } from 'components'
-import { NamedRedirect, ROUTE_NAMES } from 'components/router'
+import { NamedRedirect, VIEWS } from 'routes'
 import type { Section, Data, Redux } from 'types'
 
 type Props = {
@@ -28,7 +28,7 @@ export const _FormContainer = ({
   setAnswer,
 }: Props) => {
   if (complete) {
-    return <NamedRedirect to={ROUTE_NAMES.REVIEW} />
+    return <NamedRedirect to={VIEWS.ReviewView} />
   }
   const forms = sections
     .map(s => s.forms)

@@ -1,12 +1,10 @@
 // @flow
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import type { Node } from 'react'
 
 import { logError } from 'utils'
-
-// @noflow
-import styles from 'styles/generic/error-boundary.module.scss'
 
 type Props = {
   children: Node,
@@ -38,11 +36,19 @@ export class ErrorBoundary extends Component<Props, State> {
         return null
       }
       return (
-        <div className={styles.error}>
+        <Error>
           <h2>Something broke 😠</h2>
-        </div>
+        </Error>
       )
     }
     return children
   }
 }
+
+const Error = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`

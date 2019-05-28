@@ -1,9 +1,18 @@
 // @flow
+
+export type View =
+  | 'HomeView'
+  | 'FormView'
+  | 'ReviewView'
+  | 'SubmittedView'
+  | 'ContactLandlordView'
+  | 'NotFoundView'
+
 export type Route = {
   // URL path to get to route
   path: string,
   // view function to be rendered)
-  view?: string,
+  view?: View,
   // child routes to be rendered under path
   children?: Array<Route>,
 }
@@ -94,4 +103,14 @@ export type Section = {
 export type ImageUpload = {
   id: string,
   image: string,
+}
+
+export type Submission = {
+  id: string,
+  complete: boolean,
+  questions: { [string]: Field },
+  answers: Array<{
+    name: string,
+    answer: mixed,
+  }>,
 }

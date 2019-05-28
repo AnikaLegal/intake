@@ -2,12 +2,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, List } from 'antd'
+import uuid from 'uuid'
 
 import { api } from 'api'
 import { actions } from 'state'
 import { FIELD_TYPES } from 'consts'
 import { Form } from 'components'
-import { NamedRedirect, ROUTE_NAMES } from 'components/router'
+import { NamedRedirect, VIEWS } from 'routes'
 import { logError, flattenArray, entries } from 'utils'
 import type { Redux, Data, Section } from 'types'
 
@@ -42,13 +43,15 @@ class _ReviewContainer extends React.Component<Props, State> {
       }, [])
       .reduce((obj, field) => ({ ...obj, [field.name]: field }), {})
 
-    const data = {
+    const submission = {
       // Preserve ordering of answers
+      id: uuid.uuid4(),
+      complete: true,
       answers: entries(answers).map(([k, v]) => ({ name: k, answer: v })),
       questions,
     }
-    api.questions
-      .submit(data)
+    api.questions.submission
+      .create(submission)
       .then(() => this.setState({ isSuccess: true }))
       .catch((e, i) => {
         logError(e, i)
@@ -59,10 +62,10 @@ class _ReviewContainer extends React.Component<Props, State> {
     const { complete, answers, sections } = this.props
     const { isLoading, isSuccess } = this.state
     if (!complete) {
-      return <NamedRedirect to={ROUTE_NAMES.HOME} />
+      return <NamedRedirect to={VIEWS.HomeView} />
     }
     if (isSuccess) {
-      return <NamedRedirect to={ROUTE_NAMES.SUBMITTED} />
+      return <NamedRedirect to={VIEWS.SubmittedView} />
     }
     return (
       <div>

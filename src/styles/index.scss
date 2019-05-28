@@ -2,8 +2,8 @@
 @import './colors';
 @import './fonts';
 
-
-html, body {
+html,
+body {
   height: 100%;
   font-family: Montserrat, sans-serif;
   background-color: rgba($grey, 0.15);
@@ -13,7 +13,10 @@ h1 {
   font-weight: 600;
 }
 
-h2, h3, h4, h5 {
+h2,
+h3,
+h4,
+h5 {
   font-weight: 500;
 }
 

@@ -17,7 +17,7 @@ import type { Node, AbstractComponent } from 'react'
 
 import { UploadField } from 'containers'
 import { FIELD_TYPES } from 'consts'
-import { NamedRedirect } from 'components/router'
+import { NamedRedirect } from 'routes'
 import type { Field as FieldType } from 'types'
 
 type FieldGroupProps = {
