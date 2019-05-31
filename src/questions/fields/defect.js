@@ -9,6 +9,7 @@ export const DEFECT_TYPE: Field = {
   placeholder: 'Select the type of defect',
   help: "If none apply, please select 'other'",
   type: FIELD_TYPES.DROPDOWN,
+  rules: [rules.isTruthy],
   options: [
     { label: 'Toilet', value: 'Toilet' },
     { label: 'Water', value: 'Water' },
@@ -30,6 +31,7 @@ export const DEFECT_DESCRIPTION: Field = {
   placeholder: 'Enter your description here',
   help: 'Just explain it as if you were telling a friend about it',
   type: FIELD_TYPES.TEXTAREA,
+  rules: [rules.isTruthy],
 }
 
 export const DEFECT_PHOTO: Field = {
@@ -39,15 +41,5 @@ export const DEFECT_PHOTO: Field = {
   help:
     'If you do not have a photo of the defect to upload, that’s completely okay',
   type: FIELD_TYPES.FILE,
-}
-
-export const DEFECT_FORM: Form = {
-  name: 'DEFECT_FORM',
-  prompt: 'Tell us about your rental issue',
-  fields: [DEFECT_TYPE, DEFECT_DESCRIPTION, DEFECT_PHOTO],
-  validations: {
-    DEFECT_TYPE: [rules.isTruthy],
-    DEFECT_DESCRIPTION: [rules.isTruthy],
-    DEFECT_PHOTO: [],
-  },
+  rules: [],
 }

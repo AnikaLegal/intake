@@ -2,26 +2,28 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import { Steps } from 'antd'
-import { connect } from 'react-redux'
 
 import { Header, Form, Page } from 'components'
 import type { Section } from 'types'
 
 type Props = {
   sections: Array<Section>,
-  current: number,
   className?: string,
+  current?: number,
 }
 
 const _Sidebar = ({ className, current, sections }: Props) => {
-  let answerIdx = 0
-  let sectionIdx = 0
-  for (let section of sections) {
-    answerIdx += section.forms.length
-    if (answerIdx > current) {
-      break
+  let sectionIdx = sections.length
+  if (current || current === 0) {
+    let answerIdx = 0
+    sectionIdx = 0
+    for (let section of sections) {
+      answerIdx += section.forms.length
+      if (answerIdx > current) {
+        break
+      }
+      sectionIdx++
     }
-    sectionIdx++
   }
   return (
     <div className={className}>
@@ -44,11 +46,4 @@ const style = c => styled(c)`
     display: none;
   }
 `
-const mapState = state => ({
-  current: state.form.current,
-})
-const mapActions = dispatch => ({})
-export const Sidebar = connect(
-  mapState,
-  mapActions
-)(style(_Sidebar))
+export const Sidebar = style(_Sidebar)

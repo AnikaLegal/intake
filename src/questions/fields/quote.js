@@ -9,6 +9,7 @@ export const HAS_QUOTE: Field = {
     'Have you obtained  a quote (i.e. an estimate) for the cost of the repairs to fix the defect?',
   help: 'It doesn’t matter if you haven’t obtained a quote yet.',
   type: FIELD_TYPES.RADIO,
+  rules: [rules.isTruthy],
   options: [
     {
       label: 'Yes, I have obtained a quote.',
@@ -25,6 +26,7 @@ export const QUOTE_COST: Field = {
   name: 'QUOTE_COST',
   prompt: 'What was the quote for the cost of the repairs to fix the defect?',
   type: FIELD_TYPES.DOLLAR,
+  rules: [rules.isTruthy],
 }
 
 export const CAN_PAY_QUOTE: Field = {
@@ -34,25 +36,6 @@ export const CAN_PAY_QUOTE: Field = {
   help:
     'Paying for the repairs yourself (and then seeking reimbursement from your landlord) is the fastest way to get the defect fixed. However, we expect that most tenants will not wish to pay for the repairs themselves.',
   type: FIELD_TYPES.RADIO_BTN,
+  rules: [rules.isTruthy],
   options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
-}
-
-export const HAS_QUOTE_FORM: Form = {
-  name: 'HAS_QUOTE_FORM',
-  prompt: 'Repair quote',
-  fields: [HAS_QUOTE],
-  validations: {
-    HAS_QUOTE: [rules.isTruthy],
-  },
-}
-
-export const QUOTE_COST_FORM: Form = {
-  name: 'QUOTE_COST_FORM',
-  when: data => data['HAS_QUOTE'] === 'yes',
-  prompt: 'Repair quote',
-  fields: [QUOTE_COST, CAN_PAY_QUOTE],
-  validations: {
-    QUOTE_COST: [rules.isTruthy],
-    CAN_PAY_QUOTE: [rules.isTruthy],
-  },
 }

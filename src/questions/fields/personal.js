@@ -4,6 +4,7 @@ import { rules } from 'utils'
 import type { Field, Form } from 'types'
 
 export const LETTER_PERMISSION: Field = {
+  rules: [rules.isTruthy],
   name: 'LETTER_PERMISSION',
   prompt:
     'If any letters or notices need to be sent to your landlord, would you prefer Anika to send those letters or notices to you landlord or would you prefer Anika to prepare the letters or notices for you to send to landlord?',
@@ -25,6 +26,7 @@ export const LETTER_PERMISSION: Field = {
 }
 
 export const CLIENT_NAME: Field = {
+  rules: [rules.isTruthy],
   name: 'CLIENT_NAME',
   label: 'Full name',
   type: FIELD_TYPES.TEXT,
@@ -32,6 +34,7 @@ export const CLIENT_NAME: Field = {
 }
 
 export const CLIENT_RENTAL_ADDRESS: Field = {
+  rules: [rules.isTruthy],
   name: 'CLIENT_RENTAL_ADDRESS',
   label: 'Rental Addr',
   type: FIELD_TYPES.TEXT,
@@ -39,6 +42,7 @@ export const CLIENT_RENTAL_ADDRESS: Field = {
 }
 
 export const CLIENT_PERSONAL_ADDRESS: Field = {
+  rules: [rules.isTruthy],
   name: 'CLIENT_PERSONAL_ADDRESS',
   label: 'Personal Addr',
   type: FIELD_TYPES.TEXT,
@@ -46,6 +50,7 @@ export const CLIENT_PERSONAL_ADDRESS: Field = {
 }
 
 export const CLIENT_EMAIL: Field = {
+  rules: [rules.isTruthy],
   name: 'CLIENT_EMAIL',
   label: 'Email',
   type: FIELD_TYPES.TEXT,
@@ -53,6 +58,7 @@ export const CLIENT_EMAIL: Field = {
 }
 
 export const CLIENT_BUSINESS_PHONE: Field = {
+  rules: [rules.isTruthy],
   name: 'CLIENT_BUSINESS_PHONE',
   label: 'Phone (Day)',
   type: FIELD_TYPES.TEXT,
@@ -60,6 +66,7 @@ export const CLIENT_BUSINESS_PHONE: Field = {
 }
 
 export const CLIENT_EVENING_PHONE: Field = {
+  rules: [rules.isTruthy],
   name: 'CLIENT_EVENING_PHONE',
   type: FIELD_TYPES.TEXT,
   label: 'Phone (Evening)',
@@ -67,6 +74,7 @@ export const CLIENT_EVENING_PHONE: Field = {
 }
 
 export const CLIENT_CONTACT_DETAILS: Field = {
+  rules: [rules.isTruthy],
   name: 'CLIENT_CONTACT_DETAILS',
   prompt: 'Please provide your contact details.',
   type: FIELD_TYPES.FIELD_GROUP,
@@ -81,6 +89,7 @@ export const CLIENT_CONTACT_DETAILS: Field = {
 }
 
 export const CLIENT_CONTACT_METHOD: Field = {
+  rules: [rules.isTruthy],
   name: 'CLIENT_CONTACT_METHOD',
   prompt: 'How would you like to be contacted?',
   type: FIELD_TYPES.RADIO,
@@ -91,32 +100,8 @@ export const CLIENT_CONTACT_METHOD: Field = {
 }
 
 export const CLIENT_REFERRAL: Field = {
+  rules: [],
   name: 'CLIENT_REFERRAL',
   type: FIELD_TYPES.TEXTAREA,
   prompt: 'How did you hear about Anika?',
-}
-
-export const PERSONAL_DETAILS_FORM: Form = {
-  name: 'PERSONAL_DETAILS_FORM',
-  prompt: 'We need to know more about you',
-  fields: [CLIENT_CONTACT_DETAILS],
-  validations: {
-    CLIENT_NAME: [rules.isTruthy],
-    CLIENT_RENTAL_ADDRESS: [rules.isTruthy],
-    CLIENT_PERSONAL_ADDRESS: [rules.isTruthy],
-    CLIENT_EMAIL: [rules.isTruthy],
-    CLIENT_BUSINESS_PHONE: [rules.isTruthy],
-    CLIENT_EVENING_PHONE: [rules.isTruthy],
-  },
-}
-
-export const PERSONAL_PREFERENCES_FORM: Form = {
-  name: 'PERSONAL_PREFERENCES_FORM',
-  prompt: 'Tell us what you prefer',
-  fields: [LETTER_PERMISSION, CLIENT_CONTACT_METHOD, CLIENT_REFERRAL],
-  validations: {
-    LETTER_PERMISSION: [rules.isTruthy],
-    CLIENT_CONTACT_METHOD: [rules.isTruthy],
-    CLIENT_REFERRAL: [],
-  },
 }

@@ -99,11 +99,11 @@ export const buildNameLookup = (
 //    returns '/foo/1/bar/'
 export const buildPath = (
   template: string,
-  params: { [string]: string } = {}
+  params: { [string]: string | number } = {}
 ) => {
   let target = template
   for (let [key, val] of entries(params)) {
-    target = target.replace(`:${key}`, val)
+    target = target.replace(`:${key}`, String(val))
   }
   return target
 }

@@ -6,13 +6,22 @@ import { buildPath } from '../utils'
 
 type Props = {
   to: string,
-  params?: { [string]: string },
+  params?: { [string]: string | number },
   className?: string,
+  disabled?: boolean,
+  onClick?: Function,
   children: React.Node,
 }
 // Use this instead of Link, so that we can keep track of linked URLs.
 // and decouple route paths from their links.
-export const NamedLink = ({ to, params = {}, children, className }: Props) => {
+export const NamedLink = ({
+  to,
+  onClick,
+  disabled,
+  params = {},
+  children,
+  className,
+}: Props) => {
   let target = buildPath(to, params)
   return (
     <Link
@@ -23,7 +32,22 @@ export const NamedLink = ({ to, params = {}, children, className }: Props) => {
       style={{ textDecoration: 'none' }}
       className={className}
       children={children}
-      onClick={() => window.scrollTo(0, 0)}
+      onClick={onLinkClick(onClick, disabled)}
     />
   )
+}
+
+const onLinkClick = (onClick: Function, disabled: boolean | void) => (
+  e: SyntheticEvent<HTMLAnchorElement>
+) => {
+  if (disabled) {
+    e.preventDefault()
+    e.stopPropagation()
+    return
+  }
+  if (onClick) {
+    onClick(e)
+  } else {
+    window.scrollTo(0, 0)
+  }
 }

@@ -2,7 +2,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, List } from 'antd'
-import uuid from 'uuid'
 
 import { api } from 'api'
 import { actions } from 'state'
@@ -13,7 +12,6 @@ import { logError, flattenArray, entries } from 'utils'
 import type { Redux, Data, Section } from 'types'
 
 type Props = {
-  complete: boolean,
   answers: Data,
   sections: Array<Section>,
 }
@@ -30,23 +28,10 @@ class _ReviewContainer extends React.Component<Props, State> {
   }
   onSubmit = () => {
     const { answers, sections } = this.props
-    // This is a bit messy because we have fields with fields inside
-    // ... maybe that was a stupid choice.
     this.setState({ isLoading: true })
-    const questions = sections
-      .map(s => s.forms.map(form => form.fields).reduce(flattenArray, []))
-      .reduce(flattenArray, [])
-      .map(field => (field.fields ? field.fields : field))
-      .reduce((arr, f) => {
-        if (Array.isArray(f)) return [...arr, ...f]
-        return [...arr, f]
-      }, [])
-      .reduce((obj, field) => ({ ...obj, [field.name]: field }), {})
-
+    const questions = getQuestions(sections)
     const submission = {
       // Preserve ordering of answers
-      id: uuid.uuid4(),
-      complete: true,
       answers: entries(answers).map(([k, v]) => ({ name: k, answer: v })),
       questions,
     }
@@ -59,11 +44,8 @@ class _ReviewContainer extends React.Component<Props, State> {
       })
   }
   render() {
-    const { complete, answers, sections } = this.props
+    const { answers, sections } = this.props
     const { isLoading, isSuccess } = this.state
-    if (!complete) {
-      return <NamedRedirect to={VIEWS.HomeView} />
-    }
     if (isSuccess) {
       return <NamedRedirect to={VIEWS.SubmittedView} />
     }
@@ -100,10 +82,22 @@ class _ReviewContainer extends React.Component<Props, State> {
 
 const mapState = (state: Redux) => ({
   answers: state.form.answers,
-  complete: state.form.complete,
 })
 const mapActions = dispatch => ({})
 export const ReviewContainer = connect(
   mapState,
   mapActions
 )(_ReviewContainer)
+
+// This is a bit messy because we have fields with fields inside
+// ... maybe that was a stupid choice.
+const getQuestions = (sections: Array<Section>): Data =>
+  sections
+    // Get all the fields out of the section forms
+    .map(s => s.forms.map(form => form.fields).reduce(flattenArray, []))
+    .reduce(flattenArray, [])
+    // Get all the fields out of the nested fields
+    .map(field => (field.fields ? field.fields : field))
+    .reduce((arr, f) => (Array.isArray(f) ? [...arr, ...f] : [...arr, f]), [])
+    // Put everything in an object map
+    .reduce((obj, field) => ({ ...obj, [field.name]: field }), {})

@@ -19,7 +19,6 @@ export type Route = {
 
 export type FieldType =
   | 'FIELD_GROUP'
-  | 'EXIT'
   | 'DROPDOWN'
   | 'MULTI_SELECT'
   | 'RADIO'
@@ -35,8 +34,6 @@ export type FieldType =
 export type Data = { [string]: any }
 
 export type FormState = {
-  +current: number,
-  +complete: boolean,
   +answers: Data,
 }
 
@@ -44,10 +41,7 @@ export type Redux = {
   +form: FormState,
 }
 
-export type Action =
-  | { +type: 'PROGRESS_FORM', +idx: number }
-  | { +type: 'ANSWER_FORM', +name: string, +answer: any }
-  | { +type: 'COMPLETE_FORM' }
+export type Action = { +type: 'ANSWER_FORM', +name: string, +answer: any }
 
 export type PromiseAction = Promise<Action>
 
@@ -84,15 +78,17 @@ export type Field = {
   label?: string,
   options?: Array<FieldOption>,
   fields?: Array<Field>,
+  rules: Array<Rule>,
 }
 
 export type Form = {
   name: string,
   fields: Array<Field>,
   prompt: string,
-  validations: { [string]: Array<Rule> },
+  rules: { [string]: Array<Rule> },
   help?: string,
-  when?: ({ [string]: any }) => boolean,
+  when?: Data => boolean,
+  getRedirect?: Data => View | null,
 }
 
 export type Section = {

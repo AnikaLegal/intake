@@ -35,7 +35,7 @@ export const HomeView = () => (
             team members will contact you to introduce themselves and to collect
             any further information that we need to assist you.
           </p>
-          <NamedLink to={VIEWS.FormView}>
+          <NamedLink to={VIEWS.FormView} params={{ formId: '0' }}>
             <Button type="primary">Start</Button>
           </NamedLink>
         </Message>

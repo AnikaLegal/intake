@@ -1,4 +1,3 @@
-// @flow
 // https://github.com/storybooks/storybook/tree/master/addons/knobs
 import React, { useState } from 'react'
 
@@ -52,8 +51,9 @@ const FieldStory = ({ field }) => {
           name: 'TEST_FORM',
           fields: [{ ...field, valid: true, value: data[field.name] }],
           prompt: 'Test Field',
-          validations: { [field.name]: [] },
+          rules: { [field.name]: [] },
         }}
+        rules={{}}
         onChange={onChange}
         data={data}
         hasNext

@@ -8,6 +8,7 @@ export const HAS_CONTACTED_LANDLORD: Field = {
   prompt:
     'Have you contacted or attempted to contact your landlord (or your landlord’s agent) to ask them to fix the defect?',
   type: FIELD_TYPES.RADIO,
+  rules: [rules.isTruthy],
   options: [
     {
       label:
@@ -31,6 +32,7 @@ export const LANDLORD_CONTACT_METHOD: Field = {
   name: 'LANDLORD_CONTACT_METHOD',
   prompt: 'How did you contact your landlord (or your landlord’s agent)?',
   type: FIELD_TYPES.MULTI_SELECT,
+  rules: [rules.isTruthy],
   options: [
     { label: 'Phone', value: 'phone' },
     { label: 'Email', value: 'email' },
@@ -42,6 +44,7 @@ export const LANDLORD_CONTACT_METHOD: Field = {
 
 export const LANDLORD_CONTACT_DATE: Field = {
   name: 'LANDLORD_CONTACT_DATE',
+  rules: [rules.isTruthy],
   prompt:
     'When did you first contact or attempt to contact your landlord (or your landlord’s agent)?',
   type: FIELD_TYPES.DATE,
@@ -49,6 +52,7 @@ export const LANDLORD_CONTACT_DATE: Field = {
 
 export const LANDLORD_CONTACT_ATTEMPTS: Field = {
   name: 'LANDLORD_CONTACT_ATTEMPTS',
+  rules: [rules.isTruthy],
   prompt:
     'How many times have you contacted your landlord (or your landlord’s agent)?',
   help:
@@ -64,6 +68,7 @@ export const LANDLORD_CONTACT_ATTEMPTS: Field = {
 
 export const LANDLORD_CONTACT_RECORDS: Field = {
   name: 'LANDLORD_CONTACT_RECORDS',
+  rules: [rules.isTruthy],
   prompt:
     'Do you have records of your communications with your landlord (or your landlord’s agent) in which you asked for the defect to be fixed?',
   help:
@@ -77,6 +82,7 @@ export const LANDLORD_CONTACT_RECORDS: Field = {
 
 export const LANDLORD_HAS_AGENT: Field = {
   name: 'LANDLORD_HAS_AGENT',
+  rules: [rules.isTruthy],
   prompt: 'Does your landlord use an agent to manage the property?',
   type: FIELD_TYPES.RADIO_BTN,
   options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
@@ -85,6 +91,7 @@ export const LANDLORD_HAS_AGENT: Field = {
 export const LANDLORD_NAME = {
   name: 'LANDLORD_NAME',
   label: 'Full Name',
+  rules: [rules.isTruthy],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their full name',
 }
@@ -92,6 +99,7 @@ export const LANDLORD_NAME = {
 export const LANDLORD_EMAIL: Field = {
   name: 'LANDLORD_EMAIL',
   type: FIELD_TYPES.TEXT,
+  rules: [rules.isTruthy],
   label: 'Email',
   placeholder: 'Enter their email address',
 }
@@ -100,6 +108,7 @@ export const LANDLORD_PHONE: Field = {
   name: 'LANDLORD_PHONE',
   type: FIELD_TYPES.TEXT,
   label: 'Phone',
+  rules: [rules.isTruthy],
   placeholder: 'Enter their phone number',
 }
 
@@ -108,11 +117,13 @@ export const LANDLORD_CONTACT_DETAILS: Field = {
   prompt:
     'Please provide the details of your landlord or your landlord’s agent.',
   type: FIELD_TYPES.FIELD_GROUP,
+  rules: [rules.isTruthy],
   fields: [LANDLORD_NAME, LANDLORD_EMAIL, LANDLORD_PHONE],
 }
 
 export const IS_VCAT_OK: Field = {
   name: 'IS_VCAT_OK',
+  rules: [rules.isTruthy],
   prompt:
     'Sometimes the only way to force a landlord to fix defects is to commence VCAT proceedings against the landlord. Would you be comfortable bringing VCAT proceedings against your landlord?',
   help:
@@ -123,64 +134,8 @@ export const IS_VCAT_OK: Field = {
 
 export const VCAT_AVOID_REASON: Field = {
   name: 'VCAT_AVOID_REASON',
+  rules: [rules.isTruthy],
   prompt:
     'Can you please explain why you wouldn’t be comfortable bringing VCAT proceedings against your landlord?',
   type: FIELD_TYPES.TEXTAREA,
-}
-
-export const LANDLORD_COMMS_CHECK_FORM: Form = {
-  name: 'LANDLORD_COMMS_CHECK_FORM',
-  prompt: 'Tell us about your landlord',
-  fields: [HAS_CONTACTED_LANDLORD],
-  validations: {
-    HAS_CONTACTED_LANDLORD: [rules.isTruthy],
-  },
-}
-
-export const LANDLORD_COMMS_EXIT: Form = {
-  name: 'LANDLORD_COMMS_EXIT',
-  when: data => data['HAS_CONTACTED_LANDLORD'] === 'no',
-  fields: [{ name: '/messages/contact-landlord', type: FIELD_TYPES.EXIT }],
-  validations: {},
-  prompt: '',
-}
-
-export const LANDLORD_COMMS_DETAILS_FORM: Form = {
-  name: 'LANDLORD_COMMS_DETAILS_FORM',
-  prompt: 'Tell us about your landlord',
-  fields: [
-    LANDLORD_CONTACT_METHOD,
-    LANDLORD_CONTACT_DATE,
-    LANDLORD_CONTACT_ATTEMPTS,
-    LANDLORD_CONTACT_RECORDS,
-  ],
-  validations: {
-    LANDLORD_CONTACT_METHOD: [rules.isTruthy],
-    LANDLORD_CONTACT_DATE: [rules.isTruthy],
-    LANDLORD_CONTACT_ATTEMPTS: [rules.isTruthy],
-    LANDLORD_CONTACT_RECORDS: [rules.isTruthy],
-  },
-}
-
-export const LANDLORD_DETAILS_FORM: Form = {
-  name: 'LANDLORD_DETAILS_FORM',
-  prompt: 'Tell us about your landlord',
-  fields: [LANDLORD_HAS_AGENT, LANDLORD_CONTACT_DETAILS, IS_VCAT_OK],
-  validations: {
-    LANDLORD_HAS_AGENT: [rules.isTruthy],
-    LANDLORD_NAME: [rules.isTruthy],
-    LANDLORD_EMAIL: [rules.isTruthy],
-    LANDLORD_PHONE: [rules.isTruthy],
-    IS_VCAT_OK: [rules.isTruthy],
-  },
-}
-
-export const VCAT_AVOID_REASON_FORM: Form = {
-  name: 'VCAT_AVOID_REASON_FORM',
-  when: data => data['IS_VCAT_OK'] === 'no',
-  prompt: 'Tell us more',
-  fields: [VCAT_AVOID_REASON],
-  validations: {
-    VCAT_AVOID_REASON: [rules.isTruthy],
-  },
 }

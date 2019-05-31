@@ -6,7 +6,7 @@ import { buildPath } from '../utils'
 
 type Props = {
   to: string,
-  params?: { [string]: string },
+  params?: { [string]: string | number },
 }
 
 // Use this instead of Redirect, so that we can keep track of our redirects,

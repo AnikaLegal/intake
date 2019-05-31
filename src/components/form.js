@@ -1,49 +1,38 @@
 // @flow
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import { Button, Form as AntForm } from 'antd'
 import styled from 'styled-components'
 
-import { validate } from 'utils'
 import { Field, FieldGroup } from 'components'
 import { FIELD_TYPES } from 'consts'
-import type { Form as FormType, Data } from 'types'
+import { NamedLink, VIEWS } from 'routes'
+import type { Form as FormType, View, Data, Validations } from 'types'
 
 type FormProps = {
   form: FormType,
-  hasNext: boolean,
-  hasBack: boolean,
-  isComplete: boolean,
+  isSubmitted: boolean,
+  validation: Validations,
+  nextPage: number | null,
+  backPage: number | null,
+  isFinalForm: boolean,
   onNext: Function,
-  onBack: Function,
   onChange: Function,
-  onComplete: Function,
   data: Data,
 }
 
 export const Form = ({
   form,
   data,
-  hasNext,
-  hasBack,
-  isComplete,
-  onNext,
-  onBack,
+  validation,
+  nextPage,
+  backPage,
+  isSubmitted,
+  isFinalForm,
   onChange,
-  onComplete,
+  onNext,
 }: FormProps) => {
-  const validator = validate(form.validations)
-  const validation = validator(data)
-  const [isSubmitted, setSubmitted] = useState(false)
-  const onSubmit = () => {
-    setSubmitted(true)
-    if (validation.valid) {
-      setSubmitted(false)
-      onNext()
-    }
-  }
   return (
-    <div style={{ width: '100%' }}>
+    <React.Fragment>
       <FormTitle>{form.prompt}</FormTitle>
       <AntForm>
         {form.fields.map(f => {
@@ -88,31 +77,33 @@ export const Form = ({
           }
         })}
       </AntForm>
+
       <Divider />
-      {hasBack && (
-        <Button onClick={onBack} style={{ marginRight: '0.5rem' }}>
-          Back
-        </Button>
+
+      {backPage !== null && (
+        <NamedLink to={VIEWS.FormView} params={{ formId: backPage }}>
+          <Button style={{ marginRight: '0.5rem' }}>Back</Button>
+        </NamedLink>
       )}
-      {hasNext && (
-        <Button
-          disabled={!validation.valid}
-          type={validation.valid ? 'primary' : 'secondary'}
-          onClick={onSubmit}
+      {nextPage !== null && (
+        <NamedLink
+          to={VIEWS.FormView}
+          params={{ formId: nextPage }}
+          onClick={onNext}
         >
-          Next
-        </Button>
+          <Button type={validation.valid ? 'primary' : 'secondary'}>
+            Next
+          </Button>
+        </NamedLink>
       )}
-      {isComplete && (
-        <Button
-          disabled={!validation.valid}
-          type={validation.valid ? 'primary' : 'secondary'}
-          onClick={onComplete}
-        >
-          Review
-        </Button>
+      {isFinalForm && (
+        <NamedLink to={VIEWS.ReviewView} disabled={!validation.valid}>
+          <Button type={validation.valid ? 'primary' : 'secondary'}>
+            Review
+          </Button>
+        </NamedLink>
       )}
-    </div>
+    </React.Fragment>
   )
 }
 

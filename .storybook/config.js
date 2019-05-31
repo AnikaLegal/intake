@@ -4,7 +4,7 @@ import { withKnobs } from '@storybook/addon-knobs'
 addDecorator(withKnobs)
 
 function loadStories() {
-  require('../src/styles/main.global.scss')
+  require('../src/styles/index.scss')
   require('../src/stories/index.js')
 }
 

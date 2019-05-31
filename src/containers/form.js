@@ -1,88 +1,141 @@
 // @flow
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import { actions } from 'state'
 import { FIELD_TYPES } from 'consts'
 import { Form } from 'components'
+import { validate, flattenArray } from 'utils'
 import { NamedRedirect, VIEWS } from 'routes'
-import type { Section, Data, Redux } from 'types'
+import type {
+  View,
+  Section,
+  Data,
+  Form as FormType,
+  Redux,
+  Validations,
+} from 'types'
 
 type Props = {
+  idx: number,
   sections: Array<Section>,
   answers: Data,
-  current: number,
   complete: boolean,
-  setProgress: Function,
   setComplete: Function,
   setAnswer: Function,
 }
 
 export const _FormContainer = ({
-  current,
-  complete,
+  idx,
   answers,
   sections,
-  setProgress,
   setComplete,
   setAnswer,
 }: Props) => {
-  if (complete) {
-    return <NamedRedirect to={VIEWS.ReviewView} />
+  const [redirect, setRedirect] = useState<View | null>(null)
+  const [isSubmitted, setSubmitted] = useState(false)
+  if (redirect) {
+    return <NamedRedirect to={VIEWS[redirect]} />
   }
-  const forms = sections
-    .map(s => s.forms)
-    .reduce((arr, fs) => [...arr, ...fs], [])
-  const onNext = idx => () => {
-    if (idx + 1 >= forms.length) return
-    const nextForm = forms[idx + 1]
-    if (nextForm.when && !nextForm.when(answers)) {
-      onNext(idx + 1)()
+  const forms: Array<FormType> = sections.map(s => s.forms).reduce(flattenArray)
+  const form = forms[idx]
+
+  const validation = getValidation(form, answers)
+  const nextPage = getNextPage(idx, forms, answers)
+  const backPage = getBackPage(idx, forms, answers)
+  const isFinalForm = idx + 1 === forms.length
+
+  const onNext = (e: SyntheticEvent<any>) => {
+    const maybeRedirect = form.getRedirect ? form.getRedirect(answers) : null
+    if (maybeRedirect) {
+      setRedirect(maybeRedirect)
+      return
+    }
+    setSubmitted(true)
+    if (!validation.valid) {
+      e.preventDefault()
+      e.stopPropagation()
     } else {
-      setProgress(idx + 1)
+      setSubmitted(false)
+      window.scrollTo(0, 0)
     }
   }
-  const onBack = idx => () => {
-    if (idx - 1 < 0) return
-    const prevForm = forms[idx - 1]
-    if (prevForm.when && !prevForm.when(answers)) {
-      onBack(idx - 1)()
-    } else {
-      setProgress(idx - 1)
-    }
-  }
-  const onChange = key => value => {
-    setAnswer(key, value)
-  }
-  const hasNext = current + 1 < forms.length
-  const hasBack = current - 1 >= 0
-  const isComplete = current + 1 === forms.length
+
   return (
     <Form
-      form={forms[current]}
+      idx={idx}
+      form={form}
+      validation={validation}
       data={answers}
-      hasNext={hasNext}
-      hasBack={hasBack}
-      onNext={onNext(current)}
-      onBack={onBack(current)}
-      onChange={onChange}
-      isComplete={isComplete}
-      onComplete={setComplete}
+      nextPage={nextPage}
+      backPage={backPage}
+      onNext={onNext}
+      onChange={k => v => setAnswer(k, v)}
+      isFinalForm={isFinalForm}
+      isSubmitted={isSubmitted}
     />
   )
 }
 
 const mapState = (state: Redux) => ({
-  current: state.form.current,
   answers: state.form.answers,
-  complete: state.form.complete,
 })
 const mapActions = dispatch => ({
-  setProgress: (...args) => dispatch(actions.form.progress(...args)),
-  setComplete: (...args) => dispatch(actions.form.complete(...args)),
   setAnswer: (...args) => dispatch(actions.form.answer(...args)),
 })
 export const FormContainer = connect(
   mapState,
   mapActions
 )(_FormContainer)
+
+const getValidation = (form: FormType, answers: Data): Validations => {
+  const fieldRules = {}
+  for (let field of form.fields) {
+    if (field.fields) {
+      for (let subfield of field.fields) {
+        fieldRules[subfield.name] = [
+          ...(form.rules[subfield.name] || []),
+          ...subfield.rules,
+        ]
+      }
+    } else {
+      fieldRules[field.name] = [
+        ...(form.rules[field.name] || []),
+        ...field.rules,
+      ]
+    }
+  }
+  const rules = {
+    ...form.rules,
+    ...fieldRules,
+  }
+  return validate(rules)(answers)
+}
+
+const getNextPage = (
+  idx: number,
+  forms: Array<FormType>,
+  answers: Data
+): number | null => {
+  if (idx + 1 >= forms.length) return null
+  const nextForm = forms[idx + 1]
+  if (nextForm.when && !nextForm.when(answers)) {
+    return getNextPage(idx + 1, forms, answers)
+  } else {
+    return idx + 1
+  }
+}
+
+const getBackPage = (
+  idx: number,
+  forms: Array<FormType>,
+  answers: Data
+): number | null => {
+  if (idx - 1 < 0) return null
+  const prevForm = forms[idx - 1]
+  if (prevForm.when && !prevForm.when(answers)) {
+    return getBackPage(idx - 1, forms, answers)
+  } else {
+    return idx - 1
+  }
+}

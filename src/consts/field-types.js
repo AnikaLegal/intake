@@ -13,5 +13,4 @@ export const FIELD_TYPES: { [string]: FieldType } = {
   TEXT: 'TEXT',
   NUMBER: 'NUMBER',
   DOLLAR: 'DOLLAR',
-  EXIT: 'EXIT',
 }
