@@ -11,7 +11,11 @@ export const SubmittedView = () => (
       <Page>
         <Message>
           <h1>Your case has been submitted</h1>
-          <p>We'll talk to you soon.</p>
+          <p>
+            Thank you for taking the time to complete the questionnaire. One of
+            our friendly Anika team members will contact you as soon as possible
+            to introduce themselves and to discuss how we can help you.
+          </p>
         </Message>
       </Page>
     </Layout>

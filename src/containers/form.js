@@ -1,141 +1,88 @@
 // @flow
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import { Spin } from 'antd'
 
 import { actions } from 'state'
 import { FIELD_TYPES } from 'consts'
-import { Form } from 'components'
-import { validate, flattenArray } from 'utils'
+import { Form, Header, Page, Layout } from 'components'
+import { logError, validate, flattenArray } from 'utils'
 import { NamedRedirect, VIEWS } from 'routes'
-import type {
-  View,
-  Section,
-  Data,
-  Form as FormType,
-  Redux,
-  Validations,
-} from 'types'
+import { Sidebar } from 'containers'
+import { SECTIONS } from 'questions'
+import type { View, Form as FormType, Redux, FormState } from 'types'
 
 type Props = {
-  idx: number,
-  sections: Array<Section>,
-  answers: Data,
-  complete: boolean,
-  setComplete: Function,
-  setAnswer: Function,
+  submissionId: string,
 }
 
-export const _FormContainer = ({
-  idx,
-  answers,
-  sections,
-  setComplete,
-  setAnswer,
-}: Props) => {
+export const FormContainer = ({ submissionId }: Props) => {
+  // Setup redirect to out-of-form pages.
   const [redirect, setRedirect] = useState<View | null>(null)
-  const [isSubmitted, setSubmitted] = useState(false)
+  // Hook up to Redux store.
+  const dispatch = useDispatch()
+  const setAnswer = k => v => dispatch(actions.form.answer(k, v))
+  const loadSubmission = () => dispatch(actions.form.load(submissionId))
+  const onPrev = () => dispatch(actions.form.prev())
+  const formState: FormState = useSelector(
+    ({ form }: Redux) => form,
+    shallowEqual
+  )
+  // Load submission if it is not already loaded.
+  useEffect(() => {
+    if (!formState.id) loadSubmission().catch(logError)
+  }, [])
+  // Redirect users to out-of-form message pages.
+  if (formState.isComplete) {
+    return <NamedRedirect to={VIEWS.SubmittedView} />
+  }
   if (redirect) {
     return <NamedRedirect to={VIEWS[redirect]} />
   }
-  const forms: Array<FormType> = sections.map(s => s.forms).reduce(flattenArray)
-  const form = forms[idx]
+  if (formState.isLoading) {
+    return (
+      <Layout vertical>
+        <Page>
+          <Spin tip="Loading..." />
+        </Page>
+      </Layout>
+    )
+  }
 
-  const validation = getValidation(form, answers)
-  const nextPage = getNextPage(idx, forms, answers)
-  const backPage = getBackPage(idx, forms, answers)
-  const isFinalForm = idx + 1 === forms.length
-
+  const forms: Array<FormType> = SECTIONS.map(s => s.forms).reduce(flattenArray)
+  const form = forms[formState.page]
+  // Redirect if necessary, otherwise request next page.
+  // TODO - move this into some Redux middleware.
   const onNext = (e: SyntheticEvent<any>) => {
-    const maybeRedirect = form.getRedirect ? form.getRedirect(answers) : null
+    const maybeRedirect = form.getRedirect
+      ? form.getRedirect(formState.answers)
+      : null
     if (maybeRedirect) {
       setRedirect(maybeRedirect)
-      return
-    }
-    setSubmitted(true)
-    if (!validation.valid) {
-      e.preventDefault()
-      e.stopPropagation()
     } else {
-      setSubmitted(false)
-      window.scrollTo(0, 0)
+      dispatch(actions.form.next()).catch(logError)
     }
   }
-
   return (
-    <Form
-      idx={idx}
-      form={form}
-      validation={validation}
-      data={answers}
-      nextPage={nextPage}
-      backPage={backPage}
-      onNext={onNext}
-      onChange={k => v => setAnswer(k, v)}
-      isFinalForm={isFinalForm}
-      isSubmitted={isSubmitted}
-    />
+    <Layout vertical>
+      <Header />
+      <Layout>
+        <Sidebar current={formState.page} sections={SECTIONS} />
+        <Page>
+          <Form
+            submissionId={submissionId}
+            form={form}
+            validation={formState.validation}
+            hasNext={formState.hasNext}
+            hasPrev={formState.hasPrev}
+            isSubmitted={formState.isSubmitted}
+            onNext={onNext}
+            onPrev={onPrev}
+            onChange={setAnswer}
+            data={formState.answers}
+          />
+        </Page>
+      </Layout>
+    </Layout>
   )
-}
-
-const mapState = (state: Redux) => ({
-  answers: state.form.answers,
-})
-const mapActions = dispatch => ({
-  setAnswer: (...args) => dispatch(actions.form.answer(...args)),
-})
-export const FormContainer = connect(
-  mapState,
-  mapActions
-)(_FormContainer)
-
-const getValidation = (form: FormType, answers: Data): Validations => {
-  const fieldRules = {}
-  for (let field of form.fields) {
-    if (field.fields) {
-      for (let subfield of field.fields) {
-        fieldRules[subfield.name] = [
-          ...(form.rules[subfield.name] || []),
-          ...subfield.rules,
-        ]
-      }
-    } else {
-      fieldRules[field.name] = [
-        ...(form.rules[field.name] || []),
-        ...field.rules,
-      ]
-    }
-  }
-  const rules = {
-    ...form.rules,
-    ...fieldRules,
-  }
-  return validate(rules)(answers)
-}
-
-const getNextPage = (
-  idx: number,
-  forms: Array<FormType>,
-  answers: Data
-): number | null => {
-  if (idx + 1 >= forms.length) return null
-  const nextForm = forms[idx + 1]
-  if (nextForm.when && !nextForm.when(answers)) {
-    return getNextPage(idx + 1, forms, answers)
-  } else {
-    return idx + 1
-  }
-}
-
-const getBackPage = (
-  idx: number,
-  forms: Array<FormType>,
-  answers: Data
-): number | null => {
-  if (idx - 1 < 0) return null
-  const prevForm = forms[idx - 1]
-  if (prevForm.when && !prevForm.when(answers)) {
-    return getBackPage(idx - 1, forms, answers)
-  } else {
-    return idx - 1
-  }
 }

@@ -1,18 +1,14 @@
 // @flow
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
-import { SECTIONS } from 'questions'
-import { Header, Page, Layout } from 'components'
-import { Sidebar, ReviewContainer } from 'containers'
+import { ReviewContainer } from 'containers'
+import { NamedRedirect, VIEWS } from 'routes'
 
-export const ReviewView = () => (
-  <Layout vertical>
-    <Header />
-    <Layout>
-      <Sidebar sections={SECTIONS} />
-      <Page>
-        <ReviewContainer sections={SECTIONS} />
-      </Page>
-    </Layout>
-  </Layout>
-)
+export const ReviewView = withRouter(({ match }) => {
+  const {
+    params: { submissionId },
+  } = match
+  if (!submissionId) return <NamedRedirect to={VIEWS.NotFoundView} />
+  return <ReviewContainer submissionId={submissionId} />
+})

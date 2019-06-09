@@ -1,5 +1,5 @@
 // @flow
-import form from './form/init'
+import { form } from './form/init'
 import type { Redux } from 'types'
 
 // Initial Redux state for the app

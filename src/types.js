@@ -1,4 +1,9 @@
 // @flow
+import type {
+  Store as ReduxStore,
+  Reducer as ReduxReducer,
+  DispatchAPI,
+} from 'redux'
 
 export type View =
   | 'HomeView'
@@ -33,26 +38,6 @@ export type FieldType =
 
 export type Data = { [string]: any }
 
-export type FormState = {
-  +answers: Data,
-}
-
-export type Redux = {
-  +form: FormState,
-}
-
-export type Action = { +type: 'ANSWER_FORM', +name: string, +answer: any }
-
-export type PromiseAction = Promise<Action>
-
-export type GetState = () => Redux
-
-export type ThunkAction = (dispatch: Dispatch, getState: GetState) => any
-
-export type Dispatch = (
-  action: Action | ThunkAction | PromiseAction | Array<Action>
-) => any
-
 export type Validation = {
   valid: boolean,
   errors: Array<string>,
@@ -69,6 +54,8 @@ export type FieldOption = {
   value: string,
 }
 
+export type Condition = Data => boolean
+
 export type Field = {
   name: string,
   type: FieldType,
@@ -76,6 +63,7 @@ export type Field = {
   help?: string,
   placeholder?: string,
   label?: string,
+  when?: Condition,
   options?: Array<FieldOption>,
   fields?: Array<Field>,
   rules: Array<Rule>,
@@ -87,7 +75,7 @@ export type Form = {
   prompt: string,
   rules: { [string]: Array<Rule> },
   help?: string,
-  when?: Data => boolean,
+  when?: Condition,
   getRedirect?: Data => View | null,
 }
 
@@ -101,12 +89,45 @@ export type ImageUpload = {
   image: string,
 }
 
+type Answer = {
+  name: string,
+  answer: mixed,
+}
+
 export type Submission = {
   id: string,
   complete: boolean,
-  questions: { [string]: Field },
-  answers: Array<{
-    name: string,
-    answer: mixed,
-  }>,
+  questions: Array<Section>,
+  answers: Array<Answer>,
 }
+
+export type FormState = {
+  +id: string, // Loaded Submission ID
+  +answers: Data, // Answers provided by the user.
+  +questions: Array<Section>,
+  +page: number, // Current page number.
+  +hasNext: boolean,
+  +hasPrev: boolean,
+  +validation: Validations, // Validation for the current page.
+  +isSubmitted: boolean, // Has the user tried to submit the current page.
+  +isLoading: boolean, // Is data loading from the server.
+  +isComplete: boolean, // Is the form complete, and ready to review + submit.
+}
+
+export type Redux = {
+  +form: FormState,
+}
+
+export type Action =
+  | { +type: 'ANSWER_FORM', +name: string, +answer: any }
+  | { +type: 'FORM_LOADING' }
+  | { +type: 'FORM_LOADED', +submission: Submission }
+  | { +type: 'FORM_NEXT', +submission: Submission }
+  | { +type: 'FORM_SUBMIT', +submission: Submission }
+  | { +type: 'FORM_PREV' }
+
+export type GetState = () => Redux
+export type Thunk = (dispatch: Dispatch, getState: GetState) => void
+export type Dispatch = DispatchAPI<Action | Thunk>
+export type Store = ReduxStore<Redux, Action, Dispatch>
+export type Reducer = ReduxReducer<Redux, Action>

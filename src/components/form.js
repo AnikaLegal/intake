@@ -4,32 +4,35 @@ import { Button, Form as AntForm } from 'antd'
 import styled from 'styled-components'
 
 import { Field, FieldGroup } from 'components'
+import { VerticalAppear } from './animations'
 import { FIELD_TYPES } from 'consts'
 import { NamedLink, VIEWS } from 'routes'
 import type { Form as FormType, View, Data, Validations } from 'types'
 
 type FormProps = {
+  submissionId: string,
   form: FormType,
-  isSubmitted: boolean,
   validation: Validations,
-  nextPage: number | null,
-  backPage: number | null,
-  isFinalForm: boolean,
+  hasNext: boolean,
+  hasPrev: boolean,
+  isSubmitted: boolean,
   onNext: Function,
+  onPrev: Function,
   onChange: Function,
   data: Data,
 }
 
 export const Form = ({
+  submissionId,
   form,
-  data,
   validation,
-  nextPage,
-  backPage,
+  hasNext,
+  hasPrev,
   isSubmitted,
-  isFinalForm,
-  onChange,
   onNext,
+  onPrev,
+  onChange,
+  data,
 }: FormProps) => {
   return (
     <React.Fragment>
@@ -38,41 +41,50 @@ export const Form = ({
         {form.fields.map(f => {
           if (f.type === FIELD_TYPES.FIELD_GROUP) {
             return (
-              <FieldGroup key={f.name} field={f}>
-                <div>
-                  {f.fields &&
-                    f.fields.map(field => (
-                      <Field
-                        key={field.name}
-                        field={field}
-                        valid={
-                          isSubmitted
-                            ? validation.fields[field.name].valid
-                            : true
-                        }
-                        errors={
-                          isSubmitted
-                            ? validation.fields[field.name].errors
-                            : []
-                        }
-                        value={data[field.name] || ''}
-                        onChange={onChange(field.name)}
-                        isCompact
-                      />
-                    ))}
-                </div>
-              </FieldGroup>
+              <VerticalAppear
+                key={f.name}
+                visible={f.when ? f.when(data) : true}
+              >
+                <FieldGroup field={f}>
+                  <div>
+                    {f.fields &&
+                      f.fields.map(field => (
+                        <Field
+                          key={field.name}
+                          field={field}
+                          valid={
+                            isSubmitted
+                              ? validation.fields[field.name].valid
+                              : true
+                          }
+                          errors={
+                            isSubmitted
+                              ? validation.fields[field.name].errors
+                              : []
+                          }
+                          value={data[field.name] || ''}
+                          onChange={onChange(field.name)}
+                          isCompact
+                        />
+                      ))}
+                  </div>
+                </FieldGroup>
+              </VerticalAppear>
             )
           } else {
             return (
-              <Field
+              <VerticalAppear
                 key={f.name}
-                field={f}
-                valid={isSubmitted ? validation.fields[f.name].valid : true}
-                errors={isSubmitted ? validation.fields[f.name].errors : []}
-                value={data[f.name] || ''}
-                onChange={onChange(f.name)}
-              />
+                visible={f.when ? f.when(data) : true}
+              >
+                <Field
+                  field={f}
+                  valid={isSubmitted ? validation.fields[f.name].valid : true}
+                  errors={isSubmitted ? validation.fields[f.name].errors : []}
+                  value={data[f.name] || ''}
+                  onChange={onChange(f.name)}
+                />
+              </VerticalAppear>
             )
           }
         })}
@@ -80,26 +92,27 @@ export const Form = ({
 
       <Divider />
 
-      {backPage !== null && (
-        <NamedLink to={VIEWS.FormView} params={{ formId: backPage }}>
-          <Button style={{ marginRight: '0.5rem' }}>Back</Button>
-        </NamedLink>
+      {hasPrev && (
+        <Button onClick={onPrev} style={{ marginRight: '0.5rem' }}>
+          Back
+        </Button>
       )}
-      {nextPage !== null && (
+      {hasNext && (
+        <Button
+          onClick={onNext}
+          type={validation.valid ? 'primary' : 'default'}
+        >
+          Save & Next
+        </Button>
+      )}
+      {!hasNext && (
         <NamedLink
-          to={VIEWS.FormView}
-          params={{ formId: nextPage }}
+          to={VIEWS.ReviewView}
+          params={{ submissionId }}
           onClick={onNext}
         >
-          <Button type={validation.valid ? 'primary' : 'secondary'}>
-            Next
-          </Button>
-        </NamedLink>
-      )}
-      {isFinalForm && (
-        <NamedLink to={VIEWS.ReviewView} disabled={!validation.valid}>
-          <Button type={validation.valid ? 'primary' : 'secondary'}>
-            Review
+          <Button type={validation.valid ? 'primary' : 'default'}>
+            Save & Review
           </Button>
         </NamedLink>
       )}

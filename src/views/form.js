@@ -1,29 +1,13 @@
 // @flow
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-
-import { SECTIONS } from 'questions'
+import { FormContainer } from 'containers'
 import { NamedRedirect, VIEWS } from 'routes'
-import { Header, Page, Layout } from 'components'
-import { Sidebar, FormContainer } from 'containers'
 
-const _FormView = ({ match }) => {
+export const FormView = withRouter(({ match }) => {
   const {
-    params: { formId },
+    params: { submissionId },
   } = match
-  const idx = Number.parseInt(formId)
-  if (!idx && idx !== 0) return <NamedRedirect to={VIEWS.NotFoundView} />
-  return (
-    <Layout vertical>
-      <Header />
-      <Layout>
-        <Sidebar current={idx} sections={SECTIONS} />
-        <Page>
-          <FormContainer idx={idx} sections={SECTIONS} />
-        </Page>
-      </Layout>
-    </Layout>
-  )
-}
-
-export const FormView = withRouter(_FormView)
+  if (!submissionId) return <NamedRedirect to={VIEWS.NotFoundView} />
+  return <FormContainer submissionId={submissionId} />
+})

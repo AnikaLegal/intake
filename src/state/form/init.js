@@ -1,8 +1,15 @@
 // @flow
 import type { FormState } from 'types'
 
-const init: FormState = {
+export const form: FormState = {
+  id: '', // Empty
   answers: {},
-  complete: false,
+  questions: [],
+  page: 0,
+  hasNext: false,
+  hasPrev: false,
+  validation: { valid: false, fields: {} },
+  isSubmitted: false,
+  isComplete: false,
+  isLoading: true,
 }
-export default init

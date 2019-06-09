@@ -1,25 +1,26 @@
 // @flow
 import { FIELD_TYPES } from 'consts'
 import { rules } from 'utils'
+import * as Conditions from '../conditions'
 import type { Field, Form } from 'types'
 
 export const LETTER_PERMISSION: Field = {
   rules: [rules.isTruthy],
   name: 'LETTER_PERMISSION',
   prompt:
-    'If any letters or notices need to be sent to your landlord, would you prefer Anika to send those letters or notices to you landlord or would you prefer Anika to prepare the letters or notices for you to send to landlord?',
+    'If a letter needs to be sent to your landlord, would you prefer Anika to sign and send that letter to you landlord or would you prefer Anika to prepare the letter for you to personally sign and send to landlord?',
   help:
     'Letters sent from Anika will place more pressure on the landlord because they will notify the landlord that you have engaged legal advisors to act for you. Letters that are sent personally by you to the landlord will be more "gentle" because legal advisors are not involved.',
   type: FIELD_TYPES.RADIO,
   options: [
     {
       label:
-        'I would prefer Anika to send any letters or notices to my landlord.',
+        'I would prefer Anika to sign and send any letters to my landlord.',
       value: 'anika',
     },
     {
       label:
-        'I would prefer Anika to prepare the letters or notices so that I can personally send them to my landlord',
+        'I would prefer Anika to prepare the letters, but I wanto to personally sign and send them to my landlord',
       value: 'personal',
     },
   ],
@@ -33,20 +34,12 @@ export const CLIENT_NAME: Field = {
   placeholder: 'Full name',
 }
 
-export const CLIENT_RENTAL_ADDRESS: Field = {
+export const CLIENT_ADDRESS: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_RENTAL_ADDRESS',
-  label: 'Rental Addr',
+  label: 'Address',
   type: FIELD_TYPES.TEXT,
-  placeholder: 'Address of rental property in issue',
-}
-
-export const CLIENT_PERSONAL_ADDRESS: Field = {
-  rules: [rules.isTruthy],
-  name: 'CLIENT_PERSONAL_ADDRESS',
-  label: 'Personal Addr',
-  type: FIELD_TYPES.TEXT,
-  placeholder: 'Personal address',
+  placeholder: 'Your rental address',
 }
 
 export const CLIENT_EMAIL: Field = {
@@ -74,14 +67,13 @@ export const CLIENT_EVENING_PHONE: Field = {
 }
 
 export const CLIENT_CONTACT_DETAILS: Field = {
-  rules: [rules.isTruthy],
+  rules: [],
   name: 'CLIENT_CONTACT_DETAILS',
   prompt: 'Please provide your contact details.',
   type: FIELD_TYPES.FIELD_GROUP,
   fields: [
     CLIENT_NAME,
-    CLIENT_RENTAL_ADDRESS,
-    CLIENT_PERSONAL_ADDRESS,
+    CLIENT_ADDRESS,
     CLIENT_EMAIL,
     CLIENT_BUSINESS_PHONE,
     CLIENT_EVENING_PHONE,
@@ -94,8 +86,8 @@ export const CLIENT_CONTACT_METHOD: Field = {
   prompt: 'How would you like to be contacted?',
   type: FIELD_TYPES.RADIO,
   options: [
-    { label: 'Phone and email (we prefer this)', value: 'phone and email' },
-    { label: 'Email only', value: 'email' },
+    { label: 'Phone', value: 'phone' },
+    { label: 'Email', value: 'email' },
   ],
 }
 
@@ -104,4 +96,24 @@ export const CLIENT_REFERRAL: Field = {
   name: 'CLIENT_REFERRAL',
   type: FIELD_TYPES.TEXTAREA,
   prompt: 'How did you hear about Anika?',
+}
+
+export const IS_VCAT_OK: Field = {
+  name: 'IS_VCAT_OK',
+  rules: [rules.isTruthy],
+  prompt:
+    'Would you be willing to bring a case against your landlord at VCAT in order to get your landlord to fix the defect?',
+  help:
+    'VCAT is the tribunal that hears and decides disputes between tenants and landlords. VCAT is similar to a court, but it is much cheaper, faster, less formal and you don’t need a lawyer to speak for you. Sometimes the only way to force a landlord to perform repairs is to bring a case against them at VCAT. A common reason why tenants would not want to bring a case against their landlord at VCAT is because they are scared their landlord will become angry and try to evict them.',
+  type: FIELD_TYPES.RADIO_BTN,
+  options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
+}
+
+export const VCAT_AVOID_REASON: Field = {
+  name: 'VCAT_AVOID_REASON',
+  rules: [rules.isTruthy],
+  when: Conditions.VCAT_NOT_OK,
+  prompt:
+    'Can you please explain why you wouldn’t be comfortable bringing a case against your landlord at VCAT?',
+  type: FIELD_TYPES.TEXTAREA,
 }
