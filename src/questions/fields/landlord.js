@@ -18,7 +18,7 @@ export const HAS_CONTACTED_LANDLORD: Field = {
     },
     {
       label:
-        'No, I have not asked my landlord or (or my landlord’s agent) to fix the problem.',
+        'No, I have not asked my landlord (or my landlord’s agent) to fix the problem.',
       value: 'no',
     },
   ],
@@ -122,7 +122,7 @@ export const LANDLORD_HAS_AGENT: Field = {
   rules: [rules.isTruthy],
   prompt: 'Does your landlord use an agent to manage the property?',
   help:
-    'If your landlord uses an agent to manage the property, then you will have received letters or communication from the agent already.',
+    'If your landlord uses an agent to manage the property, then you will have received letters or communications from the agent already.',
   type: FIELD_TYPES.RADIO_BTN,
   options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
 }

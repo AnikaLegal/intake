@@ -20,7 +20,7 @@ export const LETTER_PERMISSION: Field = {
     },
     {
       label:
-        'I would prefer Anika to prepare the letters, but I wanto to personally sign and send them to my landlord',
+        'I would prefer Anika to prepare the letters, but I want to personally sign and send them to my landlord',
       value: 'personal',
     },
   ],
@@ -102,7 +102,7 @@ export const IS_VCAT_OK: Field = {
   name: 'IS_VCAT_OK',
   rules: [rules.isTruthy],
   prompt:
-    'Would you be willing to bring a case against your landlord at VCAT in order to get your landlord to fix the defect?',
+    'Would you be willing to bring a case against your landlord at VCAT in order to get your landlord to fix the problem?',
   help:
     'VCAT is the tribunal that hears and decides disputes between tenants and landlords. VCAT is similar to a court, but it is much cheaper, faster, less formal and you don’t need a lawyer to speak for you. Sometimes the only way to force a landlord to perform repairs is to bring a case against them at VCAT. A common reason why tenants would not want to bring a case against their landlord at VCAT is because they are scared their landlord will become angry and try to evict them.',
   type: FIELD_TYPES.RADIO_BTN,

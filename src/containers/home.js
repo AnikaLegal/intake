@@ -38,8 +38,8 @@ export const HomeContainer = () => {
             <h1>Welcome to Anika</h1>
             <p>
               Anika is a registered charity that provides legal advice to
-              members of the public. Our legal advice helpful for two key
-              reasons:
+              members of the public. We believe that you will find our legal
+              advice helpful for two key reasons:
             </p>
             <ul>
               <li>

@@ -37,7 +37,7 @@ export const CAN_PAY_QUOTE: Field = {
   prompt:
     'Would you be willing to pay for the repairs yourself and then claim reimbursment from the landlord?',
   help:
-    'Paying for the repairs yourself and then seeking reimbursement from your landlord is the fastest way to get the defect fixed. However, we understand that many tenants do not want to pay for the repairs themselves.',
+    'Paying for the repairs yourself and then claiming reimbursement from your landlord is the fastest way to get the problem fixed. However, we understand that many tenants do not want to pay for the repairs themselves.',
   type: FIELD_TYPES.RADIO_BTN,
   rules: [rules.isTruthy],
   options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
