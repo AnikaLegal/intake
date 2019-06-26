@@ -6,6 +6,7 @@ import type {
 } from 'redux'
 
 export type View =
+  | 'HelpView'
   | 'HomeView'
   | 'FormView'
   | 'ReviewView'

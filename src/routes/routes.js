@@ -4,6 +4,7 @@ import type { Route } from 'types'
 
 export const ROUTES: Array<Route> = [
   { path: '/', view: 'HomeView' },
+  { path: '/help', view: 'HelpView' },
   { path: '/submission/:submissionId/form/', view: 'FormView' },
   { path: '/submission/:submissionId/review/', view: 'ReviewView' },
   { path: '/submitted', view: 'SubmittedView' },
