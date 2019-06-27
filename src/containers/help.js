@@ -28,6 +28,9 @@ export const HelpContainer = () => {
   const dispatch = useDispatch()
   const [submissionId, setSubmissionId] = useState<string | null>(null)
   const [isLoading, setLoading] = useState(false)
+  const [state, setState] = useState<string>('')
+  const [isRenter, setIsRenter] = useState<boolean | null>(null)
+  const [needsRepairs, setNeedsRepairs] = useState<boolean | null>(null)
   // Create a new form submission.
   const onCreate = () => {
     setLoading(true)
@@ -44,9 +47,6 @@ export const HelpContainer = () => {
       />
     )
   }
-  const [state, setState] = useState<string>('')
-  const [isRenter, setIsRenter] = useState<boolean | null>(null)
-  const [needsRepairs, setNeedsRepairs] = useState<boolean | null>(null)
   const isValid =
     state === VALID_STATE && isRenter === true && needsRepairs === true
   const isInvalid =

@@ -50,20 +50,12 @@ export const CLIENT_EMAIL: Field = {
   placeholder: 'Email address',
 }
 
-export const CLIENT_BUSINESS_PHONE: Field = {
+export const CLIENT_PHONE: Field = {
   rules: [rules.isTruthy],
-  name: 'CLIENT_BUSINESS_PHONE',
-  label: 'Phone (Day)',
+  name: 'CLIENT_PHONE',
+  label: 'Phone',
   type: FIELD_TYPES.TEXT,
-  placeholder: 'Phone number (business hours)',
-}
-
-export const CLIENT_EVENING_PHONE: Field = {
-  rules: [rules.isTruthy],
-  name: 'CLIENT_EVENING_PHONE',
-  type: FIELD_TYPES.TEXT,
-  label: 'Phone (Evening)',
-  placeholder: 'Phone number (outside business hours)',
+  placeholder: 'Phone number',
 }
 
 export const CLIENT_CONTACT_DETAILS: Field = {
@@ -71,13 +63,7 @@ export const CLIENT_CONTACT_DETAILS: Field = {
   name: 'CLIENT_CONTACT_DETAILS',
   prompt: 'Please provide your contact details.',
   type: FIELD_TYPES.FIELD_GROUP,
-  fields: [
-    CLIENT_NAME,
-    CLIENT_ADDRESS,
-    CLIENT_EMAIL,
-    CLIENT_BUSINESS_PHONE,
-    CLIENT_EVENING_PHONE,
-  ],
+  fields: [CLIENT_NAME, CLIENT_ADDRESS, CLIENT_EMAIL, CLIENT_PHONE],
 }
 
 export const CLIENT_CONTACT_METHOD: Field = {
