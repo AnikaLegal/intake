@@ -50,7 +50,7 @@ export const HelpContainer = () => {
   const isValid =
     state === VALID_STATE && isRenter === true && needsRepairs === true
   const isInvalid =
-    !isValid && state && needsRepairs !== null && isValid !== null
+    !isValid && state && isRenter !== null && needsRepairs !== null
   return (
     <Layout vertical>
       <Header />
