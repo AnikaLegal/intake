@@ -37,6 +37,7 @@ export const Form = ({
   return (
     <React.Fragment>
       <FormTitle>{form.prompt}</FormTitle>
+      {form.help && <FormSubtitle>{form.help}</FormSubtitle>}
       <AntForm>
         {form.fields.map(f => {
           if (f.type === FIELD_TYPES.FIELD_GROUP) {
@@ -128,5 +129,10 @@ const Divider = styled.hr`
 `
 
 const FormTitle = styled.h1`
+  margin-bottom: 2rem;
+`
+
+const FormSubtitle = styled.p`
+  margin-top: -1.5rem;
   margin-bottom: 2rem;
 `
