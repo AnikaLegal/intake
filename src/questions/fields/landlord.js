@@ -96,7 +96,7 @@ export const LANDLORD_ADDRESS = {
 export const LANDLORD_EMAIL: Field = {
   name: 'LANDLORD_EMAIL',
   type: FIELD_TYPES.TEXT,
-  rules: [rules.isTruthy],
+  rules: [],
   label: 'Email',
   placeholder: 'Enter their email address',
 }
@@ -105,7 +105,7 @@ export const LANDLORD_PHONE: Field = {
   name: 'LANDLORD_PHONE',
   type: FIELD_TYPES.TEXT,
   label: 'Phone',
-  rules: [rules.isTruthy],
+  rules: [],
   placeholder: 'Enter their phone number',
 }
 
@@ -146,7 +146,7 @@ export const AGENT_ADDRESS = {
 export const AGENT_EMAIL: Field = {
   name: 'AGENT_EMAIL',
   type: FIELD_TYPES.TEXT,
-  rules: [rules.isTruthy],
+  rules: [],
   label: 'Email',
   placeholder: 'Enter their email address',
 }
@@ -155,7 +155,7 @@ export const AGENT_PHONE: Field = {
   name: 'AGENT_PHONE',
   type: FIELD_TYPES.TEXT,
   label: 'Phone',
-  rules: [rules.isTruthy],
+  rules: [],
   placeholder: 'Enter their phone number',
 }
 

@@ -68,6 +68,20 @@ export const PERSONAL_PREFERENCES: Form = {
     Fields.VCAT_AVOID_REASON,
     Fields.LETTER_PERMISSION,
     Fields.CLIENT_CONTACT_METHOD,
+  ],
+  rules: {},
+}
+
+export const SURVEY: Form = {
+  name: 'SURVEY',
+  prompt: 'We want to understand our clients better',
+  help:
+    'So we can understand our clients better and provide the best form of legal advice, we need to ask you a few more questions. We understand there may besome sensitivity around your answers. We will ensure that your answers are stored privately and securely.',
+  fields: [
+    Fields.CLIENT_OCCUPATION,
+    Fields.CLIENT_WEEKLY_EARNINGS,
+    Fields.CLIENT_SPECIAL_CIRCUMSTANCES,
+    Fields.CLIENT_SPECIAL_CIRCUMSTANCES_DETAILS,
     Fields.CLIENT_REFERRAL,
   ],
   rules: {},

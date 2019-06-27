@@ -50,6 +50,13 @@ export const CLIENT_EMAIL: Field = {
   placeholder: 'Email address',
 }
 
+export const CLIENT_DOB: Field = {
+  rules: [rules.isTruthy],
+  name: 'CLIENT_DOB',
+  label: 'Birth Date',
+  type: FIELD_TYPES.DATE,
+}
+
 export const CLIENT_PHONE: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_PHONE',
@@ -63,7 +70,7 @@ export const CLIENT_CONTACT_DETAILS: Field = {
   name: 'CLIENT_CONTACT_DETAILS',
   prompt: 'Please provide your contact details.',
   type: FIELD_TYPES.FIELD_GROUP,
-  fields: [CLIENT_NAME, CLIENT_ADDRESS, CLIENT_EMAIL, CLIENT_PHONE],
+  fields: [CLIENT_NAME, CLIENT_ADDRESS, CLIENT_DOB, CLIENT_EMAIL, CLIENT_PHONE],
 }
 
 export const CLIENT_CONTACT_METHOD: Field = {
@@ -75,13 +82,6 @@ export const CLIENT_CONTACT_METHOD: Field = {
     { label: 'Phone', value: 'phone' },
     { label: 'Email', value: 'email' },
   ],
-}
-
-export const CLIENT_REFERRAL: Field = {
-  rules: [],
-  name: 'CLIENT_REFERRAL',
-  type: FIELD_TYPES.TEXTAREA,
-  prompt: 'How did you hear about Anika?',
 }
 
 export const IS_VCAT_OK: Field = {
@@ -102,4 +102,54 @@ export const VCAT_AVOID_REASON: Field = {
   prompt:
     'Can you please explain why you wouldn’t be comfortable bringing a case against your landlord at VCAT?',
   type: FIELD_TYPES.TEXTAREA,
+}
+
+export const CLIENT_OCCUPATION: Field = {
+  name: 'CLIENT_OCCUPATION',
+  rules: [],
+  prompt: 'What is your occupation?',
+  type: FIELD_TYPES.TEXT,
+}
+export const CLIENT_WEEKLY_EARNINGS: Field = {
+  name: 'CLIENT_WEEKLY_EARNINGS',
+  rules: [],
+  prompt: 'How much money do you earn per week (on average)?',
+  type: FIELD_TYPES.DOLLAR,
+}
+export const CLIENT_SPECIAL_CIRCUMSTANCES: Field = {
+  name: 'CLIENT_SPECIAL_CIRCUMSTANCES',
+  rules: [],
+  prompt: 'Do you have any special circumstances?',
+  type: FIELD_TYPES.RADIO,
+  options: [
+    {
+      label: 'I am not comfortable communicating in English',
+      value: 'Not comfortable with English',
+    },
+    { label: 'I have a physical disability', value: 'Physical disability' },
+    {
+      label: 'I am unable to travel to a legal centre',
+      value: "Can't get to a legal centre",
+    },
+    { label: 'I have children', value: 'Has children' },
+    {
+      label:
+        'I have another personal circumstance that I want Anika to know about',
+      value: 'other',
+    },
+  ],
+}
+export const CLIENT_SPECIAL_CIRCUMSTANCES_DETAILS: Field = {
+  name: 'CLIENT_SPECIAL_CIRCUMSTANCES_DETAILS',
+  rules: [],
+  prompt: 'Tell us about the other personal circumstance',
+  type: FIELD_TYPES.TEXTAREA,
+  when: Conditions.HAS_OTHER_SPECIAL_CIRCUMSTANCE,
+}
+
+export const CLIENT_REFERRAL: Field = {
+  rules: [],
+  name: 'CLIENT_REFERRAL',
+  type: FIELD_TYPES.TEXTAREA,
+  prompt: 'How did you hear about Anika?',
 }

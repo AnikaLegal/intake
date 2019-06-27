@@ -22,6 +22,6 @@ export const SECTIONS: Array<Section> = [
   },
   {
     name: 'Your preferences',
-    forms: [Forms.PERSONAL_PREFERENCES],
+    forms: [Forms.PERSONAL_PREFERENCES, Forms.SURVEY],
   },
 ]
