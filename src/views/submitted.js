@@ -1,23 +1,20 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import { Spin } from 'antd'
 
 import { Header, Page, Layout, Message } from 'components'
 
-export const SubmittedView = () => (
-  <Layout vertical>
-    <Header />
-    <Layout>
+const SUBMIT_REDIRECT = 'https://anikalegal.com/thank-you'
+
+export const SubmittedView = () => {
+  // Send use to thank you page on anikalegal.com
+  // to register a goal completion for Google AdWords
+  window.location = SUBMIT_REDIRECT
+  return (
+    <Layout vertical>
       <Page>
-        <Message>
-          <h1>Thank you, your case has been submitted</h1>
-          <p>
-            Thank you for taking the time to complete the questionnaire. One of
-            our friendly Anika team members will contact you as soon as possible
-            to introduce themselves and to discuss how we can help you.
-          </p>
-        </Message>
+        <Spin tip="Loading..." />
       </Page>
     </Layout>
-  </Layout>
-)
+  )
+}

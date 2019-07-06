@@ -42,9 +42,15 @@ export const FormContainer = ({ submissionId }: Props) => {
   if (formState.isLoading) {
     return (
       <Layout vertical>
-        <Page>
-          <Spin tip="Loading..." />
-        </Page>
+        <Header />
+        <Layout>
+          <Sidebar current={formState.page} sections={SECTIONS} />
+          <Page>
+            <div style={{ textAlign: 'center' }}>
+              <Spin tip="Loading..." />
+            </div>
+          </Page>
+        </Layout>
       </Layout>
     )
   }
