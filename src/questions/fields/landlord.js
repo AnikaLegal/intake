@@ -12,13 +12,11 @@ export const HAS_CONTACTED_LANDLORD: Field = {
   rules: [rules.isTruthy],
   options: [
     {
-      label:
-        'Yes, I have asked my landlord (or my landlord’s agent) to fix the problem.',
+      label: 'Yes',
       value: 'yes',
     },
     {
-      label:
-        'No, I have not asked my landlord (or my landlord’s agent) to fix the problem.',
+      label: 'No',
       value: 'no',
     },
   ],
