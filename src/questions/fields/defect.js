@@ -7,8 +7,9 @@ export const DEFECT_TYPE: Field = {
   name: 'DEFECT_TYPE',
   prompt: 'What does the problem relate to?',
   placeholder: 'Select the type of problem that needs to be repaired.',
-  help: "If none apply, please select 'other'",
-  type: FIELD_TYPES.DROPDOWN,
+  help:
+    " You can select more than one problem. If none apply, please select 'Other'",
+  type: FIELD_TYPES.MULTI_DROPDOWN,
   rules: [rules.isTruthy],
   options: [
     { label: 'Toilet', value: 'Toilet' },
@@ -35,10 +36,9 @@ export const DEFECT_DESCRIPTION: Field = {
 
 export const DEFECT_PHOTO: Field = {
   name: 'DEFECT_PHOTO',
-  prompt:
-    'If you have a photo of the problem, please upload it (as it will help us to assist you)',
+  prompt: 'If you have any photos of the problem, please upload them',
   help:
-    'If you do not have a photo of the problem to upload, that’s completely okay',
+    'If you do not have any photos of the problem to upload, that’s completely okay',
   type: FIELD_TYPES.FILE,
   rules: [],
 }

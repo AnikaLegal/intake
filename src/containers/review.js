@@ -106,12 +106,16 @@ export const ReviewContainer = ({ submissionId }: Props) => {
   )
 }
 
-const FieldReview = ({ field, answers }: { field: Field, answers: Data }) => (
-  <FieldReviewEl>
-    <Prompt>{field.prompt}</Prompt>
-    {answers[field.name]}
-  </FieldReviewEl>
-)
+const FieldReview = ({ field, answers }: { field: Field, answers: Data }) => {
+  const answer = answers[field.name]
+  const answerText = Array.isArray(answer) ? answer.join(', ') : answer
+  return (
+    <FieldReviewEl>
+      <Prompt>{field.prompt}</Prompt>
+      {answerText}
+    </FieldReviewEl>
+  )
+}
 
 const FieldReviewEl = styled.div`
   margin-bottom: 1rem;

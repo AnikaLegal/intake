@@ -26,6 +26,7 @@ export type Route = {
 export type FieldType =
   | 'FIELD_GROUP'
   | 'DROPDOWN'
+  | 'MULTI_DROPDOWN'
   | 'MULTI_SELECT'
   | 'RADIO'
   | 'RADIO_BTN'

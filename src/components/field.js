@@ -119,6 +119,23 @@ const DropdownField = ({ onChange, field, value }: FieldProps) => (
   </Select>
 )
 
+const MultiDropdownField = ({ onChange, field, value }: FieldProps) => (
+  <Select
+    size="large"
+    mode="multiple"
+    onChange={onChange}
+    defaultValue={value || undefined}
+    placeholder={field.placeholder}
+  >
+    {field.options &&
+      field.options.map(({ label, value }) => (
+        <Select.Option key={label} value={value}>
+          {label}
+        </Select.Option>
+      ))}
+  </Select>
+)
+
 const RadioField = ({ onChange, field, value }: FieldProps) => (
   <Radio.Group onChange={e => onChange(e.target.value)} value={value}>
     {field.options &&
@@ -203,6 +220,7 @@ const FIELD_INPUTS: { [string]: AbstractComponent<FieldProps> } = {
   [FIELD_TYPES.EXIT]: ExitField,
   [FIELD_TYPES.MULTI_SELECT]: MultiSelectField,
   [FIELD_TYPES.DROPDOWN]: DropdownField,
+  [FIELD_TYPES.MULTI_DROPDOWN]: MultiDropdownField,
   [FIELD_TYPES.RADIO]: RadioField,
   [FIELD_TYPES.RADIO_BTN]: RadioButtonField,
   [FIELD_TYPES.FILE]: FileField,
