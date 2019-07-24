@@ -28,6 +28,7 @@ type FieldGroupProps = {
 export const FieldGroup = ({ field, children }: FieldGroupProps) => (
   <FieldWrapper>
     <h3 css={'margin-bottom: 1rem;'}>{field.prompt}</h3>
+    {field.help && <Help style={{ marginTop: '-0.7rem' }}>{field.help}</Help>}
     {children}
   </FieldWrapper>
 )

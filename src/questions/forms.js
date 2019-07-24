@@ -45,9 +45,9 @@ export const LANDLORD_CONTACT: Form = {
   name: 'LANDLORD_CONTACT',
   prompt: "Your landlord's contact details",
   fields: [
-    Fields.LANDLORD_CONTACT_DETAILS,
     Fields.LANDLORD_HAS_AGENT,
     Fields.AGENT_CONTACT_DETAILS,
+    Fields.LANDLORD_CONTACT_DETAILS,
   ],
   rules: {},
 }

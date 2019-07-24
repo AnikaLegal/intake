@@ -78,7 +78,7 @@ export const LANDLORD_CONTACT_RECORDS: Field = {
 export const LANDLORD_NAME = {
   name: 'LANDLORD_NAME',
   label: 'Full name',
-  rules: [rules.isTruthy],
+  rules: [],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their full name',
 }
@@ -86,7 +86,7 @@ export const LANDLORD_NAME = {
 export const LANDLORD_ADDRESS = {
   name: 'LANDLORD_ADDRESS',
   label: 'Address',
-  rules: [rules.isTruthy],
+  rules: [],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their address',
 }
@@ -110,6 +110,8 @@ export const LANDLORD_PHONE: Field = {
 export const LANDLORD_CONTACT_DETAILS: Field = {
   name: 'LANDLORD_CONTACT_DETAILS',
   prompt: 'Please provide the contact details of your landlord.',
+  help:
+    "We don't need all of your landlord's details. If you don't have some of this information, you can leave the fields blank.",
   type: FIELD_TYPES.FIELD_GROUP,
   rules: [],
   fields: [LANDLORD_NAME, LANDLORD_ADDRESS, LANDLORD_EMAIL, LANDLORD_PHONE],
@@ -128,7 +130,7 @@ export const LANDLORD_HAS_AGENT: Field = {
 export const AGENT_NAME = {
   name: 'AGENT_NAME',
   label: 'Full name',
-  rules: [rules.isTruthy],
+  rules: [],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their full name',
 }
@@ -136,7 +138,7 @@ export const AGENT_NAME = {
 export const AGENT_ADDRESS = {
   name: 'AGENT_ADDRESS',
   label: 'Address',
-  rules: [rules.isTruthy],
+  rules: [],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their address',
 }
@@ -160,6 +162,8 @@ export const AGENT_PHONE: Field = {
 export const AGENT_CONTACT_DETAILS: Field = {
   name: 'AGENT_CONTACT_DETAILS',
   prompt: "Please provide the contact details of your landlord's agent.",
+  help:
+    "We don't need all of your agent's details. If you don't have some of this information, you can leave the fields blank.",
   type: FIELD_TYPES.FIELD_GROUP,
   when: Conditions.HAS_AGENT,
   rules: [],

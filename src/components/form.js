@@ -4,7 +4,7 @@ import { Button, Form as AntForm } from 'antd'
 import styled from 'styled-components'
 
 import { Field, FieldGroup } from 'components'
-import { VerticalAppear } from './animations'
+import { FadeInOut } from './animations'
 import { FIELD_TYPES } from 'consts'
 import { NamedLink, VIEWS } from 'routes'
 import type { Form as FormType, View, Data, Validations } from 'types'
@@ -42,10 +42,7 @@ export const Form = ({
         {form.fields.map(f => {
           if (f.type === FIELD_TYPES.FIELD_GROUP) {
             return (
-              <VerticalAppear
-                key={f.name}
-                visible={f.when ? f.when(data) : true}
-              >
+              <FadeInOut key={f.name} visible={f.when ? f.when(data) : true}>
                 <FieldGroup field={f}>
                   <div>
                     {f.fields &&
@@ -70,14 +67,11 @@ export const Form = ({
                       ))}
                   </div>
                 </FieldGroup>
-              </VerticalAppear>
+              </FadeInOut>
             )
           } else {
             return (
-              <VerticalAppear
-                key={f.name}
-                visible={f.when ? f.when(data) : true}
-              >
+              <FadeInOut key={f.name} visible={f.when ? f.when(data) : true}>
                 <Field
                   field={f}
                   valid={isSubmitted ? validation.fields[f.name].valid : true}
@@ -85,7 +79,7 @@ export const Form = ({
                   value={data[f.name] || ''}
                   onChange={onChange(f.name)}
                 />
-              </VerticalAppear>
+              </FadeInOut>
             )
           }
         })}
