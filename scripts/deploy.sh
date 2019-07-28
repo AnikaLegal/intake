@@ -1,9 +1,6 @@
 #/bin/bash
 set -e
 
-. ./scripts/vars-prod.sh
-. ./scripts/build.sh
-
 # Compress HTML, JS, CSS
 COMPRESS="html js css"
 for SUFFIX in $COMPRESS
@@ -23,22 +20,24 @@ echo -e "\nUploading HTML"
 aws s3 cp \
     --recursive \
     --content-encoding 'gzip' \
+    --exclude '*' \
     --include '*.html' \
     --acl public-read \
     ./dist \
-    s3://repairs.anikalegal.com
+    $S3_BUCKET_URL
 
 # Upload CSS + JS with cache and gzip
 echo -e "\nUploading JS + CSS"
 aws s3 cp \
     --recursive \
     --content-encoding 'gzip' \
+    --exclude '*' \
     --include '*.css' \
     --include '*.js' \
     --cache-control $CACHE_CONTROL \
     --acl public-read \
     ./dist \
-    s3://repairs.anikalegal.com
+    $S3_BUCKET_URL
 
 # Upload everything else with cache and no gzip
 echo -e "\nUploading other assets"
@@ -46,11 +45,12 @@ aws s3 cp \
     --recursive \
     --exclude '*.css' \
     --exclude '*.js' \
+    --exclude '*.map' \
     --exclude '*.html' \
     --cache-control $CACHE_CONTROL \
     --acl public-read \
     ./dist \
-    s3://repairs.anikalegal.com
+    $S3_BUCKET_URL
 
 
 # # Clean up so you don't shoot yourself in the foot when doing dev work.
