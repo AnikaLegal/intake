@@ -21,6 +21,7 @@ module.exports = {
       SERVER: JSON.stringify(process.env.SERVER),
       STATIC_URL: JSON.stringify(process.env.STATIC_URL),
       SENTRY_JS_DSN: JSON.stringify(process.env.SENTRY_JS_DSN),
+      SENTRY_ENV: JSON.stringify(process.env.SENTRY_ENV),
       DEBUG_JS: JSON.stringify(''),
     }),
   ],

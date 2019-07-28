@@ -2,8 +2,7 @@
 import * as Sentry from '@sentry/browser'
 
 if (SENTRY_JS_DSN) {
-  // Sentry wants this run as early as possible (ie. pre-render), but this is fine for now.
-  Sentry.init({ dsn: SENTRY_JS_DSN })
+  Sentry.init({ dsn: SENTRY_JS_DSN, environment: SENTRY_ENV })
 }
 
 export const logError = (error: any, info: any) => {
