@@ -28,7 +28,7 @@ export const DEFECT_TYPE: Field = {
 
 export const DEFECT_DESCRIPTION: Field = {
   name: 'DEFECT_DESCRIPTION',
-  prompt: 'Please provide a short description of the problem',
+  prompt: 'Please provide a short description of the problem(s)',
   placeholder: 'Describe the problem here',
   type: FIELD_TYPES.TEXTAREA,
   rules: [rules.isTruthy],
