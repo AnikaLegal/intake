@@ -135,6 +135,14 @@ export const AGENT_NAME = {
   placeholder: 'Enter their full name',
 }
 
+export const AGENT_COMPANY = {
+  name: 'AGENT_COMPANY',
+  label: 'Company',
+  rules: [],
+  type: FIELD_TYPES.TEXT,
+  placeholder: "Enter the name of the agent's company",
+}
+
 export const AGENT_ADDRESS = {
   name: 'AGENT_ADDRESS',
   label: 'Address',
@@ -167,5 +175,5 @@ export const AGENT_CONTACT_DETAILS: Field = {
   type: FIELD_TYPES.FIELD_GROUP,
   when: Conditions.HAS_AGENT,
   rules: [],
-  fields: [AGENT_NAME, AGENT_ADDRESS, AGENT_EMAIL, AGENT_PHONE],
+  fields: [AGENT_NAME, AGENT_COMPANY, AGENT_ADDRESS, AGENT_EMAIL, AGENT_PHONE],
 }
