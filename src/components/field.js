@@ -1,17 +1,6 @@
 // @flow
 import React from 'react'
-import {
-  Form as AntForm,
-  Select,
-  DatePicker,
-  Button,
-  Input,
-  InputNumber,
-  Checkbox,
-  Radio,
-  Upload,
-  Icon,
-} from 'antd'
+import { Form as AntForm, Button, Icon } from 'antd'
 import styled, { css } from 'styled-components'
 import type { Node, AbstractComponent } from 'react'
 
@@ -19,6 +8,21 @@ import { UploadField } from 'containers'
 import { FIELD_TYPES } from 'consts'
 import { NamedRedirect } from 'routes'
 import type { Field as FieldType } from 'types'
+
+import {
+  ExitField,
+  MultiSelectField,
+  DropdownField,
+  MultiDropdownField,
+  RadioField,
+  RadioButtonField,
+  FileField,
+  DateField,
+  TextField,
+  TextAreaField,
+  DollarField,
+  NumberField,
+} from './fields'
 
 type FieldGroupProps = {
   field: FieldType,
@@ -92,129 +96,6 @@ const FieldWrapper = styled.div`
       margin-bottom: 0;
     `}
 `
-
-const radioStyle = {
-  display: 'block',
-  height: '30px',
-  lineHeight: '30px',
-}
-
-const MultiSelectField = ({ onChange, field }: FieldProps) => (
-  <Checkbox.Group onChange={onChange} options={field.options} />
-)
-
-const DropdownField = ({ onChange, field, value }: FieldProps) => (
-  <Select
-    size="large"
-    onChange={onChange}
-    defaultValue={value || undefined}
-    placeholder={field.placeholder}
-  >
-    {field.options &&
-      field.options.map(({ label, value }) => (
-        <Select.Option key={label} value={value}>
-          {label}
-        </Select.Option>
-      ))}
-  </Select>
-)
-
-const MultiDropdownField = ({ onChange, field, value }: FieldProps) => (
-  <Select
-    size="large"
-    mode="multiple"
-    onChange={onChange}
-    defaultValue={value || undefined}
-    placeholder={field.placeholder}
-  >
-    {field.options &&
-      field.options.map(({ label, value }) => (
-        <Select.Option key={label} value={value}>
-          {label}
-        </Select.Option>
-      ))}
-  </Select>
-)
-
-const RadioField = ({ onChange, field, value }: FieldProps) => (
-  <Radio.Group onChange={e => onChange(e.target.value)} value={value}>
-    {field.options &&
-      field.options.map(({ label, value }) => (
-        <Radio key={label} style={radioStyle} value={value}>
-          {label}
-        </Radio>
-      ))}
-  </Radio.Group>
-)
-
-const RadioButtonField = ({ onChange, field, value }: FieldProps) => (
-  <Radio.Group
-    buttonStyle="solid"
-    onChange={e => onChange(e.target.value)}
-    value={value}
-  >
-    {field.options &&
-      field.options.map(({ label, value }) => (
-        <Radio.Button key={label} value={value}>
-          {label}
-        </Radio.Button>
-      ))}
-  </Radio.Group>
-)
-
-const FileField = ({ onChange }: FieldProps) => (
-  <UploadField onChange={onChange} />
-)
-
-const DateField = ({ onChange }: FieldProps) => (
-  <DatePicker onChange={e => onChange(e._d.toDateString())} />
-)
-
-const TextField = ({ field, onChange, value }: FieldProps) => (
-  <Input
-    value={value}
-    placeholder={field.placeholder}
-    // @noflow
-    onChange={e => onChange(e.target.value)}
-  />
-)
-
-const TextAreaField = ({ field, onChange, value }: FieldProps) => (
-  <Input.TextArea
-    rows={4}
-    value={value}
-    placeholder={field.placeholder}
-    onChange={e => onChange(e.target.value)}
-  />
-)
-
-const DollarField = ({ field, onChange, value }: FieldProps) => (
-  <InputNumber
-    size="large"
-    defaultValue={0}
-    min={0}
-    formatter={value =>
-      `$ ${String(value)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    }
-    parser={value => value.replace(/\$\s?|(,*)/g, '')}
-    placeholder={field.placeholder}
-    onChange={onChange}
-    style={{ width: '300px ' }}
-  />
-)
-
-const NumberField = ({ field, onChange }: FieldProps) => (
-  <InputNumber
-    size="large"
-    defaultValue={0}
-    min={0}
-    placeholder={field.placeholder}
-    onChange={onChange}
-    style={{ width: '300px ' }}
-  />
-)
-
-const ExitField = ({ field }: FieldProps) => <NamedRedirect to={field.name} />
 
 const FIELD_INPUTS: { [string]: AbstractComponent<FieldProps> } = {
   [FIELD_TYPES.EXIT]: ExitField,
