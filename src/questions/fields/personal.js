@@ -79,7 +79,7 @@ export const CLIENT_CONTACT_METHOD: Field = {
   prompt: 'How would you like to be contacted?',
   type: FIELD_TYPES.RADIO,
   options: [
-    { label: 'Phone', value: 'phone' },
+    { label: 'Phone and email (we prefer this)', value: 'phone and email' },
     { label: 'Email', value: 'email' },
   ],
 }
