@@ -6,6 +6,8 @@ export SERVER=https://clerk.anikalegal.com
 export S3_BUCKET_URL=s3://repairs.anikalegal.com
 export SENTRY_JS_DSN=https://d562328a33ab4c1782706574e8a0bd92@sentry.io/1468089
 export SENTRY_ENV=prod
+export SENTRY_ORG=anika-legal
+export SENTRY_PROJECT=intake
 export GA_ID=
 
 . ./scripts/build.sh

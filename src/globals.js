@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from 'react'
 import type { Action, Redux, Dispatch, Store } from 'types'
 
@@ -7,6 +8,7 @@ declare var SENTRY_ENV: string
 declare var DEBUG_JS: boolean
 declare var STATIC_URL: string
 declare var SERVER: string
+declare var SENTRY_RELEASE: string
 
 declare module 'react-redux' {
   declare type MapStateToProps<State, StateProps> = (State) => StateProps

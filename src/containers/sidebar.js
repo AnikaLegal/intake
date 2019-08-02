@@ -1,9 +1,8 @@
 // @flow
-import React, { Component } from 'react'
-import styled, { css } from 'styled-components'
-import { Steps } from 'antd'
+import React from 'react'
+import styled from 'styled-components'
+// import { Steps } from 'antd'
 
-import { Header, Form, Page } from 'components'
 import type { Section } from 'types'
 
 type Props = {
@@ -25,15 +24,17 @@ const _Sidebar = ({ className, current, sections }: Props) => {
       sectionIdx++
     }
   }
-  return (
-    <div className={className}>
-      <Steps direction="vertical" current={sectionIdx}>
-        {sections.map(s => (
-          <Steps.Step title={s.name} key={s.name} />
-        ))}
-      </Steps>
-    </div>
-  )
+  return null
+  // FIXME: antd
+  // return (
+  //   <div className={className}>
+  //     <Steps direction="vertical" current={sectionIdx}>
+  //       {sections.map(s => (
+  //         <Steps.Step title={s.name} key={s.name} />
+  //       ))}
+  //     </Steps>
+  //   </div>
+  // )
 }
 
 const style = c => styled(c)`

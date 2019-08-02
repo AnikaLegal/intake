@@ -12,15 +12,13 @@ import { FIELD_TYPES } from 'consts'
 
 export const stories = storiesOf('Inputs', module)
 
-/*
-TODO - multiple fields
-  FIELD_TYPES.MULTI_SELECT
-  FIELD_TYPES.DROPDOWN
-  FIELD_TYPES.MULTI_DROPDOWN
-  FIELD_TYPES.RADIO
-  FIELD_TYPES.RADIO_BTN
-  FIELD_TYPES.FILE
-*/
+stories.add('Button', () => <div />)
+stories.add('Multi Select', () => <div />)
+stories.add('Dropdown', () => <div />)
+stories.add('Multi Dropdown', () => <div />)
+stories.add('Radio', () => <div />)
+stories.add('Multi Buttons', () => <div />)
+stories.add('Image upload', () => <div />)
 
 const TextContainer = () => {
   const [val, setVal] = useState('')

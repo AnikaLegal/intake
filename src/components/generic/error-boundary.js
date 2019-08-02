@@ -23,9 +23,9 @@ export class ErrorBoundary extends Component<Props, State> {
 
   state = { hasError: false }
 
-  componentDidCatch = (error: any, info: any) => {
+  componentDidCatch = (error: any) => {
     this.setState({ hasError: true })
-    logError(error, info)
+    logError(error)
   }
 
   render() {

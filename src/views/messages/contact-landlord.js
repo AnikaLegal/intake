@@ -1,7 +1,5 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
-import { Button } from 'antd'
 
 import { Header, Page, Layout, Message, Letter } from 'components'
 

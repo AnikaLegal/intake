@@ -5,11 +5,12 @@ echo -e "\nCleaning build output directory."
 rm -rf dist
 mkdir -p dist
 
-echo -e "\nCollecting static files."
-cp -R public/* dist
-
-echo -e "\nBuilding JavaScript and CSS."
+export SENTRY_RELEASE=$(git rev-parse HEAD)
+echo -e "\nBuilding JavaScript and CSS (Sentry release tag ${SENTRY_RELEASE})"
 yarn build
+
+# Remove incorrect sourcemap URL from built JS file.
+sed -i '/sourceMappingURL=main/d' dist/build/main.js
 
 echo -e "\nGenerating cache busting hashes."
 export JS_BUILDHASH="$(cat dist/build/main.js | md5sum | cut -d' ' -f1 | head -c 8)"
@@ -19,6 +20,7 @@ export JS_BUILDHASH="$(cat dist/build/main.js | md5sum | cut -d' ' -f1 | head -c
 }
 echo "Using JS build hash $JS_BUILDHASH"
 mv dist/build/main.js dist/build/main-${JS_BUILDHASH}.js
+mv dist/build/main.js.map dist/build/main-${JS_BUILDHASH}.js.map
 
 export CSS_BUILDHASH="$(cat dist/build/main.css | md5sum | cut -d' ' -f1 | head -c 8)"
 [[ -z "$CSS_BUILDHASH" ]] && {
@@ -34,6 +36,8 @@ yarn html
 echo -e "\nReact snap!."
 yarn snap
 
+echo -e "\nCollecting static files."
+cp -R public/* dist
 
 # Print build output to the console.
 echo -e "\nDone building assets:"

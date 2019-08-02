@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import { Form as AntForm, Button, Icon } from 'antd'
 import styled, { css } from 'styled-components'
 import type { Node, AbstractComponent } from 'react'
 
@@ -61,26 +60,28 @@ export const Field = ({
     itemProps['wrapperCol'] = { span: 17 }
     itemProps['label'] = field.label
   }
-  return (
-    <FieldWrapper compact={isCompact}>
-      <h3>{field.prompt}</h3>
-      {field.help && <Help>{field.help}</Help>}
-      <AntForm.Item
-        validateStatus={valid ? '' : 'error'}
-        help={errors ? errors.join('. ') : ''}
-        style={{ margin: '0' }}
-        {...itemProps}
-      >
-        <FieldInput
-          field={field}
-          valid={valid}
-          errors={errors}
-          value={value}
-          onChange={onChange}
-        />
-      </AntForm.Item>
-    </FieldWrapper>
-  )
+  // FIXME: antd
+  return null
+  // return (
+  //   <FieldWrapper compact={isCompact}>
+  //     <h3>{field.prompt}</h3>
+  //     {field.help && <Help>{field.help}</Help>}
+  //     <AntForm.Item
+  //       validateStatus={valid ? '' : 'error'}
+  //       help={errors ? errors.join('. ') : ''}
+  //       style={{ margin: '0' }}
+  //       {...itemProps}
+  //     >
+  //       <FieldInput
+  //         field={field}
+  //         valid={valid}
+  //         errors={errors}
+  //         value={value}
+  //         onChange={onChange}
+  //       />
+  //     </AntForm.Item>
+  //   </FieldWrapper>
+  // )
 }
 
 const Help = styled.p`

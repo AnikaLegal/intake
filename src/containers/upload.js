@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { Button, Upload, Icon, message } from 'antd'
+// import { Button, Upload, Icon, message } from 'antd'
 
 import { api } from 'api'
 import { logError } from 'utils'
@@ -37,11 +37,11 @@ export class UploadField extends React.Component<Props, State> {
       .then(() => {
         this.setState({ isLoading: false })
         onChange(images)
-        message.success('Upload successful.')
+        // message.success('Upload successful.')
       })
-      .catch((error, info) => {
-        logError(error, info)
-        message.success('Upload failed.')
+      .catch(error => {
+        logError(error)
+        // message.success('Upload failed.')
         this.setState({ isLoading: false })
       })
   }
@@ -58,21 +58,22 @@ export class UploadField extends React.Component<Props, State> {
     return false
   }
   render() {
-    const { onChange } = this.props
-    const { fileList, isLoading } = this.state
-    return (
-      <div>
-        <Upload
-          fileList={fileList}
-          beforeUpload={this.onBeforeUpload}
-          onRemove={this.onRemove}
-          listType="picture"
-        >
-          <Button>
-            <Icon type="upload" /> Click to Upload
-          </Button>
-        </Upload>
-      </div>
-    )
+    const { fileList } = this.state
+    return null
+    // FIXME - antd
+    // return (
+    // <div>
+    //   <Upload
+    //     fileList={fileList}
+    //     beforeUpload={this.onBeforeUpload}
+    //     onRemove={this.onRemove}
+    //     listType="picture"
+    //   >
+    //     <Button>
+    //       <Icon type="upload" /> Click to Upload
+    //     </Button>
+    //   </Upload>
+    // </div>
+    // )
   }
 }
