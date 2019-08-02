@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
 
-import { Header, Page, Layout, Message, Letter } from 'components'
+import { Header } from 'components'
+import { Page, Layout, Message, Letter } from 'features/generic'
 
 export const ContactLandlordView = () => (
   <Layout vertical>

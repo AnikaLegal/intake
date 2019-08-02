@@ -2,7 +2,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Header, Page, Layout, Message } from 'components'
+import { Header } from 'components'
+import { Page, Layout, Message } from 'features/generic'
 import { actions } from 'state'
 import { validate, flattenArray } from 'utils'
 import { NamedRedirect, VIEWS } from 'routes'
