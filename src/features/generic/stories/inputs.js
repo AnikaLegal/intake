@@ -7,6 +7,8 @@ import { storiesOf } from '@storybook/react'
 import { text, boolean } from '@storybook/addon-knobs'
 
 import { TestBox } from './utils'
+import { DummyImageUploader } from 'utils'
+import { ImageUploadContainer } from '../containers'
 import {
   Button,
   DollarInput,
@@ -24,7 +26,17 @@ import {
 
 export const stories = storiesOf('Inputs', module)
 
-stories.add('Image upload', () => <div />)
+stories.add('Image Uploader', () => {
+  const uploader = new DummyImageUploader()
+  return (
+    <TestBox width={600} height={300}>
+      <ImageUploadContainer
+        uploader={uploader}
+        disabled={boolean('Disabled', false)}
+      />
+    </TestBox>
+  )
+})
 
 const MultiDropdownContainer = () => {
   const [val, setVal] = useState()

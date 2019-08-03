@@ -133,3 +133,10 @@ export type Thunk = (dispatch: Dispatch, getState: GetState) => void
 export type Dispatch = DispatchAPI<Action | Thunk>
 export type Store = ReduxStore<Redux, Action, Dispatch>
 export type Reducer = ReduxReducer<Redux, Action>
+
+export interface ImageUploader {
+  constructor(...args: Array<any>): void;
+  list(): Promise<Array<ImageUpload>>;
+  create(file: File): Promise<ImageUpload>;
+  delete(file: ImageUpload): Promise<void>;
+}
