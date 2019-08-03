@@ -7,6 +7,7 @@ type Props = {
   onChange: string => void,
   disabled?: boolean,
   placeholder?: string,
+  rows?: number,
 }
 
 export const TextareaInput = ({
@@ -14,6 +15,7 @@ export const TextareaInput = ({
   onChange,
   disabled,
   placeholder,
+  rows = 6,
 }: Props) => (
   <TextareaEl
     type="text"
@@ -21,15 +23,15 @@ export const TextareaInput = ({
     onChange={e => onChange(e.target.value)}
     disabled={disabled}
     placeholder={placeholder}
+    rows={rows}
   />
 )
 
 export const TextareaEl = styled.textarea`
   width: 100%;
-  height: 40px;
   display: block;
   box-sizing: border-box;
-  padding: 0 10px;
+  padding: 10px;
   border: 1px solid #babec5;
   border-radius: 4px;
   outline: 0;
