@@ -9,10 +9,13 @@ body {
   height: 100%;
   font-family: Montserrat, sans-serif;
   background-color: rgba($grey, 0.15);
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
 }
 
 h1 {
   font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 h2,
@@ -20,6 +23,7 @@ h3,
 h4,
 h5 {
   font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 #app {

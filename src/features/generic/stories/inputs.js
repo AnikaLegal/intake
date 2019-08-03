@@ -7,12 +7,17 @@ import { storiesOf } from '@storybook/react'
 import { text, boolean } from '@storybook/addon-knobs'
 
 import { TestBox } from './utils'
-import { Field } from 'components'
-import { FIELD_TYPES } from 'consts'
+import {
+  Button,
+  DollarInput,
+  NumberInput,
+  DateInput,
+  TextInput,
+  TextareaInput,
+} from '../comps'
 
 export const stories = storiesOf('Inputs', module)
 
-stories.add('Button', () => <div />)
 stories.add('Multi Select', () => <div />)
 stories.add('Dropdown', () => <div />)
 stories.add('Multi Dropdown', () => <div />)
@@ -20,82 +25,15 @@ stories.add('Radio', () => <div />)
 stories.add('Multi Buttons', () => <div />)
 stories.add('Image upload', () => <div />)
 
-const TextContainer = () => {
-  const [val, setVal] = useState('')
-  const field = {
-    name: 'TextField',
-    type: FIELD_TYPES.TEXT,
-    prompt: text('Prompt', 'What is your problem?'),
-    help: text('Help', 'Here is some help stuff'),
-    placeholder: 'Enter your thing',
-    rules: [],
-  }
-  return (
-    <React.Fragment>
-      <Field
-        field={field}
-        valid={boolean('Is valid', true)}
-        errors={boolean('Has errors', false) ? ['This field has an error'] : []}
-        value={val}
-        onChange={setVal}
-      />
-      <p>{val}</p>
-    </React.Fragment>
-  )
-}
-stories.add('Text', () => (
-  <TestBox width={600} height={300}>
-    <TextContainer />
-  </TestBox>
-))
-
-const TextAreaContainer = () => {
-  const [val, setVal] = useState('')
-  const field = {
-    name: 'TextField',
-    type: FIELD_TYPES.TEXTAREA,
-    prompt: text('Prompt', 'What is your problem?'),
-    help: text('Help', 'Here is some help stuff'),
-    placeholder: 'Enter your thing',
-    rules: [],
-  }
-  return (
-    <React.Fragment>
-      <Field
-        field={field}
-        valid={boolean('Is valid', true)}
-        errors={boolean('Has errors', false) ? ['This field has an error'] : []}
-        value={val}
-        onChange={setVal}
-      />
-      <p>{val}</p>
-    </React.Fragment>
-  )
-}
-stories.add('Textarea', () => (
-  <TestBox width={600} height={300}>
-    <TextAreaContainer />
-  </TestBox>
-))
-
 const DollarContainer = () => {
   const [val, setVal] = useState('')
-  const field = {
-    name: 'DollarField',
-    type: FIELD_TYPES.DOLLAR,
-    prompt: text('Prompt', 'What is your problem?'),
-    help: text('Help', 'Here is some help stuff'),
-    placeholder: 'Enter your thing',
-    rules: [],
-  }
   return (
     <React.Fragment>
-      <Field
-        field={field}
-        valid={boolean('Is valid', true)}
-        errors={boolean('Has errors', false) ? ['This field has an error'] : []}
+      <DollarInput
         value={val}
         onChange={setVal}
+        disabled={boolean('Disabled', false)}
+        placeholder="Enter your thing"
       />
       <p>{val}</p>
     </React.Fragment>
@@ -109,22 +47,13 @@ stories.add('Dollar', () => (
 
 const NumberContainer = () => {
   const [val, setVal] = useState('')
-  const field = {
-    name: 'NumberField',
-    type: FIELD_TYPES.NUMBER,
-    prompt: text('Prompt', 'What is your problem?'),
-    help: text('Help', 'Here is some help stuff'),
-    placeholder: 'Enter your thing',
-    rules: [],
-  }
   return (
     <React.Fragment>
-      <Field
-        field={field}
-        valid={boolean('Is valid', true)}
-        errors={boolean('Has errors', false) ? ['This field has an error'] : []}
+      <NumberInput
         value={val}
         onChange={setVal}
+        disabled={boolean('Disabled', false)}
+        placeholder="Enter your thing"
       />
       <p>{val}</p>
     </React.Fragment>
@@ -136,24 +65,26 @@ stories.add('Number', () => (
   </TestBox>
 ))
 
+stories.add('Button', () => (
+  <TestBox width={600} height={300}>
+    <Button
+      onClick={() => alert('A button')}
+      disabled={boolean('Disabled', false)}
+      secondary={boolean('Secondary', false)}
+    >
+      A button
+    </Button>
+  </TestBox>
+))
+
 const DateContainer = () => {
   const [val, setVal] = useState('')
-  const field = {
-    name: 'DateField',
-    type: FIELD_TYPES.DATE,
-    prompt: text('Prompt', 'What is your problem?'),
-    help: text('Help', 'Here is some help stuff'),
-    placeholder: 'Enter your thing',
-    rules: [],
-  }
   return (
     <React.Fragment>
-      <Field
-        field={field}
-        valid={boolean('Is valid', true)}
-        errors={boolean('Has errors', false) ? ['This field has an error'] : []}
+      <DateInput
         value={val}
         onChange={setVal}
+        disabled={boolean('Disabled', false)}
       />
       <p>{val}</p>
     </React.Fragment>
@@ -162,5 +93,45 @@ const DateContainer = () => {
 stories.add('Date', () => (
   <TestBox width={600} height={300}>
     <DateContainer />
+  </TestBox>
+))
+
+const TextareaContainer = () => {
+  const [val, setVal] = useState('')
+  return (
+    <React.Fragment>
+      <TextareaInput
+        value={val}
+        onChange={setVal}
+        disabled={boolean('Disabled', false)}
+        placeholder="Enter your thing"
+      />
+      <p>{val}</p>
+    </React.Fragment>
+  )
+}
+stories.add('Textarea', () => (
+  <TestBox width={600} height={300}>
+    <TextareaContainer />
+  </TestBox>
+))
+
+const TextContainer = () => {
+  const [val, setVal] = useState('')
+  return (
+    <React.Fragment>
+      <TextInput
+        value={val}
+        onChange={setVal}
+        disabled={boolean('Disabled', false)}
+        placeholder="Enter your thing"
+      />
+      <p>{val}</p>
+    </React.Fragment>
+  )
+}
+stories.add('Text', () => (
+  <TestBox width={600} height={300}>
+    <TextContainer />
   </TestBox>
 ))

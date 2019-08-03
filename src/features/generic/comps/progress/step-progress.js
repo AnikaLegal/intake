@@ -69,15 +69,15 @@ const StepCircleEl = styled.div`
   margin-right: 10px;
   border-radius: ${SIZE}px;
   ${({ theme }) => css`
-    border: 1px solid #f0f2f5;
+    border: 2px solid #95b9cc;
   `}
   ${({ isActive, theme }) =>
     isActive &&
     css`
       border: none;
       color: #fff;
-      border: 1px solid #fff;
-      background: #297485;
+      border: 2px solid #fff;
+      background: #95b9cc;
     `}
 `
 const StepConnectorEl = styled.div`
@@ -88,8 +88,8 @@ const StepConnectorEl = styled.div`
       width: 1px;
       margin: 2px 0;
       display: block;
-      border-left: 2px solid #f0f2f5;
-      margin-left: ${SIZE / 2 - 1}px;
+      border-left: 2px solid #297485;
+      margin-left: ${SIZE / 2}px;
       height: ${SIZE / 2}px;
     `}
 `
