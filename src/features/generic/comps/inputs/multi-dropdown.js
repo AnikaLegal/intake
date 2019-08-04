@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import ReactSelect from 'react-select'
+import styled from 'styled-components'
 
 import { SelectWrapperEl } from './dropdown'
 
@@ -28,7 +29,7 @@ export const MultiDropdownInput = ({
     }
   }
   return (
-    <SelectWrapperEl>
+    <MultiSelectWrapperEl>
       <ReactSelect
         isMulti
         className="react-select-container"
@@ -39,6 +40,23 @@ export const MultiDropdownInput = ({
         placeholder={placeholder}
         onChange={onSelectChange}
       />
-    </SelectWrapperEl>
+    </MultiSelectWrapperEl>
   )
 }
+
+const MultiSelectWrapperEl = styled(SelectWrapperEl)`
+  .react-select__multi-value {
+    border: 2px solid #95b9cc;
+    background: #fff;
+    .react-select__multi-value__label {
+      padding: 0.3rem 0.5rem;
+      font-weight: 500;
+    }
+    .react-select__multi-value__remove {
+      background: #95b9cc;
+      border-radius: 0;
+      cursor: pointer;
+      color: white;
+    }
+  }
+`

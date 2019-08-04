@@ -29,7 +29,7 @@ export const MultiCheckboxInput = ({
     onChange(newValues)
   }
   return (
-    <div>
+    <MultiCheckboxEl>
       {options.map(({ label, value }) => (
         <CheckboxInput
           label={label}
@@ -39,6 +39,10 @@ export const MultiCheckboxInput = ({
           onChange={onCheckboxChange(value)}
         />
       ))}
-    </div>
+    </MultiCheckboxEl>
   )
 }
+
+const MultiCheckboxEl = styled.div`
+  margin-left: 1rem;
+`
