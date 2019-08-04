@@ -1,49 +1,37 @@
 // @flow
 import * as React from 'react'
+import styled from 'styled-components'
 
-import { FIELD_TYPES } from 'consts'
-
-import type { Field as FieldType, Data, Validations } from 'types'
-import { FormContext } from './form'
-
-type FormFieldProps = {
-  field: FieldType,
+type Props = {
+  prompt: string,
+  required: boolean,
+  errors: Array<string>,
+  children: React.Node,
+  help?: string,
 }
 
-// TODO
-export const Field = ({ field }: FormFieldProps) => {
-  const { data, validation, onFieldChange, disabled } = React.useContext(
-    FormContext
-  )
-  const {
-    name,
-    type,
-    prompt,
-    help,
-    placeholder,
-    label,
-    when,
-    options,
-    fields,
-  } = field
-  // Select appropriate input widget based on type.
-  const Input = FIELD_INPUTS[type]
-  return (
-    <FormItem
-      valid={validation.fields[name].valid}
-      errors={validation.fields[name].errors}
-      label={copy ? copy.label : ''}
-      tooltip={copy ? copy.tooltip : ''}
-      {...(formItemProps || {})}
-    >
-      <Input
-        disabled={isDisabled}
-        value={data[name]}
-        options={options}
-        placeholder={copy ? copy.placeholder : ''}
-        onChange={onFieldChange(name)}
-        {...(inputProps || {})}
-      />
-    </FormItem>
-  )
-}
+// FIXME: ADD REQUIRED
+// FIXME: ADD ERRORS
+export const Field = ({ prompt, required, errors, children, help }: Props) => (
+  <FieldEl>
+    <h2>{prompt}</h2>
+    {help && <HelpEl>{help}</HelpEl>}
+    {children}
+    {errors.map(e => (
+      <ErrorEl key={e}>{e}</ErrorEl>
+    ))}
+  </FieldEl>
+)
+
+const FieldEl = styled.div`
+  margin-bottom: 2.5rem;
+`
+const HelpEl = styled.p`
+  margin: -0.2rem 0 1rem 0;
+  font-weight: 300;
+`
+const ErrorEl = styled.p`
+  font-weight: 300;
+  color: #f5222d;
+  margin: 0.5rem 0 1rem 0;
+`

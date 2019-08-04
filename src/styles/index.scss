@@ -11,19 +11,36 @@ body {
   background-color: rgba($grey, 0.15);
   color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
+  line-height: 1.5;
 }
 
-h1 {
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.85);
-}
-
+h1,
 h2,
 h3,
 h4,
 h5 {
-  font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
+  margin: 0 0 1rem 0;
+}
+h1 {
+  font-weight: 600;
+  font-size: 40px;
+}
+h2 {
+  font-weight: 500;
+  font-size: 30px;
+}
+h3 {
+  font-weight: 600;
+  font-size: 24px;
+}
+h4 {
+  font-weight: 600;
+  font-size: 20px;
+}
+h5 {
+  font-weight: 600;
+  font-size: 16px;
 }
 
 #app {
