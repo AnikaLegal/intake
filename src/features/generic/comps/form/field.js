@@ -2,6 +2,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+import { FieldErrors } from './errors'
+import { FieldHeader, FieldLabel } from './header'
+
 type Props = {
   prompt: string,
   required: boolean,
@@ -10,28 +13,44 @@ type Props = {
   help?: string,
 }
 
-// FIXME: ADD REQUIRED
-// FIXME: ADD ERRORS
 export const Field = ({ prompt, required, errors, children, help }: Props) => (
   <FieldEl>
-    <h2>{prompt}</h2>
-    {help && <HelpEl>{help}</HelpEl>}
+    <FieldHeader
+      invalid={errors.length > 0}
+      prompt={prompt}
+      required={required}
+      help={help}
+    />
     {children}
-    {errors.map(e => (
-      <ErrorEl key={e}>{e}</ErrorEl>
-    ))}
+    <FieldErrors errors={errors} />
   </FieldEl>
+)
+
+type GroupProps = {
+  prompt: string,
+  children: React.Node,
+  help?: string,
+}
+type GroupFieldProps = {
+  label: string,
+  required: boolean,
+  errors: Array<string>,
+  children: React.Node,
+}
+export const FieldGroup = ({ prompt, children, help }: GroupProps) => (
+  <FieldEl>
+    <FieldHeader prompt={prompt} required={false} help={help} />
+    {children}
+  </FieldEl>
+)
+FieldGroup.Field = ({ children, errors, label, required }: GroupFieldProps) => (
+  <React.Fragment>
+    <FieldLabel label={label} required={required} invalid={errors.length > 0} />
+    {children}
+    <FieldErrors errors={errors} />
+  </React.Fragment>
 )
 
 const FieldEl = styled.div`
   margin-bottom: 2.5rem;
-`
-const HelpEl = styled.p`
-  margin: -0.2rem 0 1rem 0;
-  font-weight: 300;
-`
-const ErrorEl = styled.p`
-  font-weight: 300;
-  color: #f5222d;
-  margin: 0.5rem 0 1rem 0;
 `
