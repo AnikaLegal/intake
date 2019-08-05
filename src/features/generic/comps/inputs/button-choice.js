@@ -8,7 +8,7 @@ type Option = { label: string, value: any }
 
 type Props = {
   value: any,
-  disabled: boolean,
+  disabled?: boolean,
   onChange: any => void,
   options: Array<Option>,
 }

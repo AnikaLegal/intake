@@ -1,17 +1,16 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-// import { Steps } from 'antd'
 
+import { StepProgress } from 'features/generic'
 import type { Section } from 'types'
 
 type Props = {
   sections: Array<Section>,
-  className?: string,
   current?: number,
 }
 
-const _Sidebar = ({ className, current, sections }: Props) => {
+export const Sidebar = ({ current, sections }: Props) => {
   let sectionIdx = sections.length
   if (current || current === 0) {
     let answerIdx = 0
@@ -24,20 +23,14 @@ const _Sidebar = ({ className, current, sections }: Props) => {
       sectionIdx++
     }
   }
-  return null
-  // FIXME: antd
-  // return (
-  //   <div className={className}>
-  //     <Steps direction="vertical" current={sectionIdx}>
-  //       {sections.map(s => (
-  //         <Steps.Step title={s.name} key={s.name} />
-  //       ))}
-  //     </Steps>
-  //   </div>
-  // )
+  return (
+    <SidebarEl>
+      <StepProgress current={sectionIdx} steps={sections.map(s => s.name)} />
+    </SidebarEl>
+  )
 }
 
-const style = c => styled(c)`
+const SidebarEl = styled.div`
   background-color: #fff;
   padding: 1.5rem;
   min-height: calc(100vh - 84px);
@@ -47,4 +40,3 @@ const style = c => styled(c)`
     display: none;
   }
 `
-export const Sidebar = style(_Sidebar)
