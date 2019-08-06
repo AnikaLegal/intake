@@ -2,7 +2,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Field, FieldGroup } from 'components'
+import { Field, FormContext } from 'components'
+import { Button } from 'features/generic'
 import { FadeInOut } from './animations'
 import { FIELD_TYPES } from 'consts'
 import { NamedLink, VIEWS } from 'routes'
@@ -33,87 +34,41 @@ export const Form = ({
   onChange,
   data,
 }: FormProps) => {
-  return null
-  // FIXME: antd
-  // return (
-  //   <React.Fragment>
-  //     <FormTitle>{form.prompt}</FormTitle>
-  //     {form.help && <FormSubtitle>{form.help}</FormSubtitle>}
-  //     <AntForm>
-  //       {form.fields.map(f => {
-  //         if (f.type === FIELD_TYPES.FIELD_GROUP) {
-  //           return (
-  //             <FadeInOut key={f.name} visible={f.when ? f.when(data) : true}>
-  //               <FieldGroup field={f}>
-  //                 <div>
-  //                   {f.fields &&
-  //                     f.fields.map(field => (
-  //                       <Field
-  //                         key={field.name}
-  //                         field={field}
-  //                         valid={
-  //                           isSubmitted
-  //                             ? validation.fields[field.name].valid
-  //                             : true
-  //                         }
-  //                         errors={
-  //                           isSubmitted
-  //                             ? validation.fields[field.name].errors
-  //                             : []
-  //                         }
-  //                         value={data[field.name] || ''}
-  //                         onChange={onChange(field.name)}
-  //                         isCompact
-  //                       />
-  //                     ))}
-  //                 </div>
-  //               </FieldGroup>
-  //             </FadeInOut>
-  //           )
-  //         } else {
-  //           return (
-  //             <FadeInOut key={f.name} visible={f.when ? f.when(data) : true}>
-  //               <Field
-  //                 field={f}
-  //                 valid={isSubmitted ? validation.fields[f.name].valid : true}
-  //                 errors={isSubmitted ? validation.fields[f.name].errors : []}
-  //                 value={data[f.name] || ''}
-  //                 onChange={onChange(f.name)}
-  //               />
-  //             </FadeInOut>
-  //           )
-  //         }
-  //       })}
-  //     </AntForm>
-
-  //     <Divider />
-
-  //     {hasPrev && (
-  //       <Button onClick={onPrev} style={{ marginRight: '0.5rem' }}>
-  //         Back
-  //       </Button>
-  //     )}
-  //     {hasNext && (
-  //       <Button
-  //         onClick={onNext}
-  //         type={validation.valid ? 'primary' : 'default'}
-  //       >
-  //         Save & Next
-  //       </Button>
-  //     )}
-  //     {!hasNext && (
-  //       <NamedLink
-  //         to={VIEWS.ReviewView}
-  //         params={{ submissionId }}
-  //         onClick={onNext}
-  //       >
-  //         <Button type={validation.valid ? 'primary' : 'default'}>
-  //           Save & Review
-  //         </Button>
-  //       </NamedLink>
-  //     )}
-  //   </React.Fragment>
-  // )
+  const context = { data, validation, onChange }
+  return (
+    <React.Fragment>
+      <FormTitle>{form.prompt}</FormTitle>
+      {form.help && <FormSubtitle>{form.help}</FormSubtitle>}
+      <FormContext.Provider value={context}>
+        {form.fields.map(f => (
+          <Field field={f} />
+        ))}
+      </FormContext.Provider>
+      <Divider />
+      {hasPrev && (
+        <Button onClick={onPrev} style={{ marginRight: '0.5rem' }}>
+          Back
+        </Button>
+      )}
+      {hasNext && (
+        <Button
+          onClick={onNext}
+          type={validation.valid ? 'primary' : 'default'}
+        >
+          Save & Next
+        </Button>
+      )}
+      {!hasNext && (
+        <NamedLink
+          to={VIEWS.ReviewView}
+          params={{ submissionId }}
+          onClick={onNext}
+        >
+          <Button secondary={!validation.valid}>Save & Review</Button>
+        </NamedLink>
+      )}
+    </React.Fragment>
+  )
 }
 
 const Divider = styled.hr`

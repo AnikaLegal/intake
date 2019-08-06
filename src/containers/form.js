@@ -4,7 +4,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
 import { actions } from 'state'
 import { Form, Header } from 'components'
-import { Page, Layout } from 'features/generic'
+import { Page, Layout, LoadingSpinner } from 'features/generic'
 import { logError, flattenArray } from 'utils'
 import { NamedRedirect, VIEWS } from 'routes'
 import { Sidebar } from 'containers'
@@ -38,23 +38,19 @@ export const FormContainer = ({ submissionId }: Props) => {
   if (redirect) {
     return <NamedRedirect to={VIEWS[redirect]} />
   }
-  // FIXME: antd
-  // if (formState.isLoading) {
-  //   return (
-  //     <Layout vertical>
-  //       <Header />
-  //       <Layout>
-  //         <Sidebar current={formState.page} sections={SECTIONS} />
-  //         <Page>
-  //           <div style={{ textAlign: 'center' }}>
-  //             <Spin tip="Loading..." />
-  //           </div>
-  //         </Page>
-  //       </Layout>
-  //     </Layout>
-  //   )
-  // }
-
+  if (formState.isLoading) {
+    return (
+      <Layout vertical>
+        <Header />
+        <Layout>
+          <Sidebar current={formState.page} sections={SECTIONS} />
+          <Page>
+            <LoadingSpinner />
+          </Page>
+        </Layout>
+      </Layout>
+    )
+  }
   const forms: Array<FormType> = SECTIONS.map(s => s.forms).reduce(flattenArray)
   const form = forms[formState.page]
   // Redirect if necessary, otherwise request next page.

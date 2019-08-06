@@ -7,7 +7,7 @@ import { UploadField } from 'containers'
 import { FIELD_TYPES } from 'consts'
 import { NamedRedirect } from 'routes'
 import type { Field as FieldType } from 'types'
-
+import type { Data, Validations } from 'types'
 import {
   ExitField,
   MultiSelectField,
@@ -23,36 +23,24 @@ import {
   NumberField,
 } from './fields'
 
-type FieldGroupProps = {
-  field: FieldType,
-  children: Node,
+type FormContextType = {
+  data: Data,
+  validation: Validations,
+  onChange: string => () => any,
 }
-
-export const FieldGroup = ({ field, children }: FieldGroupProps) => (
-  <FieldWrapper>
-    <h3 css={'margin-bottom: 1rem;'}>{field.prompt}</h3>
-    {field.help && <Help style={{ marginTop: '-0.7rem' }}>{field.help}</Help>}
-    {children}
-  </FieldWrapper>
+const FORM_CONTEXT_DEFAULT = {
+  data: {},
+  validation: { valid: true, fields: {} },
+  onChange: () => () => null,
+}
+export const FormContext = React.createContext<FormContextType>(
+  FORM_CONTEXT_DEFAULT
 )
 
 type FieldProps = {
   field: FieldType,
-  valid: boolean,
-  errors: Array<string>,
-  value: string | any,
-  onChange: Function,
-  isCompact?: boolean,
 }
-
-export const Field = ({
-  field,
-  valid,
-  errors,
-  value,
-  onChange,
-  isCompact,
-}: FieldProps) => {
+export const Field = ({ field }: FieldProps) => {
   const FieldInput = FIELD_INPUTS[field.type]
   const itemProps = {}
   if (field.label) {
@@ -82,6 +70,49 @@ export const Field = ({
   //     </AntForm.Item>
   //   </FieldWrapper>
   // )
+}
+
+{
+  form.fields.map(f => {
+    if (f.type === FIELD_TYPES.FIELD_GROUP) {
+      return (
+        <FadeInOut key={f.name} visible={f.when ? f.when(data) : true}>
+          <FieldGroup field={f}>
+            <div>
+              {f.fields &&
+                f.fields.map(field => (
+                  <Field
+                    key={field.name}
+                    field={field}
+                    valid={
+                      isSubmitted ? validation.fields[field.name].valid : true
+                    }
+                    errors={
+                      isSubmitted ? validation.fields[field.name].errors : []
+                    }
+                    value={data[field.name] || ''}
+                    onChange={onChange(field.name)}
+                    isCompact
+                  />
+                ))}
+            </div>
+          </FieldGroup>
+        </FadeInOut>
+      )
+    } else {
+      return (
+        <FadeInOut key={f.name} visible={f.when ? f.when(data) : true}>
+          <Field
+            field={f}
+            valid={isSubmitted ? validation.fields[f.name].valid : true}
+            errors={isSubmitted ? validation.fields[f.name].errors : []}
+            value={data[f.name] || ''}
+            onChange={onChange(f.name)}
+          />
+        </FadeInOut>
+      )
+    }
+  })
 }
 
 const Help = styled.p`

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 
+import { DropdownInput, MultiDropdownInput } from 'features/generic'
 import type { FieldProps } from './types'
 
 // FIXME: antd
