@@ -26,3 +26,6 @@ test_media/
 
 # database backups
 dumps/
+
+# Storybook build assets
+story/
