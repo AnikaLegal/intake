@@ -33,15 +33,11 @@ const Step = ({ step, current, length, label }: StepProps) => {
   const isDone = step < current
   const hasNext = step < length - 1
   return (
-    <React.Fragment>
-      <StepLabel isActive={isDone || isCurrent}>
-        <StepCircleEl isActive={isDone || isCurrent}>
-          {isDone ? '✔' : step + 1}
-        </StepCircleEl>
-        {label}
-      </StepLabel>
+    <StepLabel>
+      <StepCircleEl isActive={isDone || isCurrent}>{step + 1}</StepCircleEl>
+      <div className="label">{label}</div>
       <StepConnectorEl hasNext={hasNext} />
-    </React.Fragment>
+    </StepLabel>
   )
 }
 
@@ -51,45 +47,40 @@ const StepProgressEl = styled.div`
 const StepLabel = styled.div`
   display: flex;
   align-items: center;
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      font-weight: 500;
-    `}
+  flex-direction: column;
+  .label {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    margin: 5px 0 8px 0;
+  }
 `
-const SIZE = 25
+const SIZE = 50
 const StepCircleEl = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 600;
-  font-size: 15px;
   width: ${SIZE}px;
   height: ${SIZE}px;
-  margin-right: 10px;
   border-radius: ${SIZE}px;
-  ${({ theme }) => css`
-    border: 2px solid #95b9cc;
-  `}
-  ${({ isActive, theme }) =>
+  text-align: center;
+  line-height: ${SIZE + 2}px;
+  font-size: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  ${({ isActive }) =>
     isActive &&
     css`
       border: none;
       color: #fff;
-      border: 2px solid #fff;
+      border: 1px solid #fff;
       background: #95b9cc;
     `}
 `
 const StepConnectorEl = styled.div`
   display: none;
-  ${({ hasNext, theme }) =>
+  ${({ hasNext }) =>
     hasNext &&
     css`
-      width: 1px;
-      margin: 2px 0;
+      width: 0px;
       display: block;
-      border-left: 2px solid #297485;
-      margin-left: ${SIZE / 2}px;
-      height: ${SIZE / 2}px;
+      height: 47px;
+      border-left: 2px dashed #979797;
     `}
 `

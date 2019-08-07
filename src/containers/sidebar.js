@@ -34,7 +34,7 @@ const SidebarEl = styled.div`
   background-color: #fff;
   padding: 1.5rem;
   min-height: calc(100vh - 84px);
-  width: 300px;
+  width: 200px;
   border-right: 2px solid rgba(21, 27, 38, 0.15);
   @media (max-width: 1000px) {
     display: none;
