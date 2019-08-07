@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import type { Ref } from 'react'
 
-import type { ImageUpload as ImageUploadType, ImageUploader } from 'types'
+import type { ImageUpload as ImageUploadType } from 'types'
 import { Button } from './button'
 
 type Props = {

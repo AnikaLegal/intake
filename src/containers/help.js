@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Header } from 'components'
 import { actions } from 'state'
 import { validate, flattenArray } from 'utils'
 import { NamedRedirect, VIEWS } from 'routes'
@@ -15,6 +14,7 @@ import {
   DropdownInput,
   ButtonChoiceInput,
   Button,
+  Header,
 } from 'features/generic'
 
 const VALID_STATE = 'Victoria'

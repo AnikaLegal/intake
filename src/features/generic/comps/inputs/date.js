@@ -8,9 +8,17 @@ type Props = {
   value: string | void,
   onChange: string => void,
   disabled?: boolean,
+  onFocus?: Function,
+  onBlur?: Function,
 }
 
-export const DateInput = ({ onChange, value, disabled }: Props) => {
+export const DateInput = ({
+  onChange,
+  value,
+  disabled,
+  onFocus,
+  onBlur,
+}: Props) => {
   const date = value ? new Date(value) : null
   const [isValid, setValid] = useState(Boolean(date))
   const [day, setDay] = useState<number | null>(date ? date.getDay() : null)
@@ -64,6 +72,8 @@ export const DateInput = ({ onChange, value, disabled }: Props) => {
         disabled={disabled}
         onChange={onDayChange}
         value={day || ''}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
       <Separator invalid={isInvalid}>/</Separator>
       <TextInput
@@ -71,6 +81,8 @@ export const DateInput = ({ onChange, value, disabled }: Props) => {
         disabled={disabled}
         onChange={onMonthChange}
         value={month || ''}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
       <Separator invalid={isInvalid}>/</Separator>
       <TextInput
@@ -78,6 +90,8 @@ export const DateInput = ({ onChange, value, disabled }: Props) => {
         disabled={disabled}
         onChange={onYearChange}
         value={year || ''}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     </DateFieldEl>
   )

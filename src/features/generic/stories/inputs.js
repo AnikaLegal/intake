@@ -1,5 +1,6 @@
 // @flow
 // https://github.com/storybooks/storybook/tree/master/addons/knobs
+import uuid from 'uuid'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -7,7 +8,6 @@ import { storiesOf } from '@storybook/react'
 import { text, boolean } from '@storybook/addon-knobs'
 
 import { TestBox } from './utils'
-import { DummyImageUploader } from 'utils'
 import { ImageUploadContainer } from '../containers'
 import {
   Button,
@@ -26,17 +26,40 @@ import {
 
 export const stories = storiesOf('Inputs', module)
 
-stories.add('Image Uploader', () => {
-  const uploader = new DummyImageUploader()
+stories.add('Image Uploader', () => (
+  <TestBox width={600} height={300}>
+    <ImageUploadContainerContainer />
+  </TestBox>
+))
+const ImageUploadContainerContainer = () => {
+  const [val, setVal] = useState([])
   return (
-    <TestBox width={600} height={300}>
+    <React.Fragment>
       <ImageUploadContainer
-        uploader={uploader}
-        disabled={boolean('Disabled', false)}
+        upload={dummyUpload}
+        images={val}
+        onChange={setVal}
       />
-    </TestBox>
+    </React.Fragment>
   )
-})
+}
+
+const dummyUpload = (file: File) => {
+  return new Promise(r => {
+    const reader = new FileReader()
+    reader.addEventListener(
+      'load',
+      () => {
+        r({
+          id: uuid(),
+          image: String(reader.result),
+        })
+      },
+      false
+    )
+    reader.readAsDataURL(file)
+  })
+}
 
 const MultiDropdownContainer = () => {
   const [val, setVal] = useState()
@@ -119,7 +142,6 @@ const MultiCheckboxContainer = () => {
       <MultiCheckboxInput
         values={val}
         onChange={setVal}
-        disabled={boolean('Disabled', false)}
         options={[
           { label: text('Label', 'Apple'), value: 'a' },
           { label: 'Banana', value: 'b' },
@@ -140,12 +162,7 @@ const CheckboxContainer = () => {
   const [val, setVal] = useState(false)
   return (
     <React.Fragment>
-      <CheckboxInput
-        value={val}
-        label="Check the box?"
-        onChange={setVal}
-        disabled={boolean('Disabled', false)}
-      />
+      <CheckboxInput value={val} label="Check the box?" onChange={setVal} />
       <p>{val ? 'Checked' : 'Not checked'}</p>
     </React.Fragment>
   )
@@ -163,7 +180,6 @@ const RadioContainer = () => {
       <RadioInput
         value={val}
         onChange={setVal}
-        disabled={boolean('Disabled', false)}
         options={[
           { label: text('Label', 'Apple'), value: 'a' },
           { label: 'Banana', value: 'b' },

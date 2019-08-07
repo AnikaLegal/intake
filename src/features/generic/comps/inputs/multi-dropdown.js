@@ -13,6 +13,8 @@ type Props = {
   options: Array<Option>,
   disabled?: boolean,
   placeholder?: string,
+  onFocus?: Function,
+  onBlur?: Function,
 }
 
 export const MultiDropdownInput = ({
@@ -21,6 +23,8 @@ export const MultiDropdownInput = ({
   options,
   disabled,
   placeholder,
+  onFocus,
+  onBlur,
 }: Props) => {
   const _values = values || []
   const onSelectChange = (options, ...args) => {
@@ -39,6 +43,8 @@ export const MultiDropdownInput = ({
         disabled={disabled}
         placeholder={placeholder}
         onChange={onSelectChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     </MultiSelectWrapperEl>
   )

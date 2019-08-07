@@ -56,6 +56,12 @@ const isAllTruthyValues = validatePredicate(
   'This is required'
 )
 
+const isTruthyArrayPredicate = (arr: Array<any>) => arr && arr.length > 0
+const isTruthyArray = validatePredicate(
+  isTruthyArrayPredicate,
+  'This is required'
+)
+
 // Truthy validator for objects - `0` is truthy.
 const isSomeTruthyValuesPredicate = (obj: Data) =>
   obj &&
@@ -128,6 +134,11 @@ const isAustralianBusinessNumber = (data: Data, key: string) => {
     : { valid: false, errors: ['This must be valid ABN'] }
 }
 
+// Check if a field is required
+const REQUIRED_RULES = [isTruthy, isTruthyArray]
+export const isRequiredCheck = (rules: Array<Rule>) =>
+  rules.some(r => REQUIRED_RULES.includes(r))
+
 // FIXME: All untested except for isAustralianBusinessNumber
 export const rules = {
   isEmail,
@@ -142,4 +153,5 @@ export const rules = {
   isLessThan,
   isSameAs,
   isAustralianBusinessNumber,
+  isTruthyArray,
 }

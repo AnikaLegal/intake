@@ -29,6 +29,7 @@ export const QUOTE_COST: Field = {
   prompt: 'What was the quote for the cost of the repairs to fix the problem?',
   when: Conditions.HAS_QUOTE,
   type: FIELD_TYPES.DOLLAR,
+  placeholder: 'Enter the quoted amount',
   rules: [rules.isTruthy],
 }
 

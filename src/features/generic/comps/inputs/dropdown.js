@@ -11,6 +11,8 @@ type Props = {
   options: Array<Option>,
   disabled?: boolean,
   placeholder?: string,
+  onFocus?: Function,
+  onBlur?: Function,
 }
 
 export const DropdownInput = ({
@@ -19,6 +21,8 @@ export const DropdownInput = ({
   options,
   disabled,
   placeholder,
+  onFocus,
+  onBlur,
 }: Props) => (
   <SelectWrapperEl>
     <ReactSelect
@@ -28,6 +32,8 @@ export const DropdownInput = ({
       options={options}
       disabled={disabled}
       placeholder={placeholder}
+      onFocus={onFocus}
+      onBlur={onBlur}
       // @noflow
       onChange={option => onChange(option.value)}
     />

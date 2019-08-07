@@ -38,7 +38,9 @@ const questions = {
       return http.patch(url, { complete: true }).then(r => r.json())
     },
   },
-  upload: (image: File): Promise<ImageUpload> => {
+}
+const image = {
+  create: (image: File): Promise<ImageUpload> => {
     const url = '/api/images/'
     const form = new FormData()
     form.append('image', image)
@@ -51,4 +53,5 @@ const questions = {
 
 export const api = {
   questions,
+  image,
 }

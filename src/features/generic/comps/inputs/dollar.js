@@ -10,6 +10,8 @@ type Props = {
   onChange: (number | void) => void,
   disabled?: boolean,
   placeholder?: string,
+  onFocus?: Function,
+  onBlur?: Function,
 }
 
 export const DollarInput = ({
@@ -17,6 +19,8 @@ export const DollarInput = ({
   onChange,
   disabled,
   placeholder,
+  onFocus,
+  onBlur,
 }: Props) => {
   return (
     <TextEl
@@ -25,6 +29,8 @@ export const DollarInput = ({
       onChange={e => onChange(format.dollars.toValue(e.target.value))}
       disabled={disabled}
       placeholder={placeholder}
+      onFocus={onFocus}
+      onBlur={onBlur}
     />
   )
 }

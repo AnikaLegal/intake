@@ -1,8 +1,7 @@
 // @flow
 import React, { useState } from 'react'
 
-import { Header } from 'components'
-import { Page, Layout, Message, Button } from 'features/generic'
+import { Header, Page, Layout, Message, Button } from 'features/generic'
 import { actions } from 'state'
 import { validate, flattenArray } from 'utils'
 import { NamedLink, NamedRedirect, VIEWS } from 'routes'

@@ -29,7 +29,7 @@ export const LETTER_PERMISSION: Field = {
 export const CLIENT_NAME: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_NAME',
-  label: 'Full name',
+  prompt: 'Full name',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Full name',
 }
@@ -37,7 +37,7 @@ export const CLIENT_NAME: Field = {
 export const CLIENT_ADDRESS: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_RENTAL_ADDRESS',
-  label: 'Address',
+  prompt: 'Address',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Your rental address',
 }
@@ -45,7 +45,7 @@ export const CLIENT_ADDRESS: Field = {
 export const CLIENT_EMAIL: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_EMAIL',
-  label: 'Email',
+  prompt: 'Email',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Email address',
 }
@@ -53,14 +53,14 @@ export const CLIENT_EMAIL: Field = {
 export const CLIENT_DOB: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_DOB',
-  label: 'Birth Date',
+  prompt: 'Birth Date',
   type: FIELD_TYPES.DATE,
 }
 
 export const CLIENT_PHONE: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_PHONE',
-  label: 'Phone',
+  prompt: 'Phone',
   type: FIELD_TYPES.TEXT,
   placeholder: 'Phone number',
 }

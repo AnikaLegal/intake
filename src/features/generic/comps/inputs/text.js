@@ -7,6 +7,8 @@ type Props = {
   onChange: string => void,
   disabled?: boolean,
   placeholder?: string,
+  onFocus?: Function,
+  onBlur?: Function,
 }
 
 export const TextInput = ({
@@ -14,6 +16,8 @@ export const TextInput = ({
   onChange,
   disabled,
   placeholder,
+  onFocus,
+  onBlur,
 }: Props) => (
   <TextEl
     type="text"
@@ -21,6 +25,8 @@ export const TextInput = ({
     onChange={e => onChange(e.target.value)}
     disabled={disabled}
     placeholder={placeholder}
+    onFocus={onFocus}
+    onBlur={onBlur}
   />
 )
 

@@ -75,17 +75,17 @@ export const LANDLORD_CONTACT_RECORDS: Field = {
   ],
 }
 
-export const LANDLORD_NAME = {
+export const LANDLORD_NAME: Field = {
   name: 'LANDLORD_NAME',
-  label: 'Full name',
+  prompt: 'Full name',
   rules: [],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their full name',
 }
 
-export const LANDLORD_ADDRESS = {
+export const LANDLORD_ADDRESS: Field = {
   name: 'LANDLORD_ADDRESS',
-  label: 'Address',
+  prompt: 'Address',
   rules: [],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their address',
@@ -95,14 +95,14 @@ export const LANDLORD_EMAIL: Field = {
   name: 'LANDLORD_EMAIL',
   type: FIELD_TYPES.TEXT,
   rules: [],
-  label: 'Email',
+  prompt: 'Email',
   placeholder: 'Enter their email address',
 }
 
 export const LANDLORD_PHONE: Field = {
   name: 'LANDLORD_PHONE',
   type: FIELD_TYPES.TEXT,
-  label: 'Phone',
+  prompt: 'Phone',
   rules: [],
   placeholder: 'Enter their phone number',
 }
@@ -127,25 +127,25 @@ export const LANDLORD_HAS_AGENT: Field = {
   options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
 }
 
-export const AGENT_NAME = {
+export const AGENT_NAME: Field = {
   name: 'AGENT_NAME',
-  label: 'Full name',
+  prompt: 'Full name',
   rules: [],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their full name',
 }
 
-export const AGENT_COMPANY = {
+export const AGENT_COMPANY: Field = {
   name: 'AGENT_COMPANY',
-  label: 'Company',
+  prompt: 'Company',
   rules: [],
   type: FIELD_TYPES.TEXT,
   placeholder: "Enter the name of the agent's company",
 }
 
-export const AGENT_ADDRESS = {
+export const AGENT_ADDRESS: Field = {
   name: 'AGENT_ADDRESS',
-  label: 'Address',
+  prompt: 'Address',
   rules: [],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their address',
@@ -155,14 +155,14 @@ export const AGENT_EMAIL: Field = {
   name: 'AGENT_EMAIL',
   type: FIELD_TYPES.TEXT,
   rules: [],
-  label: 'Email',
+  prompt: 'Email',
   placeholder: 'Enter their email address',
 }
 
 export const AGENT_PHONE: Field = {
   name: 'AGENT_PHONE',
   type: FIELD_TYPES.TEXT,
-  label: 'Phone',
+  prompt: 'Phone',
   rules: [],
   placeholder: 'Enter their phone number',
 }

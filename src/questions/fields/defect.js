@@ -10,7 +10,7 @@ export const DEFECT_TYPE: Field = {
   help:
     " You can select more than one problem. If none apply, please select 'Other'",
   type: FIELD_TYPES.MULTI_DROPDOWN,
-  rules: [rules.isTruthy],
+  rules: [rules.isTruthyArray],
   options: [
     { label: 'Toilet', value: 'Toilet' },
     { label: 'Water', value: 'Water' },

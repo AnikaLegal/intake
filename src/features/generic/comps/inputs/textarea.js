@@ -8,6 +8,8 @@ type Props = {
   disabled?: boolean,
   placeholder?: string,
   rows?: number,
+  onFocus?: Function,
+  onBlur?: Function,
 }
 
 export const TextareaInput = ({
@@ -16,6 +18,8 @@ export const TextareaInput = ({
   disabled,
   placeholder,
   rows = 6,
+  onFocus,
+  onBlur,
 }: Props) => (
   <TextareaEl
     type="text"
@@ -24,6 +28,8 @@ export const TextareaInput = ({
     disabled={disabled}
     placeholder={placeholder}
     rows={rows}
+    onFocus={onFocus}
+    onBlur={onBlur}
   />
 )
 

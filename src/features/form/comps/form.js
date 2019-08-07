@@ -2,12 +2,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Field, FormContext } from 'components'
-import { Button } from 'features/generic'
-import { FadeInOut } from './animations'
 import { FIELD_TYPES } from 'consts'
 import { NamedLink, VIEWS } from 'routes'
+import { Button, Divider } from 'features/generic'
 import type { Form as FormType, View, Data, Validations } from 'types'
+
+import { FormField, FormContext } from './field'
 
 type FormProps = {
   submissionId: string,
@@ -34,14 +34,14 @@ export const Form = ({
   onChange,
   data,
 }: FormProps) => {
-  const context = { data, validation, onChange }
+  const context = { data, validation, onChange, isSubmitted }
   return (
     <React.Fragment>
       <FormTitle>{form.prompt}</FormTitle>
       {form.help && <FormSubtitle>{form.help}</FormSubtitle>}
       <FormContext.Provider value={context}>
         {form.fields.map(f => (
-          <Field field={f} />
+          <FormField key={f.name} field={f} />
         ))}
       </FormContext.Provider>
       <Divider />
@@ -51,10 +51,7 @@ export const Form = ({
         </Button>
       )}
       {hasNext && (
-        <Button
-          onClick={onNext}
-          type={validation.valid ? 'primary' : 'default'}
-        >
+        <Button onClick={onNext} secondary={!validation.valid}>
           Save & Next
         </Button>
       )}
@@ -70,13 +67,6 @@ export const Form = ({
     </React.Fragment>
   )
 }
-
-const Divider = styled.hr`
-  margin: 1.5rem 0;
-  border: none;
-  background-color: rgba(0, 0, 0, 0.15);
-  height: 1px;
-`
 
 const FormTitle = styled.h1`
   margin-bottom: 2rem;

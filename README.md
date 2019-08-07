@@ -17,6 +17,7 @@ TODO MEDIUM TERM
     - eventually move to a feature-based folder structure
     - eventually write some end-to-end tests with cypress to run on staging server
     - setup Sentry logging + releases + sourcemaps + errors to Slack
+    - Add hot module reloading + redux state reload
 
 TODO LONG TERM
 

@@ -23,6 +23,7 @@ export const ButtonChoiceInput = ({
     <ButtonChoiceEl>
       {options.map(option => (
         <Button
+          key={option.label}
           secondary={value !== option.value}
           onClick={() => onChange(option.value)}
           disabled={disabled}
