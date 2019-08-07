@@ -24,6 +24,7 @@ export const ButtonChoiceInput = ({
       {options.map(option => (
         <Button
           key={option.label}
+          skinny
           secondary={value !== option.value}
           onClick={() => onChange(option.value)}
           disabled={disabled}
@@ -41,7 +42,7 @@ const ButtonChoiceEl = styled.div`
     border-left: 0;
     &:first-child {
       border-radius: 3px 0 0 3px;
-      border-left: 1px solid #297485;
+      border-left: 1px solid rgba(0, 0, 0, 0.4);
     }
     &:last-child {
       border-radius: 0 3px 3px 0;

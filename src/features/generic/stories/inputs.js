@@ -62,7 +62,7 @@ const dummyUpload = (file: File) => {
 }
 
 const MultiDropdownContainer = () => {
-  const [val, setVal] = useState()
+  const [val, setVal] = useState(['no'])
   return (
     <React.Fragment>
       <MultiDropdownInput
@@ -242,6 +242,7 @@ stories.add('Button', () => (
       onClick={() => alert('A button')}
       disabled={boolean('Disabled', false)}
       secondary={boolean('Secondary', false)}
+      skinny={boolean('Skinny', false)}
     >
       A button
     </Button>

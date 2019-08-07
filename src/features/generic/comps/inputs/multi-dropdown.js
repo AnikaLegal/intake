@@ -52,11 +52,12 @@ export const MultiDropdownInput = ({
 
 const MultiSelectWrapperEl = styled(SelectWrapperEl)`
   .react-select__multi-value {
-    border: 2px solid #95b9cc;
+    border: 1px solid #95b9cc;
     background: #fff;
     .react-select__multi-value__label {
-      padding: 0.3rem 0.5rem;
+      padding: 0.2rem 0.5rem;
       font-weight: 500;
+      color: rgba(0, 0, 0, 0.65);
     }
     .react-select__multi-value__remove {
       background: #95b9cc;

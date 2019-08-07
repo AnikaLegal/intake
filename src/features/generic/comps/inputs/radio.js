@@ -36,7 +36,7 @@ const onClick = (value, disabled, onChange) => () => {
 }
 
 const RadioWrapperEl = styled.div`
-  margin: 0 0 0 1rem;
+  margin: 0 0 0 2rem;
 `
 
 const RadioEl = styled.div`

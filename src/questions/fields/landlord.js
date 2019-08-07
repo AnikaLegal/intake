@@ -8,7 +8,7 @@ export const HAS_CONTACTED_LANDLORD: Field = {
   name: 'HAS_CONTACTED_LANDLORD',
   prompt:
     'Have you asked your landlord (or your landlord’s agent) to fix the problem?',
-  type: FIELD_TYPES.RADIO,
+  type: FIELD_TYPES.RADIO_BTN,
   rules: [rules.isTruthy],
   options: [
     {
@@ -26,7 +26,7 @@ export const LANDLORD_CONTACT_METHOD: Field = {
   name: 'LANDLORD_CONTACT_METHOD',
   prompt:
     'How did you ask your landlord (or your landlord’s agent) to fix the problem?',
-  type: FIELD_TYPES.MULTI_SELECT,
+  type: FIELD_TYPES.MULTI_DROPDOWN,
   rules: [rules.isTruthy],
   options: [
     { label: 'Phone', value: 'phone' },
@@ -52,7 +52,7 @@ export const LANDLORD_CONTACT_ATTEMPTS: Field = {
     'How many times have you asked your landlord (or your landlord’s agent) to fix the problem?',
   help:
     'It doesn’t matter if you have asked your landlord once or three times, it’s just helpful for us to know.',
-  type: FIELD_TYPES.RADIO,
+  type: FIELD_TYPES.DROPDOWN,
   options: [
     { label: 'Once', value: '1' },
     { label: 'Twice', value: '2' },

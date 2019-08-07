@@ -46,7 +46,7 @@ export const Form = ({
       </FormContext.Provider>
       <Divider />
       {hasPrev && (
-        <Button onClick={onPrev} style={{ marginRight: '0.5rem' }}>
+        <Button onClick={onPrev} margin="0 0.5rem 0 0">
           Back
         </Button>
       )}

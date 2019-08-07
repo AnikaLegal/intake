@@ -15,6 +15,7 @@ type Props = {
   onSelect: any => void,
   onDelete: ImageUploadType => () => any,
   inputRef: Ref<any>,
+  isLoading: boolean,
 }
 
 export const ImageUpload = ({
@@ -25,11 +26,16 @@ export const ImageUpload = ({
   errors,
   images,
   inputRef,
+  isLoading,
 }: Props) => (
   <div>
     <HiddenInput ref={inputRef} type="file" onChange={onUpload} />
-    <Button disabled={disabled} styleType="secondary" onClick={onSelect}>
-      Upload {images.length > 0 && 'another'} file
+    <Button disabled={isLoading} secondary onClick={onSelect}>
+      {isLoading ? (
+        'Uploading...'
+      ) : (
+        <span>Upload {images.length > 0 && 'another'} file</span>
+      )}
     </Button>
     {errors.length > 0 && errors.map(e => <ErrorMsg key={e}>{e}</ErrorMsg>)}
     {images.map(i => (

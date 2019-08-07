@@ -120,7 +120,7 @@ export const CLIENT_SPECIAL_CIRCUMSTANCES: Field = {
   name: 'CLIENT_SPECIAL_CIRCUMSTANCES',
   rules: [],
   prompt: 'Do you have any special circumstances?',
-  type: FIELD_TYPES.RADIO,
+  type: FIELD_TYPES.MULTI_SELECT,
   options: [
     {
       label: 'I am not comfortable communicating in English',

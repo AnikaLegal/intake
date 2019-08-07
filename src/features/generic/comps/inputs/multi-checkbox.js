@@ -44,5 +44,5 @@ export const MultiCheckboxInput = ({
 }
 
 const MultiCheckboxEl = styled.div`
-  margin-left: 1rem;
+  margin-left: 2rem;
 `

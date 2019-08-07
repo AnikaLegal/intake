@@ -21,7 +21,7 @@ export const Field = ({ prompt, required, errors, children, help }: Props) => (
       required={required}
       help={help}
     />
-    {children}
+    <FieldChildren>{children}</FieldChildren>
     <FieldErrors errors={errors} />
   </FieldEl>
 )
@@ -40,7 +40,7 @@ type GroupFieldProps = {
 export const FieldGroup = ({ prompt, children, help }: GroupProps) => (
   <FieldEl>
     <FieldHeader prompt={prompt} required={false} help={help} />
-    {children}
+    <FieldChildren>{children}</FieldChildren>
   </FieldEl>
 )
 FieldGroup.Field = ({ children, errors, label, required }: GroupFieldProps) => (
@@ -53,4 +53,8 @@ FieldGroup.Field = ({ children, errors, label, required }: GroupFieldProps) => (
 
 const FieldEl = styled.div`
   margin-bottom: 2.5rem;
+  max-width: 800px;
+`
+const FieldChildren = styled.div`
+  max-width: 500px;
 `

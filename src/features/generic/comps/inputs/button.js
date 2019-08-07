@@ -7,10 +7,25 @@ type Props = {
   onClick?: void => void,
   disabled?: boolean,
   secondary?: boolean,
+  skinny?: boolean,
+  margin?: string,
 }
 
-export const Button = ({ children, onClick, disabled, secondary }: Props) => (
-  <ButtonEl onClick={onClick} secondary={secondary} disabled={disabled}>
+export const Button = ({
+  children,
+  onClick,
+  disabled,
+  secondary,
+  skinny,
+  margin,
+}: Props) => (
+  <ButtonEl
+    onClick={onClick}
+    secondary={secondary}
+    disabled={disabled}
+    skinny={skinny}
+    margin={margin}
+  >
     {children}
   </ButtonEl>
 )
@@ -26,7 +41,7 @@ export const ButtonEl = styled.button`
   user-select: none;
   white-space: nowrap;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: Montserrat, sans-serif;
 
   background: #297485;
@@ -46,7 +61,19 @@ export const ButtonEl = styled.button`
     secondary &&
     css`
       background: none;
-      border: 1px solid #297485;
-      color: #297485;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      color: rgba(0, 0, 0, 0.75);
+    `}
+  ${({ skinny }) =>
+    skinny &&
+    css`
+      height: 35px;
+      padding: 0 15px;
+      line-height: 30px;
+    `}
+  ${({ margin }) =>
+    margin &&
+    css`
+      margin: ${margin};
     `}
 `

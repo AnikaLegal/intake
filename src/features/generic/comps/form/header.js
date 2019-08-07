@@ -11,7 +11,7 @@ type Props = {
 
 export const FieldHeader = ({ prompt, invalid, required, help }: Props) => (
   <React.Fragment>
-    <HeaderEl invalid={invalid}>
+    <HeaderEl help={Boolean(help)} invalid={invalid}>
       {prompt}
       {required && <RequiredEl> *</RequiredEl>}
     </HeaderEl>
@@ -32,7 +32,12 @@ export const FieldLabel = ({ label, required, invalid }: GroupFieldProps) => (
 )
 
 const HeaderEl = styled.h4`
-  margin: 0;
+  margin: 0 0 0.8rem 0;
+  ${({ help }) =>
+    help &&
+    css`
+      margin: 0;
+    `}
   ${({ invalid }) =>
     invalid &&
     css`

@@ -15,6 +15,8 @@ stories.add('Field', () => <FieldStory />)
 const FieldStory = () => {
   const [x, setX] = useState('It was a scary dream')
   const [y, setY] = useState('It was a scary duck')
+  const [z, setZ] = useState('')
+
   return (
     <TestBox width={600}>
       <Field
@@ -32,6 +34,9 @@ const FieldStory = () => {
         required={false}
       >
         <TextInput value={y} onChange={setY} />
+      </Field>
+      <Field prompt="Tell us about your socks" errors={[]} required={false}>
+        <TextInput value={z} onChange={setZ} placeholder="Let us know" />
       </Field>
     </TestBox>
   )

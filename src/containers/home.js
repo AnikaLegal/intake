@@ -26,7 +26,7 @@ export const HomeContainer = () => (
             </li>
             <li>It's 100% free: you don’t need to pay us anything.</li>
           </ul>
-          <h2>Here's how it works</h2>
+          <h3>Here's how it works</h3>
           <p>
             So you need something in your rental property to be fixed? In order
             for us to help you get it fixed, we need you to first complete our

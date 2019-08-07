@@ -8,7 +8,15 @@ import { FIELD_TYPES } from 'consts'
 import { Sidebar } from 'containers'
 import { logError, flattenArray, entries } from 'utils'
 import { SECTIONS } from 'questions'
-import { Header, Page, Layout, LoadingSpinner, Button } from 'features/generic'
+import {
+  Header,
+  Page,
+  Layout,
+  LoadingSpinner,
+  Button,
+  Message,
+  Divider,
+} from 'features/generic'
 import { NamedRedirect, NamedLink, VIEWS } from 'routes'
 import type { Redux, Data, Section, FormState, Field } from 'types'
 
@@ -55,14 +63,12 @@ export const ReviewContainer = ({ submissionId }: Props) => {
       <Layout>
         <Sidebar current={999} sections={SECTIONS} />
         <Page>
-          <div>
+          <Message>
             <h1>Review your answers</h1>
             {SECTIONS.map(section => (
               <div>
-                {section.name}
                 {section.forms.map(form => (
                   <div key={form.name}>
-                    <h1>{form.prompt}</h1>
                     {form.fields
                       .reduce(
                         (a, f) => (f.fields ? [...a, ...f.fields] : [...a, f]),
@@ -81,11 +87,14 @@ export const ReviewContainer = ({ submissionId }: Props) => {
                 ))}
               </div>
             ))}
+            <Divider />
             <NamedLink to={VIEWS.FormView} params={{ submissionId }}>
-              <Button secondary>Back</Button>
+              <Button secondary margin="0 0.5rem 0 0">
+                Back
+              </Button>
             </NamedLink>
             <Button onClick={onSubmit}>Submit</Button>
-          </div>
+          </Message>
         </Page>
       </Layout>
     </Layout>
@@ -103,10 +112,10 @@ const FieldReview = ({ field, answers }: { field: Field, answers: Data }) => {
   )
 }
 
-const FieldReviewEl = styled.div`
-  margin-bottom: 1rem;
-`
-
 const Prompt = styled.div`
   font-weight: bold;
+  margin-bottom: 0.4rem;
+`
+const FieldReviewEl = styled.div`
+  margin-bottom: 2rem;
 `
