@@ -66,7 +66,7 @@ export const ReviewContainer = ({ submissionId }: Props) => {
           <Message>
             <h1>Review your answers</h1>
             {SECTIONS.map(section => (
-              <div>
+              <div key={section.name}>
                 {section.forms.map(form => (
                   <div key={form.name}>
                     {form.fields
