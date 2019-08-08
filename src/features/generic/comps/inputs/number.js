@@ -25,6 +25,7 @@ export const NumberInput = ({
   return (
     <TextEl
       type="text"
+      inputMode="numeric"
       value={format.integer.toString(value)}
       onChange={e => onChange(format.integer.toValue(e.target.value))}
       disabled={disabled}

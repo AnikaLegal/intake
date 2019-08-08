@@ -36,6 +36,7 @@ export const MultiDropdownInput = ({
     <MultiSelectWrapperEl>
       <ReactSelect
         isMulti
+        isSearchable={false}
         className="react-select-container"
         classNamePrefix="react-select"
         value={options.filter(o => _values.includes(o.value))}

@@ -25,6 +25,7 @@ export const DollarInput = ({
   return (
     <TextEl
       type="text"
+      inputMode="numeric"
       value={format.dollars.toString(value)}
       onChange={e => onChange(format.dollars.toValue(e.target.value))}
       disabled={disabled}

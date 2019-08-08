@@ -26,6 +26,7 @@ export const DropdownInput = ({
 }: Props) => (
   <SelectWrapperEl>
     <ReactSelect
+      isSearchable={false}
       className="react-select-container"
       classNamePrefix="react-select"
       value={options.find(o => o.value === value)}

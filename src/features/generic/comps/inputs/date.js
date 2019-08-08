@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import { TextInput } from './text'
+import { NumberInput } from './number'
 
 type Props = {
   value: string | void,
@@ -67,7 +67,7 @@ export const DateInput = ({
   const isInvalid = !isValid && Boolean(day || month || year)
   return (
     <DateFieldEl>
-      <TextInput
+      <NumberInput
         placeholder="Day"
         disabled={disabled}
         onChange={onDayChange}
@@ -76,7 +76,7 @@ export const DateInput = ({
         onBlur={onBlur}
       />
       <Separator invalid={isInvalid}>/</Separator>
-      <TextInput
+      <NumberInput
         placeholder="Month"
         disabled={disabled}
         onChange={onMonthChange}
@@ -85,7 +85,7 @@ export const DateInput = ({
         onBlur={onBlur}
       />
       <Separator invalid={isInvalid}>/</Separator>
-      <TextInput
+      <NumberInput
         placeholder="Year"
         disabled={disabled}
         onChange={onYearChange}

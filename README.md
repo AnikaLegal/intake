@@ -10,6 +10,11 @@ DONE - fix back button with redirects (use `push` prop when back should work)
 TODO
 
     - fix phone input for date field and dropdown
+    - add extra field types
+        - tel for telephone numbers
+        - date
+        - email
+        - number
     - fix yucky loading transition on submit
     - make sure loading spinner is nicely centred
     - make sure loading spinner fades in to prevent jank

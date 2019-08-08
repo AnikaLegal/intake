@@ -32,7 +32,7 @@ export const format = {
     },
   },
   integer: {
-    //  '100,000' -> '100,000'
+    //  '100, 000' -> '100,000'
     //  100000    -> '100,000'
     //  ''        -> ''
     toString: (value: number | string | void): string => {
@@ -46,7 +46,7 @@ export const format = {
       }
       return ''
     },
-    //  '100,000' -> 100000
+    //  '100, 000' -> 100000
     //  100000    -> 100000
     //  ''        -> null
     toValue: (value: number | string | void): number | void => {
@@ -67,13 +67,16 @@ const cleanDollarString = (s: string): number | null => {
   const numString = s
     .replace('$', '')
     .replace(/,/g, '')
-    .trim()
+    .replace(/\s/g, '')
   if (!numString || isNaN(numString)) return null
   return parseFloat(numString)
 }
 
 const cleanNumString = (s: string): number | null => {
-  const numString = s.replace(/,/g, '').trim()
+  const numString = s
+    .replace(/,/g, '')
+    .replace(/\s/g, '')
+    .trim()
   if (!numString || isNaN(numString)) return null
   return parseFloat(numString)
 }
@@ -82,4 +85,4 @@ const numberToDollarString = (num: number): string =>
   `$${numberToIntegerString(num)}`
 
 const numberToIntegerString = (num: number): string =>
-  `${num.toLocaleString().split('.')[0]}`
+  `${num.toString().split('.')[0]}`
