@@ -5,15 +5,23 @@ This is the Anika client intake form frontend.
 It is a React/Redux single page app, deployed as a static site which is hosted on AWS S3 at [repairs.anikalegal.com](https://repairs.anikalegal.com)
 . The app depends on a backend API at [clerk.anikalegal.com](https://clerk.anikalegal.com).
 
+DONE - fix back button with redirects (use `push` prop when back should work)
+
+TODO
+
+    - fix phone input for date field and dropdown
+    - fix yucky loading transition on submit
+    - make sure loading spinner is nicely centred
+    - make sure loading spinner fades in to prevent jank
+    - make form text fade out on dismount
+
 TODO SHORT TERM
 
     - actually document this project
-    - fix yucky loading transition on submit
 
 TODO MEDIUM TERM
 
     - add analytics + funnel tracking
-    - setup Storybook properly
     - eventually move to a feature-based folder structure
     - eventually write some end-to-end tests with cypress to run on staging server
     - setup Sentry logging + releases + sourcemaps + errors to Slack

@@ -134,7 +134,7 @@ const FieldInput = ({
 }: FieldProps) => {
   switch (field.type) {
     case FIELD_TYPES.EXIT:
-      return <NamedRedirect to={field.name} />
+      return <NamedRedirect push to={field.name} />
     case FIELD_TYPES.TEXT:
       return (
         <TextInput

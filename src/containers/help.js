@@ -46,6 +46,7 @@ export const HelpContainer = () => {
   if (submissionId) {
     return (
       <NamedRedirect
+        push
         to={VIEWS.FormView}
         params={{
           submissionId,

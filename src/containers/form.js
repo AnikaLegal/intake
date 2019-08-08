@@ -36,7 +36,7 @@ export const FormContainer = ({ submissionId }: Props) => {
     return <NamedRedirect to={VIEWS.SubmittedView} />
   }
   if (redirect) {
-    return <NamedRedirect to={VIEWS[redirect]} />
+    return <NamedRedirect push to={VIEWS[redirect]} />
   }
   if (formState.isLoading) {
     return (
