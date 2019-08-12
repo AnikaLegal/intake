@@ -32,9 +32,10 @@ else
         --org=${SENTRY_ORG} \
         --project=${SENTRY_PROJECT} \
         files $COMMIT_HASH upload-sourcemaps \
-        dist/static/ \
+        dist/build/ \
+        --rewrite \
         --validate \
-        --url-prefix '~/static/'
+        --url-prefix '~/build/'
 fi
 
 # Compress HTML, JS, CSS
@@ -103,17 +104,17 @@ else
         --project=${SENTRY_PROJECT} \
         finalize $COMMIT_HASH
 
+    echo -e "\nCreating a $SENTRY_ENV deploy for release $COMMIT_HASH in Sentry project $SENTRY_PROJECT"
     yarn sentry-cli \
         --auth-token=${SENTRY_AUTH_TOKEN} \
-        releases 
+        releases \
         --org=${SENTRY_ORG} \
         --project=${SENTRY_PROJECT} \
-        deploys $COMMIT_HASH new -e $SENTRY_ENV
+        deploys $COMMIT_HASH new --env $SENTRY_ENV
 fi
 
 
 # # Clean up so you don't shoot yourself in the foot when doing dev work.
 echo "Cleaning up post build..."
 rm -rf ./dist
-yarn html
 echo "Done."
