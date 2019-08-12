@@ -10,5 +10,5 @@ export SENTRY_ORG=anika-legal
 export SENTRY_PROJECT=intake
 export GA_ID=
 
-# . ./scripts/build.sh
+. ./scripts/build.sh
 . ./scripts/deploy.sh
