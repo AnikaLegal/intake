@@ -2,8 +2,6 @@ const path = require('path')
 const fs = require('fs')
 const Handlebars = require('handlebars')
 
-const META = {}
-
 const onReadFile = (err, htmlText) => {
   if (err) {
     return console.error('Unable to read index.hbs')
@@ -17,7 +15,8 @@ const getHTML = htmlText => {
   return integrationTemplate({
     JS_BUILDHASH: process.env.JS_BUILDHASH,
     CSS_BUILDHASH: process.env.CSS_BUILDHASH,
-    META,
+    GA_ID: process.env.GA_ID,
+    HOTJAR_ID: process.env.HOTJAR_ID,
   })
 }
 
@@ -26,7 +25,5 @@ onWriteIndex = html => {
     console.log('Integration html written')
   )
 }
-
-
 
 fs.readFile('src/index.hbs', 'utf8', onReadFile)
