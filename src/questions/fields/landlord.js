@@ -138,7 +138,7 @@ export const AGENT_NAME: Field = {
 export const AGENT_COMPANY: Field = {
   name: 'AGENT_COMPANY',
   prompt: 'Company',
-  rules: [],
+  rules: [rules.isTruthy],
   type: FIELD_TYPES.TEXT,
   placeholder: "Enter the name of the agent's company",
 }
@@ -154,7 +154,7 @@ export const AGENT_ADDRESS: Field = {
 export const AGENT_EMAIL: Field = {
   name: 'AGENT_EMAIL',
   type: FIELD_TYPES.TEXT,
-  rules: [],
+  rules: [rules.isTruthy],
   prompt: 'Email',
   placeholder: 'Enter their email address',
 }
