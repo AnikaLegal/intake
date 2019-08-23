@@ -8,7 +8,7 @@ export const LETTER_PERMISSION: Field = {
   rules: [rules.isTruthy],
   name: 'LETTER_PERMISSION',
   prompt:
-    'If a letter needs to be sent to your landlord, would you prefer a lawyer to sign and send that letter to you landlord or would you prefer a lawyer to prepare the letter for you to personally sign and send to landlord?',
+    'If a letter needs to be sent to your landlord, would you prefer a lawyer to sign and send that letter to your landlord or would you prefer a lawyer to prepare the letter for you to personally sign and send to your landlord?',
   help:
     'Letters sent from a lawyer will place more pressure on the landlord because they will notify the landlord that you have engaged legal advisors to act for you. Letters that are sent personally by you to the landlord will be more "gentle" because legal advisors are not involved.',
   type: FIELD_TYPES.RADIO,
