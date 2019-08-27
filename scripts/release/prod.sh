@@ -10,6 +10,7 @@ export SENTRY_ORG=anika-legal
 export SENTRY_PROJECT=intake
 export GA_ID=UA-133303109-1
 export HOTJAR_ID=1449266
+export SUCCESS_URL=https://anikalegal.com/thank-you
 
 . ./scripts/build.sh
 . ./scripts/deploy.sh
