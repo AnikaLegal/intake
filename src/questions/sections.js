@@ -5,6 +5,10 @@ import * as Forms from './forms'
 
 export const SECTIONS: Array<Section> = [
   {
+    name: 'Your details',
+    forms: [Forms.PERSONAL_DETAILS],
+  },
+  {
     name: 'Your rental issue',
     forms: [Forms.DEFECT, Forms.HAS_QUOTE],
   },
@@ -15,10 +19,6 @@ export const SECTIONS: Array<Section> = [
       Forms.LANDLORD_COMMS_DETAILS,
       Forms.LANDLORD_CONTACT,
     ],
-  },
-  {
-    name: 'Your details',
-    forms: [Forms.PERSONAL_DETAILS],
   },
   {
     name: 'Your preferences',
