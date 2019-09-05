@@ -17,25 +17,11 @@ import {
   Header,
 } from 'features/generic'
 
-const VALID_STATE = 'Victoria'
-const STATES = [
-  'Victoria',
-  'New South Wales',
-  'Tasmania',
-  'Australian Capital Territory',
-  'South Australia',
-  'Queensland',
-  'Western Australia',
-  'Northern Territory',
-  'Other territory in Australia',
-  'Outside Australia',
-]
-
 export const HelpContainer = () => {
   const dispatch = useDispatch()
   const [submissionId, setSubmissionId] = useState<string | null>(null)
   const [isLoading, setLoading] = useState(false)
-  const [state, setState] = useState<string>('')
+  const [isVictoria, setVictoria] = useState<boolean | null>(null)
   const [isRenter, setIsRenter] = useState<boolean | null>(null)
   const [needsRepairs, setNeedsRepairs] = useState<boolean | null>(null)
   // Create a new form submission.
@@ -56,9 +42,12 @@ export const HelpContainer = () => {
     )
   }
   const isValid =
-    state === VALID_STATE && isRenter === true && needsRepairs === true
+    isVictoria === true && isRenter === true && needsRepairs === true
   const isInvalid =
-    !isValid && state && isRenter !== null && needsRepairs !== null
+    !isValid &&
+    isVictoria !== null &&
+    isRenter !== null &&
+    needsRepairs !== null
   return (
     <Layout vertical>
       <Header />
@@ -71,12 +60,18 @@ export const HelpContainer = () => {
               have the resources to provide legal advice to Victorian tenants.
               Answer the three questions below to find out if we can help you.
             </p>
-            <Field prompt="Where do you live?" errors={[]} required>
-              <DropdownInput
-                onChange={setState}
-                value={state}
-                options={STATES.map(s => ({ label: s, value: s }))}
-                placeholder="Select a state"
+            <Field
+              prompt="Do you live in Victoria, Australia?"
+              errors={[]}
+              required
+            >
+              <ButtonChoiceInput
+                value={isVictoria}
+                onChange={setVictoria}
+                options={[
+                  { label: 'Yes', value: true },
+                  { label: 'No', value: false },
+                ]}
               />
             </Field>
             <Field

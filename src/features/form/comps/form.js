@@ -67,7 +67,7 @@ export const Form = ({
       <p>
         If you have are having trouble, you can call our support officer Noel on
         0401 520 065 between 9am to 5pm during weekdays, or you can email us at
-        webmaster@anikalegal.com
+        noel@anikalegal.com
       </p>
     </React.Fragment>
   )
