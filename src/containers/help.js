@@ -57,8 +57,8 @@ export const HelpContainer = () => {
             <h1>Can we help you?</h1>
             <p>
               We would ideally like to help everyone, but at this stage we only
-              have the resources to provide legal advice to Victorian tenants.
-              Answer the three questions below to find out if we can help you.
+              have the resources to assist Victorian tenants. Answer the three
+              questions below to find out if we can help you.
             </p>
             <Field
               prompt="Do you live in Victoria, Australia?"
@@ -107,8 +107,8 @@ export const HelpContainer = () => {
               <React.Fragment>
                 <p>
                   Great. We are able to help you. In order for us to provide you
-                  with the best advice, we need you to first complete our
-                  questionnaire
+                  with the best assistance, we need you to first complete our
+                  questionnaire.
                 </p>
                 <Button disabled={isLoading} onClick={onCreate}>
                   Get started
@@ -120,8 +120,8 @@ export const HelpContainer = () => {
                 <p>Thank you for taking the time to answer those questions.</p>
                 <p>
                   Unfortunately, we do not currently have the resources to
-                  provide the legal advice that you need. We wish you all the
-                  best in resolving your problem.{' '}
+                  provide the assistance that you need. We wish you all the best
+                  in resolving your problem.
                 </p>
               </React.Fragment>
             )}

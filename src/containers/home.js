@@ -15,22 +15,19 @@ export const HomeContainer = () => (
         <Message>
           <h1>Welcome to Anika</h1>
           <p>
-            Anika is a registered charity that provides legal advice to members
-            of the public. We believe that you will find our legal advice
-            helpful for two key reasons:
+            Anika is an online platform that is used to provide legal advice to
+            members of the public. We believe that you will find Anika helpful
+            for two key reasons:
           </p>
           <ul>
-            <li>
-              It's all online, so you don’t need to leave the comfort of your
-              home.
-            </li>
+            <li>It's all online, so you don’t need to leave your home.</li>
             <li>It's 100% free: you don’t need to pay us anything.</li>
           </ul>
           <h3>Here's how it works</h3>
           <p>
             So you need something in your rental property to be fixed? In order
-            for us to help you get it fixed, we need you to first complete our
-            questionnaire.
+            for us to determine whether we can help you, we need to ask you a
+            few questions.
           </p>
           <NamedLink to={VIEWS.HelpView}>
             <Button>Find out if we can help you</Button>
