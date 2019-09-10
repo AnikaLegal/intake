@@ -10,7 +10,7 @@ module.exports = {
   devtool: 'source-map',
   output: {
     path: __dirname + '/dist/build',
-    filename: 'main.js',
+    filename: '[name].js',
   },
   optimization: {
     minimizer: [

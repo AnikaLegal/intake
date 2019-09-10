@@ -5,20 +5,23 @@ const baseConfig = require('./webpack.base.js')
 module.exports = {
   ...baseConfig,
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
+  output: {
+    publicPath: 'http://localhost:3000/build/',
+  },
   devServer: {
     disableHostCheck: true,
-    publicPath: 'http://localhost:3000/build/',
     contentBase: [path.join(__dirname, 'dist'), path.join(__dirname, 'public')],
     historyApiFallback: true,
-    compress: true,
     port: 3000,
+    hot: true,
   },
   optimization: {
     minimize: false,
   },
   plugins: [
     ...baseConfig.plugins,
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       SERVER: JSON.stringify('http://localhost:8000'),
       STATIC_URL: JSON.stringify('http://localhost:3000/static/'),

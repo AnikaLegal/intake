@@ -2,6 +2,7 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { hot } from 'react-hot-loader/root'
 
 import { store } from 'state'
 import { buildRoutes, ROUTES } from 'routes'
@@ -14,10 +15,12 @@ import 'styles/index.scss'
 // Inject views into route builder.
 const AppRoutes = buildRoutes(Views, ErrorBoundary, ROUTES)
 
-export const App = () => (
+const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <AppRoutes />
     </BrowserRouter>
   </Provider>
 )
+
+export default hot(App)
