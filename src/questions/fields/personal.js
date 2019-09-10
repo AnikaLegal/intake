@@ -199,7 +199,7 @@ export const CLIENT_IS_TENANT: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_IS_TENANT',
   prompt: 'Are you named as a tenant on the lease?',
-  help: "It's like that you are named as a tenant if you signed the lease.",
+  help: "It's likely that you are named as a tenant if you signed the lease.",
   type: FIELD_TYPES.RADIO_BTN,
   options: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }],
 }

@@ -28,7 +28,7 @@ const StyledPage = styled.div`
   ${({ fadeIn }) =>
     fadeIn &&
     css`
-      animation: fade-in 0.4s;
+      animation: fade-in 0.3s;
     `}
 `
 export const Message = styled.div`
