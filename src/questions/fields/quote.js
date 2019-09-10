@@ -7,18 +7,18 @@ import type { Field, Form } from 'types'
 export const HAS_QUOTE: Field = {
   name: 'HAS_QUOTE',
   prompt:
-    'Have you obtained  a quote (i.e. an estimate) for the cost of the repairs to fix the problem?',
+    'Have you obtained  a quote (i.e. an estimate) for the cost of the repairs to fix the problem(s)?',
   help:
-    'You can get a quote by contacting a tradesperson, getting them to inspect the problem and asking how much it would cost to fix it.',
-  type: FIELD_TYPES.RADIO,
+    'You can get a quote by contacting a tradesperson, getting them to inspect the problem(s) and asking how much it would cost to fix it.',
+  type: FIELD_TYPES.RADIO_BTN,
   rules: [rules.isTruthy],
   options: [
     {
-      label: 'Yes, I have obtained a quote.',
+      label: 'Yes',
       value: 'yes',
     },
     {
-      label: 'No, I have not obtained a quote.',
+      label: 'No',
       value: 'no',
     },
   ],
@@ -26,7 +26,7 @@ export const HAS_QUOTE: Field = {
 
 export const QUOTE_COST: Field = {
   name: 'QUOTE_COST',
-  prompt: 'What was the quote for the cost of the repairs to fix the problem?',
+  prompt: 'What was the quote for the cost of the repairs?',
   when: Conditions.HAS_QUOTE,
   type: FIELD_TYPES.DOLLAR,
   placeholder: 'Enter the quoted amount',

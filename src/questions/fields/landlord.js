@@ -31,7 +31,7 @@ export const LANDLORD_CONTACT_METHOD: Field = {
   options: [
     { label: 'Phone', value: 'phone' },
     { label: 'Email', value: 'email' },
-    { label: 'SMS', value: 'sms' },
+    { label: 'Text message', value: 'text message' },
     { label: 'Letter', value: 'letter' },
     { label: 'In person', value: 'in person' },
   ],
@@ -51,7 +51,7 @@ export const LANDLORD_CONTACT_ATTEMPTS: Field = {
   prompt:
     'How many times have you asked your landlord (or your landlord’s agent) to fix the problem?',
   help:
-    'It doesn’t matter if you have asked your landlord once or three times, it’s just helpful for us to know.',
+    'It doesn’t matter how many times you have asked, it’s just helpful for us to know.',
   type: FIELD_TYPES.DROPDOWN,
   options: [
     { label: 'Once', value: '1' },

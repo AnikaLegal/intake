@@ -34,11 +34,20 @@ export const DEFECT_DESCRIPTION: Field = {
   rules: [rules.isTruthy],
 }
 
+export const DEFECT_DATE: Field = {
+  rules: [rules.isTruthy],
+  name: 'DEFECT_DATE',
+  prompt: 'When did the problem arise?',
+  help:
+    "If you don't know the exact date, that's okay. An approximate date is fine.",
+  type: FIELD_TYPES.DATE,
+}
+
 export const DEFECT_PHOTO: Field = {
   name: 'DEFECT_PHOTO',
-  prompt: 'If you have any photos of the problem, please upload them',
+  prompt: 'If you have any photos of the problem(s), please upload them',
   help:
-    'If you do not have any photos of the problem to upload, that’s completely okay',
+    'If you do not have any photos of the problem(s) to upload, that’s completely okay',
   type: FIELD_TYPES.FILE,
   rules: [],
 }

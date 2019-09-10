@@ -9,7 +9,12 @@ import type { Form } from 'types'
 export const DEFECT: Form = {
   name: 'DEFECT',
   prompt: "What's wrong?",
-  fields: [Fields.DEFECT_TYPE, Fields.DEFECT_DESCRIPTION, Fields.DEFECT_PHOTO],
+  fields: [
+    Fields.DEFECT_TYPE,
+    Fields.DEFECT_DESCRIPTION,
+    Fields.DEFECT_DATE,
+    Fields.DEFECT_PHOTO,
+  ],
   rules: {},
 }
 
@@ -74,7 +79,8 @@ export const PERSONAL_PREFERENCES: Form = {
     Fields.IS_VCAT_OK,
     Fields.VCAT_AVOID_REASON,
     Fields.LETTER_PERMISSION,
-    Fields.CLIENT_CONTACT_METHOD,
+    Fields.CLIENT_BREACHED_LEASE,
+    Fields.CLIENT_CALL_TIME,
   ],
   rules: {},
 }
@@ -83,7 +89,7 @@ export const SURVEY: Form = {
   name: 'SURVEY',
   prompt: 'We want to understand our clients better',
   help:
-    'So we can understand our clients better and provide the best form of legal advice, we need to ask you a few more questions. We understand there may besome sensitivity around your answers. We will ensure that your answers are stored privately and securely.',
+    'So we can understand our clients better and provide the best form of assistance, we need to ask you a few more questions. We understand there may besome sensitivity around your answers. We will ensure that your answers are stored privately and securely.',
   fields: [
     Fields.CLIENT_OCCUPATION,
     Fields.CLIENT_WEEKLY_EARNINGS,

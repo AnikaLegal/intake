@@ -22,10 +22,14 @@ export const ContactLandlordView = () => (
           </p>
           <Letter>
             <p>
-              Dear <strong>[insert your landlord's name]</strong>,
+              Dear{' '}
+              <strong>
+                [the name of your landlord or your landlord's agent]
+              </strong>
+              ,
             </p>
             <p>
-              I am currently renting your property at{' '}
+              I am currently renting the property at{' '}
               <strong>[insert your rental address]</strong>. I wish to inform
               you that{' '}
               <strong>[describe the problem in the rental property]</strong>.
