@@ -44,8 +44,8 @@ export const ButtonEl = styled.button`
   font-weight: 500;
   font-family: Montserrat, sans-serif;
 
-  background: #297485;
-  border: 1px solid #297485;
+  background: #008897;
+  border: 1px solid #008897;
   color: #fff;
   &:focus {
     box-shadow: inset 0 0 0 1px transparent, 0 0 0 3px #dcdcdc;
@@ -60,7 +60,7 @@ export const ButtonEl = styled.button`
   ${({ secondary }) =>
     secondary &&
     css`
-      background: none;
+      background: #fff;
       border: 1px solid rgba(0, 0, 0, 0.4);
       color: rgba(0, 0, 0, 0.75);
     `}

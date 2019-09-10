@@ -52,17 +52,17 @@ export const SelectWrapperEl = styled.div`
       }
     }
     .react-select__control--is-focused {
-      border-color: #95b9cc;
-      box-shadow: 0 0 0 1px #95b9cc;
+      border-color: #6bc4c9;
+      box-shadow: 0 0 0 1px #6bc4c9;
       &:hover {
-        box-shadow: 0 0 0 1px #95b9cc;
+        box-shadow: 0 0 0 1px #6bc4c9;
       }
     }
     .react-select__option--is-focused {
-      background-color: rgba(#95b9cc, 0.2);
+      background-color: rgba(#6bc4c9, 0.2);
     }
     .react-select__option--is-selected {
-      background-color: rgba(#95b9cc, 0.9);
+      background-color: rgba(#6bc4c9, 0.9);
     }
   }
 `

@@ -62,7 +62,7 @@ const RadioEl = styled.div`
     ${({ checked }) =>
       checked &&
       css`
-        background-color: #297485;
+        background-color: #008897;
         box-shadow: inset 0 0 0 0.15em rgba(255, 255, 255, 0.95);
       `}
   }

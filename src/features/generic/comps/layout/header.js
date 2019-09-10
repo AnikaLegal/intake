@@ -6,11 +6,11 @@ import { IMAGES } from 'consts'
 
 export const Header = () => (
   <StyledHeader>
-    <img src={IMAGES.LOGO} height="50" />
+    <img src={IMAGES.LOGO.TEXT.WHITE.SVG} height="50" />
   </StyledHeader>
 )
 
 const StyledHeader = styled.div`
   padding: 1rem;
-  border-bottom: 2px solid rgba(21, 27, 38, 0.15);
+  background: #008897;
 `

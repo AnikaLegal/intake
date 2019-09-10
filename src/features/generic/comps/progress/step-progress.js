@@ -70,7 +70,7 @@ const StepCircleEl = styled.div`
       border: none;
       color: #fff;
       border: 1px solid #fff;
-      background: #95b9cc;
+      background: #6bc4c9;
     `}
 `
 const StepConnectorEl = styled.div`

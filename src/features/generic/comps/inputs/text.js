@@ -51,6 +51,6 @@ export const TextEl = styled.input`
     box-shadow: 0 0 0 2px #d4d7dc;
   }
   &:focus {
-    border-color: #95b9cc;
+    border-color: #6bc4c9;
   }
 `

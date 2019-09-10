@@ -7,7 +7,7 @@ type Props = {
 }
 
 // By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL
-export const LoadingSpinnerSVG = ({ size = 120, color = '#297485' }: Props) => (
+export const LoadingSpinnerSVG = ({ size = 120, color = '#008897' }: Props) => (
   <svg
     width={size}
     height={size}
