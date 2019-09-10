@@ -1,17 +1,35 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import type { Node } from 'react'
 
-export const Page = ({ children }: { children: Node }) => (
-  <StyledPage>{children}</StyledPage>
+type Props = {
+  children: Node,
+  fadeIn?: boolean,
+}
+
+export const Page = ({ children, fadeIn }: Props) => (
+  <StyledPage fadeIn={fadeIn}>{children}</StyledPage>
 )
 
 const StyledPage = styled.div`
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   max-width: 800px;
   flex-grow: 1;
   margin: 0 auto;
   padding: 2rem 1.5rem;
+  ${({ fadeIn }) =>
+    fadeIn &&
+    css`
+      animation: fade-in 0.4s;
+    `}
 `
 export const Message = styled.div`
   background: white;

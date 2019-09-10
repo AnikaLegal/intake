@@ -37,19 +37,24 @@ export default {
     getState: GetState
   ): Promise<Submission | void> => {
     const {
-      form: { id, answers },
+      form: { id, answers, validation },
     } = getState()
-    dispatch({ type: 'FORM_LOADING' })
-    const backendAnswers = getBackendAnswers(answers)
-    return api.questions.submission
-      .update(id, backendAnswers)
-      .then(submission => {
-        dispatch({
-          type: 'FORM_NEXT',
-          submission,
+    if (!validation.valid) {
+      dispatch({ type: 'FORM_NEXT_INVALID' })
+      return Promise.resolve()
+    } else {
+      dispatch({ type: 'FORM_LOADING' })
+      const backendAnswers = getBackendAnswers(answers)
+      return api.questions.submission
+        .update(id, backendAnswers)
+        .then(submission => {
+          dispatch({
+            type: 'FORM_NEXT',
+            submission,
+          })
+          return submission
         })
-        return submission
-      })
+    }
   },
   prev: () => ({ type: 'FORM_PREV' }),
   submit: (id: string) => (dispatch: Dispatch): Promise<Submission> => {

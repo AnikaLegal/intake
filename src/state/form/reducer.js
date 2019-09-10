@@ -76,9 +76,18 @@ export const reducer: Reducer = (state, action) => {
           hasNext: utils.getHasNext(nextPage, answers, forms),
           hasPrev: utils.getHasPrev(nextPage, answers, forms),
           validation: utils.getValidation(nextForm, answers),
-          isSubmitted: !validation.valid,
+          isSubmitted: false,
           isLoading: false,
           isComplete: submission.complete,
+        },
+      }
+    // User requests next page.
+    case 'FORM_NEXT_INVALID':
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          isSubmitted: true,
         },
       }
     // User requests previous page.

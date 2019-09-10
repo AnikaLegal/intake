@@ -70,7 +70,7 @@ export const FormContainer = ({ submissionId }: Props) => {
       <Header />
       <Layout>
         <Sidebar current={formState.page} sections={SECTIONS} />
-        <Page>
+        <Page fadeIn>
           <Form
             submissionId={submissionId}
             form={form}

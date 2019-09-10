@@ -124,6 +124,7 @@ export type Action =
   | { +type: 'FORM_LOADING' }
   | { +type: 'FORM_LOADED', +submission: Submission }
   | { +type: 'FORM_NEXT', +submission: Submission }
+  | { +type: 'FORM_NEXT_INVALID' }
   | { +type: 'FORM_SUBMIT', +submission: Submission }
   | { +type: 'FORM_PREV' }
 
