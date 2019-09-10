@@ -6,7 +6,7 @@ import * as Forms from './forms'
 export const SECTIONS: Array<Section> = [
   {
     name: 'Your details',
-    forms: [Forms.PERSONAL_DETAILS],
+    forms: [Forms.PERSONAL_DETAILS, Forms.TENANCY_DETAILS],
   },
   {
     name: 'Your rental issue',

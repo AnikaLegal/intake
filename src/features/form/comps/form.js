@@ -44,8 +44,10 @@ export const Form = ({
           <FormField key={f.name} field={f} />
         ))}
       </FormContext.Provider>
+      <Divider />
+
       {hasPrev && (
-        <Button onClick={onPrev} margin="0 0.5rem 0 0">
+        <Button onClick={onPrev} secondary margin="0 0.5rem 0 0">
           Back
         </Button>
       )}
@@ -63,8 +65,7 @@ export const Form = ({
           <Button secondary={!validation.valid}>Save & Review</Button>
         </NamedLink>
       )}
-      <Divider />
-      <p>
+      <p style={{ margin: '1.5rem 0 0 0' }}>
         If you have are having trouble, you can call our support officer Noel on
         0401 520 065 between 9am to 5pm during weekdays, or you can email us at
         noel@anikalegal.com

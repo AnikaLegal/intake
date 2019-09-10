@@ -59,6 +59,13 @@ export const PERSONAL_DETAILS: Form = {
   rules: {},
 }
 
+export const TENANCY_DETAILS: Form = {
+  name: 'TENANCY_DETAILS',
+  prompt: 'Your tenancy details',
+  fields: [Fields.TENANCY_START_DATE, Fields.CLIENT_IS_TENANT],
+  rules: {},
+}
+
 export const PERSONAL_PREFERENCES: Form = {
   name: 'PERSONAL_PREFERENCES',
   prompt: 'Tell us what you prefer',
