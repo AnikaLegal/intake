@@ -10,6 +10,8 @@ declare var STATIC_URL: string
 declare var SERVER: string
 declare var SENTRY_RELEASE: string
 declare var SUCCESS_URL: string
+declare var GA_ID: string
+declare var gtag: Function
 
 declare module 'react-redux' {
   declare type MapStateToProps<State, StateProps> = (State) => StateProps

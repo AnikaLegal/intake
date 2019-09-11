@@ -6,6 +6,7 @@ import { hot } from 'react-hot-loader/root'
 
 import { store } from 'state'
 import { buildRoutes, ROUTES } from 'routes'
+import { AnalyticsRouteListener } from 'analytics'
 import { ErrorBoundary } from 'features/generic'
 import * as Views from 'views'
 
@@ -18,7 +19,10 @@ const AppRoutes = buildRoutes(Views, ErrorBoundary, ROUTES)
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <AppRoutes />
+      <React.Fragment>
+        <AnalyticsRouteListener />
+        <AppRoutes />
+      </React.Fragment>
     </BrowserRouter>
   </Provider>
 )

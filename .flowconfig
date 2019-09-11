@@ -9,6 +9,7 @@ src/globals.js
 [lints]
 
 [options]
+module.name_mapper='^analytics' ->'<PROJECT_ROOT>/src/analytics'
 module.name_mapper='^api' ->'<PROJECT_ROOT>/src/api'
 module.name_mapper='^features' ->'<PROJECT_ROOT>/src/features'
 module.name_mapper='^components' ->'<PROJECT_ROOT>/src/components'
