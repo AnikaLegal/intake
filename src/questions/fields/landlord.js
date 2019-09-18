@@ -78,7 +78,7 @@ export const LANDLORD_CONTACT_RECORDS: Field = {
 export const LANDLORD_NAME: Field = {
   name: 'LANDLORD_NAME',
   prompt: 'Full name',
-  rules: [],
+  rules: [rules.isTruthy],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their full name',
 }
@@ -94,7 +94,7 @@ export const LANDLORD_ADDRESS: Field = {
 export const LANDLORD_EMAIL: Field = {
   name: 'LANDLORD_EMAIL',
   type: FIELD_TYPES.TEXT,
-  rules: [],
+  rules: [rules.isTruthy],
   prompt: 'Email',
   placeholder: 'Enter their email address',
 }
@@ -114,6 +114,7 @@ export const LANDLORD_CONTACT_DETAILS: Field = {
     "We don't need all of your landlord's details. If you don't have some of this information, you can leave the fields blank.",
   type: FIELD_TYPES.FIELD_GROUP,
   rules: [],
+  when: Conditions.NOT_HAS_AGENT,
   fields: [LANDLORD_NAME, LANDLORD_ADDRESS, LANDLORD_EMAIL, LANDLORD_PHONE],
 }
 
