@@ -15,7 +15,7 @@ const getHTML = htmlText => {
   return integrationTemplate({
     JS_BUILDHASH: process.env.JS_BUILDHASH,
     CSS_BUILDHASH: process.env.CSS_BUILDHASH,
-    GA_ID: process.env.GA_ID,
+    GA_ID: process.env.GA_ID || '133303109-2',
     HOTJAR_ID: process.env.HOTJAR_ID,
   })
 }
