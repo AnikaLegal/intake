@@ -128,7 +128,7 @@ export const VCAT_AVOID_REASON: Field = {
   rules: [rules.isTruthy],
   when: Conditions.VCAT_NOT_OK,
   prompt:
-    'Can you please explain why you wouldn’t be comfortable bringing a case against your landlord at VCAT?',
+    'Can you please explain why you would prefer not to bring a case against your landlord at VCAT?',
   type: FIELD_TYPES.TEXTAREA,
 }
 
