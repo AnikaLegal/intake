@@ -131,7 +131,7 @@ export const LANDLORD_HAS_AGENT: Field = {
 export const AGENT_NAME: Field = {
   name: 'AGENT_NAME',
   prompt: 'Full name',
-  rules: [],
+  rules: [rules.isTruthy],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their full name',
 }
