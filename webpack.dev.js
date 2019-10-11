@@ -28,7 +28,6 @@ module.exports = {
       SENTRY_JS_DSN: JSON.stringify(''),
       SENTRY_RELEASE: JSON.stringify(''),
       DEBUG_JS: JSON.stringify('true'),
-      SUCCESS_URL: JSON.stringify('https://example.com'),
       GA_ID: JSON.stringify(process.env.GA_ID),
     }),
   ],

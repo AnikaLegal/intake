@@ -9,7 +9,6 @@ declare var DEBUG_JS: boolean
 declare var STATIC_URL: string
 declare var SERVER: string
 declare var SENTRY_RELEASE: string
-declare var SUCCESS_URL: string
 declare var GA_ID: string
 declare var gtag: Function
 

@@ -1,17 +1,26 @@
 // @flow
 import React from 'react'
 
-import { Page, Layout, LoadingSpinner } from 'features/generic'
+import { Header, Page, Layout, Message, Button } from 'features/generic'
 
-export const SubmittedView = () => {
-  // Send use to thank you page on anikalegal.com
-  // to register a goal completion for Google AdWords
-  window.location = SUCCESS_URL
-  return (
-    <Layout vertical>
+export const SubmittedView = () => (
+  <Layout vertical>
+    <Header />
+    <Layout>
       <Page>
-        <LoadingSpinner />
+        <Message>
+          <h1>Your case has been submitted</h1>
+          <p>Thank you for taking the time to tell us about your problem.</p>
+          <p>
+            One of our staff will contact you in the next few days to discuss
+            how we can help you.
+          </p>
+          <p>
+            If you have any questions in the meantime, you can contact us at{' '}
+            contact@anikalegal.com
+          </p>
+        </Message>
       </Page>
     </Layout>
-  )
-}
+  </Layout>
+)
