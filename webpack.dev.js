@@ -29,6 +29,7 @@ module.exports = {
       SENTRY_RELEASE: JSON.stringify(''),
       DEBUG_JS: JSON.stringify('true'),
       GA_ID: JSON.stringify(process.env.GA_ID),
+      FB_PIXEL_ID: JSON.stringify(''),
     }),
   ],
 }
