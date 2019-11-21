@@ -55,6 +55,7 @@ CACHE_CONTROL="max-age=86400"
 # Upload HTML with no cache, gzip encoding
 echo -e "\nUploading HTML"
 aws s3 cp \
+    --profile anika \
     --recursive \
     --content-encoding 'gzip' \
     --exclude '*' \
@@ -66,6 +67,7 @@ aws s3 cp \
 # Upload CSS + JS with cache and gzip
 echo -e "\nUploading JS + CSS"
 aws s3 cp \
+    --profile anika \
     --recursive \
     --content-encoding 'gzip' \
     --exclude '*' \
@@ -79,6 +81,7 @@ aws s3 cp \
 # Upload everything else with cache and no gzip
 echo -e "\nUploading other assets"
 aws s3 cp \
+    --profile anika \
     --recursive \
     --exclude '*.css' \
     --exclude '*.js' \
