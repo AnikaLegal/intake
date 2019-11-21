@@ -111,11 +111,22 @@ export const LANDLORD_CONTACT_DETAILS: Field = {
   name: 'LANDLORD_CONTACT_DETAILS',
   prompt: 'Please provide the contact details of your landlord.',
   help:
-    "We don't need all of your landlord's details. If you don't have some of this information, you can leave the fields blank.",
+    "Your landlord's name will be on your lease agreement. It may be a the name of a person or a company. ",
   type: FIELD_TYPES.FIELD_GROUP,
   rules: [],
   when: Conditions.NOT_HAS_AGENT,
   fields: [LANDLORD_NAME, LANDLORD_ADDRESS, LANDLORD_EMAIL, LANDLORD_PHONE],
+}
+
+export const LANDLORD_CONTACT_DETAILS_WHEN_AGENT: Field = {
+  name: 'LANDLORD_CONTACT_DETAILS',
+  prompt: 'Please provide the contact details of your landlord.',
+  help:
+    "Your landlord's name will be on your lease agreement. It may be a the name of a person or a company. ",
+  type: FIELD_TYPES.FIELD_GROUP,
+  rules: [],
+  when: Conditions.HAS_AGENT,
+  fields: [LANDLORD_NAME],
 }
 
 export const LANDLORD_HAS_AGENT: Field = {

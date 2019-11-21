@@ -21,7 +21,7 @@ import {
   MultiDropdownInput,
   ButtonChoiceInput,
   RadioInput,
-  FadeInOut,
+  NoAnimation,
   ImageUploadContainer,
 } from 'features/generic'
 import type { Field as FieldType, Data, Validations } from 'types'
@@ -55,13 +55,13 @@ const FormFieldGroup = ({ field }: Props) => {
   const { data } = useContext(FormContext)
   if (!field.fields) return null
   return (
-    <FadeInOut visible={field.when ? field.when(data) : true}>
+    <NoAnimation visible={field.when ? field.when(data) : true}>
       <FieldGroup prompt={field.prompt} help={field.help}>
         {field.fields.map(f => (
           <FormGroupField field={f} key={f.name} />
         ))}
       </FieldGroup>
-    </FadeInOut>
+    </NoAnimation>
   )
 }
 
@@ -73,7 +73,7 @@ const FormGroupField = ({ field }: Props) => {
   const errors = validation.fields[field.name].errors
   const visibleErrors = isBlur || isSubmitted ? errors : []
   return (
-    <FadeInOut visible={isVisible}>
+    <NoAnimation visible={isVisible}>
       <FieldGroup.Field
         label={field.prompt}
         errors={visibleErrors}
@@ -87,7 +87,7 @@ const FormGroupField = ({ field }: Props) => {
           onBlur={() => setBlur(true)}
         />
       </FieldGroup.Field>
-    </FadeInOut>
+    </NoAnimation>
   )
 }
 
@@ -99,7 +99,7 @@ const SingleFormField = ({ field }: Props) => {
   const errors = validation.fields[field.name].errors
   const visibleErrors = isBlur || isSubmitted ? errors : []
   return (
-    <FadeInOut visible={isVisible}>
+    <NoAnimation visible={isVisible}>
       <Field
         prompt={field.prompt}
         help={field.help}
@@ -114,7 +114,7 @@ const SingleFormField = ({ field }: Props) => {
           onBlur={() => setBlur(true)}
         />
       </Field>
-    </FadeInOut>
+    </NoAnimation>
   )
 }
 

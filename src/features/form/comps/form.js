@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { FIELD_TYPES } from 'consts'
 import { NamedLink, VIEWS } from 'routes'
 import { Button, Divider } from 'features/generic'
 import type { Form as FormType, View, Data, Validations } from 'types'
@@ -66,9 +65,9 @@ export const Form = ({
         </NamedLink>
       )}
       <p style={{ margin: '1.5rem 0 0 0' }}>
-        If you have are having trouble, you can call our support officer Noel on
-        0401 520 065 between 9am to 5pm during weekdays, or you can email us at
-        noel@anikalegal.com
+        If you have are having trouble, you can call our support staff on 0451
+        618 383 between 9am to 5pm during weekdays, or you can email us at
+        contact@anikalegal.com
       </p>
     </React.Fragment>
   )

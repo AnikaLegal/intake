@@ -1,6 +1,5 @@
 // @flow
 import { rules } from 'utils'
-import { FIELD_TYPES } from 'consts'
 import { VIEWS } from 'routes'
 import * as Fields from './fields'
 import * as Conditions from './conditions'
@@ -51,8 +50,9 @@ export const LANDLORD_CONTACT: Form = {
   prompt: "Your landlord's contact details",
   fields: [
     Fields.LANDLORD_HAS_AGENT,
-    Fields.AGENT_CONTACT_DETAILS,
     Fields.LANDLORD_CONTACT_DETAILS,
+    Fields.LANDLORD_CONTACT_DETAILS_WHEN_AGENT,
+    Fields.AGENT_CONTACT_DETAILS,
   ],
   rules: {},
 }

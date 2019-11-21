@@ -87,7 +87,7 @@ export const CLIENT_CALL_TIME = {
   prompt: 'When is your preferred time for us to call you?',
   help:
     'One of our friendly team members will call you to introduce themselves and to discuss how we can help you.',
-  type: FIELD_TYPES.RADIO,
+  type: FIELD_TYPES.MULTI_SELECT,
   options: [
     {
       label: 'Monday – Friday (between 9am and 5pm)',

@@ -4,7 +4,6 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
 
 import { actions } from 'state'
-import { FIELD_TYPES } from 'consts'
 import { Sidebar } from 'containers'
 import { logError, flattenArray, entries } from 'utils'
 import { SECTIONS } from 'questions'
