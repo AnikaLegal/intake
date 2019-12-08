@@ -140,7 +140,7 @@ export const CLIENT_OCCUPATION: Field = {
 }
 export const CLIENT_WEEKLY_EARNINGS: Field = {
   name: 'CLIENT_WEEKLY_EARNINGS',
-  rules: [],
+  rules: [rules.isTruthy],
   prompt: 'How much money do you earn per week (on average)?',
   type: FIELD_TYPES.DOLLAR,
 }

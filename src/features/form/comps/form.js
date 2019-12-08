@@ -57,7 +57,7 @@ export const Form = ({
       )}
       {!hasNext && (
         <NamedLink
-          to={VIEWS.ReviewView}
+          to={validation.valid ? VIEWS.ReviewView : ''}
           params={{ submissionId }}
           onClick={onNext}
         >
