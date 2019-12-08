@@ -182,8 +182,45 @@ export const CLIENT_SPECIAL_CIRCUMSTANCES_DETAILS: Field = {
 export const CLIENT_REFERRAL: Field = {
   rules: [],
   name: 'CLIENT_REFERRAL',
-  type: FIELD_TYPES.TEXTAREA,
+  type: FIELD_TYPES.DROPDOWN,
   prompt: 'How did you hear about Anika?',
+  options: [
+    { label: 'Facebook', value: 'Facebook' },
+    { label: 'Instagram', value: 'Instagram' },
+    { label: 'Google', value: 'Google' },
+    { label: 'Flyer', value: 'Flyer' },
+    { label: 'Word of mouth', value: 'Word of mouth' },
+    { label: 'Referral from a charity', value: 'Charity' },
+    {
+      label: 'Referral from a legal centre',
+      value: 'Legal centre',
+    },
+    { label: 'Other', value: 'Other' },
+  ],
+}
+
+export const CLIENT_REFERRAL_CHARITY: Field = {
+  rules: [rules.isTruthy],
+  name: 'CLIENT_REFERRAL_CHARITY',
+  type: FIELD_TYPES.TEXT,
+  prompt: 'What was the name of the charity that referred you?',
+  when: Conditions.WAS_REFERRED_CHARITY,
+}
+
+export const CLIENT_REFERRAL_LEGAL_CENTRE: Field = {
+  rules: [rules.isTruthy],
+  name: 'CLIENT_REFERRAL_LEGAL_CENTRE',
+  type: FIELD_TYPES.TEXT,
+  prompt: 'What was the name of the legal center that referred you?',
+  when: Conditions.WAS_REFERRED_LEGAL_CENTRE,
+}
+
+export const CLIENT_REFERRAL_OTHER: Field = {
+  rules: [],
+  name: 'CLIENT_REFERRAL_OTHER',
+  type: FIELD_TYPES.TEXT,
+  prompt: 'Can you tell us more about how you hear about us?',
+  when: Conditions.WAS_REFERRED_OTHER,
 }
 
 export const TENANCY_START_DATE: Field = {
