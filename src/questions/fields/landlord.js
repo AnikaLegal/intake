@@ -26,6 +26,8 @@ export const LANDLORD_CONTACT_METHOD: Field = {
   name: 'LANDLORD_CONTACT_METHOD',
   prompt:
     'How did you ask your landlord (or your landlord’s agent) to fix the problem?',
+  help:
+    "You can select more than one option. If none apply, please select 'Other'",
   type: FIELD_TYPES.MULTI_DROPDOWN,
   rules: [rules.isTruthy],
   options: [
@@ -34,6 +36,7 @@ export const LANDLORD_CONTACT_METHOD: Field = {
     { label: 'Text message', value: 'text message' },
     { label: 'Letter', value: 'letter' },
     { label: 'In person', value: 'in person' },
+    { label: 'Other', value: 'other' },
   ],
 }
 

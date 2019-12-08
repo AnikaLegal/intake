@@ -8,7 +8,7 @@ export const DEFECT_TYPE: Field = {
   prompt: 'What does the problem relate to?',
   placeholder: 'Select the type of problem that needs to be repaired.',
   help:
-    " You can select more than one problem. If none apply, please select 'Other'",
+    "You can select more than one problem. If none apply, please select 'Other'",
   type: FIELD_TYPES.MULTI_DROPDOWN,
   rules: [rules.isTruthyArray],
   options: [
