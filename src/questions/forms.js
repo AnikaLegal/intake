@@ -78,7 +78,7 @@ export const PERSONAL_PREFERENCES: Form = {
     Fields.CAN_PAY_QUOTE,
     Fields.IS_VCAT_OK,
     Fields.VCAT_AVOID_REASON,
-    Fields.LETTER_PERMISSION,
+    Fields.LETTER_ASSERTS_PROCEEDINGS_RIGHT,
     Fields.CLIENT_BREACHED_LEASE,
     Fields.CLIENT_CALL_TIME,
   ],

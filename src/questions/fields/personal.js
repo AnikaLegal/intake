@@ -4,22 +4,23 @@ import { rules } from 'utils'
 import * as Conditions from '../conditions'
 import type { Field, Form } from 'types'
 
-export const LETTER_PERMISSION: Field = {
+export const LETTER_ASSERTS_PROCEEDINGS_RIGHT: Field = {
   rules: [rules.isTruthy],
-  name: 'LETTER_PERMISSION',
+  name: 'LETTER_ASSERTS_PROCEEDINGS_RIGHT',
   prompt:
-    'If a letter needs to be sent to your landlord, would you prefer the letter to be sent by a lawyer or by yourself?',
+    'If a letter needs to be sent to your landlord, would you like the letter to say you have the right to commence legal proceedings against your landlord?',
   help:
-    'Letters sent from a lawyer will place more pressure on the landlord. Letters sent personally by you will be more "gentle" because lawyers are not involved.',
+    'If the letter says you have the right to commence legal proceedings, it will place more pressure on the landlord to perform the repairs quickly. If the letter does not say you have the right to commence legal proceedings against your landlord, it will be a more “gentle” letter.',
+
   type: FIELD_TYPES.RADIO_BTN,
   options: [
     {
-      label: 'Lawyer',
-      value: 'lawyer',
+      label: 'Yes',
+      value: 'yes',
     },
     {
-      label: 'Myself',
-      value: 'myself',
+      label: 'No',
+      value: 'no',
     },
   ],
 }
