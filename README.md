@@ -5,22 +5,6 @@ This is the Anika client intake form frontend.
 It is a React/Redux single page app, deployed as a static site which is hosted on AWS S3 at [repairs.anikalegal.com](https://repairs.anikalegal.com)
 . The app depends on a backend API at [clerk.anikalegal.com](https://clerk.anikalegal.com).
 
-TODO SHORT TERM
-
-    - actually document this project
-
-TODO MEDIUM TERM
-
-    - add analytics + funnel tracking
-    - eventually move to a feature-based folder structure
-    - eventually write some end-to-end tests with cypress to run on staging server
-    - setup Sentry logging + releases + sourcemaps + errors to Slack
-    - Add hot module reloading + redux state reload
-
-TODO LONG TERM
-
-    - ??
-
 ## Project Structure
 
 ```
@@ -99,6 +83,8 @@ yarn serve  # Run dev server
 
 Ths project has [Storybook](https://storybook.js.org/docs/basics/introduction/) setup to allow us to build components independently of their UI.
 Config lives in `.storybook`.
+
+View the prod storybook [here](https://storybook.anikalegal.com/?).
 
 Run storybook on `http://localhost:3001` with
 
