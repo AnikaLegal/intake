@@ -30,7 +30,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: pip install awscli
+      - run: pip install --user awscli
       - restore_cache:
           keys:
             - deps-v1-{{ checksum "yarn.lock" }}
@@ -42,7 +42,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: pip install awscli
+      - run: pip install --user awscli
       - restore_cache:
           keys:
             - deps-v1-{{ checksum "yarn.lock" }}
