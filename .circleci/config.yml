@@ -6,7 +6,7 @@
 #   - AWS_ACCESS_KEY_ID
 #   - AWS_SECRET_ACCESS_KEY
 #   - SENTRY_AUTH_TOKEN
-version: 2
+version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@0.1.19
 jobs:
