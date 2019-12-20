@@ -38,7 +38,7 @@ The general idea is that the root app `App` renders the routes from `routes/`. E
 
 ## System Setup
 
-You will need Node (prefer v11) and [yarn](https://yarnpkg.com/en/) installed locally.
+You will need Node (prefer v11+) and [yarn](https://yarnpkg.com/en/) installed locally.
 
 ```bash
 yarn install
