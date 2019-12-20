@@ -34,8 +34,8 @@ jobs:
           - checkout
           - aws-cli/install
           - restore_cache:
-            keys:
-              - deps-v1-{{ checksum "yarn.lock" }}
+              keys:
+                - deps-v1-{{ checksum "yarn.lock" }}
           - run: ./scripts/release/test.sh
 
   release_prod:
@@ -46,8 +46,8 @@ jobs:
           - checkout
           - aws-cli/install
           - restore_cache:
-            keys:
-              - deps-v1-{{ checksum "yarn.lock" }}
+              keys:
+                - deps-v1-{{ checksum "yarn.lock" }}
           - run: ./scripts/release/prod.sh
 
 workflows:
