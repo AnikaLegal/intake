@@ -6,9 +6,7 @@
 #   - AWS_ACCESS_KEY_ID
 #   - AWS_SECRET_ACCESS_KEY
 #   - SENTRY_AUTH_TOKEN
-version: 2.1
-orbs:
-  aws-cli: circleci/aws-cli@0.1.19
+version: 2
 jobs:
   install:
     docker:
@@ -32,7 +30,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - aws-cli/install
+      - run: pip install awscli
       - restore_cache:
           keys:
             - deps-v1-{{ checksum "yarn.lock" }}
@@ -44,7 +42,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - aws-cli/install
+      - run: pip install awscli
       - restore_cache:
           keys:
             - deps-v1-{{ checksum "yarn.lock" }}
