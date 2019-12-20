@@ -1,0 +1,64 @@
+#
+# CircleCI Build Script
+# Install the CLI from https://circleci.com/docs/2.0/local-cli/
+# So you can run `circleci config validate`
+# Needs following envars setup:
+#   - AWS_ACCESS_KEY_ID
+#   - AWS_SECRET_ACCESS_KEY
+#   - SENTRY_AUTH_TOKEN
+version: 2
+orbs:
+  aws-cli: circleci/aws-cli@0.1.19
+jobs:
+  install:
+    docker:
+      - image: circleci/node:12
+        working_directory: ~/repo
+        steps:
+          - checkout
+          - restore_cache:
+              keys:
+                - deps-v1-{{ checksum "yarn.lock" }}
+                - deps-v1-
+          - run: yarn install
+          - save_cache:
+              paths:
+                - node_modules
+              key: deps-v1-{{ checksum "yarn.lock" }}
+
+  release_test:
+    docker:
+      - image: circleci/node:12
+        working_directory: ~/repo
+        steps:
+          - checkout
+          - aws-cli/install
+          - restore_cache:
+            keys:
+              - deps-v1-{{ checksum "yarn.lock" }}
+          - run: ./scripts/release/test.sh
+
+  release_prod:
+    docker:
+      - image: circleci/node:12
+        working_directory: ~/repo
+        steps:
+          - checkout
+          - aws-cli/install
+          - restore_cache:
+            keys:
+              - deps-v1-{{ checksum "yarn.lock" }}
+          - run: ./scripts/release/prod.sh
+
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - install:
+          filters: { branches: { only: [master, develop] } }
+      - release_test:
+          requires: [install]
+          filters: { branches: { only: [develop] } }
+      - release_prod:
+          requires: [install]
+          filters: { branches: { only: [master] } }
