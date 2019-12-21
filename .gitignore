@@ -29,3 +29,6 @@ dumps/
 
 # Storybook build assets
 story/
+
+# Checksum
+.checksum

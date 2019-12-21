@@ -8,10 +8,10 @@
 #   - SENTRY_AUTH_TOKEN
 version: 2
 jobs:
-  install:
+  deploy:
     docker:
-      - image: circleci/python:3.6.9-node
-    working_directory: ~/repo
+      - image: circleci/python:3.6.9-node-browsers
+    working_directory: ~/build
     steps:
       - checkout
       - restore_cache:
@@ -23,40 +23,13 @@ jobs:
           paths:
             - node_modules
           key: deps-v1-{{ checksum "yarn.lock" }}
-
-  release_test:
-    docker:
-      - image: circleci/python:3.6.9-node
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run: pip install --user awscli
-      - restore_cache:
-          keys:
-            - deps-v1-{{ checksum "yarn.lock" }}
-      - run: ./scripts/release/test.sh
-
-  release_prod:
-    docker:
-      - image: circleci/python:3.6.9-node
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run: pip install --user awscli
-      - restore_cache:
-          keys:
-            - deps-v1-{{ checksum "yarn.lock" }}
-      - run: ./scripts/release/prod.sh
+      - run: ./scripts/circleci/build.sh
+      - run: ./scripts/circleci/setup-awscli.sh
+      - run: ./scripts/circleci/deploy.sh
 
 workflows:
   version: 2
   build_deploy:
     jobs:
-      - install:
+      - deploy:
           filters: { branches: { only: [master, develop] } }
-      - release_test:
-          requires: [install]
-          filters: { branches: { only: [develop] } }
-      - release_prod:
-          requires: [install]
-          filters: { branches: { only: [master] } }
