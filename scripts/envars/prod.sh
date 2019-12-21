@@ -1,6 +1,7 @@
 #/bin/bash
 set -e
 
+echo "Using production environment variables."
 export STATIC_URL=https://repairs.anikalegal.com/static/
 export SERVER=https://clerk.anikalegal.com
 export S3_BUCKET_URL=s3://repairs.anikalegal.com

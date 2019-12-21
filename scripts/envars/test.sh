@@ -1,6 +1,7 @@
 #/bin/bash
 set -e
 
+echo "Using test environment variables."
 export STATIC_URL=https://test-repairs.anikalegal.com/static/
 export SERVER=https://test-clerk.anikalegal.com
 export S3_BUCKET_URL=s3://test-repairs.anikalegal.com
