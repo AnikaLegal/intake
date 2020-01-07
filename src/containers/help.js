@@ -15,7 +15,6 @@ import {
   ButtonChoiceInput,
   Button,
   Header,
-  Warning,
 } from 'features/generic'
 
 export const HelpContainer = () => {
@@ -111,20 +110,6 @@ export const HelpContainer = () => {
                   with the best assistance, we need you to first complete our
                   questionnaire.
                 </p>
-                <Warning>
-                  <h4>Christmas Closure</h4>
-                  <p>
-                    Just so you know, we'll be closing from{' '}
-                    <strong>21 December 2019</strong> to{' '}
-                    <strong>5 January 2020</strong>. When we're back in the
-                    office, we'll get on your case as soon as possible.
-                  </p>
-
-                  <p>
-                    If your tenancy situation requires attention urgently,
-                    contact Victoria Legal Aid.
-                  </p>
-                </Warning>
                 <Button disabled={isLoading} onClick={onCreate}>
                   Get started
                 </Button>
