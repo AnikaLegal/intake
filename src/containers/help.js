@@ -106,9 +106,9 @@ export const HelpContainer = () => {
             {isValid && (
               <React.Fragment>
                 <p>
-                  Great. We are able to help you. In order for us to provide you
-                  with the best assistance, we need you to first complete our
-                  questionnaire.
+                  Great. We may be able to help you. In order for us to provide
+                  you with the best assistance, we need you to first complete
+                  our questionnaire.
                 </p>
                 <Button disabled={isLoading} onClick={onCreate}>
                   Get started
