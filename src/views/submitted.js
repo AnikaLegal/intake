@@ -1,7 +1,14 @@
 // @flow
 import React from 'react'
 
-import { Header, Page, Layout, Message, Button } from 'features/generic'
+import {
+  Header,
+  Page,
+  Layout,
+  Message,
+  Button,
+  Warning,
+} from 'features/generic'
 
 export const SubmittedView = () => (
   <Layout vertical>
@@ -19,6 +26,13 @@ export const SubmittedView = () => (
             If you have any questions in the meantime, you can contact us at{' '}
             contact@anikalegal.com
           </p>
+          <Warning>
+            We can only assist you if you meet our{' '}
+            <a href="https://anikalegal.com/eligibility">
+              eligibility criteria
+            </a>
+            .
+          </Warning>
         </Message>
       </Page>
     </Layout>

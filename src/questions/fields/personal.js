@@ -151,20 +151,29 @@ export const CLIENT_SPECIAL_CIRCUMSTANCES: Field = {
   prompt: 'Do you have any special circumstances?',
   type: FIELD_TYPES.MULTI_SELECT,
   options: [
-    {
-      label: 'I am not comfortable communicating in English',
-      value: 'Not comfortable with English',
-    },
     { label: 'I have a physical disability', value: 'Physical disability' },
     {
       label: 'I am unable to travel to a legal centre',
       value: "Can't get to a legal centre",
     },
-    { label: 'I have children', value: 'Has children' },
+    { label: 'I am a single parent', value: 'Is a single parent' },
     {
       label: 'I am living in public housing',
       value: 'Is living in public housing',
     },
+    {
+      label: 'I am from a migrant or refugee background',
+      value: 'Is migrant or refugee',
+    },
+    {
+      label: 'I have a mental illness or intellectual disability',
+      value: 'Has mental illness or intellectual disability',
+    },
+    {
+      label: 'I am from an Aboriginal or Torres Strait Islander background',
+      value: 'Is from an Aboriginal or Torres Strait Islander background',
+    },
+
     {
       label:
         'I have another personal circumstance that I want Anika to know about',
@@ -175,7 +184,8 @@ export const CLIENT_SPECIAL_CIRCUMSTANCES: Field = {
 export const CLIENT_SPECIAL_CIRCUMSTANCES_DETAILS: Field = {
   name: 'CLIENT_SPECIAL_CIRCUMSTANCES_DETAILS',
   rules: [],
-  prompt: 'Tell us about the other personal circumstance',
+  prompt:
+    'Tell us about the other personal circumstance that makes you disadvantaged or vulnerable',
   type: FIELD_TYPES.TEXTAREA,
   when: Conditions.HAS_OTHER_SPECIAL_CIRCUMSTANCE,
 }

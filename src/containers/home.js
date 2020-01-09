@@ -16,8 +16,8 @@ export const HomeContainer = () => (
           <h1>Welcome to Anika</h1>
           <p>
             Anika is an online platform that is used to provide legal advice to
-            members of the public. We believe that you will find Anika helpful
-            for two key reasons:
+            disadvantaged members of the public. We believe that you will find
+            Anika helpful for two key reasons:
           </p>
           <ul>
             <li>It's all online, so you don’t need to leave your home.</li>
