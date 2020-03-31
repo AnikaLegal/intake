@@ -33,7 +33,6 @@ export type FieldType =
   | 'TEXTAREA'
   | 'FILE'
   | 'DATE'
-  | 'BOOLEAN'
   | 'TEXT'
   | 'NUMBER'
   | 'DOLLAR'
@@ -74,7 +73,6 @@ export type Form = {
   name: string,
   fields: Array<Field>,
   prompt: string,
-  rules: { [string]: Array<Rule> },
   help?: string,
   when?: Condition,
   getRedirect?: Data => View | null,
@@ -133,3 +131,5 @@ export type Thunk = (dispatch: Dispatch, getState: GetState) => void
 export type Dispatch = DispatchAPI<Action | Thunk>
 export type Store = ReduxStore<Redux, Action, Dispatch>
 export type Reducer = ReduxReducer<Redux, Action>
+
+export type Topic = 'REPAIRS' | 'COVID'

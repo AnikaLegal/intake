@@ -1,9 +1,12 @@
-// @flow
+//@flow
+// Form where we collect tenancy defect details.
 import { FIELD_TYPES } from 'consts'
 import { rules } from 'utils'
+
+import * as Conditions from '../conditions'
 import type { Field, Form } from 'types'
 
-export const DEFECT_TYPE: Field = {
+const DEFECT_TYPE: Field = {
   name: 'DEFECT_TYPE',
   prompt: 'What does the problem relate to?',
   placeholder: 'Select the type of problem that needs to be repaired.',
@@ -26,7 +29,7 @@ export const DEFECT_TYPE: Field = {
   ],
 }
 
-export const DEFECT_DESCRIPTION: Field = {
+const DEFECT_DESCRIPTION: Field = {
   name: 'DEFECT_DESCRIPTION',
   prompt: 'Please provide a short description of the problem(s)',
   placeholder: 'Describe the problem here',
@@ -34,7 +37,7 @@ export const DEFECT_DESCRIPTION: Field = {
   rules: [rules.isTruthy],
 }
 
-export const DEFECT_DATE: Field = {
+const DEFECT_DATE: Field = {
   rules: [rules.isTruthy],
   name: 'DEFECT_DATE',
   prompt: 'When did the problem arise?',
@@ -43,11 +46,17 @@ export const DEFECT_DATE: Field = {
   type: FIELD_TYPES.DATE,
 }
 
-export const DEFECT_PHOTO: Field = {
+const DEFECT_PHOTO: Field = {
   name: 'DEFECT_PHOTO',
   prompt: 'If you have any photos of the problem(s), please upload them',
   help:
     'If you do not have any photos of the problem(s) to upload, that’s completely okay',
   type: FIELD_TYPES.FILE,
   rules: [],
+}
+
+export const DEFECT: Form = {
+  name: 'DEFECT',
+  prompt: "What's wrong?",
+  fields: [DEFECT_TYPE, DEFECT_DESCRIPTION, DEFECT_DATE, DEFECT_PHOTO],
 }

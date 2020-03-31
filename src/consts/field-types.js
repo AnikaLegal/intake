@@ -10,7 +10,6 @@ export const FIELD_TYPES: { [string]: FieldType } = {
   TEXTAREA: 'TEXTAREA',
   FILE: 'FILE',
   DATE: 'DATE',
-  BOOLEAN: 'BOOLEAN',
   TEXT: 'TEXT',
   NUMBER: 'NUMBER',
   DOLLAR: 'DOLLAR',

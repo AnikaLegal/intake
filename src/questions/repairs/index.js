@@ -3,7 +3,7 @@ import type { Section } from 'types'
 
 import * as Forms from './forms'
 
-export const SECTIONS: Array<Section> = [
+export const REPAIRS_SECTIONS: Array<Section> = [
   {
     name: 'Your details',
     forms: [Forms.PERSONAL_DETAILS, Forms.TENANCY_DETAILS],
