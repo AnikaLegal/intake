@@ -51,46 +51,52 @@ do
 done
 
 CACHE_CONTROL="max-age=86400"
+for S3_BUCKET_URL in $S3_BUCKET_URLS
+do
+    echo "\n>>> Uploading assets to S3 bucket $S3_BUCKET_URL"
 
-# Upload HTML with no cache, gzip encoding
-echo -e "\nUploading HTML"
-aws s3 cp \
-    --profile anika \
-    --recursive \
-    --content-encoding 'gzip' \
-    --exclude '*' \
-    --include '*.html' \
-    --acl public-read \
-    ./dist \
-    $S3_BUCKET_URL
+    # Upload HTML with no cache, gzip encoding
+    echo -e "\nUploading HTML to $S3_BUCKET_URL"
+    aws s3 cp \
+        --profile anika \
+        --recursive \
+        --content-encoding 'gzip' \
+        --exclude '*' \
+        --include '*.html' \
+        --acl public-read \
+        ./dist \
+        $S3_BUCKET_URL
 
-# Upload CSS + JS with cache and gzip
-echo -e "\nUploading JS + CSS"
-aws s3 cp \
-    --profile anika \
-    --recursive \
-    --content-encoding 'gzip' \
-    --exclude '*' \
-    --include '*.css' \
-    --include '*.js' \
-    --cache-control $CACHE_CONTROL \
-    --acl public-read \
-    ./dist \
-    $S3_BUCKET_URL
 
-# Upload everything else with cache and no gzip
-echo -e "\nUploading other assets"
-aws s3 cp \
-    --profile anika \
-    --recursive \
-    --exclude '*.css' \
-    --exclude '*.js' \
-    --exclude '*.map' \
-    --exclude '*.html' \
-    --cache-control $CACHE_CONTROL \
-    --acl public-read \
-    ./dist \
-    $S3_BUCKET_URL
+
+    # Upload CSS + JS with cache and gzip
+    echo -e "\nUploading JS + CSS to $S3_BUCKET_URL"
+    aws s3 cp \
+        --profile anika \
+        --recursive \
+        --content-encoding 'gzip' \
+        --exclude '*' \
+        --include '*.css' \
+        --include '*.js' \
+        --cache-control $CACHE_CONTROL \
+        --acl public-read \
+        ./dist \
+        $S3_BUCKET_URL
+
+    # Upload everything else with cache and no gzip
+    echo -e "\nUploading other assets to $S3_BUCKET_URL"
+    aws s3 cp \
+        --profile anika \
+        --recursive \
+        --exclude '*.css' \
+        --exclude '*.js' \
+        --exclude '*.map' \
+        --exclude '*.html' \
+        --cache-control $CACHE_CONTROL \
+        --acl public-read \
+        ./dist \
+        $S3_BUCKET_URL
+done
 
 # Finalize Sentry release
 if [ -z "$SENTRY_PROJECT" ]
