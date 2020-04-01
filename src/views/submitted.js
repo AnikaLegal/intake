@@ -28,7 +28,7 @@ export const SubmittedView = () => (
           </p>
           <Warning>
             We can only assist you if you meet our{' '}
-            <a href="https://anikalegal.com/eligibility">
+            <a href="https://www.anikalegal.com/eligibility-criteria">
               eligibility criteria
             </a>
             .

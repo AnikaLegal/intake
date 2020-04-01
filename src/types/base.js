@@ -1,10 +1,4 @@
 // @flow
-import type {
-  Store as ReduxStore,
-  Reducer as ReduxReducer,
-  DispatchAPI,
-} from 'redux'
-
 export type View =
   | 'HelpView'
   | 'HomeView'
@@ -93,43 +87,11 @@ type Answer = {
   answer: mixed,
 }
 
+export type Topic = 'REPAIRS' | 'COVID'
 export type Submission = {
   id: string,
   complete: boolean,
+  topic: Topic,
   questions: Array<Section>,
   answers: Array<Answer>,
 }
-
-export type FormState = {
-  +id: string, // Loaded Submission ID
-  +answers: Data, // Answers provided by the user.
-  +questions: Array<Section>,
-  +page: number, // Current page number.
-  +hasNext: boolean,
-  +hasPrev: boolean,
-  +validation: Validations, // Validation for the current page.
-  +isSubmitted: boolean, // Has the user tried to submit the current page.
-  +isLoading: boolean, // Is data loading from the server.
-  +isComplete: boolean, // Is the form complete, and ready to review + submit.
-}
-
-export type Redux = {
-  +form: FormState,
-}
-
-export type Action =
-  | { +type: 'ANSWER_FORM', +name: string, +answer: any }
-  | { +type: 'FORM_LOADING' }
-  | { +type: 'FORM_LOADED', +submission: Submission }
-  | { +type: 'FORM_NEXT', +submission: Submission }
-  | { +type: 'FORM_NEXT_INVALID' }
-  | { +type: 'FORM_SUBMIT', +submission: Submission }
-  | { +type: 'FORM_PREV' }
-
-export type GetState = () => Redux
-export type Thunk = (dispatch: Dispatch, getState: GetState) => void
-export type Dispatch = DispatchAPI<Action | Thunk>
-export type Store = ReduxStore<Redux, Action, Dispatch>
-export type Reducer = ReduxReducer<Redux, Action>
-
-export type Topic = 'REPAIRS' | 'COVID'

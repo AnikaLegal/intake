@@ -1,9 +1,12 @@
-import type { Store, Action, Dispatch } from 'types'
+// @flow
+const SCROLL_ACTIONS = [
+  'form/setNextPage',
+  'form/setPrevPage',
+  'form/submitSubmission',
+]
 
-const SCROLL_ACTIONS = ['FORM_NEXT', 'FORM_PREV']
-
-export const scrollMiddleware = (store: Store) => (next: Dispatch) => (
-  action: Action
+export const scrollMiddleware = (store: any) => (next: Function) => (
+  action: any
 ) => {
   // Scroll to the top of the page when the user progresses through the form.
   if (SCROLL_ACTIONS.includes(action.type)) {

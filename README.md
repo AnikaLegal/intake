@@ -71,7 +71,6 @@ The general idea is that the root app `App` renders the routes from `routes/`. E
 ```
 ├── .circleci               CircleCI config
 ├── .storybook              Storybook config
-├── flow-typed              Flow typed definitions for external libraries
 ├── dist                    build artifacts (not in version control)
 ├── public                  static files to be deployed (in version control)
 │   └── static
@@ -103,7 +102,7 @@ The general idea is that the root app `App` renders the routes from `routes/`. E
 
 ## Type Checking
 
-This project use [FlowJS](https://flow.org/) for type checking and `flow-typed` to get types for some 3rd party libraries.
+This project use [FlowJS](https://flow.org/) for type checking.
 See more details in `.flowconfig`.
 
 You can run a type check as follows:

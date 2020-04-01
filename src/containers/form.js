@@ -2,14 +2,15 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
-import { actions } from 'state'
 import { Page, Layout, LoadingSpinner, Header } from 'features/generic'
 import { Form } from 'features/form'
 import { logError, flattenArray } from 'utils'
 import { NamedRedirect, VIEWS } from 'routes'
 import { Sidebar } from 'containers'
-import { SECTIONS } from 'questions'
-import type { View, Form as FormType, Redux, FormState } from 'types'
+import { getQuestions } from 'questions'
+import { TOPICS } from 'consts'
+
+import type { Topic, View, Form as FormType, Dispatch, FormState } from 'types'
 
 type Props = {
   submissionId: string,
@@ -19,14 +20,12 @@ export const FormContainer = ({ submissionId }: Props) => {
   // Setup redirect to out-of-form pages.
   const [redirect, setRedirect] = useState<View | null>(null)
   // Hook up to Redux store.
-  const dispatch = useDispatch()
-  const setAnswer = k => v => dispatch(actions.form.answer(k, v))
-  const loadSubmission = () => dispatch(actions.form.load(submissionId))
-  const onPrev = () => dispatch(actions.form.prev())
-  const formState: FormState = useSelector(
-    ({ form }: Redux) => form,
-    shallowEqual
-  )
+  const dispatch: Dispatch = useDispatch()
+  const setAnswer = k => v => dispatch.form.setAnswer({ name: k, answer: v })
+  const loadSubmission = () => dispatch.form.loadSubmission(submissionId)
+  const onPrev = () => dispatch.form.setPrevPage()
+  const formState: FormState = useSelector(({ form }) => form, shallowEqual)
+  const sections = getQuestions(formState.topic)
   // Load submission if it is not already loaded.
   useEffect(() => {
     if (!formState.id) loadSubmission().catch(logError)
@@ -43,7 +42,7 @@ export const FormContainer = ({ submissionId }: Props) => {
       <Layout vertical>
         <Header />
         <Layout>
-          <Sidebar current={formState.page} sections={SECTIONS} />
+          <Sidebar current={formState.page} sections={sections} />
           <Page>
             <LoadingSpinner />
           </Page>
@@ -51,7 +50,7 @@ export const FormContainer = ({ submissionId }: Props) => {
       </Layout>
     )
   }
-  const forms: Array<FormType> = SECTIONS.map(s => s.forms).reduce(flattenArray)
+  const forms: Array<FormType> = sections.map(s => s.forms).reduce(flattenArray)
   const form = forms[formState.page]
   // Redirect if necessary, otherwise request next page.
   // TODO - move this into some Redux middleware.
@@ -62,14 +61,14 @@ export const FormContainer = ({ submissionId }: Props) => {
     if (maybeRedirect) {
       setRedirect(maybeRedirect)
     } else {
-      dispatch(actions.form.next()).catch(logError)
+      dispatch.form.setNextPage().catch(logError)
     }
   }
   return (
     <Layout vertical>
       <Header />
       <Layout>
-        <Sidebar current={formState.page} sections={SECTIONS} />
+        <Sidebar current={formState.page} sections={sections} />
         <Page fadeIn>
           <Form
             submissionId={submissionId}

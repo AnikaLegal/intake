@@ -3,16 +3,15 @@
 import type { Route } from 'types'
 
 export const ROUTES: Array<Route> = [
-  { path: '/', view: 'HomeView' },
-  { path: '/help', view: 'HelpView' },
   { path: '/submission/:submissionId/form/', view: 'FormView' },
   { path: '/submission/:submissionId/review/', view: 'ReviewView' },
   { path: '/submitted', view: 'SubmittedView' },
-
   {
     path: '/messages',
     children: [{ path: '/contact-landlord', view: 'ContactLandlordView' }],
   },
   { path: '/not-found', view: 'NotFoundView' },
+  { path: '/:topic/', view: 'HomeView' },
+  { path: '/:topic/help', view: 'HelpView' },
   { path: '', view: 'NotFoundView' },
 ]

@@ -2,10 +2,10 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { actions } from 'state'
 import { validate, flattenArray } from 'utils'
 import { NamedRedirect, VIEWS } from 'routes'
-import { SECTIONS } from 'questions'
+import { getQuestions } from 'questions'
+import { TOPICS } from 'consts'
 import {
   Page,
   Layout,
@@ -17,8 +17,13 @@ import {
   Header,
 } from 'features/generic'
 
-export const HelpContainer = () => {
-  const dispatch = useDispatch()
+import type { Topic, Dispatch } from 'types'
+
+type Props = { topic: Topic }
+
+export const HelpContainer = ({ topic }: Props) => {
+  const dispatch: Dispatch = useDispatch()
+  const sections = getQuestions(topic)
   const [submissionId, setSubmissionId] = useState<string | null>(null)
   const [isLoading, setLoading] = useState(false)
   const [isVictoria, setVictoria] = useState<boolean | null>(null)
@@ -27,7 +32,9 @@ export const HelpContainer = () => {
   // Create a new form submission.
   const onCreate = () => {
     setLoading(true)
-    dispatch(actions.form.create(SECTIONS)).then(sub => setSubmissionId(sub.id))
+    dispatch.form
+      .createSubmission({ sections, topic })
+      .then(sub => setSubmissionId(sub.id))
   }
   if (submissionId) {
     return (
@@ -89,7 +96,7 @@ export const HelpContainer = () => {
               />
             </Field>
             <Field
-              prompt="Do you need your landlord to fix something in your home?"
+              prompt={topic === TOPICS.COVID ? COVID_PROMPT : RETNAL_PROMPT}
               errors={[]}
               required
             >
@@ -131,3 +138,7 @@ export const HelpContainer = () => {
     </Layout>
   )
 }
+
+const RETNAL_PROMPT = 'Do you need your landlord to fix something in your home?'
+const COVID_PROMPT =
+  'Would you like to seek a rental reduction from your landlord?'

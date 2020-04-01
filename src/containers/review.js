@@ -3,10 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
 
-import { actions } from 'state'
 import { Sidebar } from 'containers'
 import { logError, flattenArray, entries } from 'utils'
-import { SECTIONS } from 'questions'
+import { getQuestions } from 'questions'
 import {
   Header,
   Page,
@@ -17,7 +16,7 @@ import {
   Divider,
 } from 'features/generic'
 import { NamedRedirect, NamedLink, VIEWS } from 'routes'
-import type { Redux, Data, Section, FormState, Field } from 'types'
+import type { State, Data, Section, FormState, Field, Dispatch } from 'types'
 
 type Props = {
   submissionId: string,
@@ -26,14 +25,15 @@ type Props = {
 export const ReviewContainer = ({ submissionId }: Props) => {
   const dispatch = useDispatch()
   const onSubmit = () =>
-    dispatch(actions.form.submit(submissionId)).catch(logError)
+    dispatch.form.submitSubmission(submissionId).catch(logError)
   const loadSubmission = () =>
-    dispatch(actions.form.load(submissionId)).catch(logError)
+    dispatch.form.loadSubmission(submissionId).catch(logError)
 
   const formState: FormState = useSelector(
-    ({ form }: Redux) => form,
+    ({ form }: State) => form,
     shallowEqual
   )
+  const questions = getQuestions(formState.topic)
   // Load submission if it is not already loaded.
   useEffect(() => {
     if (!formState.id) loadSubmission()
@@ -43,7 +43,7 @@ export const ReviewContainer = ({ submissionId }: Props) => {
       <Layout vertical>
         <Header />
         <Layout>
-          <Sidebar current={999} sections={SECTIONS} />
+          <Sidebar current={999} sections={questions} />
           <Page>
             <Layout vertical>
               <LoadingSpinner />
@@ -60,11 +60,11 @@ export const ReviewContainer = ({ submissionId }: Props) => {
     <Layout vertical>
       <Header />
       <Layout>
-        <Sidebar current={999} sections={SECTIONS} />
+        <Sidebar current={999} sections={questions} />
         <Page>
           <Message>
             <h1>Review your answers</h1>
-            {SECTIONS.map(section => (
+            {questions.map(section => (
               <div key={section.name}>
                 {section.forms.map(form => (
                   <div key={form.name}>

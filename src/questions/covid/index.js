@@ -18,10 +18,6 @@ export const COVID_SECTIONS: Array<Section> = [
   },
   {
     name: 'Your preferences',
-    forms: [Forms.PERSONAL_PREFERENCES],
-  },
-  {
-    name: 'We want to understand out clients better',
-    forms: [Forms.SURVEY],
+    forms: [Forms.PERSONAL_PREFERENCES, Forms.SURVEY],
   },
 ]

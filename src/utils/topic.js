@@ -1,23 +1,23 @@
 //@flow
-// Tools to determine which topic we should use
-import { TOPICS } from 'consts'
-import { getQueryParams } from './querystring'
-import type { Topic } from 'types'
+import * as React from 'react'
+import { useParams, useHistory } from 'react-router-dom'
+import { createLocation } from 'history'
 
-export const getTopic = (): Topic => {
-  const qsData = getQueryParams()
-  // Use the topic set by the querystring
-  for (let key of Object.keys(TOPICS)) {
-    const topic = TOPICS[key]
-    if (qsData.topic && qsData.topic.toLowerCase() === topic.toLowerCase())
-      return topic
+import { TOPICS } from 'consts'
+import type { Topic } from 'types'
+import { VIEWS } from 'routes'
+
+const DEFAULT_TOPIC = TOPICS.REPAIRS
+const TOPIC_LIST = Object.values(TOPICS)
+
+// Returns a topic if it is possible to select a topic from the URL
+export const useTopic = (): Topic => {
+  const notFoundLoc = createLocation(VIEWS.NotFoundView)
+  const history = useHistory()
+  const { topic } = useParams()
+  if (!topic || !TOPIC_LIST.includes(topic.toUpperCase())) {
+    history.push(notFoundLoc)
+    return DEFAULT_TOPIC
   }
-  // Otherwise check whether the topic is in the domain name.
-  const hostname: string = window.location.hostname
-  for (let key of Object.keys(TOPICS)) {
-    const topic = TOPICS[key]
-    if (hostname.includes(topic.toLowerCase())) return topic
-  }
-  // Default to repairs
-  return TOPICS.REPAIRS
+  return topic.toUpperCase()
 }

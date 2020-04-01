@@ -1,17 +1,14 @@
 // @flow
 import { TOPICS } from 'consts'
-import { getTopic } from 'utils'
 
 import { REPAIRS_SECTIONS } from './repairs'
 import { COVID_SECTIONS } from './covid'
+import type { Topic } from 'types'
 
-const topic = getTopic()
-
-let topicSections = []
-if (topic === TOPICS.REPAIRS) {
-  topicSections = REPAIRS_SECTIONS
-} else if (topic === TOPICS.COVID) {
-  topicSections = COVID_SECTIONS
+export const getQuestions = (topic: Topic) => {
+  if (topic === TOPICS.COVID) {
+    return COVID_SECTIONS
+  } else {
+    return REPAIRS_SECTIONS
+  }
 }
-
-export const SECTIONS = topicSections
