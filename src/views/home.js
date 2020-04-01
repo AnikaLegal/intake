@@ -1,9 +1,13 @@
 // @flow
 import React from 'react'
 import { HomeContainer } from 'containers'
-import { useTopic } from 'utils'
+import { useParams } from 'react-router-dom'
+import { NamedRedirect, VIEWS } from 'routes'
+import { TOPICS } from 'consts'
+
+const TOPIC_LIST = Object.values(TOPICS)
 
 export const HomeView = () => {
-  const topic = useTopic()
-  return <HomeContainer topic={topic} />
+  const { topic } = useParams()
+  return <HomeContainer topic={topic ? topic.toUpperCase() : topic} />
 }
