@@ -2,7 +2,7 @@
 
 This is the Anika client intake form frontend.
 
-It is a React/Redux single page app, deployed as a static site which is hosted on AWS S3 at [repairs.anikalegal.com](https://repairs.anikalegal.com).
+It is a React/Redux single page app, deployed as a static site which is hosted on AWS S3 at [intake.anikalegal.com](https://intake.anikalegal.com/repairs).
 The app depends on a backend API at [clerk.anikalegal.com](https://clerk.anikalegal.com).
 
 Clients visit the webapp from the Anika [website](https://anikalegal.com), looking to get help with their rental repairs issue.
@@ -28,8 +28,8 @@ yarn serve  # Run dev server on http://localhost:3001
 
 There are two environments, each of which has a corresponding backend:
 
-- [test frontend](https://test-repairs.anikalegal.com), talks to [test backend](http://test-clerk.anikalegal.com)
-- [prod backend](https://repairs.anikalegal.com), talks to [prod backend](http://clerk.anikalegal.com)
+- [test frontend](https://test-intake.anikalegal.com), talks to [test backend](http://test-clerk.anikalegal.com)
+- [prod backend](https://intake.anikalegal.com), talks to [prod backend](http://clerk.anikalegal.com)
 
 Each of these environments correspond to a similarly named S3 bucket in the Anika AWS account.
 DNS is managed using Anika's CloudFlare account.
