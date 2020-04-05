@@ -43,6 +43,10 @@ const CLIENT_SPECIAL_CIRCUMSTANCES: Field = {
       value: 'Has mental illness or intellectual disability',
     },
     {
+      label: 'I have a Low Income Health Care card',
+      value: 'Has a low income health care card',
+    },
+    {
       label: 'I am from an Aboriginal or Torres Strait Islander background',
       value: 'Is from an Aboriginal or Torres Strait Islander background',
     },

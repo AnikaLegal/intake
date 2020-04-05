@@ -16,6 +16,7 @@ const ISSUE_TYPE: Field = {
   rules: [rules.isTruthyArray],
   options: [
     { label: 'Unable to work', value: 'Unable to work' },
+    { label: 'Reduced income', value: 'Reduced income' },
     { label: 'Emotional distress', value: 'Emotional distress' },
     {
       label: 'Another tenant has moved out',
@@ -33,6 +34,27 @@ const ISSUE_DESCRIPTION: Field = {
   rules: [rules.isTruthy],
 }
 
+const ISSUE_PHOTO: Field = {
+  name: 'ISSUE_PHOTO',
+  prompt: 'Please upload a photo of any evidence of how you have been affected',
+  help:
+    'For example, if you have lost your job and have received a letter of termination, please upload the a photo letter of termination. Providing evidence will increase your chance of obtaining a rent reduction.',
+  type: FIELD_TYPES.FILE,
+  rules: [],
+}
+
+const IS_JOB_SEEKER_ELIGIBLE: Field = {
+  rules: [rules.isTruthy],
+  name: 'IS_JOB_SEEKER_ELIGIBLE',
+  prompt: 'Are you eligible for Job Seeker or Job Keeper payments?',
+  type: FIELD_TYPES.RADIO_BTN,
+  rules: [rules.isTruthy],
+  options: [
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' },
+  ],
+}
+
 const ISSUE_EVICTION: Field = {
   rules: [rules.isTruthy],
   name: 'ISSUE_EVICTION',
@@ -46,8 +68,8 @@ const ISSUE_EVICTION: Field = {
   ],
 }
 
-const ISSUE_PHOTO: Field = {
-  name: 'ISSUE_PHOTO',
+const NOTICE_TO_VACATE_PHOTO: Field = {
+  name: 'NOTICE_TO_VACATE_PHOTO',
   when: Conditions.HAS_NOTICE_TO_VACATE,
   prompt: 'Please upload a photo of the Notice to Vacate',
   type: FIELD_TYPES.FILE,
@@ -57,5 +79,12 @@ const ISSUE_PHOTO: Field = {
 export const ISSUE: Form = {
   name: 'ISSUE',
   prompt: 'Tell us about your problem.',
-  fields: [ISSUE_TYPE, ISSUE_DESCRIPTION, ISSUE_EVICTION, ISSUE_PHOTO],
+  fields: [
+    ISSUE_TYPE,
+    ISSUE_DESCRIPTION,
+    ISSUE_PHOTO,
+    IS_JOB_SEEKER_ELIGIBLE,
+    ISSUE_EVICTION,
+    NOTICE_TO_VACATE_PHOTO,
+  ],
 }
