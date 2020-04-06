@@ -43,15 +43,16 @@ const ISSUE_PHOTO: Field = {
   rules: [],
 }
 
-const IS_JOB_SEEKER_ELIGIBLE: Field = {
+const IS_JOB_SEEKER_BENEFITS: Field = {
   rules: [rules.isTruthy],
-  name: 'IS_JOB_SEEKER_ELIGIBLE',
-  prompt: 'Are you eligible for Job Seeker or Job Keeper payments?',
+  name: 'IS_JOB_SEEKER_BENEFITS',
+  prompt: 'Will you be receiving Job Keeper or Job Seeker benefits?',
   type: FIELD_TYPES.RADIO_BTN,
   rules: [rules.isTruthy],
   options: [
     { label: 'Yes', value: 'yes' },
     { label: 'No', value: 'no' },
+    { label: "I'm not sure", value: 'not sure' },
   ],
 }
 
@@ -83,7 +84,7 @@ export const ISSUE: Form = {
     ISSUE_TYPE,
     ISSUE_DESCRIPTION,
     ISSUE_PHOTO,
-    IS_JOB_SEEKER_ELIGIBLE,
+    IS_JOB_SEEKER_BENEFITS,
     ISSUE_EVICTION,
     NOTICE_TO_VACATE_PHOTO,
   ],
