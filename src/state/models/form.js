@@ -107,16 +107,16 @@ const reducers = {
   },
   // User navigates to previous page.
   setPrevPage: (state: FormState): FormState => {
-    const nextPage = state.page - 1
+    const prevPage = state.page - 1
     const questions = getQuestions(state.topic)
     const forms = utils.getForms(questions)
-    const nextForm = forms[nextPage]
+    const nextForm = forms[prevPage]
     const validation = utils.getValidation(nextForm, state.answers)
     return {
       ...state,
-      page: nextPage,
-      hasNext: utils.getHasNext(nextPage, state.answers, forms),
-      hasPrev: utils.getHasPrev(nextPage, state.answers, forms),
+      page: prevPage,
+      hasNext: utils.getHasNext(prevPage, state.answers, forms),
+      hasPrev: utils.getHasPrev(prevPage, state.answers, forms),
       validation,
     }
   },

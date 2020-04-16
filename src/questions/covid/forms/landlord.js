@@ -50,7 +50,7 @@ const LANDLORD_CONTACT_DETAILS: Field = {
 }
 
 const LANDLORD_CONTACT_DETAILS_WHEN_AGENT: Field = {
-  name: 'LANDLORD_CONTACT_DETAILS',
+  name: 'LANDLORD_CONTACT_DETAILS_WHEN_AGENT',
   prompt: 'Please provide the contact details of your landlord.',
   help:
     "Your landlord's name will be on your lease agreement. It may be a the name of a person or a company. ",
