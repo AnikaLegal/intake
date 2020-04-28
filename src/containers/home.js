@@ -20,9 +20,9 @@ export const HomeContainer = ({ topic }: Props) => {
             <Message>
               <h1>Welcome to Anika</h1>
               <p>
-                Anika is an online platform that is used to provide legal advice
-                to members of the public. We believe that you will find Anika
-                helpful for three important reasons:
+                Anika Legal provides free legal advice to vulnerable Victorians.
+                We believe that you will find Anika helpful for three important
+                reasons:
               </p>
               <ul>
                 <li>
@@ -30,8 +30,8 @@ export const HomeContainer = ({ topic }: Props) => {
                   specifically tailored to your circumstances.
                 </li>
                 <li>
-                  <strong>Easy to access:</strong> Our materials are easy to
-                  understand and can be accessed online.
+                  <strong>Easy to access:</strong> The advice and assistance we
+                  give you are easy to understand and can be accessed online.
                 </li>
                 <li>
                   <strong>Free of cost:</strong> Our legal services are 100%
@@ -59,6 +59,7 @@ export const HomeContainer = ({ topic }: Props) => {
   )
 }
 
-const RENTAL_COPY = 'So you need something in your rental property to be fixed?'
+const RENTAL_COPY =
+  'So, you need something in your rental property to be fixed?'
 const COVID_COPY =
-  'So you have been affected by COVID-19 and are worried about meeting your rental payments?'
+  'So, you have been affected by COVID-19 and are worried about meeting your rental payments?'
