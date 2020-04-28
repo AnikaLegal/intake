@@ -20,9 +20,9 @@ export const HomeContainer = ({ topic }: Props) => {
             <Message>
               <h1>Welcome to Anika</h1>
               <p>
-                Anika Legal provides free legal advice to disadvantaged
-                Victorians. We believe that you will find Anika helpful for
-                three important reasons:
+                Anika provides free legal advice to disadvantaged Victorians. We
+                believe that you will find Anika helpful for three important
+                reasons:
               </p>
               <ul>
                 <li>
