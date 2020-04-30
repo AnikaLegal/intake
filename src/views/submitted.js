@@ -9,6 +9,7 @@ import {
   Button,
   Warning,
 } from 'features/generic'
+import { LINKS } from 'consts'
 
 export const SubmittedView = () => (
   <Layout vertical>
@@ -28,10 +29,7 @@ export const SubmittedView = () => (
           </p>
           <Warning>
             We can only assist you if you meet our{' '}
-            <a href="https://www.anikalegal.com/eligibility-criteria">
-              eligibility criteria
-            </a>
-            .
+            <a href={LINKS.ELIGIBILIY_PAGE}>eligibility criteria</a>.
           </Warning>
         </Message>
       </Page>
