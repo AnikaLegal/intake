@@ -115,7 +115,7 @@ export const SURVEY: Form = {
   name: 'SURVEY',
   prompt: 'We want to understand our clients better',
   help:
-    'So we can understand our clients better and provide the best form of assistance, we need to ask you a few more questions. We understand there may besome sensitivity around your answers. We will ensure that your answers are stored privately and securely.',
+    'So we can understand our clients better and provide the best form of assistance, we need to ask you a few more questions. We understand there may be some sensitivity around your answers. We will ensure that your answers are stored privately and securely.',
   fields: [
     CLIENT_OCCUPATION,
     CLIENT_WEEKLY_EARNINGS,

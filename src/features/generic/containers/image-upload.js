@@ -60,6 +60,7 @@ export const ImageUploadContainer = ({
         })
         .catch(e => {
           logError(e)
+          setLoading(false)
           setErrors([`Could not upload ${f.name}`])
         })
     }

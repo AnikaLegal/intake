@@ -49,7 +49,12 @@ const image = {
     return fetch(`${SERVER}${url}`, {
       method: 'POST',
       body: form,
-    }).then(r => r.json())
+    }).then(r => {
+      // Handle case where user tries to upload corrupt image,
+      // or renames their PDF to mydoc.png and tries to upload that.
+      if (r.status == 400) throw 400
+      return r.json()
+    })
   },
 }
 
