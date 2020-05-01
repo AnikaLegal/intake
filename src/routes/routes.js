@@ -11,6 +11,7 @@ export const ROUTES: Array<Route> = [
     children: [{ path: '/contact-landlord', view: 'ContactLandlordView' }],
   },
   { path: '/not-found', view: 'NotFoundView' },
+
   { path: '/:topic/help', view: 'HelpView' },
   { path: '/:topic/', view: 'HomeView' },
   { path: '/', view: 'HomeView' },

@@ -10,3 +10,4 @@ declare var SERVER: string
 declare var SENTRY_RELEASE: string
 declare var GA_ID: string
 declare var gtag: Function
+declare var fbq: Function

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
 
+import { events } from 'analytics'
 import { Sidebar } from 'containers'
 import { logError, flattenArray, entries } from 'utils'
 import { getQuestions } from 'questions'
@@ -24,8 +25,10 @@ type Props = {
 
 export const ReviewContainer = ({ submissionId }: Props) => {
   const dispatch = useDispatch()
-  const onSubmit = () =>
+  const onSubmit = () => {
     dispatch.form.submitSubmission(submissionId).catch(logError)
+    events.onFinishIntake(submissionId)
+  }
   const loadSubmission = () =>
     dispatch.form.loadSubmission(submissionId).catch(logError)
 

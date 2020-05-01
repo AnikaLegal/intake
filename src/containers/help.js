@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { events } from 'analytics'
 import { validate, flattenArray } from 'utils'
 import { NamedRedirect, VIEWS } from 'routes'
 import { getQuestions } from 'questions'
@@ -22,6 +23,7 @@ import type { Topic, Dispatch } from 'types'
 type Props = { topic: Topic }
 
 export const HelpContainer = ({ topic }: Props) => {
+  // FIXME: 404 if topic not in whitelist
   const dispatch: Dispatch = useDispatch()
   const sections = getQuestions(topic)
   const [submissionId, setSubmissionId] = useState<string | null>(null)
@@ -32,9 +34,10 @@ export const HelpContainer = ({ topic }: Props) => {
   // Create a new form submission.
   const onCreate = () => {
     setLoading(true)
-    dispatch.form
-      .createSubmission({ sections, topic })
-      .then(sub => setSubmissionId(sub.id))
+    dispatch.form.createSubmission({ sections, topic }).then(sub => {
+      setSubmissionId(sub.id)
+      events.onStartIntake(sub.id)
+    })
   }
   if (submissionId) {
     return (

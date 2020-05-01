@@ -23,6 +23,10 @@
     gtag('js', new Date());
     gtag('config', '{{ GA_ID }}');
   </script>
+  {{else}}
+  <script>
+    function gtag() {console.log('gtag event', arguments)}
+  </script>
   {{/if}}
   {{!-- End Google Analytics --}}
 
@@ -43,6 +47,10 @@
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id={{ FB_PIXEL_ID }}&ev=PageView&noscript=1"
   /></noscript>
+  {{else}}
+  <script>
+    function fbq() {console.log('Facebook event', arguments)}
+  </script>
   {{/if}}
   {{!-- end Facebook pixel --}}
 

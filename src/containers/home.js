@@ -11,6 +11,7 @@ import type { Topic } from 'types'
 type Props = { topic: Topic | void }
 
 export const HomeContainer = ({ topic }: Props) => {
+  // FIXME: 404 if topic not in whitelist
   return (
     <Layout vertical>
       <Header />
