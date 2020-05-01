@@ -53,6 +53,7 @@ export type Condition = Data => boolean
 
 export type Field = {
   name: string,
+  displayName: string | null,
   type: FieldType,
   prompt: string,
   help?: string,

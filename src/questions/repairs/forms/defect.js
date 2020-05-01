@@ -9,6 +9,8 @@ import type { Field, Form } from 'types'
 const DEFECT_TYPE: Field = {
   name: 'DEFECT_TYPE',
   prompt: 'What does the problem relate to?',
+  displayName: 'The defect in your home relates to',
+
   placeholder: 'Select the type of problem that needs to be repaired.',
   help:
     "You can select more than one problem. If none apply, please select 'Other'",
@@ -31,6 +33,7 @@ const DEFECT_TYPE: Field = {
 
 const DEFECT_DESCRIPTION: Field = {
   name: 'DEFECT_DESCRIPTION',
+  displayName: 'Problem description',
   prompt: 'Please provide a short description of the problem(s)',
   placeholder: 'Describe the problem here',
   type: FIELD_TYPES.TEXTAREA,
@@ -40,6 +43,7 @@ const DEFECT_DESCRIPTION: Field = {
 const DEFECT_DATE: Field = {
   rules: [rules.isTruthy],
   name: 'DEFECT_DATE',
+  displayName: 'The problem first arose on',
   prompt: 'When did the problem arise?',
   help:
     "If you don't know the exact date, that's okay. An approximate date is fine.",
@@ -48,6 +52,7 @@ const DEFECT_DATE: Field = {
 
 const DEFECT_PHOTO: Field = {
   name: 'DEFECT_PHOTO',
+  displayName: 'Photo(s) of the problem',
   prompt: 'If you have any photos of the problem(s), please upload them',
   help:
     'If you do not have any photos of the problem(s) to upload, that’s completely okay',

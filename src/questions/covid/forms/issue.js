@@ -10,6 +10,7 @@ const ISSUE_TYPE: Field = {
   name: 'ISSUE_TYPE',
   prompt: 'How have you been affected by COVID-19?',
   placeholder: 'Select the type of problem.',
+  displayName: 'COVID-19 has caused you these issues',
   help:
     "You can select more than one problem. If none apply, please select 'Other'",
   type: FIELD_TYPES.MULTI_DROPDOWN,
@@ -28,6 +29,7 @@ const ISSUE_TYPE: Field = {
 
 const ISSUE_DESCRIPTION: Field = {
   name: 'ISSUE_DESCRIPTION',
+  displayName: 'Description of your problem',
   prompt: 'Please provide a short description of how you have been affected.',
   placeholder: 'Describe how you have been affected here',
   type: FIELD_TYPES.TEXTAREA,
@@ -36,6 +38,7 @@ const ISSUE_DESCRIPTION: Field = {
 
 const ISSUE_PHOTO: Field = {
   name: 'ISSUE_PHOTO',
+  displayName: 'Photo(s) of evidence of how you have been affected',
   prompt: 'Please upload a photo of any evidence of how you have been affected',
   help:
     'For example, if you have lost your job and have received a letter of termination, please upload the a photo letter of termination. Providing evidence will increase your chance of obtaining a rent reduction.',
@@ -46,6 +49,7 @@ const ISSUE_PHOTO: Field = {
 const IS_JOB_SEEKER_BENEFITS: Field = {
   rules: [rules.isTruthy],
   name: 'IS_JOB_SEEKER_BENEFITS',
+  displayName: 'You are receiving Job Keeper/Seeker benefits',
   prompt: 'Will you be receiving Job Keeper or Job Seeker benefits?',
   type: FIELD_TYPES.RADIO_BTN,
   rules: [rules.isTruthy],
@@ -59,6 +63,7 @@ const IS_JOB_SEEKER_BENEFITS: Field = {
 const ISSUE_EVICTION: Field = {
   rules: [rules.isTruthy],
   name: 'ISSUE_EVICTION',
+  displayName: 'The landlord has tried to evict you with a Notice to Vacate',
   prompt:
     'Has the landlord tried to evict you by providing you with a Notice to Vacate?',
   type: FIELD_TYPES.RADIO_BTN,
@@ -71,6 +76,7 @@ const ISSUE_EVICTION: Field = {
 
 const NOTICE_TO_VACATE_PHOTO: Field = {
   name: 'NOTICE_TO_VACATE_PHOTO',
+  displayName: 'Photo(s) of the Notice to Vacate',
   when: Conditions.HAS_NOTICE_TO_VACATE,
   prompt: 'Please upload a photo of the Notice to Vacate',
   type: FIELD_TYPES.FILE,

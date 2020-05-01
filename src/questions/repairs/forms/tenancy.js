@@ -9,6 +9,7 @@ import type { Field, Form } from 'types'
 const CLIENT_IS_TENANT: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_IS_TENANT',
+  displayName: 'You are a tenant on the lease',
   prompt: 'Are you named as a tenant on the lease?',
   help: "It's likely that you are named as a tenant if you signed the lease.",
   type: FIELD_TYPES.RADIO_BTN,
@@ -20,6 +21,7 @@ const CLIENT_IS_TENANT: Field = {
 const TENANCY_START_DATE: Field = {
   rules: [rules.isTruthy],
   name: 'TENANCY_START_DATE',
+  displayName: 'Tenancy start date',
   prompt: 'When did you start living at the rental property?',
   help:
     "If you don't know the exact date, that's okay. An approximate date is fine.",

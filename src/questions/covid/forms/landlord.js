@@ -9,6 +9,7 @@ import type { Field, Form } from 'types'
 const LANDLORD_NAME: Field = {
   name: 'LANDLORD_NAME',
   prompt: 'Full name',
+  displayName: "Your landlord's name",
   rules: [rules.isTruthy],
   type: FIELD_TYPES.TEXT,
   placeholder: 'Enter their full name',
@@ -16,6 +17,7 @@ const LANDLORD_NAME: Field = {
 
 const LANDLORD_ADDRESS: Field = {
   name: 'LANDLORD_ADDRESS',
+  displayName: "Your landlord's address",
   prompt: 'Address',
   rules: [],
   type: FIELD_TYPES.TEXT,
@@ -24,6 +26,7 @@ const LANDLORD_ADDRESS: Field = {
 
 const LANDLORD_EMAIL: Field = {
   name: 'LANDLORD_EMAIL',
+  displayName: "Your landlord's email",
   type: FIELD_TYPES.TEXT,
   rules: [rules.isTruthy],
   prompt: 'Email',
@@ -33,6 +36,7 @@ const LANDLORD_EMAIL: Field = {
 const LANDLORD_PHONE: Field = {
   name: 'LANDLORD_PHONE',
   type: FIELD_TYPES.TEXT,
+  displayName: "Your landlord's phone number",
   prompt: 'Phone',
   rules: [],
   placeholder: 'Enter their phone number',
@@ -40,6 +44,7 @@ const LANDLORD_PHONE: Field = {
 
 const LANDLORD_CONTACT_DETAILS: Field = {
   name: 'LANDLORD_CONTACT_DETAILS',
+  displayName: null,
   prompt: 'Please provide the contact details of your landlord.',
   help:
     "Your landlord's name will be on your lease agreement. It may be a the name of a person or a company. ",
@@ -51,6 +56,7 @@ const LANDLORD_CONTACT_DETAILS: Field = {
 
 const LANDLORD_CONTACT_DETAILS_WHEN_AGENT: Field = {
   name: 'LANDLORD_CONTACT_DETAILS_WHEN_AGENT',
+  displayName: null,
   prompt: 'Please provide the contact details of your landlord.',
   help:
     "Your landlord's name will be on your lease agreement. It may be a the name of a person or a company. ",
@@ -63,6 +69,7 @@ const LANDLORD_CONTACT_DETAILS_WHEN_AGENT: Field = {
 const LANDLORD_HAS_AGENT: Field = {
   name: 'LANDLORD_HAS_AGENT',
   rules: [rules.isTruthy],
+  displayName: 'Your landlord uses an agent',
   prompt: 'Does your landlord use an agent to manage the property?',
   help:
     'If your landlord uses an agent to manage the property, then you will have received letters or communications from the agent already.',
@@ -75,6 +82,7 @@ const LANDLORD_HAS_AGENT: Field = {
 
 const AGENT_NAME: Field = {
   name: 'AGENT_NAME',
+  displayName: "Your agent's name",
   prompt: 'Full name',
   rules: [rules.isTruthy],
   type: FIELD_TYPES.TEXT,
@@ -83,6 +91,7 @@ const AGENT_NAME: Field = {
 
 const AGENT_COMPANY: Field = {
   name: 'AGENT_COMPANY',
+  displayName: "Your agent's company",
   prompt: 'Company',
   rules: [rules.isTruthy],
   type: FIELD_TYPES.TEXT,
@@ -91,6 +100,7 @@ const AGENT_COMPANY: Field = {
 
 const AGENT_ADDRESS: Field = {
   name: 'AGENT_ADDRESS',
+  displayName: "Your agent's address",
   prompt: 'Address',
   rules: [],
   type: FIELD_TYPES.TEXT,
@@ -99,6 +109,7 @@ const AGENT_ADDRESS: Field = {
 
 const AGENT_EMAIL: Field = {
   name: 'AGENT_EMAIL',
+  displayName: "Your agent's email",
   type: FIELD_TYPES.TEXT,
   rules: [rules.isTruthy],
   prompt: 'Email',
@@ -107,6 +118,7 @@ const AGENT_EMAIL: Field = {
 
 const AGENT_PHONE: Field = {
   name: 'AGENT_PHONE',
+  displayName: "Your agent's phone number",
   type: FIELD_TYPES.TEXT,
   prompt: 'Phone',
   rules: [],
@@ -115,6 +127,7 @@ const AGENT_PHONE: Field = {
 
 const AGENT_CONTACT_DETAILS: Field = {
   name: 'AGENT_CONTACT_DETAILS',
+  displayName: null,
   prompt: "Please provide the contact details of your landlord's agent.",
   help:
     "We don't need all of your agent's details. If you don't have some of this information, you can leave the fields blank.",

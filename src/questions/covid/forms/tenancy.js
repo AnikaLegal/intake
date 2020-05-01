@@ -8,6 +8,7 @@ import type { Field, Form } from 'types'
 
 const CLIENT_IS_TENANT: Field = {
   rules: [rules.isTruthy],
+  displayName: 'You are named as a tenant on the lease',
   name: 'CLIENT_IS_TENANT',
   prompt: 'Are you named as a tenant on the lease?',
   help: "It's likely that you are named as a tenant if you signed the lease.",
@@ -20,6 +21,7 @@ const CLIENT_IS_TENANT: Field = {
 const TENANCY_START_DATE: Field = {
   rules: [rules.isTruthy],
   name: 'TENANCY_START_DATE',
+  displayName: 'When you started living at the rental property',
   prompt: 'When did you start living at the rental property?',
   help:
     "If you don't know the exact date, that's okay. An approximate date is fine.",

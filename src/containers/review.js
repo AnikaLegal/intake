@@ -17,7 +17,15 @@ import {
   Divider,
 } from 'features/generic'
 import { NamedRedirect, NamedLink, VIEWS } from 'routes'
-import type { State, Data, Section, FormState, Field, Dispatch } from 'types'
+import type {
+  State,
+  Data,
+  Section,
+  FormState,
+  Field,
+  Form,
+  Dispatch,
+} from 'types'
 
 type Props = {
   submissionId: string,
@@ -68,26 +76,11 @@ export const ReviewContainer = ({ submissionId }: Props) => {
           <Message>
             <h1>Review your answers</h1>
             {questions.map(section => (
-              <div key={section.name}>
-                {section.forms.map(form => (
-                  <div key={form.name}>
-                    {form.fields
-                      .reduce(
-                        (a, f) => (f.fields ? [...a, ...f.fields] : [...a, f]),
-                        []
-                      )
-                      .filter(field => field.type !== 'FILE')
-                      .filter(field => formState.answers[field.name])
-                      .map(field => (
-                        <FieldReview
-                          key={field.name}
-                          field={field}
-                          answers={formState.answers}
-                        />
-                      ))}
-                  </div>
-                ))}
-              </div>
+              <SectionReview
+                key={`section-${section.name}`}
+                section={section}
+                answers={formState.answers}
+              />
             ))}
             <Divider />
             <NamedLink to={VIEWS.FormView} params={{ submissionId }}>
@@ -103,21 +96,65 @@ export const ReviewContainer = ({ submissionId }: Props) => {
   )
 }
 
+const SectionReview = ({
+  section,
+  answers,
+}: {
+  section: Section,
+  answers: Data,
+}) => (
+  <SectionEl>
+    <SectionHeader>
+      <h4>{section.name}</h4>
+    </SectionHeader>
+    {section.forms.map(form => (
+      <FormReview key={`form-${form.name}`} form={form} answers={answers} />
+    ))}
+  </SectionEl>
+)
+
+const SectionEl = styled.div`
+  border: solid 3px #008897;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+`
+
+const SectionHeader = styled.div`
+  background-color: #008897;
+  padding: 0.5rem 1rem;
+  h4 {
+    color: white;
+    margin: 0;
+  }
+`
+
+const FormReview = ({ form, answers }: { form: Form, answers: Data }) => (
+  <FormEl key={form.name}>
+    {form.fields
+      .reduce((a, f) => (f.fields ? [...a, ...f.fields] : [...a, f]), [])
+      .filter(field => field.type !== 'FILE')
+      .filter(field => answers[field.name])
+      .map(field => (
+        <FieldReview
+          key={`field-${field.name}`}
+          field={field}
+          answers={answers}
+        />
+      ))}
+  </FormEl>
+)
+
+const FormEl = styled.div`
+  padding: 0 1rem;
+`
+
 const FieldReview = ({ field, answers }: { field: Field, answers: Data }) => {
   const answer = answers[field.name]
   const answerText = Array.isArray(answer) ? answer.join(', ') : answer
   return (
-    <FieldReviewEl>
-      <Prompt>{field.prompt}</Prompt>
+    <p>
+      <strong>{field.displayName}: </strong>
       {answerText}
-    </FieldReviewEl>
+    </p>
   )
 }
-
-const Prompt = styled.div`
-  font-weight: bold;
-  margin-bottom: 0.4rem;
-`
-const FieldReviewEl = styled.div`
-  margin-bottom: 2rem;
-`

@@ -4,10 +4,12 @@ import { FIELD_TYPES } from 'consts'
 import { rules } from 'utils'
 
 import * as Conditions from '../conditions'
+import { CLIENT_CALL_TIME } from 'questions/generic'
 import type { Field, Form } from 'types'
 
 const CAN_PAY_QUOTE: Field = {
   name: 'CAN_PAY_QUOTE',
+  displayName: 'You can pay the quote',
   prompt:
     'Would you be willing to pay for the repairs yourself and then claim reimbursment from the landlord?',
   help:
@@ -23,6 +25,7 @@ const CAN_PAY_QUOTE: Field = {
 const IS_VCAT_OK: Field = {
   name: 'IS_VCAT_OK',
   rules: [rules.isTruthy],
+  displayName: 'You are willing to go to VCAT',
   prompt:
     'Would you be willing to go to VCAT to force your landlord to fix the problem?',
   help:
@@ -38,6 +41,7 @@ const IS_VCAT_OK: Field = {
 const VCAT_AVOID_REASON: Field = {
   name: 'VCAT_AVOID_REASON',
   rules: [rules.isTruthy],
+  displayName: 'Why you prefer not to go to VCAT',
   when: Conditions.VCAT_NOT_OK,
   prompt:
     'Can you please explain why you would prefer not to bring a case against your landlord at VCAT?',
@@ -47,6 +51,8 @@ const VCAT_AVOID_REASON: Field = {
 const LETTER_ASSERTS_PROCEEDINGS_RIGHT: Field = {
   rules: [rules.isTruthy],
   name: 'LETTER_ASSERTS_PROCEEDINGS_RIGHT',
+  displayName:
+    'You would like to mention your right to commence legal proceedings against your landlord in the letter',
   prompt:
     'If a letter needs to be sent to your landlord, would you like the letter to say you have the right to commence legal proceedings against your landlord?',
   help:
@@ -68,6 +74,7 @@ const LETTER_ASSERTS_PROCEEDINGS_RIGHT: Field = {
 const CLIENT_BREACHED_LEASE: Field = {
   rules: [rules.isTruthy],
   name: 'CLIENT_BREACHED_LEASE',
+  displayName: 'You have recently breached your lease',
   prompt: 'Have you recently breached your lease?',
   help:
     'Breaches may include not paying rent on time or sub-letting the premises to a friend without your landlord’s consent. We will keep your answer strictly confidential and won’t tell your landlord. Telling us this information will help us to determine the most appropriate course of action for you to take.',
@@ -75,33 +82,6 @@ const CLIENT_BREACHED_LEASE: Field = {
   options: [
     { label: 'Yes', value: 'yes' },
     { label: 'No', value: 'no' },
-  ],
-}
-
-const CLIENT_CALL_TIME: Field = {
-  rules: [rules.isTruthy],
-  name: 'CLIENT_CALL_TIME',
-  prompt: 'When is your preferred time for us to call you?',
-  help:
-    'One of our friendly team members will call you to introduce themselves and to discuss how we can help you.',
-  type: FIELD_TYPES.MULTI_SELECT,
-  options: [
-    {
-      label: 'Monday – Friday (between 9am and 5pm)',
-      value: 'Monday – Friday (between 9am and 5pm)',
-    },
-    {
-      label: 'Monday – Friday (between 5pm and 8pm)',
-      value: 'Monday – Friday (between 5pm and 8pm)',
-    },
-    {
-      label: 'Saturday (between 9am and 5pm)',
-      value: 'Saturday (between 9am and 5pm)',
-    },
-    {
-      label: 'Sunday (between 9am and 5pm)',
-      value: 'Sunday (between 9am and 5pm)',
-    },
   ],
 }
 

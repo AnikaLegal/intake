@@ -8,6 +8,7 @@ import type { Field, Form } from 'types'
 
 const HAS_QUOTE_BOOL: Field = {
   name: 'HAS_QUOTE',
+  displayName: 'You have obtained a quote',
   prompt:
     'Have you obtained  a quote (i.e. an estimate) for the cost of the repairs to fix the problem(s)?',
   help:
@@ -28,6 +29,7 @@ const HAS_QUOTE_BOOL: Field = {
 
 const QUOTE_COST: Field = {
   name: 'QUOTE_COST',
+  displayName: 'The quote amount for the repairs',
   prompt: 'What was the quote for the cost of the repairs?',
   when: Conditions.HAS_QUOTE,
   type: FIELD_TYPES.DOLLAR,

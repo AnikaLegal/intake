@@ -2,11 +2,12 @@
 import type { Section } from 'types'
 
 import * as Forms from './forms'
+import { SURVEY, PERSONAL_DETAILS } from 'questions/generic'
 
 export const REPAIRS_SECTIONS: Array<Section> = [
   {
     name: 'Your details',
-    forms: [Forms.PERSONAL_DETAILS, Forms.TENANCY_DETAILS],
+    forms: [PERSONAL_DETAILS, Forms.TENANCY_DETAILS],
   },
   {
     name: 'Your rental issue',
@@ -22,6 +23,6 @@ export const REPAIRS_SECTIONS: Array<Section> = [
   },
   {
     name: 'Your preferences',
-    forms: [Forms.PERSONAL_PREFERENCES, Forms.SURVEY],
+    forms: [Forms.PERSONAL_PREFERENCES, SURVEY],
   },
 ]

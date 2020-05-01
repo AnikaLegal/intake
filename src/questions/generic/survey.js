@@ -3,11 +3,12 @@
 import { FIELD_TYPES } from 'consts'
 import { rules } from 'utils'
 
-import * as Conditions from '../conditions'
+import * as Conditions from './conditions'
 import type { Field, Form } from 'types'
 
 const CLIENT_OCCUPATION: Field = {
   name: 'CLIENT_OCCUPATION',
+  displayName: 'Your occupation',
   rules: [],
   prompt: 'What is your occupation?',
   type: FIELD_TYPES.TEXT,
@@ -15,12 +16,14 @@ const CLIENT_OCCUPATION: Field = {
 const CLIENT_WEEKLY_EARNINGS: Field = {
   name: 'CLIENT_WEEKLY_EARNINGS',
   rules: [rules.isTruthy],
+  displayName: 'Your average weekly earnings',
   prompt: 'How much money do you earn per week (on average)?',
   type: FIELD_TYPES.DOLLAR,
 }
 const CLIENT_SPECIAL_CIRCUMSTANCES: Field = {
   name: 'CLIENT_SPECIAL_CIRCUMSTANCES',
   rules: [],
+  displayName: 'Your special circumstances',
   prompt: 'Do you have any special circumstances?',
   type: FIELD_TYPES.MULTI_SELECT,
   options: [
@@ -61,6 +64,7 @@ const CLIENT_SPECIAL_CIRCUMSTANCES: Field = {
 const CLIENT_SPECIAL_CIRCUMSTANCES_DETAILS: Field = {
   name: 'CLIENT_SPECIAL_CIRCUMSTANCES_DETAILS',
   rules: [],
+  displayName: 'Details about your special circumstances',
   prompt:
     'Tell us about the other personal circumstance that makes you disadvantaged or vulnerable',
   type: FIELD_TYPES.TEXTAREA,
@@ -70,13 +74,13 @@ const CLIENT_SPECIAL_CIRCUMSTANCES_DETAILS: Field = {
 const CLIENT_REFERRAL: Field = {
   rules: [],
   name: 'CLIENT_REFERRAL',
+  displayName: 'How you heard about Anika',
   type: FIELD_TYPES.DROPDOWN,
   prompt: 'How did you hear about Anika?',
   options: [
-    { label: 'Facebook', value: 'Facebook' },
-    { label: 'Instagram', value: 'Instagram' },
     { label: 'Google', value: 'Google' },
-    { label: 'Flyer', value: 'Flyer' },
+    { label: 'Social media', value: 'Social media' },
+    { label: 'Online ad', value: 'Online ad' },
     { label: 'Word of mouth', value: 'Word of mouth' },
     { label: 'Referral from a charity', value: 'Charity' },
     {
@@ -89,6 +93,7 @@ const CLIENT_REFERRAL: Field = {
 
 const CLIENT_REFERRAL_CHARITY: Field = {
   rules: [rules.isTruthy],
+  displayName: 'The charity that referred you',
   name: 'CLIENT_REFERRAL_CHARITY',
   type: FIELD_TYPES.TEXT,
   prompt: 'What was the name of the charity that referred you?',
@@ -97,6 +102,7 @@ const CLIENT_REFERRAL_CHARITY: Field = {
 
 const CLIENT_REFERRAL_LEGAL_CENTRE: Field = {
   rules: [rules.isTruthy],
+  displayName: 'The legal centre that referred you',
   name: 'CLIENT_REFERRAL_LEGAL_CENTRE',
   type: FIELD_TYPES.TEXT,
   prompt: 'What was the name of the legal center that referred you?',
@@ -105,6 +111,7 @@ const CLIENT_REFERRAL_LEGAL_CENTRE: Field = {
 
 const CLIENT_REFERRAL_OTHER: Field = {
   rules: [],
+  displayName: 'How you heard about us',
   name: 'CLIENT_REFERRAL_OTHER',
   type: FIELD_TYPES.TEXT,
   prompt: 'Can you tell us more about how you hear about us?',
