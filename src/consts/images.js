@@ -1,5 +1,6 @@
 // @flow
 export const IMAGES = {
+  PDF: `${STATIC_URL}images/pdf-file.png`,
   LOGO: {
     ICON: {
       COLOR: {

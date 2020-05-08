@@ -8,7 +8,7 @@ import { storiesOf } from '@storybook/react'
 import { text, boolean } from '@storybook/addon-knobs'
 
 import { TestBox } from './utils'
-import { ImageUploadContainer } from '../containers'
+import { FileUploadContainer } from '../containers'
 import {
   Button,
   DollarInput,
@@ -26,25 +26,26 @@ import {
 
 export const stories = storiesOf('Inputs', module)
 
-stories.add('Image Uploader', () => (
+stories.add('File Uploader', () => (
   <TestBox width={600} height={300}>
-    <ImageUploadContainerContainer />
+    <FileUploadContainerContainer />
   </TestBox>
 ))
-const ImageUploadContainerContainer = () => {
+const FileUploadContainerContainer = () => {
   const [val, setVal] = useState([])
   return (
     <React.Fragment>
-      <ImageUploadContainer
-        upload={dummyUpload}
-        images={val}
+      <FileUploadContainer
+        uploadImage={buildDummyUpload('image')}
+        uploadDoc={buildDummyUpload('file')}
+        files={val}
         onChange={setVal}
       />
     </React.Fragment>
   )
 }
 
-const dummyUpload = (file: File) => {
+const buildDummyUpload = (key: string) => (file: File): any => {
   return new Promise(r => {
     const reader = new FileReader()
     reader.addEventListener(
@@ -52,7 +53,7 @@ const dummyUpload = (file: File) => {
       () => {
         r({
           id: uuid(),
-          image: String(reader.result),
+          [key]: String(reader.result),
         })
       },
       false

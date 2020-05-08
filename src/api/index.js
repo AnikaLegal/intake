@@ -2,7 +2,14 @@
 import { http } from './http'
 import Cookies from 'universal-cookie'
 
-import type { Data, ImageUpload, Submission, Section, Topic } from 'types'
+import type {
+  Data,
+  DocumentUpload,
+  ImageUpload,
+  Submission,
+  Section,
+  Topic,
+} from 'types'
 
 const cookies = new Cookies()
 
@@ -57,8 +64,24 @@ const image = {
     })
   },
 }
+const document = {
+  create: (file: File): Promise<DocumentUpload> => {
+    const url = '/api/files/'
+    const form = new FormData()
+    form.append('file', file)
+    return fetch(`${SERVER}${url}`, {
+      method: 'POST',
+      body: form,
+    }).then(r => {
+      // Handle case where user tries to upload bad file (?)
+      if (r.status == 400) throw 400
+      return r.json()
+    })
+  },
+}
 
 export const api = {
   questions,
   image,
+  document,
 }

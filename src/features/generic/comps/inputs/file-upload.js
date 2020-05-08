@@ -3,28 +3,31 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import type { Ref } from 'react'
 
-import type { ImageUpload as ImageUploadType } from 'types'
+import type { FileUpload as FileUploadType } from 'types'
+import { IMAGES } from 'consts'
 import { Button } from './button'
+
+const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg']
 
 type Props = {
   disabled: boolean,
   isLoading: boolean,
-  images: Array<ImageUploadType>,
+  files: Array<FileUploadType>,
   errors: Array<string>,
   onUpload: any => any,
   onSelect: any => void,
-  onDelete: ImageUploadType => () => any,
+  onDelete: FileUploadType => () => any,
   inputRef: Ref<any>,
   isLoading: boolean,
 }
 
-export const ImageUpload = ({
+export const FileUpload = ({
   onUpload,
   onSelect,
   disabled,
   onDelete,
   errors,
-  images,
+  files,
   inputRef,
   isLoading,
 }: Props) => (
@@ -34,37 +37,56 @@ export const ImageUpload = ({
       {isLoading ? (
         'Uploading...'
       ) : (
-        <span>Upload {images.length > 0 && 'another'} file</span>
+        <span>Upload {files.length > 0 && 'another'} file</span>
       )}
     </Button>
     {errors.length > 0 && errors.map(e => <ErrorMsg key={e}>{e}</ErrorMsg>)}
-    {images.map(i => (
+    {files.map(f => (
       <UploadedFile
-        key={i.image}
+        key={f.file || f.image}
         disabled={disabled}
-        image={i}
-        onDelete={onDelete(i)}
+        file={f}
+        onDelete={onDelete(f)}
       />
     ))}
   </div>
 )
 
 type FileProps = {
-  image: ImageUploadType,
+  file: FileUploadType,
   disabled: boolean,
   onDelete: () => any,
 }
 
-const UploadedFile = ({ image, disabled, onDelete }: FileProps) => (
-  <UploadedFileEl>
-    <img src={image.image} className="preview" />
-    {!disabled && (
-      <div onClick={onDelete} className="delete">
-        &times;
-      </div>
-    )}
-  </UploadedFileEl>
-)
+const UploadedFile = ({ file, disabled, onDelete }: FileProps) => {
+  if (file.image) {
+    return (
+      <UploadedFileEl>
+        <a href={file.image} target="_blank">
+          <img src={file.image} className="preview" />
+        </a>
+        {!disabled && (
+          <div onClick={onDelete} className="delete">
+            &times;
+          </div>
+        )}
+      </UploadedFileEl>
+    )
+  } else {
+    return (
+      <UploadedFileEl>
+        <a href={file.file} target="_blank">
+          <img src={IMAGES.PDF} className="preview pdf" />
+        </a>
+        {!disabled && (
+          <div onClick={onDelete} className="delete">
+            &times;
+          </div>
+        )}
+      </UploadedFileEl>
+    )
+  }
+}
 
 const HiddenInput = styled.input`
   display: none;
@@ -78,26 +100,17 @@ const UploadedFileEl = styled.div`
   display: flex;
   align-items: center;
   height: ${IMAGE_SIZE}px;
-  .preview,
-  .blank {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  .preview {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
     border-radius: 6px;
     height: ${IMAGE_SIZE}px;
     width: ${IMAGE_SIZE}px;
     margin-right: 2rem;
-  }
-  .preview {
     object-fit: cover;
-  }
-  .blank {
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    img {
-      opacity: 0.5;
-      width: ${IMAGE_SIZE - 40}px;
-      height: ${IMAGE_SIZE - 40}px;
+    &.pdf {
+      opacity: 0.4;
+      padding: 15px;
+      box-sizing: border-box;
     }
   }
   .delete {

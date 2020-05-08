@@ -22,7 +22,7 @@ import {
   ButtonChoiceInput,
   RadioInput,
   NoAnimation,
-  ImageUploadContainer,
+  FileUploadContainer,
 } from 'features/generic'
 import type { Field as FieldType, Data, Validations } from 'types'
 
@@ -238,9 +238,10 @@ const FieldInput = ({
       )
     case FIELD_TYPES.FILE:
       return (
-        <ImageUploadContainer
-          upload={api.image.create}
-          images={value || []}
+        <FileUploadContainer
+          uploadDoc={api.document.create}
+          uploadImage={api.image.create}
+          files={value || []}
           onChange={onChange}
         />
       )

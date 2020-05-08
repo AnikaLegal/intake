@@ -78,10 +78,19 @@ export type Section = {
   forms: Array<Form>,
 }
 
+export type DocumentUpload = {
+  id: string,
+  file: string,
+  image: void,
+}
+
 export type ImageUpload = {
   id: string,
   image: string,
+  file: void,
 }
+
+export type FileUpload = ImageUpload | DocumentUpload
 
 type Answer = {
   name: string,

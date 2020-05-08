@@ -3,22 +3,29 @@ import React, { useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { logError } from 'utils'
-import type { ImageUpload as ImageUploadType } from 'types'
+import type {
+  FileUpload as FileUploadType,
+  ImageUpload,
+  DocumentUpload,
+} from 'types'
 
-import { Button, ImageUpload } from '../comps'
+import { Button, FileUpload } from '../comps'
 
-const ALLOWED_IMAGE_TYPES = ['png', 'jpg', 'jpeg']
+const ALLOWED_FILE_TYPES = ['png', 'jpg', 'jpeg', 'pdf']
+const IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 type Props = {
-  images: Array<ImageUploadType>,
+  files: Array<FileUploadType>,
   onChange: any => void,
-  upload: File => Promise<ImageUploadType>,
+  uploadDoc: File => Promise<DocumentUpload>,
+  uploadImage: File => Promise<ImageUpload>,
 }
 
-export const ImageUploadContainer = ({
-  images,
+export const FileUploadContainer = ({
+  files,
   onChange,
-  upload,
+  uploadDoc,
+  uploadImage,
   disabled,
 }: Props) => {
   const ref = useRef(null)
@@ -27,8 +34,8 @@ export const ImageUploadContainer = ({
   const onSelect = (e: SyntheticEvent<HTMLInputElement>) => {
     ref.current && ref.current.click()
   }
-  const onDelete = (image: ImageUploadType) => () => {
-    onChange(images.filter(i => i.id !== image.id))
+  const onDelete = (file: FileUploadType) => () => {
+    onChange(files.filter(i => i.id !== file.id))
     if (ref.current) {
       ref.current.value = null
     }
@@ -41,22 +48,24 @@ export const ImageUploadContainer = ({
     const f = fileList[0]
     // Ensure only allowed files are can be uploaded.
     const fileExtension = f.name.split('.').pop()
-    const isFileTypeOk = ALLOWED_IMAGE_TYPES.some(
+    const isFileTypeOk = ALLOWED_FILE_TYPES.some(
       ext => ext === fileExtension.toLowerCase()
     )
+    const isImage = IMAGE_FILE_TYPES.includes(fileExtension)
     if (!isFileTypeOk) {
       // Reject the file, spit in the eye of our user.
-      const allowedList = ALLOWED_IMAGE_TYPES.map(t => `.${t}`).join(', ')
+      const allowedList = ALLOWED_FILE_TYPES.map(t => `.${t}`).join(', ')
       const msg = `The file ${f.name} cannot be uploaded. Please attach only files of type ${allowedList}.`
       setErrors([msg])
     } else {
       // Accept the file, upload it.
+      const upload = isImage ? uploadImage : uploadDoc
       setLoading(true)
       upload(f)
-        .then(image => {
+        .then(file => {
           setLoading(false)
           setErrors([])
-          onChange([...images, image])
+          onChange([...files, file])
         })
         .catch(e => {
           logError(e)
@@ -66,14 +75,14 @@ export const ImageUploadContainer = ({
     }
   }
   return (
-    <ImageUpload
+    <FileUpload
       onUpload={onUpload}
       onSelect={onSelect}
       onDelete={onDelete}
       disabled={false}
       isLoading={isLoading}
       errors={errors}
-      images={images}
+      files={files}
       inputRef={ref}
     />
   )
