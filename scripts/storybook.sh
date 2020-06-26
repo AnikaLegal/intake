@@ -9,6 +9,7 @@ yarn build-storybook \
     --static-dir static
 
 aws s3 cp \
+    --profile anika \
     --recursive \
     --acl public-read \
     ./story \
