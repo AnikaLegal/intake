@@ -65,7 +65,14 @@ export const ReviewContainer = ({ submissionId }: Props) => {
     )
   }
   if (formState.isComplete) {
-    return <NamedRedirect to={VIEWS.SubmittedView} />
+    return (
+      <NamedRedirect
+        to={VIEWS.SubmittedView}
+        params={{
+          submissionId: formState.id,
+        }}
+      />
+    )
   }
   return (
     <Layout vertical>

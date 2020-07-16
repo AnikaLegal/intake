@@ -32,7 +32,14 @@ export const FormContainer = ({ submissionId }: Props) => {
   }, [])
   // Redirect users to out-of-form message pages.
   if (formState.isComplete) {
-    return <NamedRedirect to={VIEWS.SubmittedView} />
+    return (
+      <NamedRedirect
+        to={VIEWS.SubmittedView}
+        params={{
+          submissionId: formState.id,
+        }}
+      />
+    )
   }
   if (redirect) {
     return <NamedRedirect push to={VIEWS[redirect]} />
