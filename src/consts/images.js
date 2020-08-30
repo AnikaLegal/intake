@@ -1,6 +1,19 @@
 // @flow
 export const IMAGES = {
-  PDF: `${STATIC_URL}images/pdf-file.png`,
+  SWOOSH: {
+    LEFT: `${STATIC_URL}images/swoosh/swoosh-left.svg`,
+    RIGHT: `${STATIC_URL}images/swoosh/swoosh-right.svg`,
+    LEFT_MOBILE: `${STATIC_URL}images/swoosh/swoosh-left-mobile.svg`,
+    RIGHT_MOBILE: `${STATIC_URL}images/swoosh/swoosh-right-mobile.svg`,
+    LEFT_MOBILE_SMALL: `${STATIC_URL}images/swoosh/swoosh-left-mobile-small.svg`,
+    RIGHT_MOBILE_SMALL: `${STATIC_URL}images/swoosh/swoosh-right-mobile-small.svg`,
+  },
+  HEROES: {
+    DESK_LADY: `${STATIC_URL}images/heroes/desk-lady.svg`,
+    PAPER_GUY: `${STATIC_URL}images/heroes/paper-guy.svg`,
+    PHONE_LADY: `${STATIC_URL}images/heroes/phone-lady.svg`,
+    SHRUB_GUY: `${STATIC_URL}images/heroes/shrub-guy.svg`,
+  },
   LOGO: {
     ICON: {
       COLOR: {

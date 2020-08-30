@@ -1,7 +1,8 @@
 // @flow
 export const theme = {
   screen: {
-    mobile: '600px',
+    mobile: '800px',
+    small: '350px',
   },
   color: {
     white: '#fff',
@@ -25,8 +26,8 @@ export const theme = {
     },
   },
   text: {
-    title: '24px',
-    subtitle: '20px',
+    title: '1.2rem',
+    subtitle: '1rem',
   },
   shadow:
     '0px 10px 20px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);',

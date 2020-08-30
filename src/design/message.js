@@ -2,7 +2,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
-import { Icon } from './shapes'
+import { Icon } from './icons'
 import { theme } from './theme'
 
 type Props = {

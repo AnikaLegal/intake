@@ -26,7 +26,7 @@ export const logError = (error: any) => {
       const msg = `${error.message} for ${url} `
       const e = new Error(msg)
       // Extract additional error data from Axios HTTP errors.
-      Sentry.withScope(scope => {
+      Sentry.withScope((scope) => {
         scope.setExtras(errorInfo)
         Sentry.captureException(e)
       })
@@ -38,7 +38,7 @@ export const logError = (error: any) => {
 }
 
 // Extract extra data from failed Axios HTTP requests
-const getAxiosErrorInfo = e => {
+const getAxiosErrorInfo = (e) => {
   let data, headers, responseData, responseHeaders
   try {
     data = JSON.stringify(e.config.data)
@@ -73,6 +73,7 @@ const getAxiosErrorInfo = e => {
       }
     : {}
   return {
+    // $FlowFixMe
     ...config,
     requestData: data,
     requestHeaders: headers,

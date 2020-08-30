@@ -1,8 +1,8 @@
-// @flow
-export * from './home'
-export * from './notfound'
+//@flow
+export * from './landing'
+export * from './ineligible'
 export * from './form'
 export * from './review'
-export * from './messages'
 export * from './submitted'
-export * from './help'
+export * from './abandon'
+export * from './notfound'

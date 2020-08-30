@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { theme } from '../theme'
-import { Icon } from '../shapes'
+import { Icon } from '../icons'
 
 type Option = { label: string, value: any }
 

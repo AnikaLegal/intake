@@ -3,23 +3,19 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import { store } from 'state'
-import { buildRoutes, ROUTES } from 'routes'
+// import { store } from 'state'
 import { AnalyticsRouteListener } from 'analytics'
-import { ErrorBoundary } from 'features/generic'
-import * as Views from 'views'
+import { ErrorBoundary } from 'comps'
+import { AppRoutes } from 'routes'
 
-
-// Inject views into route builder.
-const AppRoutes = buildRoutes(Views, ErrorBoundary, ROUTES)
-
+// <Provider store={store}>
 export const App = () => (
-  <Provider store={store}>
+  <ErrorBoundary>
     <BrowserRouter>
-      <>
-        <AnalyticsRouteListener />
-        <AppRoutes />
-      </>
+      <AnalyticsRouteListener />
+      <AppRoutes />
     </BrowserRouter>
-  </Provider>
+  </ErrorBoundary>
 )
+
+// </Provider>
