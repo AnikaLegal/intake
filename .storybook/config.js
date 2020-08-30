@@ -5,7 +5,7 @@ addDecorator(withKnobs)
 
 function loadStories() {
   require('../src/styles/index.scss')
-  require('../src/features/generic/stories/index.js')
+  require('../src/stories/index.js')
 }
 
 configure(loadStories, module)

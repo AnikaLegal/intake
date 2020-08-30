@@ -16,6 +16,9 @@ output/
 *.pid
 *.db
 
+# editors
+.vscode/
+
 # frontend
 dist/
 node_modules/

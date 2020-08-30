@@ -1,16 +1,20 @@
 const path = require('path')
-const devConfig = require('../webpack.dev.js')
+const webpack = require('webpack')
+const base = require('../webpack/webpack.base.js')
+const rules = require('../webpack/rules.js')
 
 module.exports = async ({ config, mode }) => {
-  config.module.rules = devConfig.module.rules
-  config.resolve = devConfig.resolve
-  const plugins = [
-    config.plugins[0],
-    config.plugins[2],
-    config.plugins[3],
-    config.plugins[4],
-    config.plugins[5],
-  ].concat(devConfig.plugins)
-  config.plugins = plugins
+  config.module.rules = [rules.prod[0], rules.dev[1], rules.dev[2]]
+  config.resolve = base.resolve
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      SERVER: JSON.stringify('http://localhost:8000'),
+      STATIC_URL: JSON.stringify('http://localhost:3000/static/'),
+      SENTRY_JS_DSN: JSON.stringify(''),
+      SENTRY_RELEASE: JSON.stringify(''),
+      DEBUG_JS: JSON.stringify('true'),
+      GA_ID: JSON.stringify(process.env.GA_ID),
+    })
+  )
   return config
 }

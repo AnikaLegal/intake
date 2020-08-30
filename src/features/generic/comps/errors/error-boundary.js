@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import type { Node } from 'react'
 
@@ -16,14 +15,13 @@ type State = {
 }
 
 export class ErrorBoundary extends Component<Props, State> {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    noRender: PropTypes.bool,
+
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
   }
 
-  state = { hasError: false }
-
-  componentDidCatch = (error: any) => {
+  componentDidCatch(error: any) {
     this.setState({ hasError: true })
     logError(error)
   }

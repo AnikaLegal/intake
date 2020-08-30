@@ -1,11 +1,12 @@
 const webpack = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-
-const baseConfig = require('./webpack.base.js')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const rules = require('./rules.js')
+const base = require('./webpack.base.js')
 
 module.exports = {
-  ...baseConfig,
+  ...base,
   mode: 'production',
   devtool: 'source-map',
   output: {
@@ -18,8 +19,13 @@ module.exports = {
       new OptimizeCSSAssetsPlugin(),
     ],
   },
+  module: { rules: rules.prod },
   plugins: [
-    ...baseConfig.plugins,
+    new webpack.NoEmitOnErrorsPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
     new webpack.DefinePlugin({
       // Build system envars
       SERVER: JSON.stringify(process.env.SERVER),
