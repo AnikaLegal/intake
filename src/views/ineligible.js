@@ -9,15 +9,17 @@ export const IneligibleView = () => (
     <Hero.Image src={IMAGES.HEROES.SHRUB_GUY} />
     <Hero.Content>
       <Text.Header>
-        Welcome to the Anika Legal rental support questonnaire.
+        Unfortunately we are currently only able to help with rental issues in
+        Victoria.
       </Text.Header>
       <Text.Body>
-        We’re here to help you with your rental problem. In order for us to
-        start your case, we need to ask you a series of simple questions. This
-        questionnaire takes approximately 10 minutes to complete.
+        If you wish to enquire further you can call our support staff on 0451
+        618 383 between 9am to 5pm during weekdays, or you can email us at
+        contact@anikalegal.com
       </Text.Body>
 
-      <HeroButton primary>Let’s get started</HeroButton>
+      <HeroButton primary>Contact us</HeroButton>
+      <HeroButton>Return home</HeroButton>
     </Hero.Content>
   </Hero.Container>
 )

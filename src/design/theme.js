@@ -1,7 +1,8 @@
 // @flow
 export const theme = {
   screen: {
-    mobile: '800px',
+    half: '1440px',
+    mobile: '1100px',
     small: '350px',
   },
   color: {

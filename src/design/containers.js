@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { IMAGES } from 'consts'
 import { theme } from './theme'
+import { Navbar } from './navbar'
 
 export const TextContainerOuter = styled.div`
   display: flex;
@@ -28,11 +29,11 @@ export const TextContainer = ({ children }: Props) => (
   </TextContainerOuter>
 )
 
-export const HeroImage = styled.img``
-export const HeroContent = styled.div`
+const HeroImage = styled.img``
+const HeroContent = styled.div`
   max-width: 589px;
 `
-export const HeroOuterEl = styled.div`
+const HeroOuterEl = styled.div`
   width: 100%;
   .swoosh {
     position: absolute;
@@ -55,9 +56,22 @@ export const HeroOuterEl = styled.div`
       left: 0;
     }
   }
+  @media (max-width: ${theme.screen.half}) {
+    .swoosh {
+      &.desktop {
+        &.left {
+          left: calc(-1000px + 40vw);
+        }
+        &.right {
+          right: calc(-600px + 30vw);
+        }
+      }
+    }
+  }
+
   @media (max-width: ${theme.screen.mobile}) {
     box-sizing: border-box;
-    padding: 0 16px 76px 16px;
+    padding: 0 16px 0 16px;
     .swoosh {
       &.mobile {
         display: block;
@@ -68,7 +82,7 @@ export const HeroOuterEl = styled.div`
     }
   }
   @media (max-width: ${theme.screen.small}) {
-    padding: 0 16px 40px 16px;
+    padding: 0 16px 0 16px;
     .swoosh {
       &.mobile {
         display: none;
@@ -79,19 +93,52 @@ export const HeroOuterEl = styled.div`
     }
   }
 `
-export const HeroInnerEl = styled.div`
+const FadeBottom = styled.div`
+  height: 0;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  @media (max-width: ${theme.screen.mobile}) {
+    height: 76px;
+  }
+  @media (max-width: ${theme.screen.small}) {
+    height: 40px;
+  }
+  background: linear-gradient(
+    360deg,
+    #ffffff 21.06%,
+    rgba(255, 255, 255, 0) 94.14%
+  );
+`
+
+const HeroInnerEl = styled.div`
   width: 86vw;
   margin: 0 auto 0;
-  padding-top: 22vh;
+  padding-top: calc(22vh - 64px);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: ${theme.screen.half}) {
+    ${HeroImage} {
+      width: 28vw;
+    }
+  }
   @media (max-width: ${theme.screen.mobile}) {
     width: 100%;
+    padding-top: 89px;
     flex-direction: column-reverse;
     ${theme.switch({ left: `flex-direction: column;` })}
     ${HeroImage} {
       width: calc(100% - 2 * 16px);
+      margin-bottom: 76px;
+      max-height: 300px;
+    }
+  }
+  @media (max-width: ${theme.screen.small}) {
+    padding-top: 40px;
+    ${HeroImage} {
+      margin-bottom: 44px;
     }
   }
 `
@@ -122,7 +169,9 @@ const HeroContainer = ({ children, left }: HeroProps) => (
         />
       </>
     )}
+    <Navbar />
     <HeroInnerEl left={left}>{children}</HeroInnerEl>
+    <FadeBottom />
   </HeroOuterEl>
 )
 

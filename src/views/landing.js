@@ -25,6 +25,12 @@ export const LandingView = () => (
 
 const HeroButton = styled(BigButton)`
   margin-top: 50px;
+  @media (max-width: ${theme.screen.mobile}) {
+    margin-top: 20px;
+  }
+  @media (max-width: ${theme.screen.small}) {
+    margin-top: 7px;
+  }
 `
 
 const LogoEl = styled.img`

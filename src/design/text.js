@@ -16,6 +16,11 @@ const Header = styled.h2`
     font-size: 20px;
     line-height: 20px;
   }
+  @media (max-width: ${theme.screen.small}) {
+    margin: 0 0 13px 0;
+    font-size: 16.7px;
+    line-height: 17px;
+  }
 `
 
 const Body = styled.p`
@@ -29,6 +34,10 @@ const Body = styled.p`
     margin: 0 0 12px 0;
     font-size: 16px;
     line-height: 16px;
+  }
+  @media (max-width: ${theme.screen.small}) {
+    font-size: 13.4px;
+    line-height: 14px;
   }
 `
 

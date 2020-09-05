@@ -3,6 +3,7 @@
 html,
 body {
   height: 100%;
+  box-sizing: border-box;
   font-family: 'DM Sans', sans-serif;
   font-size: 20px;
   line-height: 1.3333333;
@@ -15,5 +16,6 @@ button {
 }
 
 #app {
+  box-sizing: border-box;
   height: 100%;
 }
