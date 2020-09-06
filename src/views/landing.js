@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
 import { Hero, Text, BigButton, theme } from 'design'
-import { IMAGES } from 'consts'
+import { Link } from 'react-router-dom'
+import { IMAGES, ROUTES } from 'consts'
 import styled from 'styled-components'
 
 export const LandingView = () => (
@@ -16,8 +17,9 @@ export const LandingView = () => (
         start your case, we need to ask you a series of simple questions. This
         questionnaire takes approximately 10 minutes to complete.
       </Text.Body>
-
-      <HeroButton primary>Let’s get started</HeroButton>
+      <Link to={ROUTES.INTAKE_START}>
+        <HeroButton primary>Let’s get started</HeroButton>
+      </Link>
     </Hero.Content>
     <Hero.Image src={IMAGES.HEROES.PHONE_LADY} />
   </Hero.Container>

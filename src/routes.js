@@ -1,21 +1,13 @@
 //@flow
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import * as Views from 'views'
 
-// Route names
-export const ROUTES = {
-  LANDING: '/',
-  INELIGIBLE: '/ineligible/',
-  FORM: '/submission/:id/form/',
-  REVIEW: '/submission/:id/review/',
-  SUBMITTED: '/submission/:id/submitted/',
-  ABANDON: '/submission/:id/abandon/',
-  NOT_FOUND: '/not-found/',
-}
+import { ROUTES } from 'consts'
+import * as Views from 'views'
 
 // Route to view mapping
 const ROUTE_VIEWS = {
+  [ROUTES.INTAKE_START]: Views.IntakeStartView,
   [ROUTES.LANDING]: Views.LandingView,
   [ROUTES.INELIGIBLE]: Views.IneligibleView,
   [ROUTES.FORM]: Views.FormView,

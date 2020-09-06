@@ -3,31 +3,8 @@ import * as React from 'react'
 import styled from 'styled-components'
 
 import { IMAGES } from 'consts'
-import { theme } from './theme'
-import { Navbar } from './navbar'
-
-export const TextContainerOuter = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`
-
-export const TextContainerInner = styled.div`
-  max-width: 700px;
-  padding-left: 16px;
-  padding-right: 16px;
-`
-
-type Props = {
-  children: React.Node,
-}
-
-export const TextContainer = ({ children }: Props) => (
-  <TextContainerOuter>
-    <TextContainerInner>{children}</TextContainerInner>
-  </TextContainerOuter>
-)
+import { theme } from '../theme'
+import { Navbar } from '../navbar'
 
 const HeroImage = styled.img``
 const HeroContent = styled.div`
@@ -70,8 +47,6 @@ const HeroOuterEl = styled.div`
   }
 
   @media (max-width: ${theme.screen.mobile}) {
-    box-sizing: border-box;
-    padding: 0 16px 0 16px;
     .swoosh {
       &.mobile {
         display: block;
@@ -82,7 +57,6 @@ const HeroOuterEl = styled.div`
     }
   }
   @media (max-width: ${theme.screen.small}) {
-    padding: 0 16px 0 16px;
     .swoosh {
       &.mobile {
         display: none;
@@ -114,6 +88,7 @@ const FadeBottom = styled.div`
 
 const HeroInnerEl = styled.div`
   width: 86vw;
+  max-width: 1227px;
   margin: 0 auto 0;
   padding-top: calc(22vh - 64px);
   display: flex;
@@ -126,7 +101,7 @@ const HeroInnerEl = styled.div`
   }
   @media (max-width: ${theme.screen.mobile}) {
     width: 100%;
-    padding-top: 89px;
+    padding-top: 161px;
     flex-direction: column-reverse;
     ${theme.switch({ left: `flex-direction: column;` })}
     ${HeroImage} {
@@ -136,7 +111,7 @@ const HeroInnerEl = styled.div`
     }
   }
   @media (max-width: ${theme.screen.small}) {
-    padding-top: 40px;
+    padding-top: 89px;
     ${HeroImage} {
       margin-bottom: 44px;
     }

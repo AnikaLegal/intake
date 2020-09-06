@@ -17,11 +17,11 @@ export const StepProgress = ({ current, steps }: Props) => {
         const hasNext = idx < length - 1
         return (
           <>
-            <StepOuterEl active={isCurrent}>
+            <StepOuterEl key={`${label}-step`} active={isCurrent}>
               <StepInnerEl />
               {isCurrent && <StepLabelEl>{label}</StepLabelEl>}
             </StepOuterEl>
-            {hasNext && <StepBarEl />}
+            {hasNext && <StepBarEl key={`${label}-next`} />}
           </>
         )
       })}
@@ -33,7 +33,10 @@ const StepProgressEl = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 34px;
+  padding: 34px 0;
+  @media (max-width: ${theme.screen.mobile}) {
+    display: none;
+  }
 `
 const StepOuterEl = styled.div`
   border: 3px solid transparent;
@@ -51,6 +54,8 @@ const StepOuterEl = styled.div`
 `
 const StepLabelEl = styled.div`
   position: absolute;
+  width: 120px;
+  text-align: center;
   bottom: -34px;
   font-weight: 500;
   font-size: 16px;

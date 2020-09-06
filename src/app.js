@@ -7,13 +7,16 @@ import { Provider } from 'react-redux'
 import { AnalyticsRouteListener } from 'analytics'
 import { ErrorBoundary } from 'comps'
 import { AppRoutes } from 'routes'
+import { AppContainer } from 'design'
 
 // <Provider store={store}>
 export const App = () => (
   <ErrorBoundary>
     <BrowserRouter>
       <AnalyticsRouteListener />
-      <AppRoutes />
+      <AppContainer>
+        <AppRoutes />
+      </AppContainer>
     </BrowserRouter>
   </ErrorBoundary>
 )

@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import type { Node } from 'react'
+import { Text } from 'design'
 
 import { logError } from 'utils'
 
@@ -34,7 +35,11 @@ export class ErrorBoundary extends Component<Props, State> {
       }
       return (
         <Error>
-          <h2>Something broke 😠</h2>
+          <Text.Header>Something broke 😠</Text.Header>
+          <Text.Body>
+            Try refreshing the page. If it's still broken, let us know at
+            contact@anikalegal.com
+          </Text.Body>
         </Error>
       )
     }
@@ -44,6 +49,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
 const Error = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   justify-content: center;
