@@ -1,6 +1,7 @@
 // @flow
 import type { FieldType } from 'types'
 export const FIELD_TYPES: { [string]: FieldType } = {
+  DISPLAY: 'DISPLAY',
   TEXT: 'TEXT',
   TEXT: 'EMAIL',
   NUMBER: 'NUMBER',

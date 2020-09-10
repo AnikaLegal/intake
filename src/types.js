@@ -12,10 +12,13 @@ export type FieldType =
   | 'CHOICE_MULTI'
   | 'FILE'
   | 'PHOTO'
+  | 'DISPLAY'
 
 export type Field = {
   type: FieldType,
   required: boolean,
   Prompt: React.Element<'span'>,
   Help?: React.Element<'span'>,
+  choices?: Array<{ label: string, value: string | boolean | null }>,
+  buttonText?: string,
 }

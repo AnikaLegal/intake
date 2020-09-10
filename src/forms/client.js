@@ -5,6 +5,18 @@ import * as React from 'react'
 import { FIELD_TYPES } from 'consts'
 import type { Field } from 'types'
 
+const INTRO: Field = {
+  required: true,
+  type: FIELD_TYPES.DISPLAY,
+  Prompt: (
+    <span>
+      First of all, congratulations on taking the first step in solving your
+      rental issues.
+    </span>
+  ),
+  buttonText: 'Thank you',
+}
+
 const FIRST_NAME: Field = {
   required: true,
   type: FIELD_TYPES.TEXT,
@@ -42,6 +54,7 @@ const EMAIL: Field = {
 }
 
 export const FIELDS = {
+  INTRO,
   FIRST_NAME,
   LAST_NAME,
   EMAIL,
