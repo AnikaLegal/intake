@@ -5,12 +5,11 @@ import { useHistory } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
 import { TextContainer, Text, Button, theme } from 'design'
-import { FIELDS } from 'forms/client'
-import { ROUTES } from 'consts'
+import { FIELDS } from 'forms/issues'
 import { api } from 'api'
 import type { Data } from 'types'
 
-export const CreateClientView = () => {
+export const ClientIssuesView = () => {
   const history = useHistory()
   const onSubmit = async (data: Data) => {
     await api.client.create({
@@ -18,11 +17,11 @@ export const CreateClientView = () => {
       lastName: data.LAST_NAME,
       email: data.EMAIL,
     })
-    history.push(ROUTES.ELIGIBILITY_FORM)
+    history.push('/')
   }
   return (
     <>
-      <IntakeNavbar current={0} />
+      <IntakeNavbar current={1} />
       <Form fields={FIELDS} onSubmit={onSubmit} />
     </>
   )

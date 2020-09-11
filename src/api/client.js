@@ -2,15 +2,13 @@
 import { http } from './http'
 
 import type { Data, Client } from 'types'
+import { timeout } from 'utils'
 
 type ClientCreate = {
   firstName: string,
   lastName: string,
   email: string,
 }
-
-// Simulate HTTP requests
-const timeout = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 export const client = {
   // Create a new client.

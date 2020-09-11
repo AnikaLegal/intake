@@ -9,4 +9,6 @@ export const ROUTES = {
   NOT_FOUND: '/not-found/',
   // Form pages
   CLIENT_FORM: '/intake/client',
+  ELIGIBILITY_FORM: '/intake/eligibility',
+  ISSUES_FORM: '/intake/issues',
 }

@@ -15,6 +15,8 @@ const ROUTE_VIEWS = {
   [ROUTES.NOT_FOUND]: Views.NotFoundView,
   // Form views
   [ROUTES.CLIENT_FORM]: Views.CreateClientView,
+  [ROUTES.ELIGIBILITY_FORM]: Views.ClientEligibilityView,
+  [ROUTES.ISSUES_FORM]: Views.ClientIssuesView,
 }
 
 export const AppRoutes = () => (

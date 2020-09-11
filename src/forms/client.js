@@ -39,7 +39,7 @@ const LAST_NAME: Field = {
 
 const EMAIL: Field = {
   required: true,
-  type: FIELD_TYPES.TEXT,
+  type: FIELD_TYPES.EMAIL,
   Prompt: (
     <span>
       What <strong>email address</strong> can we reach you at?
