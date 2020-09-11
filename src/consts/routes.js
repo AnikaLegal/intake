@@ -1,12 +1,12 @@
 //@flow
 // Route names
 export const ROUTES = {
+  // Splash pages
   LANDING: '/',
-  INTAKE_START: '/intake/',
   INELIGIBLE: '/ineligible/',
-  FORM: '/submission/:id/form/',
-  REVIEW: '/submission/:id/review/',
-  SUBMITTED: '/submission/:id/submitted/',
+  SUBMITTED: '/submitted/',
   ABANDON: '/abandon/',
   NOT_FOUND: '/not-found/',
+  // Form pages
+  CLIENT_FORM: '/intake/client',
 }

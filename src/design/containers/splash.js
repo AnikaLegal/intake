@@ -6,11 +6,11 @@ import { IMAGES } from 'consts'
 import { theme } from '../theme'
 import { Navbar } from '../navbar'
 
-const HeroImage = styled.img``
-const HeroContent = styled.div`
+const SplashImage = styled.img``
+const SplashContent = styled.div`
   max-width: 589px;
 `
-const HeroOuterEl = styled.div`
+const SplashOuterEl = styled.div`
   width: 100%;
   .swoosh {
     position: absolute;
@@ -86,7 +86,7 @@ const FadeBottom = styled.div`
   );
 `
 
-const HeroInnerEl = styled.div`
+const SplashInnerEl = styled.div`
   width: 86vw;
   max-width: 1227px;
   margin: 0 auto 0;
@@ -95,7 +95,7 @@ const HeroInnerEl = styled.div`
   justify-content: space-between;
   align-items: center;
   @media (max-width: ${theme.screen.half}) {
-    ${HeroImage} {
+    ${SplashImage} {
       width: 28vw;
     }
   }
@@ -104,7 +104,7 @@ const HeroInnerEl = styled.div`
     padding-top: 161px;
     flex-direction: column-reverse;
     ${theme.switch({ left: `flex-direction: column;` })}
-    ${HeroImage} {
+    ${SplashImage} {
       width: calc(100% - 2 * 16px);
       margin-bottom: 76px;
       max-height: 300px;
@@ -112,19 +112,19 @@ const HeroInnerEl = styled.div`
   }
   @media (max-width: ${theme.screen.small}) {
     padding-top: 89px;
-    ${HeroImage} {
+    ${SplashImage} {
       margin-bottom: 44px;
     }
   }
 `
 
-type HeroProps = {
+type SplashProps = {
   children: React.Node,
   left: boolean,
 }
 
-const HeroContainer = ({ children, left }: HeroProps) => (
-  <HeroOuterEl left={left}>
+const SplashContainer = ({ children, left }: SplashProps) => (
+  <SplashOuterEl left={left}>
     {left ? (
       <>
         <img className="swoosh left desktop" src={IMAGES.SWOOSH.LEFT} />
@@ -145,13 +145,13 @@ const HeroContainer = ({ children, left }: HeroProps) => (
       </>
     )}
     <Navbar />
-    <HeroInnerEl left={left}>{children}</HeroInnerEl>
+    <SplashInnerEl left={left}>{children}</SplashInnerEl>
     <FadeBottom />
-  </HeroOuterEl>
+  </SplashOuterEl>
 )
 
-export const Hero = {
-  Container: HeroContainer,
-  Image: HeroImage,
-  Content: HeroContent,
+export const Splash = {
+  Container: SplashContainer,
+  Image: SplashImage,
+  Content: SplashContent,
 }

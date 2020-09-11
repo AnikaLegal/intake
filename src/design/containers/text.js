@@ -2,6 +2,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+import { theme } from '../theme'
+
 export const TextContainerOuter = styled.div`
   display: flex;
   justify-content: center;
@@ -10,9 +12,12 @@ export const TextContainerOuter = styled.div`
 `
 
 export const TextContainerInner = styled.div`
-  max-width: 700px;
+  width: 700px;
   padding-left: 16px;
   padding-right: 16px;
+  @media (max-width: ${theme.screen.mobile}) {
+    max-width: 700px;
+  }
 `
 
 type Props = {

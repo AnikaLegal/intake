@@ -1,13 +1,13 @@
 // @flow
 import React from 'react'
-import { Hero, Text, BigButton } from 'design'
+import { Splash, Text, BigButton } from 'design'
 import { IMAGES } from 'consts'
 import styled from 'styled-components'
 
 export const IneligibleView = () => (
-  <Hero.Container left>
-    <Hero.Image src={IMAGES.HEROES.SHRUB_GUY} />
-    <Hero.Content>
+  <Splash.Container left>
+    <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
+    <Splash.Content>
       <Text.Header>
         Unfortunately we are currently only able to help with rental issues in
         Victoria.
@@ -18,12 +18,12 @@ export const IneligibleView = () => (
         contact@anikalegal.com
       </Text.Body>
 
-      <HeroButton primary>Contact us</HeroButton>
-      <HeroButton>Return home</HeroButton>
-    </Hero.Content>
-  </Hero.Container>
+      <SplashButton primary>Contact us</SplashButton>
+      <SplashButton>Return home</SplashButton>
+    </Splash.Content>
+  </Splash.Container>
 )
 
-const HeroButton = styled(BigButton)`
+const SplashButton = styled(BigButton)`
   margin-top: 50px;
 `

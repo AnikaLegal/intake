@@ -1,5 +1,6 @@
 //@flow
 export const LINKS = {
+  HOME: 'https://www.anikalegal.com',
   TERMS_OF_USE: 'https://www.anikalegal.com/terms-of-use',
   PRIVACY_POLICY: 'https://www.anikalegal.com/privacy-policy',
   COLLECTIONS_STATEMENT: 'https://www.anikalegal.com/collections-statement',

@@ -1,9 +1,8 @@
 // @flow
-import type { FieldType } from 'types'
-export const FIELD_TYPES: { [string]: FieldType } = {
+export const FIELD_TYPES = {
   DISPLAY: 'DISPLAY',
   TEXT: 'TEXT',
-  TEXT: 'EMAIL',
+  EMAIL: 'EMAIL',
   NUMBER: 'NUMBER',
   DATE: 'DATE',
   CHOICE_SINGLE: 'CHOICE_SINGLE',

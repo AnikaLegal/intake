@@ -16,13 +16,13 @@ export const StepProgress = ({ current, steps }: Props) => {
         const isCurrent = idx === current
         const hasNext = idx < length - 1
         return (
-          <>
-            <StepOuterEl key={`${label}-step`} active={isCurrent}>
+          <React.Fragment key={label}>
+            <StepOuterEl active={isCurrent}>
               <StepInnerEl />
               {isCurrent && <StepLabelEl>{label}</StepLabelEl>}
             </StepOuterEl>
-            {hasNext && <StepBarEl key={`${label}-next`} />}
-          </>
+            {hasNext && <StepBarEl />}
+          </React.Fragment>
         )
       })}
     </StepProgressEl>

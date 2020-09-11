@@ -14,7 +14,7 @@ const INTRO: Field = {
       rental issues.
     </span>
   ),
-  buttonText: 'Thank you',
+  button: { text: 'Thank you', Icon: null },
 }
 
 const FIRST_NAME: Field = {

@@ -19,5 +19,6 @@ module.name_mapper='^types' ->'<PROJECT_ROOT>/src/types'
 module.name_mapper='^utils' ->'<PROJECT_ROOT>/src/utils'
 module.name_mapper='^views' ->'<PROJECT_ROOT>/src/views'
 module.name_mapper='^routes' ->'<PROJECT_ROOT>/src/routes'
+module.name_mapper='^forms' ->'<PROJECT_ROOT>/src/forms'
 
 [strict]

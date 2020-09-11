@@ -20,5 +20,20 @@ export type Field = {
   Prompt: React.Element<'span'>,
   Help?: React.Element<'span'>,
   choices?: Array<{ label: string, value: string | boolean | null }>,
-  buttonText?: string,
+  button?: {
+    text: string,
+    Icon: any,
+  },
+}
+
+export type Client = {
+  uuid: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  isEligible: null | boolean,
+  dob?: void,
+  phone?: void,
+  tenancy?: void,
+  callTime?: void,
 }
