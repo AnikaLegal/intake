@@ -80,7 +80,7 @@ const ISSUE_START: Field = {
 
 const ISSUE_PHOTO: Field = {
   required: false,
-  type: FIELD_TYPES.FILE,
+  type: FIELD_TYPES.UPLOAD,
   Prompt: (
     <span>
       Please upload a photo of any evidence of how you have been affected.
@@ -125,7 +125,7 @@ const IS_NOTICE_TO_VACATE: Field = {
 
 const NOTICE_TO_VACATE_DOCUMENT: Field = {
   required: false,
-  type: FIELD_TYPES.FILE,
+  type: FIELD_TYPES.UPLOAD,
   Prompt: <span>Please upload a photo of your Notice to Vacate.</span>,
 }
 

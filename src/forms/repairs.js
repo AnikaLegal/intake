@@ -83,7 +83,7 @@ const ISSUE_START: Field = {
 
 const ISSUE_PHOTO: Field = {
   required: false,
-  type: FIELD_TYPES.PHOTO,
+  type: FIELD_TYPES.UPLOAD,
   Prompt: (
     <span>Do you have any photos of the problem(s) that you could upload?</span>
   ),

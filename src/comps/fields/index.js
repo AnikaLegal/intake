@@ -6,6 +6,8 @@ import { DisplayField } from './display'
 import { EmailField } from './email'
 import { ChoiceSingleField } from './choice-single'
 import { ChoiceMultiField } from './choice-multi'
+import { DateField } from './date'
+import { UploadField } from './upload'
 
 export const FORM_FIELDS = {
   [FIELD_TYPES.DISPLAY]: DisplayField,
@@ -13,8 +15,6 @@ export const FORM_FIELDS = {
   [FIELD_TYPES.EMAIL]: EmailField,
   [FIELD_TYPES.CHOICE_SINGLE]: ChoiceSingleField,
   [FIELD_TYPES.CHOICE_MULTI]: ChoiceMultiField,
-  [FIELD_TYPES.NUMBER]: () => null,
-  [FIELD_TYPES.DATE]: () => null,
-  [FIELD_TYPES.FILE]: () => null,
-  [FIELD_TYPES.PHOTO]: () => null,
+  [FIELD_TYPES.DATE]: DateField,
+  [FIELD_TYPES.UPLOAD]: UploadField,
 }

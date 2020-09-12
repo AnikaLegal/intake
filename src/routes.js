@@ -17,6 +17,12 @@ const ROUTE_VIEWS = {
   [ROUTES.CLIENT_FORM]: Views.CreateClientView,
   [ROUTES.ELIGIBILITY_FORM]: Views.ClientEligibilityView,
   [ROUTES.ISSUES_FORM]: Views.ClientIssuesView,
+  [ROUTES.REPAIR_ISSUE_FORM]: Views.RepairsView,
+  [ROUTES.COVID_ISSUE_FORM]: Views.RentReductionView,
+  [ROUTES.OTHER_ISSUE_FORM]: Views.OtherIssuesView,
+  [ROUTES.LANDLORD_FORM]: Views.LandlordView,
+  [ROUTES.CONTACT_FORM]: Views.ClientContactView,
+  [ROUTES.SUBMIT_FORM]: Views.SubmitView,
 }
 
 export const AppRoutes = () => (

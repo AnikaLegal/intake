@@ -5,13 +5,11 @@ export type Data = { [string]: any }
 
 export type FieldType =
   | 'TEXT'
-  | 'NUMBER'
   | 'EMAIL'
   | 'DATE'
   | 'CHOICE_SINGLE'
   | 'CHOICE_MULTI'
-  | 'FILE'
-  | 'PHOTO'
+  | 'UPLOAD'
   | 'DISPLAY'
 
 export type Field = {
@@ -26,14 +24,49 @@ export type Field = {
   },
 }
 
+export type Person = {
+  id: number,
+  fullName: string,
+  address: string,
+  email: string,
+  phone: string,
+}
+
+export type Tenancy = {
+  id: number,
+  address: string,
+  isClientOnLease?: boolean,
+  started?: string,
+  landlord?: Person,
+  agent?: Person,
+}
+
+export type Upload = {
+  id: string,
+  description: string | null,
+  file: string,
+}
+
+export type Topic = 'REPAIRS' | 'COVID' | 'OTHER'
+
+export type Submission = {
+  id: string,
+  answers: { [string]: any } | null,
+  topic: Topic,
+  complete: boolean,
+  topic: Topic,
+  uploads: Array<Upload>,
+}
+
 export type Client = {
-  uuid: string,
+  id: string,
   firstName: string,
   lastName: string,
   email: string,
   isEligible: null | boolean,
-  dob?: void,
-  phone?: void,
-  tenancy?: void,
-  callTime?: void,
+  submissions: Array<Submission>,
+  dob?: string,
+  phone?: string,
+  tenancy?: Tenancy,
+  callTime?: string,
 }

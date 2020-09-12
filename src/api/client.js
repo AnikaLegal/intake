@@ -15,15 +15,34 @@ export const client = {
   create: async (client: ClientCreate): Promise<Client> => {
     const url = '/api/client/'
     // const result = await http.post(url, client).then((r) => r.json())
-    console.warn(`Sending... ${Object.values(client).toString()}`)
+    console.warn(`Sending... ${JSON.stringify(client)}`)
     await timeout(500)
-    console.warn(`Submitted ${Object.values(client).toString()}`)
+    console.warn(`Submitted.`)
     return {
-      uuid: '123456789',
+      id: '123456789',
       firstName: 'Matt',
       lastName: 'Segal',
       email: 'matt@anikalegal.com',
+      submissions: [],
       isEligible: null,
+    }
+  },
+  setEligibility: async (
+    uuid: string,
+    isEligible: boolean
+  ): Promise<Client> => {
+    const url = `/api/client/${uuid}`
+    // const result = await http.post(url, client).then((r) => r.json())
+    console.warn(`Sending... ${JSON.stringify({ uuid, isEligible })}`)
+    await timeout(500)
+    console.warn(`Submitted.`)
+    return {
+      id: '123456789',
+      firstName: 'Matt',
+      lastName: 'Segal',
+      email: 'matt@anikalegal.com',
+      submissions: [],
+      isEligible,
     }
   },
 }

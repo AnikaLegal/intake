@@ -12,6 +12,7 @@ import {
   SelectInput,
   MultiSelectInput,
   DateInput,
+  UploadInput,
 } from '../design'
 
 export const stories = storiesOf('Inputs', module)
@@ -103,3 +104,28 @@ stories.add('Multi Select Input', () => {
     </>
   )
 })
+
+stories.add('Upload Input', () => {
+  const [val, setVal] = useState([])
+  return (
+    <React.Fragment>
+      <UploadInput onUpload={onUpload} values={val} onChange={setVal} />
+    </React.Fragment>
+  )
+})
+const onUpload = (file: File): Promise<any> => {
+  return new Promise((r) => {
+    const reader = new FileReader()
+    reader.addEventListener(
+      'load',
+      () => {
+        r({
+          id: file.name,
+          file: String(reader.result),
+        })
+      },
+      false
+    )
+    reader.readAsDataURL(file)
+  })
+}

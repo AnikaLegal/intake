@@ -113,5 +113,5 @@ const SelectEl = styled.div`
 
 const MultiSelectEl = styled.div`
   min-width: 280px;
-  max-width: 340px;
+  max-width: 360px;
 `

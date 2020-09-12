@@ -3,24 +3,29 @@ import React, { useState } from 'react'
 
 import { TextContainer, Text } from 'design'
 import { FIELDS } from 'forms/client'
-import type { Field } from 'types'
-
 import { FORM_FIELDS } from './fields'
+import type { Field, Upload } from 'types'
 
 type Props = {
   fields: { [string]: Field },
   onSubmit: (data: any) => Promise<void>,
+  onUpload?: (File) => Promise<Upload>,
 }
 
 // TODO: function to check whether to skip questions
 // TODO: add onupdate hook
-export const Form = ({ fields, onSubmit }: Props) => {
+export const Form = ({ fields, onSubmit, onUpload }: Props) => {
   const fieldNames = Object.keys(fields)
   const [fieldIdx, setFieldIdx] = useState(0)
   const fieldName = fieldNames[fieldIdx]
   const field = fields[fieldName]
   const [data, setData] = useState({})
   const [isLoading, setIsLoading] = useState(false)
+  console.log('form data:', data)
+  const navNext = () => {
+    // Progress to the next question.
+    setFieldIdx((i) => i + 1)
+  }
   const onNext = (e) => {
     e.preventDefault() // Don't submit form.
     // User submits the current question.
@@ -29,8 +34,7 @@ export const Form = ({ fields, onSubmit }: Props) => {
       setIsLoading(true)
       onSubmit(data)
     } else {
-      // Progress to the next question.
-      setFieldIdx((i) => i + 1)
+      navNext()
     }
   }
   const onSkip = () => {
@@ -39,8 +43,7 @@ export const Form = ({ fields, onSubmit }: Props) => {
       // User has finished the form.
       onSubmit(data)
     } else {
-      // Progress to the next question.
-      setFieldIdx((i) => i + 1)
+      navNext()
     }
   }
   const onChange = (v) => {
@@ -60,6 +63,7 @@ export const Form = ({ fields, onSubmit }: Props) => {
         value={value}
         isLoading={isLoading}
         onChange={onChange}
+        onUpload={onUpload}
       />
     </TextContainer>
   )
