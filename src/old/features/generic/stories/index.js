@@ -1,6 +1,0 @@
-export * from './form'
-export * from './typography'
-export * from './inputs'
-export * from './layout'
-export * from './progress'
-export * from './loading'

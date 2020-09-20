@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import type { Upload } from 'types'
 import { IMAGES } from 'consts'
-import { logError } from 'utils'
+import { logException } from 'utils'
 
 import { Button } from './button'
 
@@ -62,7 +62,7 @@ export const UploadInput = ({
         setErrors([])
         onChange([...values, file])
       } catch {
-        logError(e)
+        logException(e)
         setLoading(false)
         setErrors([`Could not upload ${f.name}`])
       }

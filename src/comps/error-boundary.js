@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import type { Node } from 'react'
 import { Text } from 'design'
 
-import { logError } from 'utils'
+import { logException } from 'utils'
 
 type Props = {
   children: Node,
@@ -23,7 +23,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: any) {
     this.setState({ hasError: true })
-    logError(error)
+    logException(error)
   }
 
   render() {

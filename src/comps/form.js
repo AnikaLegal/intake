@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { TextContainer, Text } from 'design'
 import { FIELDS } from 'forms/client'
@@ -8,19 +8,23 @@ import type { Field, Upload } from 'types'
 
 type Props = {
   fields: { [string]: Field },
+  isViewLoading: boolean,
   onSubmit: (data: any) => Promise<void>,
   onUpload?: (File) => Promise<Upload>,
 }
 
 // TODO: function to check whether to skip questions
 // TODO: add onupdate hook
-export const Form = ({ fields, onSubmit, onUpload }: Props) => {
+export const Form = ({ fields, onSubmit, onUpload, isViewLoading }: Props) => {
   const fieldNames = Object.keys(fields)
   const [fieldIdx, setFieldIdx] = useState(0)
   const fieldName = fieldNames[fieldIdx]
   const field = fields[fieldName]
   const [data, setData] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(isViewLoading)
+  useEffect(() => {
+    setIsLoading(isViewLoading)
+  }, [isViewLoading])
   console.log('form data:', data)
   const navNext = () => {
     // Progress to the next question.

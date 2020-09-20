@@ -62,7 +62,7 @@ Deployment can also be run manually using the bash scripts in `/scripts/release/
 Errors are logged using Sentry can be viewed [here](https://sentry.io/organizations/anika-legal/projects/).
 
 Sentry is used via `@sentry/browser`. The `ErrorBoundary` component is used to catch and handle these errors.
-The `logError` utilities method can be used in both dev and prod to handle errors and report them to Sentry.
+The `logException` utilities method can be used in both dev and prod to handle errors and report them to Sentry.
 
 ## Project Structure
 
