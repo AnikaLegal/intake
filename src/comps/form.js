@@ -9,23 +9,40 @@ import type { Field, Upload } from 'types'
 type Props = {
   fields: { [string]: Field },
   isViewLoading: boolean,
+  initData: Object,
   onSubmit: (data: any) => Promise<void>,
   onUpload?: (File) => Promise<Upload>,
 }
 
 // TODO: function to check whether to skip questions
 // TODO: add onupdate hook
-export const Form = ({ fields, onSubmit, onUpload, isViewLoading }: Props) => {
+export const Form = ({
+  fields,
+  onSubmit,
+  onUpload,
+  isViewLoading,
+  initData,
+}: Props) => {
   const fieldNames = Object.keys(fields)
   const [fieldIdx, setFieldIdx] = useState(0)
   const fieldName = fieldNames[fieldIdx]
   const field = fields[fieldName]
   const [data, setData] = useState({})
   const [isLoading, setIsLoading] = useState(isViewLoading)
+  const [isSubmit, setIsSubmit] = useState(false)
   useEffect(() => {
     setIsLoading(isViewLoading)
+    if (!isViewLoading) {
+      setData((d) => ({ ...d, ...initData }))
+    }
   }, [isViewLoading])
-  console.log('form data:', data)
+  useEffect(() => {
+    if (isSubmit) {
+      // User has finished the form.
+      setIsLoading(true)
+      onSubmit(data)
+    }
+  }, [isSubmit])
   const navNext = () => {
     // Progress to the next question.
     setFieldIdx((i) => i + 1)
@@ -34,9 +51,7 @@ export const Form = ({ fields, onSubmit, onUpload, isViewLoading }: Props) => {
     e.preventDefault() // Don't submit form.
     // User submits the current question.
     if (fieldIdx >= fieldNames.length - 1) {
-      // User has finished the form.
-      setIsLoading(true)
-      onSubmit(data)
+      setIsSubmit(true)
     } else {
       navNext()
     }
@@ -54,21 +69,23 @@ export const Form = ({ fields, onSubmit, onUpload, isViewLoading }: Props) => {
     // User enters some data.
     setData((d) => ({ ...d, [fieldName]: v }))
   }
-  const FormField = FORM_FIELDS[field.type]
+  const FormField = field ? FORM_FIELDS[field.type] : null
   const value = data[fieldName]
   return (
     <TextContainer>
-      <Text.Header>{field.Prompt}</Text.Header>
-      {field.Help && <Text.Body>{field.Help}</Text.Body>}
-      <FormField
-        onNext={onNext}
-        onSkip={onSkip}
-        field={field}
-        value={value}
-        isLoading={isLoading}
-        onChange={onChange}
-        onUpload={onUpload}
-      />
+      <Text.Header>{field && field.Prompt}</Text.Header>
+      {field && field.Help && <Text.Body>{field && field.Help}</Text.Body>}
+      {FormField && (
+        <FormField
+          onNext={onNext}
+          onSkip={onSkip}
+          field={field}
+          value={value}
+          isLoading={isLoading}
+          onChange={onChange}
+          onUpload={onUpload}
+        />
+      )}
     </TextContainer>
   )
 }

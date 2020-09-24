@@ -1,12 +1,15 @@
 //@flow
 import type { Data } from './form'
-import type { Client, Person, Tenancy, Submission, Upload } from './core'
+import type { Client, Person, Tenancy, Issue, Upload } from './core'
 import type {
   ClientCreate,
   PersonCreate,
-  SubmissionCreate,
+  IssueCreate,
   TenancyCreate,
   UploadCreate,
+  TenancyUpdate,
+  IssueUpdate,
+  ClientUpdate,
 } from './api'
 
 // Redux + Rematcher stuff
@@ -20,20 +23,21 @@ export type State = { +client: ClientState }
 export type ClientActions = {
   // Internal actions
   _setLoading: () => void,
+  _setLoaded: () => void,
   _loadClient: (client: Client) => void,
   _loadTenancy: (tenancy: Tenancy) => void,
-  _loadSubmission: (sub: Submission) => void,
+  _loadIssue: (sub: Issue) => void,
   _loadUpload: (upload: Upload) => void,
   // Public actions
   loadClient: (cliendId: string) => Promise<Client>,
   createClient: (client: ClientCreate) => Promise<Client>,
-  updateClient: (cliendId: string, updates: Data) => Promise<Client>,
+  updateClient: (updates: ClientUpdate) => Promise<Client>,
   createAgent: (person: PersonCreate) => Promise<Person>,
   createLandlord: (person: PersonCreate) => Promise<Person>,
-  createSubmission: (sub: SubmissionCreate) => Promise<Submission>,
-  updateSubmission: (subId: string, updates: Data) => Promise<Submission>,
+  createIssue: (sub: IssueCreate) => Promise<Issue>,
+  updateIssue: (updates: IssueUpdate) => Promise<Issue>,
   createTenancy: (tenancy: TenancyCreate) => Promise<Tenancy>,
-  updateTenancy: (tenancyId: string, updates: Data) => Promise<Tenancy>,
+  updateTenancy: (updates: TenancyUpdate) => Promise<Tenancy>,
   createUpload: (upload: UploadCreate) => Promise<Upload>,
 }
 

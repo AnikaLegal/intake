@@ -22,7 +22,11 @@ export const UploadField = ({
   }
   return (
     <form onSubmit={onNext}>
-      <UploadInput onUpload={onUpload} values={value} onChange={onChange} />
+      <UploadInput
+        onUpload={onUpload}
+        values={value || []}
+        onChange={onChange}
+      />
       <ButtonGroupEl>
         <Button
           primary

@@ -1,10 +1,8 @@
 //@flow
 export * from './client'
-export * from './eligibility'
-export * from './issues'
 export * from './contact'
+export * from './eligibility'
+export * from './issue-detail'
+export * from './issues'
 export * from './landlord'
-export * from './other-issues'
-export * from './rent-reduction'
-export * from './repairs'
 export * from './submit'

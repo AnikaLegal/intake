@@ -1,5 +1,5 @@
 //@flow
-// A form where the client submits their submissions.
+// A form where the client submits their issue.
 import * as React from 'react'
 
 import { FIELD_TYPES, LINKS } from 'consts'

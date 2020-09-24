@@ -1,6 +1,6 @@
 // @flow
 import { http } from './http'
-import type { Data, Tenancy, TenancyCreate } from 'types'
+import type { TenancyUpdate, Tenancy, TenancyCreate } from 'types'
 
 export const tenancy = {
   // Create a new tenancy for a client.
@@ -9,8 +9,8 @@ export const tenancy = {
     return await http.post(url, tenancy)
   },
   // Update an existing tenancy
-  update: async (tenancyId: string, update: Data): Promise<Tenancy> => {
-    const url = `/api/tenancy/${tenancyId}/`
-    return await http.patch(url, update)
+  update: async (update: TenancyUpdate): Promise<Tenancy> => {
+    const url = `/api/tenancy/${update.tenancyId}/`
+    return await http.patch(url, update.updates)
   },
 }

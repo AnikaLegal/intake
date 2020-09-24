@@ -20,20 +20,20 @@ export type Tenancy = {
 
 export type Upload = {
   id: string,
-  submission: string,
+  issue: string,
   file: string,
 }
 
 export type Topic = 'REPAIRS' | 'RENT_REDUCTION' | 'OTHER'
 
-export type Submission = {
+export type Issue = {
   id: string,
   answers: { [string]: any },
   topic: Topic,
-  complete: boolean,
-  topic: Topic,
   client: string,
   fileuploadSet: Array<Upload>,
+  isAnswered: boolean,
+  isSubmitted: boolean,
 }
 
 export type Client = {
@@ -42,7 +42,7 @@ export type Client = {
   lastName: string,
   email: string,
   isEligible: null | boolean,
-  submissionSet: Array<Submission>,
+  issueSet: Array<Issue>,
   tenancySet: Array<Tenancy>,
   dateOfBirth?: string,
   phoneNumber?: string,

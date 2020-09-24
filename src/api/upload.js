@@ -5,12 +5,12 @@ import { http } from './http'
 import type { Upload, UploadCreate } from 'types'
 
 export const upload = {
-  // Attach a new file upload to a submission.
+  // Attach a new file upload to a issue.
   create: async (upload: UploadCreate): Promise<Upload> => {
     const url = '/api/upload/'
     const form = new FormData()
     form.append('file', upload.file)
-    form.append('submission', upload.submission)
+    form.append('issue', upload.issue)
     const request = { method: 'POST', body: form }
     const resp = await fetch(`${SERVER}${url}`, request)
     // Handle case where user tries to upload corrupt image,

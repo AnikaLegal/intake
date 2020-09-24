@@ -16,7 +16,7 @@ const ISSUES: Field = {
   type: FIELD_TYPES.CHOICE_MULTI,
   choices: [
     { label: 'I need rental repairs', value: 'REPAIRS' },
-    { label: 'I need a reduction in rent', value: 'COVID' },
+    { label: 'I need a reduction in rent', value: 'RENT_REDUCTION' },
     { label: 'Some other rental issue', value: 'OTHER' },
   ],
   Prompt: <span>What do you need help with?</span>,

@@ -6,16 +6,20 @@ import type {
   Data,
   Actions,
   ClientState,
+  State,
   Client,
   Person,
-  Submission,
+  Issue,
   Tenancy,
   Upload,
-  SubmissionCreate,
+  IssueCreate,
   PersonCreate,
   ClientCreate,
   TenancyCreate,
   UploadCreate,
+  IssueUpdate,
+  ClientUpdate,
+  TenancyUpdate,
 } from 'types'
 
 // Application state.
@@ -29,6 +33,9 @@ const reducers = {
   // Start loading data from the backend.
   _setLoading: (state: ClientState): ClientState => {
     return { ...state, isLoading: true }
+  },
+  _setLoaded: (state: ClientState): ClientState => {
+    return { ...state, isLoading: false }
   },
   _loadClient: (state: ClientState, client: Client): ClientState => {
     return { ...state, isLoading: false, client }
@@ -46,14 +53,14 @@ const reducers = {
       },
     }
   },
-  _loadSubmission: (state: ClientState, sub: Submission): ClientState => {
+  _loadIssue: (state: ClientState, sub: Issue): ClientState => {
     if (!state.client) return state
     return {
       ...state,
       isLoading: false,
       client: {
         ...state.client,
-        submissionSet: state.client.submissionSet
+        issueSet: state.client.issueSet
           .filter((s) => s.id !== sub.id)
           .concat([sub]),
       },
@@ -61,12 +68,10 @@ const reducers = {
   },
   _loadUpload: (state: ClientState, upload: Upload): ClientState => {
     if (!state.client) return state
-    const sub = state.client.submissionSet.find(
-      (s) => s.id === upload.submission
-    )
+    const sub = state.client.issueSet.find((s) => s.id === upload.issue)
     if (!sub) return state
     const newSub = { ...sub, fileuploadSet: [...sub.fileuploadSet, upload] }
-    return reducers._loadSubmission(state, newSub)
+    return reducers._loadIssue(state, newSub)
   },
 }
 
@@ -87,36 +92,53 @@ const effects = (actions: Actions) => ({
     events.onFirstSave(client.id)
     return client
   },
-  updateClient: async (cliendId: string, updates: Data): Promise<Client> => {
+  updateClient: async (updates: ClientUpdate): Promise<Client> => {
     actions.client._setLoading()
-    const client = await api.client.update(cliendId, updates)
+    const client = await api.client.update(updates)
     actions.client._loadClient(client)
     return client
   },
-  createSubmission: async (subData: SubmissionCreate): Promise<Submission> => {
+  createIssue: async (subData: IssueCreate, state: State): Promise<Issue> => {
+    const { client } = state.client
+    if (client) {
+      // Don't create a new issue if it already for a given topic.
+      const sub = client.issueSet.find((s) => s.topic == subData.topic)
+      if (sub) {
+        return sub
+      }
+    }
     actions.client._setLoading()
-    const sub = await api.submission.create(subData)
-    actions.client._loadSubmission(sub)
+    const sub = await api.issue.create({ ...subData, answers: {} })
+    actions.client._loadIssue(sub)
     return sub
   },
-  updateSubmission: async (
-    subId: string,
-    updates: Data
-  ): Promise<Submission> => {
+  updateIssue: async (updates: IssueUpdate): Promise<Issue> => {
     actions.client._setLoading()
-    const sub = await api.submission.update(subId, updates)
-    actions.client._loadSubmission(sub)
+    const sub = await api.issue.update(updates)
+    actions.client._loadIssue(sub)
     return sub
   },
-  createTenancy: async (tenancyData: TenancyCreate): Promise<Tenancy> => {
+  createTenancy: async (
+    tenancyData: TenancyCreate,
+    state: State
+  ): Promise<Tenancy> => {
+    const { client } = state.client
+    if (client && client.tenancySet.length > 0) {
+      // Don't create a new tenancy if it already exists.
+      return client.tenancySet[0]
+    }
     actions.client._setLoading()
-    const tenancy = await api.tenancy.create(tenancyData)
+    const tenancy = await api.tenancy.create({
+      ...tenancyData,
+      landlord: null,
+      agent: null,
+    })
     actions.client._loadTenancy(tenancy)
     return tenancy
   },
-  updateTenancy: async (tenancyId: string, updates: Data): Promise<Tenancy> => {
+  updateTenancy: async (updates: TenancyUpdate): Promise<Tenancy> => {
     actions.client._setLoading()
-    const tenancy = await api.tenancy.update(tenancyId, updates)
+    const tenancy = await api.tenancy.update(updates)
     actions.client._loadTenancy(tenancy)
     return tenancy
   },
@@ -133,8 +155,9 @@ const effects = (actions: Actions) => ({
     actions.client._setLoading()
     const person = await api.person.create(personData)
     const updates = { agent: person.id }
-    const tenancy = await api.tenancy.update(tenancyId, updates)
-    actions.client._loadTenancy(tenancy)
+    // FIXME
+    // const tenancy = await api.tenancy.update(tenancyId, updates)
+    // actions.client._loadTenancy(tenancy)
     return person
   },
   createLandlord: async (
@@ -144,8 +167,9 @@ const effects = (actions: Actions) => ({
     actions.client._setLoading()
     const person = await api.person.create(personData)
     const updates = { landlord: person.id }
-    const tenancy = await api.tenancy.update(tenancyId, updates)
-    actions.client._loadTenancy(tenancy)
+    // FIXME
+    // const tenancy = await api.tenancy.update(tenancyId, updates)
+    // actions.client._loadTenancy(tenancy)
     return person
   },
 })

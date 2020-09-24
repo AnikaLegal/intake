@@ -1,4 +1,6 @@
 // @flow
+import type { Client } from 'types'
+
 export * from './querystring'
 export * from './debounce'
 export * from './functional'
