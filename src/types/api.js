@@ -23,7 +23,7 @@ export type TenancyCreate = {
 }
 
 export type TenancyUpdate = {
-  tenancyId: string,
+  tenancyId: number,
   updates: Data,
 }
 

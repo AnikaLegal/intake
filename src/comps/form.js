@@ -30,12 +30,15 @@ export const Form = ({
   const [data, setData] = useState({})
   const [isLoading, setIsLoading] = useState(isViewLoading)
   const [isSubmit, setIsSubmit] = useState(false)
+  const isFinalQuestion = fieldIdx >= fieldNames.length - 1
+  // Load default data
   useEffect(() => {
     setIsLoading(isViewLoading)
     if (!isViewLoading) {
       setData((d) => ({ ...d, ...initData }))
     }
   }, [isViewLoading])
+  // Submit data
   useEffect(() => {
     if (isSubmit) {
       // User has finished the form.
@@ -43,34 +46,25 @@ export const Form = ({
       onSubmit(data)
     }
   }, [isSubmit])
-  const navNext = () => {
-    // Progress to the next question.
-    setFieldIdx((i) => i + 1)
-  }
+  // Progress form to next question
   const onNext = (e) => {
-    e.preventDefault() // Don't submit form.
+    e?.preventDefault() // Don't submit HTML form.
     // User submits the current question.
-    if (fieldIdx >= fieldNames.length - 1) {
+    if (isFinalQuestion) {
+      // Trigger submission effect.
       setIsSubmit(true)
     } else {
-      navNext()
+      // Progress to the next question.
+      setFieldIdx((i) => i + 1)
     }
   }
-  const onSkip = () => {
-    // User skips the current question.
-    if (fieldIdx >= fieldNames.length - 1) {
-      // User has finished the form.
-      onSubmit(data)
-    } else {
-      navNext()
-    }
-  }
+  // User enters some data.
   const onChange = (v) => {
-    // User enters some data.
     setData((d) => ({ ...d, [fieldName]: v }))
   }
   const FormField = field ? FORM_FIELDS[field.type] : null
   const value = data[fieldName]
+  console.log('Form data', data)
   return (
     <TextContainer>
       <Text.Header>{field && field.Prompt}</Text.Header>
@@ -78,7 +72,7 @@ export const Form = ({
       {FormField && (
         <FormField
           onNext={onNext}
-          onSkip={onSkip}
+          onSkip={onNext}
           field={field}
           value={value}
           isLoading={isLoading}

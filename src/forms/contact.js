@@ -51,4 +51,5 @@ export const FIELDS = {
   INTRO,
   DOB,
   PHONE,
+  AVAILIBILITY,
 }

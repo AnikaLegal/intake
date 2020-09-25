@@ -10,11 +10,10 @@ const SUBMIT: Field = {
   type: FIELD_TYPES.DISPLAY,
   Prompt: (
     <span>
-      By submitting this form, you are agreeing to our
-      <a href={LINKS.PRIVACY_POLICY}>Privacy Policy</a>,
-      <a href={LINKS.COLLECTIONS_STATEMENT}>Collections Statement</a>
-      and website
-      <a href={LINKS.TERMS_OF_USE}>Terms of Use</a>.
+      By submitting this form, you are agreeing to our{' '}
+      <a href={LINKS.PRIVACY_POLICY}>Privacy Policy</a>,{' '}
+      <a href={LINKS.COLLECTIONS_STATEMENT}>Collections Statement</a> and
+      website <a href={LINKS.TERMS_OF_USE}>Terms of Use</a>.
     </span>
   ),
   buttonText: 'Confirm',

@@ -17,8 +17,14 @@ const ROUTE_VIEWS = {
   [ROUTES.CLIENT_FORM]: Views.CreateClientView,
   [ROUTES.ELIGIBILITY_FORM]: Views.ClientEligibilityView,
   [ROUTES.ISSUES_FORM]: Views.ClientIssuesView,
-  [ROUTES.ISSUE_DETAIL_FORM]: Views.ClientIssuesDetailView,
-  [ROUTES.LANDLORD_FORM]: Views.LandlordView,
+  [ROUTES.ISSUE_REPAIRS_FORM]: Views.ClientIssuesDetailView('REPAIRS'),
+  [ROUTES.ISSUE_RENT_REDUCTION_FORM]: Views.ClientIssuesDetailView(
+    'RENT_REDUCTION'
+  ),
+  [ROUTES.ISSUE_OTHER_FORM]: Views.ClientIssuesDetailView('OTHER'),
+  [ROUTES.PROPERTY_MANAGER_FORM]: Views.PropertyManagerSelectView,
+  [ROUTES.LANDLORD_FORM]: Views.PropertyManagerDetailsView('landlord'),
+  [ROUTES.AGENT_FORM]: Views.PropertyManagerDetailsView('agent'),
   [ROUTES.CONTACT_FORM]: Views.ClientContactView,
   [ROUTES.SUBMIT_FORM]: Views.SubmitView,
 }

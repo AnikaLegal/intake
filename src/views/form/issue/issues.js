@@ -11,6 +11,8 @@ import { api } from 'api'
 import { useRedux } from 'state'
 import type { Data, Client } from 'types'
 
+import { getNextIssueRoute } from './issue-detail'
+
 export const ClientIssuesView = () => {
   const history = useHistory()
   const { actions, client, isLoading } = useRedux()
@@ -19,16 +21,27 @@ export const ClientIssuesView = () => {
     const address = data.ADDRESS
     const clientIssues = data.ISSUES
     const promises = []
-    promises.push(actions.client.createTenancy({ client: client.id, address }))
+    const tenancy = client.tenancySet.find((t) => t)
+    if (tenancy) {
+      // Change the tenancy address
+      promises.push(
+        actions.client.updateTenancy({
+          tenancyId: tenancy.id,
+          updates: { address },
+        })
+      )
+    } else {
+      // Create the tenancy
+      promises.push(
+        actions.client.createTenancy({ client: client.id, address })
+      )
+    }
     for (let topic of clientIssues) {
       promises.push(actions.client.createIssue({ client: client.id, topic }))
     }
     const results = await Promise.all<any>(promises)
     const issues = results.slice(1)
-    const route = ROUTES.ISSUE_DETAIL_FORM.replace(':id', client.id).replace(
-      ':issueId',
-      issues[0].id
-    )
+    const route = getNextIssueRoute('', client.id, issues)
     history.push(route)
   }
   return (
@@ -51,6 +64,6 @@ const toForm = (client: ?Client): Data => {
   if (tenancy) {
     formData['ADDRESS'] = tenancy.address
   }
-
+  formData['ISSUES'] = client.issueSet.map((i) => i.topic)
   return formData
 }

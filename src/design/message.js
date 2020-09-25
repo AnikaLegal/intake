@@ -16,9 +16,7 @@ const ErrorEl = styled.div`
   background-color: ${theme.color.error.secondary};
   padding: 3px 10px;
   font-size: ${theme.text.subtitle};
-  & + & {
-    margin-top: 5px;
-  }
+  margin-top: 8px;
 `
 
 export const ErrorMessage = ({ children }: Props) => (

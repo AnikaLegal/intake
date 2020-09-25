@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import type { Node } from 'react'
 import { Text } from 'design'
+import { IMAGES } from 'consts'
 
 import { logException } from 'utils'
 
@@ -35,7 +36,8 @@ export class ErrorBoundary extends Component<Props, State> {
       }
       return (
         <Error>
-          <Text.Header>Something broke 😠</Text.Header>
+          <img className="logo" src={IMAGES.LOGO.ICON.COLOR.SVG} />
+          <Text.Header>Something broke, sorry!</Text.Header>
           <Text.Body>
             Try refreshing the page. If it's still broken, let us know at
             contact@anikalegal.com
@@ -54,4 +56,11 @@ const Error = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  text-align: center;
+  .logo {
+    height: 100px;
+    margin-bottom: 20px;
+  }
 `
