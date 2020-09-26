@@ -31,5 +31,9 @@ export const useRedux = () => {
       actions.client._setLoaded()
     })
   }, [])
+  if (client?.issueSet.some((i) => i.isSubmitted)) {
+    history.push(ROUTES.SUBMITTED.replace(':id', client?.id || ''))
+  }
+
   return { actions, client, isLoading }
 }

@@ -28,6 +28,20 @@ export const PropertyManagerDetailsView = (managerType: Manager) => () => {
   }
   const fields = FIELDS_LOOKUP[managerType]
   const onSubmit = async (data: Data) => {
+    if (person) {
+      // Update the person
+      await actions.client.updatePerson({
+        personId: person.id,
+        updates: toApi(data),
+      })
+    } else {
+      // Create a person
+      const create =
+        managerType == 'agent'
+          ? actions.client.createAgent
+          : actions.client.createLandlord
+      await create(toApi(data))
+    }
     history.push(ROUTES.CONTACT_FORM)
   }
   return (

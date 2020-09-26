@@ -14,6 +14,7 @@ import type {
   Upload,
   IssueCreate,
   PersonCreate,
+  PersonUpdate,
   ClientCreate,
   TenancyCreate,
   UploadCreate,
@@ -50,6 +51,25 @@ const reducers = {
         tenancySet: state.client.tenancySet
           .filter((t) => t.id !== tenancy.id)
           .concat([tenancy]),
+      },
+    }
+  },
+  _loadPerson: (state: ClientState, person: Person): ClientState => {
+    if (!state.client) return state
+    return {
+      ...state,
+      isLoading: false,
+      client: {
+        ...state.client,
+        tenancySet: state.client.tenancySet.map((t) => {
+          if (t.agent?.id === person.id) {
+            return { ...t, agent: person }
+          } else if (t.landlord?.id === person.id) {
+            return { ...t, landlord: person }
+          } else {
+            return t
+          }
+        }),
       },
     }
   },
@@ -98,17 +118,17 @@ const effects = (actions: Actions) => ({
     actions.client._loadClient(client)
     return client
   },
-  createIssue: async (subData: IssueCreate, state: State): Promise<Issue> => {
+  createIssue: async (issueData: IssueCreate, state: State): Promise<Issue> => {
     const { client } = state.client
     if (client) {
       // Don't create a new issue if it already for a given topic.
-      const sub = client.issueSet.find((s) => s.topic == subData.topic)
-      if (sub) {
-        return sub
+      const issue = client.issueSet.find((s) => s.topic == issueData.topic)
+      if (issue) {
+        return issue
       }
     }
     actions.client._setLoading()
-    const sub = await api.issue.create({ ...subData, answers: {} })
+    const sub = await api.issue.create({ ...issueData, answers: {} })
     actions.client._loadIssue(sub)
     return sub
   },
@@ -149,27 +169,38 @@ const effects = (actions: Actions) => ({
     return upload
   },
   createAgent: async (
-    tenancyId: string,
-    personData: PersonCreate
+    personData: PersonCreate,
+    state: State
   ): Promise<Person> => {
     actions.client._setLoading()
     const person = await api.person.create(personData)
-    const updates = { agent: person.id }
-    // FIXME
-    // const tenancy = await api.tenancy.update(tenancyId, updates)
-    // actions.client._loadTenancy(tenancy)
+    let tenancy = state.client.client?.tenancySet[0]
+    if (!tenancy) return person
+    const updates = { agent_id: person.id }
+    tenancy = await api.tenancy.update({
+      tenancyId: tenancy.id,
+      updates,
+    })
+    actions.client._loadTenancy(tenancy)
     return person
   },
   createLandlord: async (
-    tenancyId: string,
-    personData: PersonCreate
+    personData: PersonCreate,
+    state: State
   ): Promise<Person> => {
     actions.client._setLoading()
     const person = await api.person.create(personData)
-    const updates = { landlord: person.id }
-    // FIXME
-    // const tenancy = await api.tenancy.update(tenancyId, updates)
-    // actions.client._loadTenancy(tenancy)
+    let tenancy = state.client.client?.tenancySet[0]
+    if (!tenancy) return person
+    const updates = { landlord_id: person.id }
+    tenancy = await api.tenancy.update({ tenancyId: tenancy.id, updates })
+    actions.client._loadTenancy(tenancy)
+    return person
+  },
+  updatePerson: async (updates: PersonUpdate): Promise<Person> => {
+    actions.client._setLoading()
+    const person = await api.person.update(updates)
+    actions.client._loadPerson(person)
     return person
   },
 })
