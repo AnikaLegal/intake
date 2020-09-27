@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
 import { TextContainer, Text, Button, theme } from 'design'
@@ -9,9 +9,11 @@ import { FIELDS } from 'forms/contact'
 import { ROUTES } from 'consts'
 import { useRedux } from 'state'
 import type { Data, Client } from 'types'
+import { getNextFormRoute } from 'utils'
 
 export const ClientContactView = () => {
   const history = useHistory()
+  const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()
   const onSubmit = async (data: Data) => {
     if (!client) return
@@ -19,7 +21,8 @@ export const ClientContactView = () => {
       clientId: client.id,
       updates: toApi(data),
     })
-    history.push(ROUTES.SUBMIT_FORM.replace(':id', client.id))
+    const route = getNextFormRoute(path, client, {})
+    history.push(route)
   }
   return (
     <>

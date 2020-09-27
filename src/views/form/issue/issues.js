@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
 import { ROUTES } from 'consts'
@@ -10,11 +10,11 @@ import { FIELDS } from 'forms/issues'
 import { api } from 'api'
 import { useRedux } from 'state'
 import type { Data, Client } from 'types'
-
-import { getNextIssueRoute } from './issue-detail'
+import { getNextFormRoute } from 'utils'
 
 export const ClientIssuesView = () => {
   const history = useHistory()
+  const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()
   const onSubmit = async (data: Data) => {
     if (!client) return
@@ -41,7 +41,11 @@ export const ClientIssuesView = () => {
     }
     const results = await Promise.all<any>(promises)
     const issues = results.slice(1)
-    const route = getNextIssueRoute('', client.id, issues)
+    const route = getNextFormRoute(
+      path,
+      { ...client, issueSet: issues },
+      { issueTopic: 'START_ISSUE' }
+    )
     history.push(route)
   }
   return (

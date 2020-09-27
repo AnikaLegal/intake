@@ -1,18 +1,20 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
 import { TextContainer, Text, Button, theme } from 'design'
 import { FIELDS } from 'forms/client'
 import { ROUTES } from 'consts'
 import { useRedux } from 'state'
+import { getNextFormRoute } from 'utils'
 
 import type { Data, Client, State, Actions } from 'types'
 
 export const CreateClientView = () => {
   const history = useHistory()
+  const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()
 
   const onSubmit = async (data: Data) => {
@@ -26,7 +28,7 @@ export const CreateClientView = () => {
       newClient = await actions.client.createClient(toApi(data))
       localStorage.setItem('clientId', newClient.id)
     }
-    const route = ROUTES.ELIGIBILITY_FORM.replace(':id', newClient.id)
+    const route = getNextFormRoute(path, newClient, {})
     history.push(route)
   }
   return (

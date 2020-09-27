@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
 import { TextContainer, Text, Button, theme } from 'design'
@@ -10,9 +10,11 @@ import { ROUTES } from 'consts'
 import { api } from 'api'
 import type { Data } from 'types'
 import { useRedux } from 'state'
+import { getNextFormRoute } from 'utils'
 
 export const SubmitView = () => {
   const history = useHistory()
+  const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()
 
   const onSubmit = async (data: Data) => {
@@ -24,7 +26,8 @@ export const SubmitView = () => {
       })
     )
     await Promise.all<any>(promises)
-    history.push(ROUTES.SUBMITTED)
+    const route = getNextFormRoute(path, client, {})
+    history.push(route)
   }
   return (
     <>

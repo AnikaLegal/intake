@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import camelize from 'camelize'
 import snakeize from 'snakeize'
 
@@ -14,6 +14,7 @@ import { ROUTES } from 'consts'
 import { api } from 'api'
 import { useRedux } from 'state'
 import type { Data, Issue, Client, Topic } from 'types'
+import { getNextFormRoute } from 'utils'
 
 const FIELD_LOOKUP = {
   REPAIRS: REPAIRS_FIELDS,
@@ -23,36 +24,25 @@ const FIELD_LOOKUP = {
 
 export const ClientIssuesDetailView = (topic: Topic) => () => {
   const history = useHistory()
+  const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()
   const issue = client?.issueSet.find((i) => i.topic === topic)
-  const onAnswered = () => {
-    // User is ready to go to the next page
-    console.log('onAnswered')
-    if (!client) return
-    const route = getNextIssueRoute(topic, client.id, client.issueSet)
-    history.push(route)
-  }
+  const match = useRouteMatch()
   const onSubmit = async (data: Data) => {
     // User has submitted the form
-    console.log('submit', issue, client, data)
     if (!issue || !client) return
     const updatedIssue = await actions.client.updateIssue({
       issueId: issue.id,
       updates: { answers: toApi(data), isAnswered: true },
     })
+    // User is ready to go to the next page
+    const route = getNextFormRoute(path, client, { issueTopic: topic })
+    history.push(route)
   }
   const onUpload = async (file: File) => {
     // User is uploading a file
     const id = issue?.id || ''
     return await actions.client.createUpload({ issue: id, file })
-  }
-  if (client && !issue) {
-    // Go back to issues form if we can't find this issue.
-    const route = ROUTES.ISSUES_FORM.replace(':id', client.id)
-    history.push(route)
-  }
-  if (issue?.isAnswered) {
-    onAnswered()
   }
   const fields = issue ? FIELD_LOOKUP[issue.topic] : {}
   return (
@@ -69,34 +59,16 @@ export const ClientIssuesDetailView = (topic: Topic) => () => {
   )
 }
 
-const TOPIC_ROUTES = {
-  REPAIRS: ROUTES.ISSUE_REPAIRS_FORM,
-  RENT_REDUCTION: ROUTES.ISSUE_RENT_REDUCTION_FORM,
-  OTHER: ROUTES.ISSUE_OTHER_FORM,
-}
-
-export const getNextIssueRoute = (
-  topic: string,
-  clientId: string,
-  issues: Array<Issue>
-) => {
-  // Check for any unanswered issues.
-  const unanswered = issues
-    .filter((i) => i.topic !== topic)
-    .filter((i) => !i.isAnswered)
-
-  if (unanswered.length > 0) {
-    // If there are unanswered issues, then go to their issue detail form.
-    const nextTopic = unanswered[0].topic
-    const nextRoute = TOPIC_ROUTES[nextTopic]
-    return nextRoute.replace(':id', clientId)
-  } else {
-    // If there are no unanswered issues, proceed to property manager form.
-    return ROUTES.PROPERTY_MANAGER_FORM.replace(':id', clientId)
+const toForm = (issue: ?Issue): Data => {
+  if (!issue) return {}
+  const answers = snakeize(issue.answers)
+  const data = {}
+  for (let k of Object.keys(answers)) {
+    const key = k.toUpperCase()
+    data[key] = answers[k]
   }
+  return data
 }
-
-const toForm = (issue: ?Issue): Data => (issue ? snakeize(issue.answers) : {})
 
 const toApi = (data: Data) => {
   // Turn 'IS_ON_LEASE' into 'isOnLease', so that camelize/snakeize donesn't mangle the keys.

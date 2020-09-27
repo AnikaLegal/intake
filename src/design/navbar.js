@@ -42,6 +42,7 @@ const NavbarEl = styled.div`
   right: 16px;
   .logo {
     height: 27.4px;
+    user-select: none;
   }
   svg {
     height: 20.5px;

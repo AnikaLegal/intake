@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
 import { TextContainer, Text, Button, theme } from 'design'
@@ -9,6 +9,8 @@ import { FIELDS as LANDLORD_FIELDS } from 'forms/property-landlord'
 import { FIELDS as AGENT_FIELDS } from 'forms/property-agent'
 import { useRedux } from 'state'
 import { ROUTES } from 'consts'
+import { getNextFormRoute } from 'utils'
+
 import type { Data, Person } from 'types'
 
 type Manager = 'agent' | 'landlord'
@@ -20,14 +22,20 @@ const FIELDS_LOOKUP = {
 
 export const PropertyManagerDetailsView = (managerType: Manager) => () => {
   const history = useHistory()
+  const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()
   const tenancy = client?.tenancySet.find((t) => t)
   const person = tenancy ? tenancy[managerType] : null
   if (client && !tenancy) {
-    history.push(ROUTES.ISSUES_FORM.replace(':id', client.id))
+    const route = ROUTES.build(ROUTES.ISSUES_FORM, {
+      ':id': client.id,
+      ':qIdx': 0,
+    })
+    history.push(route)
   }
   const fields = FIELDS_LOOKUP[managerType]
   const onSubmit = async (data: Data) => {
+    if (!client) return
     if (person) {
       // Update the person
       await actions.client.updatePerson({
@@ -42,7 +50,8 @@ export const PropertyManagerDetailsView = (managerType: Manager) => () => {
           : actions.client.createLandlord
       await create(toApi(data))
     }
-    history.push(ROUTES.CONTACT_FORM)
+    const route = getNextFormRoute(path, client, { data })
+    history.push(route)
   }
   return (
     <>

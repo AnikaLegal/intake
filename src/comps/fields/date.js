@@ -15,7 +15,6 @@ export const DateField = ({
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
   const isDisabled = isLoading || !value
-  console.log(value)
   const isDateTooOld = value
     ? getTimestamp(value) < getTimestamp('1900-1-1')
     : false

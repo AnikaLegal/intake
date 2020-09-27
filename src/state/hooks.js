@@ -26,13 +26,15 @@ export const useRedux = () => {
     if (client || !clientId) return
     actions.client.loadClient(clientId).catch((e) => {
       console.error('Failed to fetch client with id', clientId)
-      history.push(ROUTES.CLIENT_FORM)
+      const route = ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 })
+      history.push(route)
       localStorage.setItem(CLIENT_KEY, '')
       actions.client._setLoaded()
     })
   }, [])
   if (client?.issueSet.some((i) => i.isSubmitted)) {
-    history.push(ROUTES.SUBMITTED.replace(':id', client?.id || ''))
+    const route = ROUTES.build(ROUTES.SUBMITTED, { ':id': client?.id || '' })
+    history.push(route)
   }
 
   return { actions, client, isLoading }

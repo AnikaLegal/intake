@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
 import { TextContainer, Text, Button, theme } from 'design'
@@ -10,14 +10,16 @@ import { ROUTES } from 'consts'
 import { api } from 'api'
 import type { Data } from 'types'
 import { useRedux } from 'state'
+import { getNextFormRoute } from 'utils'
 
 export const PropertyManagerSelectView = () => {
   const history = useHistory()
+  const { path } = useRouteMatch()
+
   const { actions, client, isLoading } = useRedux()
   const onSubmit = async (data: Data) => {
-    if (!client) return
-    let route = data.IS_AGENT ? ROUTES.AGENT_FORM : ROUTES.LANDLORD_FORM
-    history.push(route.replace(':id', client.id))
+    const route = getNextFormRoute(path, client, { data })
+    history.push(route)
   }
   return (
     <>

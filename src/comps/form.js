@@ -1,5 +1,6 @@
 // @flow
 import React, { useState, useEffect } from 'react'
+import { useRouteMatch, useParams, useHistory } from 'react-router-dom'
 
 import { TextContainer, Text } from 'design'
 import { FIELDS } from 'forms/client'
@@ -23,14 +24,17 @@ export const Form = ({
   isViewLoading,
   initData,
 }: Props) => {
+  const history = useHistory()
+  let { url } = useRouteMatch()
+
+  const { qIdx } = useParams()
   const fieldNames = Object.keys(fields)
-  const [fieldIdx, setFieldIdx] = useState(0)
-  const fieldName = fieldNames[fieldIdx]
+  const fieldName = fieldNames[qIdx]
   const field = fields[fieldName]
   const [data, setData] = useState({})
   const [isLoading, setIsLoading] = useState(isViewLoading)
   const [isSubmit, setIsSubmit] = useState(false)
-  const isFinalQuestion = fieldIdx >= fieldNames.length - 1
+  const isFinalQuestion = qIdx >= fieldNames.length - 1
   // Load default data
   useEffect(() => {
     setIsLoading(isViewLoading)
@@ -55,7 +59,13 @@ export const Form = ({
       setIsSubmit(true)
     } else {
       // Progress to the next question.
-      setFieldIdx((i) => i + 1)
+      const nextIdx = Number(qIdx) + 1
+      const nextUrl = url
+        .split('/')
+        .slice(0, -2)
+        .concat([nextIdx, ''])
+        .join('/')
+      history.push(nextUrl)
     }
   }
   // User enters some data.
@@ -64,7 +74,7 @@ export const Form = ({
   }
   const FormField = field ? FORM_FIELDS[field.type] : null
   const value = data[fieldName]
-  console.log('Form data', data)
+  console.log('Form data', data, url)
   return (
     <TextContainer>
       <Text.Header>{field && field.Prompt}</Text.Header>

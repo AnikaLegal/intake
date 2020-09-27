@@ -1,5 +1,6 @@
 // @flow
 export const IMAGES = {
+  UPLOAD: `${STATIC_URL}images/upload.svg`,
   SWOOSH: {
     LEFT: `${STATIC_URL}images/swoosh/swoosh-left.svg`,
     RIGHT: `${STATIC_URL}images/swoosh/swoosh-right.svg`,

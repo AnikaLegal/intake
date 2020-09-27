@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 
 import { NumberInput } from './number'
@@ -22,13 +22,17 @@ export const DateInput = ({
 }: Props) => {
   const date = value ? new Date(value) : null
   const [isValid, setValid] = useState(Boolean(date))
-  const [day, setDay] = useState<number | null>(date ? date.getDay() : null)
-  const [month, setMonth] = useState<number | null>(
-    date ? date.getMonth() + 1 : null
-  )
-  const [year, setYear] = useState<number | null>(
-    date ? date.getFullYear() : null
-  )
+  const [day, setDay] = useState<number | null>(null)
+  const [month, setMonth] = useState<number | null>(null)
+  const [year, setYear] = useState<number | null>(null)
+  useEffect(() => {
+    if (date) {
+      setDay(date.getDate())
+      setMonth(date.getMonth() + 1)
+      setYear(date.getFullYear())
+    }
+  }, [value])
+
   const onDayChange = (val) => {
     const newDay = Number(val)
     const newDate = getDate(year, month, newDay)
@@ -55,6 +59,7 @@ export const DateInput = ({
   }
   const onYearChange = (val) => {
     const newYear = Number(val)
+    if (newYear > new Date().getFullYear()) return
     const newDate = getDate(newYear, month, day)
     setYear(newYear)
     if (newDate) {

@@ -7,6 +7,8 @@ import { IMAGES } from 'consts'
 import { logException } from 'utils'
 
 import { Button } from './button'
+import { theme } from '../theme'
+import { ErrorMessage } from '../message'
 
 const ALLOWED_FILE_TYPES = ['png', 'jpg', 'jpeg', 'pdf']
 const IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -29,16 +31,16 @@ export const UploadInput = ({
   const [isLoading, setLoading] = useState<boolean>(false)
   const [errors, setErrors] = useState<Array<string>>([])
   const onSelect = (e: SyntheticEvent<HTMLInputElement>) => {
-    ref.current && ref.current.click()
-  }
-  const onDelete = (file: Upload) => () => {
-    onChange(values.filter((i) => i.id !== file.id))
-    if (ref.current) {
-      ref.current.value = null
-    }
+    e.preventDefault()
+    if (isLoading) return
+    ref.current?.click()
   }
   const onInputChange = async (e: SyntheticInputEvent<HTMLInputElement>) => {
-    const fileList: FileList = e.target.files
+    //$FlowFixMe
+    const fileList: FileList = e?.dataTransfer
+      ? //$FlowFixMe
+        e.dataTransfer.files
+      : e.target.files
     // There will only ever be one file at a time.
     if (!fileList || fileList.length < 1) return
     const f = fileList[0]
@@ -68,94 +70,126 @@ export const UploadInput = ({
       }
     }
   }
-
+  // Handle the user dragging the file in and out.
+  const onDrag = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+  // Handle file drop
+  const onDrop = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    onInputChange(e)
+  }
   return (
-    <div>
+    <>
       <HiddenInput ref={ref} type="file" onChange={onInputChange} />
-      <Button disabled={isLoading} secondary onClick={onSelect}>
-        {isLoading ? (
-          'Uploading...'
-        ) : (
-          <span>Upload {values.length > 0 && 'another'} file</span>
-        )}
-      </Button>
-      {errors.length > 0 && errors.map((e) => <ErrorMsg key={e}>{e}</ErrorMsg>)}
-      {values.map((f) => (
-        <UploadedFile
-          key={f.file}
-          disabled={disabled}
-          file={f}
-          onDelete={onDelete(f)}
-        />
-      ))}
-    </div>
+      <InputContainer>
+        <DropBox
+          onDragEnter={onDrag}
+          onDragLeave={onDrag}
+          onDragOver={onDrag}
+          onDrop={onDrop}
+        >
+          <ContentContainer>
+            <TitleImg onClick={onSelect} src={IMAGES.UPLOAD} />
+            <TitleEl onClick={onSelect}>
+              {isLoading && <span>Uploading...</span>}
+              {!isLoading && (
+                <span>Upload {values.length > 0 && 'another'} file</span>
+              )}
+            </TitleEl>
+            {values.map((f, i) => (
+              <UploadedFile key={f.file} idx={i} file={f} />
+            ))}
+          </ContentContainer>
+          <DragAndDropContainer />
+        </DropBox>
+      </InputContainer>
+      <InputContainer>
+        {errors.length > 0 &&
+          errors.map((e) => <ErrorMessage key={e}>{e}</ErrorMessage>)}
+      </InputContainer>
+    </>
   )
 }
 
 type FileProps = {
   file: Upload,
-  disabled: boolean,
-  onDelete: () => any,
+  idx: number,
 }
 
-const UploadedFile = ({ file, disabled, onDelete }: FileProps) => {
+const UploadedFile = ({ file, idx }: FileProps) => {
   return (
     <UploadedFileEl>
       <a href={file.file} target="_blank">
-        <img src={file.file} className="preview" />
+        Uploaded file #{idx + 1}
       </a>
-      {!disabled && (
-        <div onClick={onDelete} className="delete">
-          &times;
-        </div>
-      )}
     </UploadedFileEl>
   )
 }
+const UploadedFileEl = styled.div`
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  & > a {
+    text-decoration: none;
+    font-size: 12px;
+    color: ${theme.color.green};
+    &:hover {
+      color: ${theme.color.green};
+    }
+  }
+`
+
+const ContentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`
+const DragAndDropContainer = styled.div`
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+`
+
+const TitleEl = styled.div`
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 8px;
+  line-height: 24px;
+  color: ${theme.color.teal.secondary};
+`
+const TitleImg = styled.img`
+  cursor: pointer;
+`
 
 const HiddenInput = styled.input`
   display: none;
 `
-
-const IMAGE_SIZE = 200
-
-const UploadedFileEl = styled.div`
-  position: relative;
-  margin: 2rem 0;
-  display: flex;
-  align-items: center;
-  height: ${IMAGE_SIZE}px;
-  .preview {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
-    border-radius: 6px;
-    height: ${IMAGE_SIZE}px;
-    width: ${IMAGE_SIZE}px;
-    margin-right: 2rem;
-    object-fit: cover;
-    &.pdf {
-      opacity: 0.4;
-      padding: 15px;
-      box-sizing: border-box;
-    }
-  }
-  .delete {
-    position: absolute;
-    cursor: pointer;
-    background: #d52b1e;
-    width: 15px;
-    height: 15px;
-    border-radius: 15px;
-    color: white;
-    font-size: 15px;
-    line-height: 15px;
-    text-align: center;
-    font-weight: bold;
-    top: -6px;
-    left: ${IMAGE_SIZE - 8}px;
-  }
+const InputContainer = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
 `
-const ErrorMsg = styled.div`
-  margin: 10px 0;
-  font-weight: 500;
-  color: #d52b1e;
+
+const DropBox = styled.div`
+  position: relative;
+  height: 300px;
+  background: ${theme.color.teal.quaternary};
+  border: 2px dashed ${theme.color.teal.secondary};
+  box-sizing: border-box;
+  border-radius: 4px;
 `
