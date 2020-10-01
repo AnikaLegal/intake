@@ -40,16 +40,18 @@ export const getNextFormRoute = (
   client: ?Client,
   kwargs: Kwargs
 ): string => {
-  console.warn('Using path', path)
   if (!client) {
     // No client, so send them to client creation
-    return ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 })
+    return ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 }, {})
   } else if (Object.keys(NEXT_ROUTE).includes(path)) {
     // Routing covered by "next route" lookup table,
-    return ROUTES.build(NEXT_ROUTE[path], {
-      ':id': client.id,
-      ':qIdx': 0,
-    })
+    return ROUTES.build(
+      NEXT_ROUTE[path],
+      {
+        ':qIdx': 0,
+      },
+      { client: client.id }
+    )
   } else if (kwargs.issueTopic && ISSUE_ROUTES.includes(path)) {
     // Do special routing for issues.
     const topics = client.issueSet.map((i) => i.topic).concat(['END_ISSUE'])
@@ -65,21 +67,26 @@ export const getNextFormRoute = (
     if (!nextTopic) {
       throw Error('Could not find a next topic.')
     }
-    return ROUTES.build(TOPIC_ROUTES[nextTopic], {
-      ':id': client.id,
-      ':qIdx': 0,
-    })
+    return ROUTES.build(
+      TOPIC_ROUTES[nextTopic],
+      { ':qIdx': 0 },
+      { client: client.id }
+    )
   } else if (kwargs.data && path == ROUTES.ELIGIBILITY_FORM) {
     // Route to either issues or ineliguble
     const isEligible = kwargs.data.IS_VICTORIAN && kwargs.data.IS_TENANT
     if (!isEligible) return ROUTES.INELIGIBLE
-    return ROUTES.build(ROUTES.ISSUES_FORM, { ':id': client.id, ':qIdx': 0 })
+    return ROUTES.build(
+      ROUTES.ISSUES_FORM,
+      { ':qIdx': 0 },
+      { client: client.id }
+    )
   } else if (kwargs.data && path == ROUTES.PROPERTY_MANAGER_FORM) {
     // Route to either agent or landlord
     let routeName = kwargs.data.IS_AGENT
       ? ROUTES.AGENT_FORM
       : ROUTES.LANDLORD_FORM
-    return ROUTES.build(routeName, { ':id': client.id, ':qIdx': 0 })
+    return ROUTES.build(routeName, { ':qIdx': 0 }, { client: client.id })
   } else {
     throw Error('No route found.')
   }

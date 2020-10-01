@@ -60,11 +60,9 @@ export const Form = ({
     } else {
       // Progress to the next question.
       const nextIdx = Number(qIdx) + 1
-      const nextUrl = url
-        .split('/')
-        .slice(0, -2)
-        .concat([nextIdx, ''])
-        .join('/')
+      const regex = /question\/\d+/
+      const nextUrl =
+        url.replace(regex, `question/${nextIdx}`) + window.location.search
       history.push(nextUrl)
     }
   }

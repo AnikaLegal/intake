@@ -2,6 +2,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
+import { ErrorBoundary } from 'comps'
 import { ROUTES } from 'consts'
 import * as Views from 'views'
 
@@ -30,11 +31,14 @@ const ROUTE_VIEWS = {
 }
 
 export const AppRoutes = () => (
-  <Switch>
-    {Object.values(ROUTES).map((path) => (
-      // $FlowFixMe
-      <Route exact key={path} path={path} component={ROUTE_VIEWS[path]} />
-    ))}
-    <Route path="" component={Views.NotFoundView} />
-  </Switch>
+  <ErrorBoundary>
+    <Switch>
+      {Object.values(ROUTES)
+        .map((p) => String(p))
+        .map((path) => (
+          <Route exact key={path} path={path} component={ROUTE_VIEWS[path]} />
+        ))}
+      <Route path="" component={Views.NotFoundView} />
+    </Switch>
+  </ErrorBoundary>
 )

@@ -27,10 +27,11 @@ export const PropertyManagerDetailsView = (managerType: Manager) => () => {
   const tenancy = client?.tenancySet.find((t) => t)
   const person = tenancy ? tenancy[managerType] : null
   if (client && !tenancy) {
-    const route = ROUTES.build(ROUTES.ISSUES_FORM, {
-      ':id': client.id,
-      ':qIdx': 0,
-    })
+    const route = ROUTES.build(
+      ROUTES.ISSUES_FORM,
+      { ':qIdx': 0 },
+      { client: client.id }
+    )
     history.push(route)
   }
   const fields = FIELDS_LOOKUP[managerType]

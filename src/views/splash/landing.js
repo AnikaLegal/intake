@@ -17,7 +17,7 @@ export const LandingView = () => (
         start your case, we need to ask you a series of simple questions. This
         questionnaire takes approximately 10 minutes to complete.
       </Text.Body>
-      <Link to={ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 })}>
+      <Link to={ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 }, {})}>
         <SplashButton primary>Let’s get started</SplashButton>
       </Link>
     </Splash.Content>
