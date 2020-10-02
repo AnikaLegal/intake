@@ -33,28 +33,26 @@ export const EmailField = ({
           {!isEmailValid && (
             <ErrorMessage>Hold on, that email doesn't look valid</ErrorMessage>
           )}
-          <ButtonGroupEl>
-            {isEmailValid && (
-              <Button
-                primary
-                disabled={isDisabled}
-                type="submit"
-                Icon={field.button ? field.button.Icon : Icon.Tick}
-              >
-                {field.button ? field.button.text : 'OK'}
-              </Button>
-            )}
-            {!field.required && <Button onClick={onSkip}>Skip</Button>}
-          </ButtonGroupEl>
         </form>
       </Form.Content>
+      <Form.Footer>
+        <form onSubmit={onNext}>
+          {isEmailValid && (
+            <Button
+              primary
+              disabled={isDisabled}
+              type="submit"
+              Icon={field.button ? field.button.Icon : Icon.Tick}
+            >
+              {field.button ? field.button.text : 'OK'}
+            </Button>
+          )}
+          {!field.required && <Button onClick={onSkip}>Skip</Button>}
+        </form>
+      </Form.Footer>
     </Form.Outer>
   )
 }
-
-const ButtonGroupEl = styled.div`
-  margin-top: 24px;
-`
 
 // Grabbed a regex off the internet.
 // https://html.form.guide/best-practices/validate-email-address-using-javascript/

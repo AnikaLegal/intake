@@ -25,25 +25,26 @@ const FormOuter = styled.div`
   }
 `
 
-const FormContent = styled.div`
+const FormChild = styled.div`
   width: 100%;
   max-width: 700px;
   @media (max-width: ${theme.screen.mobile}) {
+    width: calc(100vw - 32px);
     justify-self: center;
     align-self: center;
-    grid-area: main;
   }
 `
 
-const FormFooterEl = styled.div`
+const FormContent = styled(FormChild)`
+  grid-area: main;
+`
+
+const FormFooterEl = styled(FormChild)`
   margin-top: 30px;
-  width: 100%;
-  max-width: 700px;
+  grid-area: footer;
   @media (max-width: ${theme.screen.mobile}) {
     margin-top: 0;
-    justify-self: center;
     align-self: end;
-    grid-area: footer;
   }
 `
 
