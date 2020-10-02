@@ -13,13 +13,13 @@ const Header = styled.h2`
   margin: 0 0 20px 0;
   @media (max-width: ${theme.screen.mobile}) {
     margin: 0 0 16px 0;
-    font-size: 20px;
-    line-height: 20px;
+    ${theme.switch({ splash: `font-weight: 500;` })}
   }
   @media (max-width: ${theme.screen.small}) {
     margin: 0 0 13px 0;
-    font-size: 16.7px;
-    line-height: 17px;
+  }
+  &:last-child {
+    margin: 0;
   }
 `
 
@@ -38,6 +38,9 @@ const Body = styled.p`
   @media (max-width: ${theme.screen.small}) {
     font-size: 13.4px;
     line-height: 14px;
+  }
+  &:last-child {
+    margin: 0;
   }
 `
 

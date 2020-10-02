@@ -33,7 +33,9 @@ const ROUTE_VIEWS = {
 export const AppRoutes = () => (
   <ErrorBoundary>
     <Switch>
-      {Object.values(ROUTES)
+      {Object.keys(ROUTES)
+        .filter((k) => k !== 'build')
+        .map((k) => ROUTES[k])
         .map((p) => String(p))
         .map((path) => (
           <Route exact key={path} path={path} component={ROUTE_VIEWS[path]} />

@@ -52,6 +52,11 @@ export const BigButton = styled.button`
       margin-top: 16px;
     }
   }
+  @media (max-width: ${theme.screen.small}) {
+    height: 40px;
+    line-height: 27px;
+    padding: 4px 38px 6px 38px;
+  }
 `
 
 const _Button = styled.button`

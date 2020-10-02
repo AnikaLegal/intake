@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button, Icon, UploadInput } from 'design'
+import { Button, Icon, UploadInput, Form } from 'design'
 import { timeout } from 'utils'
 import type { FormFieldProps } from './types'
 
@@ -14,6 +14,7 @@ export const UploadField = ({
   isLoading,
   onChange,
   onUpload,
+  children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
   const isDisabled = isLoading || !value
@@ -21,24 +22,29 @@ export const UploadField = ({
     throw Error('onUpload required for UploadField')
   }
   return (
-    <form onSubmit={onNext}>
-      <UploadInput
-        onUpload={onUpload}
-        values={value || []}
-        onChange={onChange}
-      />
-      <ButtonGroupEl>
-        <Button
-          primary
-          disabled={isDisabled}
-          type="submit"
-          Icon={field.button ? field.button.Icon : Icon.Tick}
-        >
-          {field.button ? field.button.text : 'OK'}
-        </Button>
-        {!field.required && <Button onClick={onSkip}>Skip</Button>}
-      </ButtonGroupEl>
-    </form>
+    <Form.Outer>
+      <Form.Content>
+        {children}
+        <form onSubmit={onNext}>
+          <UploadInput
+            onUpload={onUpload}
+            values={value || []}
+            onChange={onChange}
+          />
+          <ButtonGroupEl>
+            <Button
+              primary
+              disabled={isDisabled}
+              type="submit"
+              Icon={field.button ? field.button.Icon : Icon.Tick}
+            >
+              {field.button ? field.button.text : 'OK'}
+            </Button>
+            {!field.required && <Button onClick={onSkip}>Skip</Button>}
+          </ButtonGroupEl>
+        </form>
+      </Form.Content>
+    </Form.Outer>
   )
 }
 

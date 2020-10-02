@@ -1,4 +1,5 @@
 //@flow
+import * as React from 'react'
 import type { Field, Upload } from 'types'
 
 export type FormFieldProps = {
@@ -9,4 +10,5 @@ export type FormFieldProps = {
   field: Field,
   value: any,
   isLoading: boolean,
+  children: React.Node,
 }

@@ -5,7 +5,6 @@ import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
 import { ROUTES } from 'consts'
-import { TextContainer, Text, Button, theme } from 'design'
 import { FIELDS } from 'forms/issues'
 import { api } from 'api'
 import { useRedux } from 'state'

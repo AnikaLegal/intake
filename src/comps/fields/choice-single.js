@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button, Icon, SelectInput } from 'design'
+import { Button, Icon, SelectInput, Form } from 'design'
 import { timeout } from 'utils'
 import type { FormFieldProps } from './types'
 
@@ -12,6 +12,7 @@ export const ChoiceSingleField = ({
   value,
   isLoading,
   onChange,
+  children,
 }: FormFieldProps) => {
   const onClick = async (val) => {
     onChange(val)
@@ -20,6 +21,11 @@ export const ChoiceSingleField = ({
   }
 
   return (
-    <SelectInput value={value} onChange={onClick} options={field.choices} />
+    <Form.Outer>
+      <Form.Content>
+        {children}
+        <SelectInput value={value} onChange={onClick} options={field.choices} />
+      </Form.Content>
+    </Form.Outer>
   )
 }

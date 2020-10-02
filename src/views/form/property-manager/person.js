@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
-import { TextContainer, Text, Button, theme } from 'design'
 import { FIELDS as LANDLORD_FIELDS } from 'forms/property-landlord'
 import { FIELDS as AGENT_FIELDS } from 'forms/property-agent'
 import { useRedux } from 'state'

@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { IntakeNavbar, Form } from 'comps'
-import { TextContainer, Text, Button, theme } from 'design'
 import { FIELDS } from 'forms/property-manager'
 import { ROUTES } from 'consts'
 import { api } from 'api'

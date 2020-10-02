@@ -6,7 +6,6 @@ import camelize from 'camelize'
 import snakeize from 'snakeize'
 
 import { IntakeNavbar, Form } from 'comps'
-import { TextContainer, Text, Button, theme } from 'design'
 import { FIELDS as REPAIRS_FIELDS } from 'forms/repairs'
 import { FIELDS as OTHER_FIELDS } from 'forms/other-issues'
 import { FIELDS as RENT_REDUCTION_FIELDS } from 'forms/rent-reduction'

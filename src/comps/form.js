@@ -1,8 +1,9 @@
 // @flow
 import React, { useState, useEffect } from 'react'
 import { useRouteMatch, useParams, useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 
-import { TextContainer, Text } from 'design'
+import { Footer, Text, theme } from 'design'
 import { FIELDS } from 'forms/client'
 import { FORM_FIELDS } from './fields'
 import type { Field, Upload } from 'types'
@@ -73,21 +74,19 @@ export const Form = ({
   const FormField = field ? FORM_FIELDS[field.type] : null
   const value = data[fieldName]
   console.log('Form data', data, url)
+  if (!FormField) return null
   return (
-    <TextContainer>
+    <FormField
+      onNext={onNext}
+      onSkip={onNext}
+      field={field}
+      value={value}
+      isLoading={isLoading}
+      onChange={onChange}
+      onUpload={onUpload}
+    >
       <Text.Header>{field && field.Prompt}</Text.Header>
       {field && field.Help && <Text.Body>{field && field.Help}</Text.Body>}
-      {FormField && (
-        <FormField
-          onNext={onNext}
-          onSkip={onNext}
-          field={field}
-          value={value}
-          isLoading={isLoading}
-          onChange={onChange}
-          onUpload={onUpload}
-        />
-      )}
-    </TextContainer>
+    </FormField>
   )
 }

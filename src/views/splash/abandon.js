@@ -12,30 +12,24 @@ export const AbandonView = () => {
     <Splash.Container left>
       <Splash.Image src={IMAGES.HEROES.DESK_LADY} />
       <Splash.Content>
-        <Text.Header>Are you sure you want to abandon your case?</Text.Header>
+        <Text.Header splash>
+          Are you sure you want to abandon your case?
+        </Text.Header>
         <Text.Body>
           Life can get busy quick and we appreciate the effort you have taken to
           start your journey with Anika. You are only a few steps away from
           creating a case and then we will take care of everthing else.
         </Text.Body>
-        <SplashButton className="top" primary onClick={() => history.goBack()}>
-          Continue
-        </SplashButton>
-        <a href={LINKS.HOME}>
-          <SplashButton>Abandon case</SplashButton>
-        </a>
+
+        <Splash.ButtonGroup>
+          <Splash.Button primary onClick={() => history.goBack()}>
+            Continue
+          </Splash.Button>
+          <a href={LINKS.HOME}>
+            <Splash.Button last>Abandon case</Splash.Button>
+          </a>
+        </Splash.ButtonGroup>
       </Splash.Content>
     </Splash.Container>
   )
 }
-const SplashButton = styled(BigButton)`
-  margin-top: 16px;
-  &.top {
-    margin-top: 50px;
-  }
-`
-
-const LogoEl = styled.img`
-  height: 122px;
-  margin-bottom: 39px;
-`

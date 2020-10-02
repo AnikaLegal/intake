@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button, Icon, TextInput, ErrorMessage } from 'design'
+import { Button, Icon, TextInput, ErrorMessage, Form } from 'design'
 import type { FormFieldProps } from './types'
 
 // TODO: email validation.
@@ -13,35 +13,42 @@ export const EmailField = ({
   value,
   isLoading,
   onChange,
+  children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
   const isDisabled = isLoading || !value
   const isEmailValid = checkIsEmailValid(value)
   return (
-    <form onSubmit={onNext}>
-      <TextInput
-        placeholder="Type your answer here..."
-        value={value}
-        disabled={isLoading}
-        onChange={onChange}
-      />
-      {!isEmailValid && (
-        <ErrorMessage>Hold on, that email doesn't look valid</ErrorMessage>
-      )}
-      <ButtonGroupEl>
-        {isEmailValid && (
-          <Button
-            primary
-            disabled={isDisabled}
-            type="submit"
-            Icon={field.button ? field.button.Icon : Icon.Tick}
-          >
-            {field.button ? field.button.text : 'OK'}
-          </Button>
-        )}
-        {!field.required && <Button onClick={onSkip}>Skip</Button>}
-      </ButtonGroupEl>
-    </form>
+    <Form.Outer>
+      <Form.Content>
+        {children}
+
+        <form onSubmit={onNext}>
+          <TextInput
+            placeholder="Type your answer here..."
+            value={value}
+            disabled={isLoading}
+            onChange={onChange}
+          />
+          {!isEmailValid && (
+            <ErrorMessage>Hold on, that email doesn't look valid</ErrorMessage>
+          )}
+          <ButtonGroupEl>
+            {isEmailValid && (
+              <Button
+                primary
+                disabled={isDisabled}
+                type="submit"
+                Icon={field.button ? field.button.Icon : Icon.Tick}
+              >
+                {field.button ? field.button.text : 'OK'}
+              </Button>
+            )}
+            {!field.required && <Button onClick={onSkip}>Skip</Button>}
+          </ButtonGroupEl>
+        </form>
+      </Form.Content>
+    </Form.Outer>
   )
 }
 

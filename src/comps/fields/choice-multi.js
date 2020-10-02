@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button, Icon, MultiSelectInput } from 'design'
+import { Button, Icon, MultiSelectInput, Form } from 'design'
 import { timeout } from 'utils'
 import type { FormFieldProps } from './types'
 
@@ -13,29 +13,35 @@ export const ChoiceMultiField = ({
   value,
   isLoading,
   onChange,
+  children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
   const isDisabled = isLoading || !value
   return (
-    <form onSubmit={onNext}>
-      <MultiSelectInput
-        values={value}
-        disabled={isLoading}
-        onChange={onChange}
-        options={field.choices}
-      />
-      <ButtonGroupEl>
-        <Button
-          primary
-          disabled={isDisabled}
-          type="submit"
-          Icon={field.button ? field.button.Icon : Icon.Tick}
-        >
-          {field.button ? field.button.text : 'OK'}
-        </Button>
-        {!field.required && <Button onClick={onSkip}>Skip</Button>}
-      </ButtonGroupEl>
-    </form>
+    <Form.Outer>
+      <Form.Content>
+        {children}
+        <form onSubmit={onNext}>
+          <MultiSelectInput
+            values={value}
+            disabled={isLoading}
+            onChange={onChange}
+            options={field.choices}
+          />
+          <ButtonGroupEl>
+            <Button
+              primary
+              disabled={isDisabled}
+              type="submit"
+              Icon={field.button ? field.button.Icon : Icon.Tick}
+            >
+              {field.button ? field.button.text : 'OK'}
+            </Button>
+            {!field.required && <Button onClick={onSkip}>Skip</Button>}
+          </ButtonGroupEl>
+        </form>
+      </Form.Content>
+    </Form.Outer>
   )
 }
 
