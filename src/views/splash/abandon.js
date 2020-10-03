@@ -15,7 +15,7 @@ export const AbandonView = () => {
         <Text.Header splash>
           Are you sure you want to abandon your case?
         </Text.Header>
-        <Text.Body>
+        <Text.Body splash>
           Life can get busy quick and we appreciate the effort you have taken to
           start your journey with Anika. You are only a few steps away from
           creating a case and then we will take care of everthing else.

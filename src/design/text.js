@@ -13,10 +13,22 @@ const Header = styled.h2`
   margin: 0 0 20px 0;
   @media (max-width: ${theme.screen.mobile}) {
     margin: 0 0 16px 0;
-    ${theme.switch({ splash: `font-weight: 500;` })}
+    ${theme.switch({
+      splash: `
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 20px;
+    `,
+    })}
   }
   @media (max-width: ${theme.screen.small}) {
     margin: 0 0 13px 0;
+    ${theme.switch({
+      splash: `
+      font-size: 16.74px;
+      line-height: 16.74px;
+    `,
+    })}
   }
   &:last-child {
     margin: 0;
@@ -32,12 +44,20 @@ const Body = styled.p`
   margin: 0 0 15px 0;
   @media (max-width: ${theme.screen.mobile}) {
     margin: 0 0 12px 0;
-    font-size: 16px;
-    line-height: 16px;
+    ${theme.switch({
+      splash: `
+        font-size: 16px;
+        line-height: 16px;
+    `,
+    })}
   }
   @media (max-width: ${theme.screen.small}) {
-    font-size: 13.4px;
-    line-height: 14px;
+    ${theme.switch({
+      splash: `
+        font-size: 13.4px;
+        line-height: 14px;
+    `,
+    })}
   }
   &:last-child {
     margin: 0;

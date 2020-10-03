@@ -5,11 +5,11 @@ import styled from 'styled-components'
 import { theme } from './theme'
 
 export const FadeFooter = styled.div`
-  height: 0;
   position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
+  height: 0;
   @media (max-width: ${theme.screen.mobile}) {
     height: 76px;
   }

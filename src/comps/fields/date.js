@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button, Icon, DateInput, ErrorMessage, Form } from 'design'
+import { Button, Icon, DateInput, ErrorMessage, Form, theme } from 'design'
 import type { FormFieldProps } from './types'
 
 export const DateField = ({
@@ -25,40 +25,53 @@ export const DateField = ({
   const isDateValid = !isDateTooOld && !isDateInFuture
   return (
     <Form.Outer>
-      <Form.Content>
+      <FormContent>
         {children}
-        <form onSubmit={onNext}>
-          <DateInput value={value} disabled={isLoading} onChange={onChange} />
-          {isDateTooOld && (
+        <DateInput value={value} disabled={isLoading} onChange={onChange} />
+        {isDateTooOld && (
+          <ErrorWrapper>
             <ErrorMessage>
               Hold on, that date is over 100 years ago!
             </ErrorMessage>
-          )}
-          {isDateInFuture && (
+          </ErrorWrapper>
+        )}
+        {isDateInFuture && (
+          <ErrorWrapper>
             <ErrorMessage>Hold on, that date is in the future!</ErrorMessage>
-          )}
-          <ButtonGroupEl>
-            {isDateValid && (
-              <Button
-                primary
-                disabled={isDisabled}
-                type="submit"
-                Icon={field.button ? field.button.Icon : Icon.Tick}
-              >
-                {field.button ? field.button.text : 'OK'}
-              </Button>
-            )}{' '}
-            {!field.required && <Button onClick={onSkip}>Skip</Button>}
-          </ButtonGroupEl>
-        </form>
-      </Form.Content>
+          </ErrorWrapper>
+        )}
+      </FormContent>
+      <Form.Footer>
+        <FooterForm invalid={!isDateValid} onSubmit={onNext}>
+          <Button
+            primary
+            disabled={isDisabled}
+            type="submit"
+            Icon={field.button ? field.button.Icon : Icon.Tick}
+          >
+            {field.button ? field.button.text : 'OK'}
+          </Button>
+          {!field.required && <Button onClick={onSkip}>Skip</Button>}
+        </FooterForm>
+      </Form.Footer>
     </Form.Outer>
   )
 }
 
+const ErrorWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+`
+
+const FormContent = styled(Form.Content)`
+  position: relative;
+`
+
+const FooterForm = styled.form`
+  ${theme.switch({ invalid: `opacity: 0; pointer-events: none;` })}
+`
+
 const getTimestampNow = (): number => Date.now()
 const getTimestamp = (s: string): number => Date.parse(s)
-
-const ButtonGroupEl = styled.div`
-  margin-top: 24px;
-`

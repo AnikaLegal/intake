@@ -3,25 +3,30 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { theme } from '../theme'
-import { FadeFooter } from '../footer'
 
 const FormOuter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100%;
   @media (max-width: ${theme.screen.mobile}) {
     display: grid;
-    margin: 0 -16px;
-    padding: 0 16px;
+    padding: 0 16px 0 16px;
     box-sizing: border-box;
     grid-template-columns: auto;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: minmax(100px, min-content) 1fr min-content;
     grid-template-areas:
       '.'
       'main'
       'footer';
+  }
+  /* Account for footer padding */
+  min-height: 100vh;
+  @media (max-width: ${theme.screen.mobile}) {
+    min-height: calc(100vh - 76px);
+  }
+  @media (max-width: ${theme.screen.small}) {
+    min-height: calc(100vh - 40px);
   }
 `
 
@@ -39,21 +44,14 @@ const FormContent = styled(FormChild)`
   grid-area: main;
 `
 
-const FormFooterEl = styled(FormChild)`
+const FormFooter = styled(FormChild)`
   margin-top: 30px;
   grid-area: footer;
   @media (max-width: ${theme.screen.mobile}) {
-    margin-top: 0;
+    /* margin-top: 0; */
     align-self: end;
   }
 `
-
-const FormFooter = ({ children }: any) => (
-  <FormFooterEl>
-    {children}
-    <FadeFooter />
-  </FormFooterEl>
-)
 
 export const Form = {
   Outer: FormOuter,

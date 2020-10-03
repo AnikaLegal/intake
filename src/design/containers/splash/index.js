@@ -12,13 +12,13 @@ import { SplashSwoosh } from './swoosh'
 
 const SplashOuterEl = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
   @media (max-width: ${theme.screen.mobile}) {
     overflow: auto;
-    padding: 0 16px;
-    margin: 0 -16px;
+    padding: 0 16px 0 16px;
   }
   @media (max-width: ${theme.screen.small}) {
   }

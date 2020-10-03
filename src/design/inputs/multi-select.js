@@ -109,6 +109,13 @@ const SelectEl = styled.div`
       }
   `,
   })}
+
+  @media (max-width: ${theme.screen.mobile}) {
+    font-size: 16px;
+  }
+  @media (max-width: ${theme.screen.small}) {
+    font-size: 13.4px;
+  }
 `
 
 const MultiSelectEl = styled.div`

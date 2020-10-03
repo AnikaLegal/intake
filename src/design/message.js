@@ -17,6 +17,10 @@ const ErrorEl = styled.div`
   padding: 3px 10px;
   font-size: ${theme.text.subtitle};
   margin-top: 8px;
+  @media (max-width: ${theme.screen.mobile}) {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
 `
 
 export const ErrorMessage = ({ children }: Props) => (

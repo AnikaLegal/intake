@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button, Icon, TextInput, ErrorMessage, Form } from 'design'
+import { Button, Icon, TextInput, ErrorMessage, Form, theme } from 'design'
 import type { FormFieldProps } from './types'
 
 // TODO: email validation.
@@ -16,11 +16,11 @@ export const EmailField = ({
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
-  const isDisabled = isLoading || !value
   const isEmailValid = checkIsEmailValid(value)
+  const isSubmitDisabled = isLoading || !value || !isEmailValid
   return (
     <Form.Outer>
-      <Form.Content>
+      <FormContent>
         {children}
 
         <form onSubmit={onNext}>
@@ -31,28 +31,45 @@ export const EmailField = ({
             onChange={onChange}
           />
           {!isEmailValid && (
-            <ErrorMessage>Hold on, that email doesn't look valid</ErrorMessage>
+            <ErrorWrapper>
+              <ErrorMessage>
+                Hold on, that email doesn't look valid
+              </ErrorMessage>
+            </ErrorWrapper>
           )}
         </form>
-      </Form.Content>
+      </FormContent>
       <Form.Footer>
-        <form onSubmit={onNext}>
-          {isEmailValid && (
-            <Button
-              primary
-              disabled={isDisabled}
-              type="submit"
-              Icon={field.button ? field.button.Icon : Icon.Tick}
-            >
-              {field.button ? field.button.text : 'OK'}
-            </Button>
-          )}
+        <FooterForm invalid={!isEmailValid} onSubmit={onNext}>
+          <Button
+            primary
+            disabled={isSubmitDisabled}
+            type="submit"
+            Icon={field.button ? field.button.Icon : Icon.Tick}
+          >
+            {field.button ? field.button.text : 'OK'}
+          </Button>
           {!field.required && <Button onClick={onSkip}>Skip</Button>}
-        </form>
+        </FooterForm>
       </Form.Footer>
     </Form.Outer>
   )
 }
+
+const ErrorWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+`
+
+const FooterForm = styled.form`
+  ${theme.switch({ invalid: `opacity: 0; pointer-events: none;` })}
+`
+
+const FormContent = styled(Form.Content)`
+  position: relative;
+`
 
 // Grabbed a regex off the internet.
 // https://html.form.guide/best-practices/validate-email-address-using-javascript/

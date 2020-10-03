@@ -100,7 +100,7 @@ export const DateInput = ({
         value={year || ''}
         onFocus={onFocus}
         onBlur={onBlur}
-        style={{ width: '78px' }}
+        style={{ width: '80px' }}
       />
     </DateFieldEl>
   )

@@ -12,7 +12,7 @@ export const NotFoundView = () => {
       <Splash.Image src={IMAGES.HEROES.PAPER_GUY} />
       <Splash.Content>
         <Text.Header splash>Page not found</Text.Header>
-        <Text.Body>We couldn't find this page for you. Sorry!</Text.Body>
+        <Text.Body splash>We couldn't find this page for you. Sorry!</Text.Body>
         <Splash.ButtonGroup>
           <Splash.Button primary last onClick={() => history.goBack()}>
             Go back

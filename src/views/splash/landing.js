@@ -12,7 +12,7 @@ export const LandingView = () => (
       <Text.Header splash>
         Welcome to the Anika Legal rental support questonnaire.
       </Text.Header>
-      <Text.Body>
+      <Text.Body splash>
         We’re here to help you with your rental problem. In order for us to
         start your case, we need to ask you a series of simple questions. This
         questionnaire takes approximately 10 minutes to complete.

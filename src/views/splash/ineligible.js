@@ -12,7 +12,7 @@ export const IneligibleView = () => (
         Unfortunately we are currently only able to help with rental issues in
         Victoria.
       </Text.Header>
-      <Text.Body>
+      <Text.Body splash>
         If you wish to enquire further you can call our support staff on 0451
         618 383 between 9am to 5pm during weekdays, or you can email us at
         contact@anikalegal.com
