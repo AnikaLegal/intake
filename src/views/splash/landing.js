@@ -10,7 +10,7 @@ export const LandingView = () => (
     <Splash.Content>
       <LogoEl src={IMAGES.LOGO.TEXT.COLOR.SVG} />
       <Text.Header splash>
-        Welcome to the Anika Legal rental support questonnaire.
+        Welcome to the Anika Legal rental support questionnaire.
       </Text.Header>
       <Text.Body splash>
         We’re here to help you with your rental problem. In order for us to

@@ -34,6 +34,7 @@ export const SelectInput = ({ value, onChange, options }: Props) => {
 
 const SelectButtonEl = styled.div`
   display: flex;
+  cursor: pointer;
   align-items: center;
   justify-content: space-between;
   font-size: ${theme.text.subtitle};

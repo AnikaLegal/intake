@@ -55,6 +55,7 @@ export const MultiSelectInput = ({
 
 const SelectEl = styled.div`
   display: flex;
+  cursor: pointer;
   align-items: center;
   justify-content: space-between;
   font-size: ${theme.text.subtitle};
