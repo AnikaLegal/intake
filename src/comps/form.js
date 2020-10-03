@@ -46,9 +46,26 @@ export const Form = ({
   // Submit data
   useEffect(() => {
     if (isSubmit) {
-      // User has finished the form.
-      setIsLoading(true)
-      onSubmit(data)
+      // Check that all required field have been filled.
+      const isRequiredFieldMissing = fieldNames
+        .map((fn) => [fn, fields[fn]])
+        .some(
+          ([fn, field]) =>
+            field.type !== 'DISPLAY' &&
+            field.required &&
+            typeof data[fn] == 'undefined'
+        )
+
+      if (isRequiredFieldMissing) {
+        // Go back to the first question.
+        setIsSubmit(false)
+        const nextUrl = getNextURL(url, 0)
+        history.push(nextUrl)
+      } else {
+        // User has finished the form.
+        setIsLoading(true)
+        onSubmit(data)
+      }
     }
   }, [isSubmit])
   // Progress form to next question
@@ -60,10 +77,7 @@ export const Form = ({
       setIsSubmit(true)
     } else {
       // Progress to the next question.
-      const nextIdx = Number(qIdx) + 1
-      const regex = /question\/\d+/
-      const nextUrl =
-        url.replace(regex, `question/${nextIdx}`) + window.location.search
+      const nextUrl = getNextURL(url, Number(qIdx) + 1)
       history.push(nextUrl)
     }
   }
@@ -93,3 +107,7 @@ export const Form = ({
     </>
   )
 }
+
+const QUESTION_REGEX = /question\/\d+/
+const getNextURL = (url: string, nextIdx: number) =>
+  url.replace(QUESTION_REGEX, `question/${nextIdx}`) + window.location.search

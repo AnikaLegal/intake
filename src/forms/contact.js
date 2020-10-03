@@ -39,10 +39,10 @@ const AVAILIBILITY: Field = {
   required: true,
   type: FIELD_TYPES.CHOICE_SINGLE,
   choices: [
-    { label: 'Monday – Friday (between 9am and 5pm', value: 'WEEK_DAY' },
-    { label: 'Monday – Friday (between 5pm and 8pm', value: 'WEEK_EVENING' },
-    { label: 'Saturday (between 9am and 5pm', value: 'SATURDAY' },
-    { label: 'Sunday (between 9am and 5pm', value: 'SUNDAY' },
+    { label: 'Monday to Friday (9am to 5pm)', value: 'WEEK_DAY' },
+    { label: 'Monday to Friday (5pm to 8pm)', value: 'WEEK_EVENING' },
+    { label: 'Saturday (9am to 5pm)', value: 'SATURDAY' },
+    { label: 'Sunday (9am to 5pm)', value: 'SUNDAY' },
   ],
   Prompt: <span>When is your preferred time for us to call you??</span>,
 }

@@ -9,10 +9,11 @@ const FormOuter = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 120px 0;
+  box-sizing: border-box;
   @media (max-width: ${theme.screen.mobile}) {
     display: grid;
     padding: 0 16px 0 16px;
-    box-sizing: border-box;
     grid-template-columns: auto;
     grid-template-rows: minmax(100px, min-content) 1fr min-content;
     grid-template-areas:

@@ -63,8 +63,15 @@ const SelectButtonEl = styled.div`
       background-color: ${theme.color.teal.quaternary};
   `,
   })}
+
+  @media (max-width: ${theme.screen.mobile}) {
+    font-size: 16px;
+  }
+  @media (max-width: ${theme.screen.small}) {
+    font-size: 13.4px;
+  }
 `
 
 const SelectEl = styled.div`
-  width: 160px;
+  max-width: 380px;
 `
