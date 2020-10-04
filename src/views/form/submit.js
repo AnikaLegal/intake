@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 
+import { events } from 'analytics'
 import { IntakeNavbar, Form } from 'comps'
 import { FIELDS } from 'forms/submit'
 import { ROUTES } from 'consts'
@@ -18,6 +19,7 @@ export const SubmitView = () => {
 
   const onSubmit = async (data: Data) => {
     if (!client) return
+    events.onFinishIntake()
     const promises = client.issueSet.map((issue) =>
       actions.client.updateIssue({
         issueId: issue.id,

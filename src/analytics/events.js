@@ -3,25 +3,22 @@
 // gtag used for Adwords conversion tracking.
 // fbq used for Facebook ads
 export const events = {
-  onStartIntake: (id: string) => {
+  onStartIntake: () => {
     // User starts the questionnaire
     gtag('event', 'startIntake', {
       event_category: 'questionnaire',
-      event_label: id,
     })
   },
-  onFirstSave: (id: string) => {
+  onFirstSave: () => {
     // User save the questionnaire for the 1st time
     gtag('event', 'firstSave', {
       event_category: 'questionnaire',
-      event_label: id,
     })
   },
-  onFinishIntake: (id: string) => {
+  onFinishIntake: () => {
     // User submits the questionnaire
     gtag('event', 'finishIntake', {
       event_category: 'questionnaire',
-      event_label: id,
     })
     fbq('track', 'SubmitApplication')
   },

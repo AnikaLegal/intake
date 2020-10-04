@@ -26,6 +26,7 @@ export const TextField = ({
             value={value}
             disabled={isLoading}
             onChange={onChange}
+            autoFocus
           />
         </form>
       </Form.Content>

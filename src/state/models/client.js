@@ -1,5 +1,4 @@
 // @flow
-import { events } from 'analytics'
 import { api } from 'api'
 
 import type {
@@ -108,8 +107,6 @@ const effects = (actions: Actions) => ({
     actions.client._setLoading()
     const client = await api.client.create(clientData)
     actions.client._loadClient(client)
-    // Dispatch analytics event if user creates a client
-    events.onFirstSave(client.id)
     return client
   },
   updateClient: async (updates: ClientUpdate): Promise<Client> => {

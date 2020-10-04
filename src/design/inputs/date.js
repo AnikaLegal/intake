@@ -11,6 +11,7 @@ type Props = {
   disabled?: boolean,
   onFocus?: Function,
   onBlur?: Function,
+  autoFocus?: boolean,
 }
 
 export const DateInput = ({
@@ -19,6 +20,7 @@ export const DateInput = ({
   disabled,
   onFocus,
   onBlur,
+  autoFocus,
 }: Props) => {
   const date = value ? new Date(value) : null
   const [isValid, setValid] = useState(Boolean(date))
@@ -81,6 +83,7 @@ export const DateInput = ({
         onFocus={onFocus}
         onBlur={onBlur}
         style={{ width: '50px' }}
+        autoFocus={autoFocus}
       />
       <Separator invalid={isInvalid}>/</Separator>
       <NumberInput

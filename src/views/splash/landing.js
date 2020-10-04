@@ -4,6 +4,7 @@ import { Splash, Text, BigButton, theme } from 'design'
 import { Link } from 'react-router-dom'
 import { IMAGES, ROUTES } from 'consts'
 import styled from 'styled-components'
+import { events } from 'analytics'
 
 export const LandingView = () => (
   <Splash.Container>
@@ -18,7 +19,10 @@ export const LandingView = () => (
         questionnaire takes approximately 10 minutes to complete.
       </Text.Body>
       <Splash.ButtonGroup>
-        <Link to={ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 }, {})}>
+        <Link
+          to={ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 }, {})}
+          onClick={events.onStartIntake}
+        >
           <Splash.Button last primary>
             Let’s get started
           </Splash.Button>

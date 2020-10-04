@@ -8,6 +8,7 @@ import { FIELDS } from 'forms/client'
 import { ROUTES } from 'consts'
 import { useRedux } from 'state'
 import { getNextFormRoute } from 'utils'
+import { events } from 'analytics'
 
 import type { Data, Client, State, Actions } from 'types'
 
@@ -24,6 +25,7 @@ export const CreateClientView = () => {
         updates: toApi(data),
       })
     } else {
+      events.onFirstSave()
       newClient = await actions.client.createClient(toApi(data))
       localStorage.setItem('clientId', newClient.id)
     }

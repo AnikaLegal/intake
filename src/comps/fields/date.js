@@ -37,7 +37,12 @@ export const DateField = ({
     <Form.Outer>
       <FormContent>
         {children}
-        <DateInput value={value} disabled={isLoading} onChange={onChange} />
+        <DateInput
+          value={value}
+          disabled={isLoading}
+          onChange={onChange}
+          autoFocus
+        />
         {shouldShowError && isDateTooOld && (
           <ErrorWrapper>
             <ErrorMessage>

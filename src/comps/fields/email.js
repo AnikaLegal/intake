@@ -37,9 +37,11 @@ export const EmailField = ({
         <form onSubmit={onSubmit}>
           <TextInput
             placeholder="Type your answer here..."
+            type="email"
             value={value}
             disabled={isLoading}
             onChange={onChange}
+            autoFocus
           />
           {shouldShowError && (
             <ErrorWrapper>
