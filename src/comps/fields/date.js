@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { Button, Icon, DateInput, ErrorMessage, Form, theme } from 'design'
@@ -15,6 +15,7 @@ export const DateField = ({
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
+  const [hasAttemptSubmit, setAttemptSubmit] = useState(false)
   const isDisabled = isLoading || !value
   const isDateTooOld = value
     ? getTimestamp(value) < getTimestamp('1900-1-1')
@@ -23,26 +24,35 @@ export const DateField = ({
     ? getTimestamp(value) >= getTimestampNow()
     : false
   const isDateValid = !isDateTooOld && !isDateInFuture
+  const shouldShowError = !isDateValid && hasAttemptSubmit
+  const onSubmit = (e) => {
+    if (isDateValid) {
+      onNext(e)
+    } else {
+      e.preventDefault()
+      setAttemptSubmit(true)
+    }
+  }
   return (
     <Form.Outer>
       <FormContent>
         {children}
         <DateInput value={value} disabled={isLoading} onChange={onChange} />
-        {isDateTooOld && (
+        {shouldShowError && isDateTooOld && (
           <ErrorWrapper>
             <ErrorMessage>
               Hold on, that date is over 100 years ago!
             </ErrorMessage>
           </ErrorWrapper>
         )}
-        {isDateInFuture && (
+        {shouldShowError && isDateInFuture && (
           <ErrorWrapper>
             <ErrorMessage>Hold on, that date is in the future!</ErrorMessage>
           </ErrorWrapper>
         )}
       </FormContent>
       <Form.Footer>
-        <FooterForm invalid={!isDateValid} onSubmit={onNext}>
+        <FooterForm invalid={shouldShowError} onSubmit={onSubmit}>
           <Button
             primary
             disabled={isDisabled}

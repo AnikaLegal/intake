@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { Button, Icon, TextInput, ErrorMessage, Form, theme } from 'design'
@@ -16,21 +16,32 @@ export const EmailField = ({
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
+  const [hasAttemptSubmit, setAttemptSubmit] = useState(false)
+  const isSubmitDisabled = isLoading || !value
   const isEmailValid = checkIsEmailValid(value)
-  const isSubmitDisabled = isLoading || !value || !isEmailValid
+  const shouldShowError = !isEmailValid && hasAttemptSubmit
+  const onSubmit = (e) => {
+    if (isEmailValid) {
+      onNext(e)
+    } else {
+      e.preventDefault()
+      setAttemptSubmit(true)
+    }
+  }
+
   return (
     <Form.Outer>
       <FormContent>
         {children}
 
-        <form onSubmit={onNext}>
+        <form onSubmit={onSubmit}>
           <TextInput
             placeholder="Type your answer here..."
             value={value}
             disabled={isLoading}
             onChange={onChange}
           />
-          {!isEmailValid && (
+          {shouldShowError && (
             <ErrorWrapper>
               <ErrorMessage>
                 Hold on, that email doesn't look valid
@@ -40,7 +51,7 @@ export const EmailField = ({
         </form>
       </FormContent>
       <Form.Footer>
-        <FooterForm invalid={!isEmailValid} onSubmit={onNext}>
+        <FooterForm invalid={shouldShowError} onSubmit={onSubmit}>
           <Button
             primary
             disabled={isSubmitDisabled}
