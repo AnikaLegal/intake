@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -10,7 +11,7 @@ module.exports = {
   mode: 'production',
   devtool: 'source-map',
   output: {
-    path: __dirname + '/dist/build',
+    path: path.join(__dirname, '../dist/build'),
     filename: '[name].js',
   },
   optimization: {
