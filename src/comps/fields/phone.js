@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Button, Icon, TextInput, Form } from 'design'
 import type { FormFieldProps } from './types'
 
-export const TextField = ({
+export const PhoneField = ({
   onNext,
   onSkip,
   field,
@@ -27,6 +27,7 @@ export const TextField = ({
             disabled={isLoading}
             onChange={onChange}
             autoFocus={false}
+            type="tel"
           />
         </form>
       </Form.Content>

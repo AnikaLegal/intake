@@ -9,9 +9,10 @@ import { FIELDS } from 'forms/issues'
 import { api } from 'api'
 import { useRedux } from 'state'
 import type { Data, Client } from 'types'
-import { getNextFormRoute } from 'utils'
+import { getNextFormRoute, useScrollTop } from 'utils'
 
 export const ClientIssuesView = () => {
+  useScrollTop()
   const history = useHistory()
   const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()

@@ -8,8 +8,10 @@ import { ChoiceSingleField } from './choice-single'
 import { ChoiceMultiField } from './choice-multi'
 import { DateField } from './date'
 import { UploadField } from './upload'
+import { PhoneField } from './phone'
 
 export const FORM_FIELDS = {
+  [FIELD_TYPES.PHONE]: PhoneField,
   [FIELD_TYPES.DISPLAY]: DisplayField,
   [FIELD_TYPES.TEXT]: TextField,
   [FIELD_TYPES.EMAIL]: EmailField,

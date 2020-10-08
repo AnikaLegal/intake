@@ -11,6 +11,7 @@ export type FieldType =
   | 'CHOICE_MULTI'
   | 'UPLOAD'
   | 'DISPLAY'
+  | 'PHONE'
 
 export type Field = {
   type: FieldType,

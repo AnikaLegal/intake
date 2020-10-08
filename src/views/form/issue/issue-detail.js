@@ -13,7 +13,7 @@ import { ROUTES } from 'consts'
 import { api } from 'api'
 import { useRedux } from 'state'
 import type { Data, Issue, Client, Topic } from 'types'
-import { getNextFormRoute } from 'utils'
+import { getNextFormRoute, useScrollTop } from 'utils'
 
 const FIELD_LOOKUP = {
   REPAIRS: REPAIRS_FIELDS,
@@ -22,6 +22,7 @@ const FIELD_LOOKUP = {
 }
 
 export const ClientIssuesDetailView = (topic: Topic) => () => {
+  useScrollTop()
   const history = useHistory()
   const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()

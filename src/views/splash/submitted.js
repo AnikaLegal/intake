@@ -3,10 +3,12 @@ import React, { useEffect } from 'react'
 import { Splash, Text, BigButton } from 'design'
 import { IMAGES, LINKS } from 'consts'
 import styled from 'styled-components'
+import { useScrollTop } from 'utils'
 
 const CLIENT_KEY = 'clientId'
 
 export const SubmittedView = () => {
+  useScrollTop()
   useEffect(() => {
     localStorage.setItem(CLIENT_KEY, '')
   })

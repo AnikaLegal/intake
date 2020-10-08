@@ -31,7 +31,7 @@ const DOB: Field = {
 
 const PHONE: Field = {
   required: true,
-  type: FIELD_TYPES.TEXT,
+  type: FIELD_TYPES.PHONE,
   Prompt: <span>What is the best phone number to contact you on?</span>,
 }
 
@@ -44,7 +44,7 @@ const AVAILIBILITY: Field = {
     { label: 'Saturday (9am to 5pm)', value: 'SATURDAY' },
     { label: 'Sunday (9am to 5pm)', value: 'SUNDAY' },
   ],
-  Prompt: <span>When is your preferred time for us to call you??</span>,
+  Prompt: <span>When is your preferred time for us to call you?</span>,
 }
 
 export const FIELDS = {

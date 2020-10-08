@@ -10,9 +10,10 @@ import { ROUTES } from 'consts'
 import { api } from 'api'
 import type { Data } from 'types'
 import { useRedux } from 'state'
-import { getNextFormRoute } from 'utils'
+import { getNextFormRoute, useScrollTop } from 'utils'
 
 export const SubmitView = () => {
+  useScrollTop()
   const history = useHistory()
   const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()

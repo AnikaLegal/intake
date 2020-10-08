@@ -4,12 +4,14 @@ const base = require('./webpack.base.js')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const rules = require('./rules.js')
 
+const HOST = 'localhost'
+
 module.exports = {
   ...base,
   mode: 'development',
   devtool: 'inline-source-map',
   output: {
-    publicPath: 'http://localhost:3000/build/',
+    publicPath: `http://${HOST}:3000/build/`,
   },
   module: { rules: rules.dev },
   devServer: {
@@ -20,7 +22,9 @@ module.exports = {
     ],
     historyApiFallback: true,
     port: 3000,
+    host: HOST,
     hot: true,
+    headers: { 'Access-Control-Allow-Origin': '*' },
   },
   optimization: {
     minimize: false,
@@ -30,8 +34,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new ReactRefreshWebpackPlugin(),
     new webpack.DefinePlugin({
-      SERVER: JSON.stringify('http://localhost:8000'),
-      STATIC_URL: JSON.stringify('http://localhost:3000/static/'),
+      SERVER: JSON.stringify(`http://${HOST}:8000`),
+      STATIC_URL: JSON.stringify(`http://${HOST}:3000/static/`),
       SENTRY_JS_DSN: JSON.stringify(''),
       SENTRY_RELEASE: JSON.stringify(''),
       DEBUG_JS: JSON.stringify('true'),

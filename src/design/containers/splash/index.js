@@ -20,8 +20,6 @@ const SplashOuterEl = styled.div`
     overflow: auto;
     padding: 0 16px 0 16px;
   }
-  @media (max-width: ${theme.screen.small}) {
-  }
 `
 const SplashInnerEl = styled.div`
   width: 86vw;
@@ -38,7 +36,7 @@ const SplashInnerEl = styled.div`
     flex-direction: column-reverse;
     ${theme.switch({ left: `flex-direction: column;` })}
   }
-  @media (max-width: ${theme.screen.small}) {
+  @media (max-width: ${theme.screen.small}), (max-height: 700px) {
     padding-top: 89px;
   }
 `
@@ -50,8 +48,11 @@ const SplashImage = styled.img`
     margin-bottom: 80px;
     max-height: 300px;
   }
-  @media (max-width: ${theme.screen.small}) {
+  @media (max-width: ${theme.screen.small}), (max-height: 700px) {
     margin-bottom: 43px;
+  }
+  @media (max-height: 600px) {
+    max-height: 180px;
   }
 `
 const SplashContent = styled.div`

@@ -24,7 +24,7 @@ const EMAIL: Field = {
 }
 const PHONE: Field = {
   required: true,
-  type: FIELD_TYPES.TEXT,
+  type: FIELD_TYPES.PHONE,
   Prompt: <span>What is your landlord's phone number?</span>,
 }
 

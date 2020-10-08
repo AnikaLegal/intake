@@ -4,8 +4,10 @@ import { Splash, Text, theme } from 'design'
 import { IMAGES } from 'consts'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { useScrollTop } from 'utils'
 
 export const NotFoundView = () => {
+  useScrollTop()
   const history = useHistory()
   return (
     <Splash.Container left>

@@ -16,6 +16,11 @@ export const ClientEligibilityView = () => {
   const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()
   const onSubmit = async (data: Data) => {
+    if (!client) return
+    await actions.client.updateClient({
+      clientId: client.id,
+      updates: toApi(data),
+    })
     const route = getNextFormRoute(path, client, { data })
     history.push(route)
   }
@@ -31,3 +36,7 @@ export const ClientEligibilityView = () => {
     </>
   )
 }
+
+const toApi = (data: Data) => ({
+  isEligible: data.IS_VICTORIAN && data.IS_TENANT,
+})

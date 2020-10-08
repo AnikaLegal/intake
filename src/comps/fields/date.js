@@ -1,6 +1,7 @@
 // @flow
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
 
 import { Button, Icon, DateInput, ErrorMessage, Form, theme } from 'design'
 import type { FormFieldProps } from './types'
@@ -41,7 +42,7 @@ export const DateField = ({
           value={value}
           disabled={isLoading}
           onChange={onChange}
-          autoFocus
+          autoFocus={false}
         />
         {shouldShowError && isDateTooOld && (
           <ErrorWrapper>
@@ -88,5 +89,5 @@ const FooterForm = styled.form`
   ${theme.switch({ invalid: `opacity: 0; pointer-events: none;` })}
 `
 
-const getTimestampNow = (): number => Date.now()
-const getTimestamp = (s: string): number => Date.parse(s)
+const getTimestampNow = (): number => moment().unix()
+const getTimestamp = (s: string): number => moment(s, 'YYYY-MM-DD').unix()

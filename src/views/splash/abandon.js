@@ -5,8 +5,10 @@ import { useHistory } from 'react-router-dom'
 
 import { Splash, Text, BigButton } from 'design'
 import { IMAGES, LINKS } from 'consts'
+import { useScrollTop } from 'utils'
 
 export const AbandonView = () => {
+  useScrollTop()
   const history = useHistory()
   return (
     <Splash.Container left>

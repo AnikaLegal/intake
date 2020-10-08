@@ -58,7 +58,7 @@ const NavbarEl = styled.div`
     }
   }
 
-  @media (min-width: ${theme.screen.mobile}) {
+  @media (min-width: ${theme.screen.mobile}), {
     /* Larger than mobile */
     top: 35px;
     left: 60px;

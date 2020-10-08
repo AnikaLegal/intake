@@ -33,6 +33,9 @@ const FormOuter = styled.div`
   @media (max-width: ${theme.screen.small}) {
     min-height: calc(100vh - 40px);
   }
+  @media (max-height: 700px) {
+    min-height: calc(100vh - 120px);
+  }
 `
 
 const FormChild = styled.div`

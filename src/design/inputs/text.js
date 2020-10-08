@@ -25,6 +25,9 @@ export const TextEl = styled.input`
   outline: 0;
   border: 0;
   border-bottom: 2px solid ${theme.color.teal.quaternary};
+  padding: 0;
+  border-radius: 0;
+
   &::placeholder {
     color: ${theme.color.teal.quaternary};
   }

@@ -8,7 +8,7 @@ import { FIELDS as LANDLORD_FIELDS } from 'forms/property-landlord'
 import { FIELDS as AGENT_FIELDS } from 'forms/property-agent'
 import { useRedux } from 'state'
 import { ROUTES } from 'consts'
-import { getNextFormRoute } from 'utils'
+import { getNextFormRoute, useScrollTop } from 'utils'
 
 import type { Data, Person } from 'types'
 
@@ -20,6 +20,7 @@ const FIELDS_LOOKUP = {
 }
 
 export const PropertyManagerDetailsView = (managerType: Manager) => () => {
+  useScrollTop()
   const history = useHistory()
   const { path } = useRouteMatch()
   const { actions, client, isLoading } = useRedux()

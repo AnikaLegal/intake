@@ -38,10 +38,10 @@ export const EmailField = ({
           <TextInput
             placeholder="Type your answer here..."
             type="email"
-            value={value}
+            value={value ? value.toLowerCase() : ''}
             disabled={isLoading}
             onChange={onChange}
-            autoFocus
+            autoFocus={false}
           />
           {shouldShowError && (
             <ErrorWrapper>

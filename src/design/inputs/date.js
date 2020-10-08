@@ -1,6 +1,7 @@
 // @flow
 import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
+import moment from 'moment'
 
 import { NumberInput } from './number'
 import { theme } from '../theme'
@@ -22,25 +23,26 @@ export const DateInput = ({
   onBlur,
   autoFocus,
 }: Props) => {
-  const date = value ? new Date(value) : null
+  const date = getDateFromString(value)
   const [isValid, setValid] = useState(Boolean(date))
   const [day, setDay] = useState<number | null>(null)
   const [month, setMonth] = useState<number | null>(null)
   const [year, setYear] = useState<number | null>(null)
   useEffect(() => {
     if (date) {
-      setDay(date.getDate())
-      setMonth(date.getMonth() + 1)
-      setYear(date.getFullYear())
+      setDay(date.get('date'))
+      setMonth(date.get('month') + 1)
+      setYear(date.get('year'))
     }
   }, [value])
 
   const onDayChange = (val) => {
     const newDay = Number(val)
-    const newDate = getDate(year, month, newDay)
+    if (newDay > 31) return
+    const newDate = getDateFromVals(year, month, newDay)
     setDay(newDay)
     if (newDate) {
-      onChange(getDateString(newDate))
+      onChange(getStringFromDate(newDate))
       setValid(true)
     } else {
       setValid(false)
@@ -49,10 +51,11 @@ export const DateInput = ({
   }
   const onMonthChange = (val) => {
     const newMonth = Number(val)
-    const newDate = getDate(year, newMonth, day)
+    if (newMonth > 12) return
+    const newDate = getDateFromVals(year, newMonth, day)
     setMonth(newMonth)
     if (newDate) {
-      onChange(getDateString(newDate))
+      onChange(getStringFromDate(newDate))
       setValid(true)
     } else {
       setValid(false)
@@ -62,10 +65,10 @@ export const DateInput = ({
   const onYearChange = (val) => {
     const newYear = Number(val)
     if (newYear > new Date().getFullYear()) return
-    const newDate = getDate(newYear, month, day)
+    const newDate = getDateFromVals(newYear, month, day)
     setYear(newYear)
     if (newDate) {
-      onChange(getDateString(newDate))
+      onChange(getStringFromDate(newDate))
       setValid(true)
     } else {
       setValid(false)
@@ -109,18 +112,25 @@ export const DateInput = ({
   )
 }
 
-const getDateString = (date: Date) => {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+const getStringFromDate = (date) => date.format('YYYY-MM-DD')
+
+const getDateFromString = (s) => {
+  if (!s) return null
+  return moment(s, 'YYYY-MM-DD')
 }
 
-const getDate = (y: number | null, m: number | null, d: number | null) => {
+const getDateFromVals = (
+  y: number | null,
+  m: number | null,
+  d: number | null
+) => {
   if (!d || !m || !y) return null
-  const date = new Date(y, m - 1, d, 0, 0, 0, 0)
-  const isValid =
-    y === date.getFullYear() &&
-    m === date.getMonth() + 1 &&
-    d === date.getDate()
-  return isValid ? date : null
+  const newMoment = moment([y, m, d].join('-'), 'Y-M-D')
+  if (!newMoment.isValid()) {
+    return null
+  } else {
+    return newMoment
+  }
 }
 
 const DateFieldEl = styled.div`
@@ -128,7 +138,8 @@ const DateFieldEl = styled.div`
     display: inline-block;
     text-align: center;
     font-size: 30px;
-    padding-bottom: 12px;
+    padding: 0 0 12px 0;
+    border-radius: 0;
   }
   &:not(:hover) {
     input:first-child {

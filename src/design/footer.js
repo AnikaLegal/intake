@@ -10,6 +10,7 @@ export const FadeFooter = styled.div`
   left: 0;
   right: 0;
   height: 0;
+  pointer-events: none;
   @media (max-width: ${theme.screen.mobile}) {
     height: 76px;
   }
