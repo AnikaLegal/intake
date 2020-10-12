@@ -12,7 +12,7 @@ export type Tenancy = {
   id: number,
   client: string,
   address: string,
-  isClientOnLease?: boolean,
+  isOnLease?: boolean,
   started?: string,
   landlord?: Person,
   agent?: Person,

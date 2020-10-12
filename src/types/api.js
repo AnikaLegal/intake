@@ -16,6 +16,8 @@ export type PersonUpdate = {
 export type TenancyCreate = {
   client: string,
   address: string,
+  started: string,
+  isOnLease: boolean,
 }
 export type TenancyUpdate = {
   tenancyId: number,

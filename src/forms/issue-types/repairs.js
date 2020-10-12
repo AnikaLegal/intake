@@ -18,27 +18,6 @@ const INTRO: Field = {
   button: { text: 'Continue', Icon: null },
 }
 
-const START_DATE: Field = {
-  required: true,
-  type: FIELD_TYPES.DATE,
-  Prompt: <span>When did you start living at this property?</span>,
-}
-
-const IS_ON_LEASE: Field = {
-  required: true,
-  type: FIELD_TYPES.CHOICE_SINGLE,
-  choices: [
-    { label: 'Yes', value: true },
-    { label: 'No', value: false },
-  ],
-  Prompt: <span>Are you named as a tenant on the lease?</span>,
-  Help: (
-    <span>
-      If you signed the lease, it is likely that you are named as a tenant.
-    </span>
-  ),
-}
-
 const REPAIRS_REQUIRED: Field = {
   required: true,
   type: FIELD_TYPES.CHOICE_MULTI,
@@ -104,8 +83,6 @@ const OUTRO: Field = {
 
 export const FIELDS = [
   ['INTRO', INTRO],
-  ['START_DATE', START_DATE],
-  ['IS_ON_LEASE', IS_ON_LEASE],
   ['REPAIRS_REQUIRED', REPAIRS_REQUIRED],
   ['ISSUE_DESCRIPTION', ISSUE_DESCRIPTION],
   ['ISSUE_START', ISSUE_START],

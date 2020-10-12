@@ -17,6 +17,8 @@ export class IssueForm extends BaseForm implements Form {
   async onSubmit(data: Data, history: any) {
     if (!this.client) return
     const address = data.ADDRESS
+    const started = `${data.START_DATE}T00:00`
+    const isOnLease = data.IS_ON_LEASE
     const clientIssues = data.ISSUES
     const promises = []
     const tenancy = this.client.tenancySet.find((t) => t)
@@ -25,14 +27,19 @@ export class IssueForm extends BaseForm implements Form {
       promises.push(
         this.actions.client.updateTenancy({
           tenancyId: tenancy.id,
-          updates: { address },
+          updates: { address, started, isOnLease },
         })
       )
     } else {
       // Create the tenancy
       promises.push(
-        // $FlowFixMe
-        this.actions.client.createTenancy({ client: this.client.id, address })
+        this.actions.client.createTenancy({
+          // $FlowFixMe
+          client: this.client.id,
+          address,
+          started,
+          isOnLease,
+        })
       )
     }
     for (let topic of clientIssues) {
@@ -55,6 +62,8 @@ export class IssueForm extends BaseForm implements Form {
     const tenancy = this.client.tenancySet.find((t) => t)
     if (tenancy) {
       formData['ADDRESS'] = tenancy.address
+      formData['START_DATE'] = tenancy.started
+      formData['IS_ON_LEASE'] = tenancy.isOnLease
     }
     // $FlowFixMe
     formData['ISSUES'] = this.client.issueSet.map((i) => i.topic)
@@ -91,7 +100,30 @@ const ISSUES: Field = {
   Prompt: <span>What do you need help with?</span>,
 }
 
+const START_DATE: Field = {
+  required: true,
+  type: FIELD_TYPES.DATE,
+  Prompt: <span>When did you start living at this property?</span>,
+}
+
+const IS_ON_LEASE: Field = {
+  required: true,
+  type: FIELD_TYPES.CHOICE_SINGLE,
+  choices: [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ],
+  Prompt: <span>Are you named as a tenant on the lease?</span>,
+  Help: (
+    <span>
+      If you signed the lease, it is likely that you are named as a tenant.
+    </span>
+  ),
+}
+
 const FIELDS = [
   ['ADDRESS', ADDRESS],
+  ['START_DATE', START_DATE],
+  ['IS_ON_LEASE', IS_ON_LEASE],
   ['ISSUES', ISSUES],
 ]
