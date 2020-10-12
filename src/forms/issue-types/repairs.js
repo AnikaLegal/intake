@@ -15,7 +15,7 @@ const INTRO: Field = {
       around your rental repairs.
     </span>
   ),
-  buttonText: 'Continue',
+  button: { text: 'Continue', Icon: null },
 }
 
 const START_DATE: Field = {
@@ -99,16 +99,16 @@ const OUTRO: Field = {
   required: true,
   type: FIELD_TYPES.DISPLAY,
   Prompt: <span>Thanks. That is all the questions about rental repairs.</span>,
-  buttonText: 'Continue',
+  button: { text: 'Continue', Icon: null },
 }
 
-export const FIELDS = {
-  INTRO,
-  START_DATE,
-  IS_ON_LEASE,
-  REPAIRS_REQUIRED,
-  ISSUE_DESCRIPTION,
-  ISSUE_START,
-  ISSUE_PHOTO,
-  OUTRO,
-}
+export const FIELDS = [
+  ['INTRO', INTRO],
+  ['START_DATE', START_DATE],
+  ['IS_ON_LEASE', IS_ON_LEASE],
+  ['REPAIRS_REQUIRED', REPAIRS_REQUIRED],
+  ['ISSUE_DESCRIPTION', ISSUE_DESCRIPTION],
+  ['ISSUE_START', ISSUE_START],
+  ['ISSUE_PHOTO', ISSUE_PHOTO],
+  ['OUTRO', OUTRO],
+]

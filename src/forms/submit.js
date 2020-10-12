@@ -1,9 +1,51 @@
-//@flow
-// A form where the client submits their issue.
+// @flow
 import * as React from 'react'
 
-import { FIELD_TYPES, LINKS } from 'consts'
-import type { Field } from 'types'
+import { ROUTES, LINKS, FIELD_TYPES } from 'consts'
+import { events } from 'analytics'
+import { BaseForm } from './base'
+
+import type { Form, Actions, Client, Data, Field } from 'types'
+
+export class SubmitForm extends BaseForm implements Form {
+  stage = 3
+
+  async onSubmit(data: Data, history: any) {
+    if (!this.client) return
+    events.onFinishIntake()
+    const promises = this.client?.issueSet.map((issue) =>
+      this.actions.client.updateIssue({
+        issueId: issue.id,
+        updates: { isSubmitted: true },
+      })
+    )
+    await Promise.all<any>(promises)
+    const route = ROUTES.build(
+      ROUTES.SUBMITTED,
+      {
+        ':qIdx': 0,
+      },
+      { client: this.client?.id }
+    )
+    history.push(route)
+  }
+
+  toForm() {
+    return {}
+  }
+
+  toApi(data: Data) {
+    return {}
+  }
+
+  getFieldCount(data: Data) {
+    return FIELDS.length
+  }
+
+  getField(idx: number, data: Data) {
+    return FIELDS[idx] || ['', null]
+  }
+}
 
 const SUBMIT: Field = {
   required: true,
@@ -19,6 +61,4 @@ const SUBMIT: Field = {
   buttonText: 'Confirm',
 }
 
-export const FIELDS = {
-  SUBMIT,
-}
+export const FIELDS = [['SUBMIT', SUBMIT]]

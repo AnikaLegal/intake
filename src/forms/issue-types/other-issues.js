@@ -15,7 +15,7 @@ const INTRO: Field = {
       rental property.
     </span>
   ),
-  buttonText: 'Continue',
+  button: { text: 'Continue', Icon: null },
 }
 
 const START_DATE: Field = {
@@ -58,13 +58,13 @@ const OUTRO: Field = {
       property.
     </span>
   ),
-  buttonText: 'Continue',
+  button: { text: 'Continue', Icon: null },
 }
 
-export const FIELDS = {
-  INTRO,
-  START_DATE,
-  IS_ON_LEASE,
-  ISSUE_DESCRIPTION,
-  OUTRO,
-}
+export const FIELDS = [
+  ['INTRO', INTRO],
+  ['START_DATE', START_DATE],
+  ['IS_ON_LEASE', IS_ON_LEASE],
+  ['ISSUE_DESCRIPTION', ISSUE_DESCRIPTION],
+  ['OUTRO', OUTRO],
+]

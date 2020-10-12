@@ -46,5 +46,9 @@ export type Client = {
   tenancySet: Array<Tenancy>,
   dateOfBirth?: string,
   phoneNumber?: string,
-  callTime?: string,
+  callTime: string,
+  referrerType: string,
+  referrer: string,
 }
+
+export type Data = { [string]: any }

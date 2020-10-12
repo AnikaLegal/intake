@@ -20,11 +20,16 @@ const babelRule = (isDev) => ({
         ],
         plugins: isDev
           ? [
+              '@babel/plugin-proposal-class-properties',
               '@babel/transform-runtime',
               'babel-plugin-styled-components',
               'react-refresh/babel',
             ]
-          : ['@babel/transform-runtime', 'babel-plugin-styled-components'],
+          : [
+              '@babel/plugin-proposal-class-properties',
+              '@babel/transform-runtime',
+              'babel-plugin-styled-components',
+            ],
       },
     },
   ],

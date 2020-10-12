@@ -15,7 +15,7 @@ const INTRO: Field = {
       about your rental situation.
     </span>
   ),
-  buttonText: 'Continue',
+  button: { text: 'Continue', Icon: null },
 }
 
 const START_DATE: Field = {
@@ -137,19 +137,19 @@ const OUTRO: Field = {
       Thank you. That is all the questions about COVID-19 rental assistance.
     </span>
   ),
-  buttonText: 'Continue',
+  button: { text: 'Continue', Icon: null },
 }
 
-export const FIELDS = {
-  INTRO,
-  START_DATE,
-  IS_ON_LEASE,
-  COVID_ISSUES,
-  ISSUE_DESCRIPTION,
-  ISSUE_START,
-  ISSUE_PHOTO,
-  IS_JOB_SEEKER_BENEFITS,
-  IS_NOTICE_TO_VACATE,
-  NOTICE_TO_VACATE_DOCUMENT,
-  OUTRO,
-}
+export const FIELDS = [
+  ['INTRO', INTRO],
+  ['START_DATE', START_DATE],
+  ['IS_ON_LEASE', IS_ON_LEASE],
+  ['COVID_ISSUES', COVID_ISSUES],
+  ['ISSUE_DESCRIPTION', ISSUE_DESCRIPTION],
+  ['ISSUE_START', ISSUE_START],
+  ['ISSUE_PHOTO', ISSUE_PHOTO],
+  ['IS_JOB_SEEKER_BENEFITS', IS_JOB_SEEKER_BENEFITS],
+  ['IS_NOTICE_TO_VACATE', IS_NOTICE_TO_VACATE],
+  ['NOTICE_TO_VACATE_DOCUMENT', NOTICE_TO_VACATE_DOCUMENT],
+  ['OUTRO', OUTRO],
+]

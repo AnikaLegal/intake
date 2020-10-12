@@ -1,7 +1,7 @@
 //@flow
 import * as React from 'react'
-
-export type Data = { [string]: any }
+import type { Client, Data, Upload } from './core'
+import type { Actions } from './state'
 
 export type FieldType =
   | 'TEXT'
@@ -12,17 +12,31 @@ export type FieldType =
   | 'UPLOAD'
   | 'DISPLAY'
   | 'PHONE'
-  | 'DYNAMIC'
 
 export type Field = {
   type: FieldType,
   required: boolean,
   Prompt: React.Element<'span'>,
   Help?: React.Element<'span'>,
-  dynamic?: (Data) => Field | null,
   choices?: Array<{ label: string, value: string | boolean | null }>,
   button?: {
     text: string,
     Icon: any,
   },
+}
+
+export interface Form {
+  +stage: number;
+  path: string;
+  client: ?Client;
+  actions: Actions;
+
+  constructor(path: string, actions: Actions, client: ?Client): void;
+  onSubmit(data: Data, history: any): Promise<void>;
+  onUpload(file: File): Promise<Upload>;
+  toForm(): Data;
+  toApi(data: Data): Data;
+  getFieldCount(data: Data): number;
+  getField(idx: number, data: Data): [string, Field | null];
+  isRequiredFieldMissing(data: Data): boolean;
 }

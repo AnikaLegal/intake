@@ -1,6 +1,5 @@
 //@flow
-import type { Data } from './form'
-import type { Client, Person, Tenancy, Issue, Upload } from './core'
+import type { Data, Client, Person, Tenancy, Issue, Upload } from './core'
 import type {
   ClientCreate,
   PersonCreate,

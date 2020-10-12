@@ -8,5 +8,4 @@ export const FIELD_TYPES = {
   CHOICE_MULTI: 'CHOICE_MULTI',
   UPLOAD: 'UPLOAD',
   PHONE: 'PHONE',
-  DYNAMIC: 'DYNAMIC',
 }

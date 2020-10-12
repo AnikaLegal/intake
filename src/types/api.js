@@ -1,6 +1,5 @@
 //@flow
-import type { Data } from './form'
-import type { Topic } from './core'
+import type { Topic, Data } from './core'
 
 export type PersonCreate = {
   fullName: string,

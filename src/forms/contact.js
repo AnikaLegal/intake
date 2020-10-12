@@ -1,10 +1,72 @@
-//@flow
-// A form where we get the client's contact details.
+// @flow
 import * as React from 'react'
 
+import { ROUTES } from 'consts'
 import { FIELD_TYPES } from 'consts'
-import type { Field, Data } from 'types'
+import type { Form, Actions, Client, Data } from 'types'
+import type { Field } from 'types'
 
+import { events } from 'analytics'
+
+import { BaseForm } from './base'
+
+export class ContactForm extends BaseForm implements Form {
+  stage = 3
+
+  async onSubmit(data: Data, history: any) {
+    if (!this.client) return
+    await this.actions.client.updateClient({
+      clientId: this.client.id,
+      updates: this.toApi(data),
+    })
+    const route = ROUTES.build(ROUTES.SUBMIT_FORM, { ':qIdx': 0 }, {})
+    history.push(route)
+  }
+
+  toForm() {
+    if (!this.client) return {}
+    return {
+      PHONE: this.client.phoneNumber,
+      AVAILIBILITY: this.client.callTime,
+      REFERRER_TYPE: this.client.referrerType,
+      REFERRER: this.client.referrer,
+      DOB: this.client.dateOfBirth?.split('T')[0],
+    }
+  }
+
+  toApi(data: Data) {
+    return {
+      dateOfBirth: `${data.DOB}T00:00`,
+      phoneNumber: data.PHONE,
+      callTime: data.AVAILIBILITY,
+      referrerType: data.REFERRER_TYPE,
+      referrer: data.REFERRER || '',
+    }
+  }
+
+  getFieldCount(data: Data) {
+    return FIELDS.length
+  }
+
+  getField(idx: number, data: Data) {
+    if (idx < 5) {
+      // $FlowFixMe
+      return FIELDS[idx] || ['', null]
+    } else if (data.REFERRER_TYPE === 'LEGAL_CENTRE') {
+      // $FlowFixMe
+      return FIELDS[idx][0]
+    } else if (data.REFERRER_TYPE === 'CHARITY') {
+      // $FlowFixMe
+      return FIELDS[idx][1]
+    } else if (data.REFERRER_TYPE === 'SOCIAL_MEDIA') {
+      // $FlowFixMe
+      return FIELDS[idx][2]
+    } else {
+      // $FlowFixMe
+      return FIELDS[idx][3]
+    }
+  }
+}
 const INTRO: Field = {
   required: true,
   type: FIELD_TYPES.DISPLAY,
@@ -20,7 +82,7 @@ const INTRO: Field = {
       can contact you.
     </span>
   ),
-  buttonText: 'Continue',
+  button: { text: 'Continue', Icon: null },
 }
 
 const DOB: Field = {
@@ -47,34 +109,21 @@ const AVAILIBILITY: Field = {
   Prompt: <span>When is your preferred time for us to call you?</span>,
 }
 
-const REFERRAL_TYPE: Field = {
+const REFERRER_TYPE: Field = {
   required: true,
   Prompt: <span>How did you hear about Anika?</span>,
   type: FIELD_TYPES.CHOICE_SINGLE,
   choices: [
     {
-      label: 'Referral from a legal centre',
+      label: 'Legal centre',
       value: 'LEGAL_CENTRE',
     },
-    { label: 'Referral from a charity or non-profit', value: 'CHARITY' },
+    { label: 'Charity / non-profit', value: 'CHARITY' },
     { label: 'Social media', value: 'SOCIAL_MEDIA' },
     { label: 'Google search', value: 'SEARCH' },
     { label: 'Word of mouth', value: 'WORD_OF_MOUTH' },
     { label: 'Online ad', value: 'ONLINE_AD' },
   ],
-}
-
-const REFERRER: Field = {
-  type: FIELD_TYPES.DYNAMIC,
-  required: false,
-  Prompt: <span />,
-  dynamic: (data: Data) => {
-    const refType = data.REFERRAL_TYPE
-    if (refType == 'LEGAL_CENTRE') return LEGAL_CENTER_REFERRER
-    if (refType == 'CHARITY_REFERRER') return CHARITY_REFERRER
-    if (refType == 'SOCIAL_MEDIA') return SOCIAL_REFERRER
-    return null
-  },
 }
 
 const LEGAL_CENTER_REFERRER: Field = {
@@ -84,6 +133,9 @@ const LEGAL_CENTER_REFERRER: Field = {
   choices: [
     { label: 'Tenants Victoria', value: 'Tenants Victoria' },
     { label: 'Victoria Legal Aid', value: 'Victoria Legal Aid' },
+    { label: 'Housing Victoria', value: 'Housing Victoria' },
+    { label: 'Justice Connect', value: 'Justice Connect' },
+    { label: 'Consumer Affairs Victoria', value: 'Consumer Affairs Victoria' },
     { label: 'Other', value: 'Other' },
   ],
 }
@@ -121,11 +173,28 @@ const SOCIAL_REFERRER: Field = {
   ],
 }
 
-export const FIELDS = {
-  INTRO,
-  DOB,
-  PHONE,
-  AVAILIBILITY,
-  REFERRAL_TYPE,
-  REFERRER,
+const OUTRO: Field = {
+  required: true,
+  type: FIELD_TYPES.DISPLAY,
+  Prompt: <span>Almost done!</span>,
+  Help: (
+    <span>
+      Now all you need to do is submit your answers and we'll give you a call.
+    </span>
+  ),
+  button: { text: 'Continue', Icon: null },
 }
+
+export const FIELDS = [
+  ['INTRO', INTRO],
+  ['DOB', DOB],
+  ['PHONE', PHONE],
+  ['AVAILIBILITY', AVAILIBILITY],
+  ['REFERRER_TYPE', REFERRER_TYPE],
+  [
+    ['REFERRER', LEGAL_CENTER_REFERRER],
+    ['REFERRER', CHARITY_REFERRER],
+    ['REFERRER', SOCIAL_REFERRER],
+    ['OUTRO', OUTRO],
+  ],
+]

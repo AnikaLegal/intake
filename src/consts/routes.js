@@ -15,8 +15,6 @@ export const ROUTES = {
   ISSUE_RENT_REDUCTION_FORM: '/intake/issues/rent-reduction/question/:qIdx/',
   ISSUE_OTHER_FORM: '/intake/issues/other/question/:qIdx/',
   PROPERTY_MANAGER_FORM: '/intake/property-manager/question/:qIdx/',
-  LANDLORD_FORM: '/intake/property-manager/landlord/question/:qIdx/',
-  AGENT_FORM: '/intake/property-manager/agent/question/:qIdx/',
   CONTACT_FORM: '/intake/client/contact/question/:qIdx/',
   SUBMIT_FORM: '/intake/submit/question/:qIdx/',
 
