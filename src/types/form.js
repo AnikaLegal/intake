@@ -12,12 +12,14 @@ export type FieldType =
   | 'UPLOAD'
   | 'DISPLAY'
   | 'PHONE'
+  | 'DYNAMIC'
 
 export type Field = {
   type: FieldType,
   required: boolean,
   Prompt: React.Element<'span'>,
   Help?: React.Element<'span'>,
+  dynamic?: (Data) => Field | null,
   choices?: Array<{ label: string, value: string | boolean | null }>,
   button?: {
     text: string,

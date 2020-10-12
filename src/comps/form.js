@@ -95,6 +95,7 @@ export const Form = ({
         onNext={onNext}
         onSkip={onNext}
         field={field}
+        data={data}
         value={value}
         isLoading={isLoading}
         onChange={onChange}

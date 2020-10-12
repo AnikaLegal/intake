@@ -35,6 +35,7 @@ type Kwargs = {
   data?: Data,
 }
 
+// Returns the next route given the current route,
 export const getNextFormRoute = (
   path: string,
   client: ?Client,
