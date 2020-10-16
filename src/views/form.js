@@ -60,7 +60,8 @@ export const FormView = (FormCls: any) => () => {
   // Load default data
   useEffect(() => {
     setIsLoading(isStateLoading)
-    if (!isStateLoading) {
+    const isDataEmpty = Object.keys(data).length === 0
+    if (!isStateLoading && isDataEmpty) {
       setData(form.toForm())
     }
   }, [isStateLoading])
@@ -100,6 +101,14 @@ export const FormView = (FormCls: any) => () => {
     // $FlowFixMe
     setData((d) => ({ ...d, [fieldName]: v }))
   }
+  // User tries to upload a file
+  const onUpload = (file: File) => {
+    // User is uploading a file
+    // $FlowFixMe
+    const id = form.getIssue()?.id || ''
+    return actions.client.createUpload({ issue: id, file })
+  }
+
   const FormField = field ? FORM_FIELDS[field.type] : null
   const value = data[fieldName]
   console.log('Form data', data, url)
@@ -115,7 +124,7 @@ export const FormView = (FormCls: any) => () => {
         value={value}
         isLoading={isLoading}
         onChange={onChange}
-        onUpload={form.onUpload}
+        onUpload={onUpload}
       >
         <Text.Header>{field && field.Prompt}</Text.Header>
         {field && field.Help && <Text.Body>{field && field.Help}</Text.Body>}

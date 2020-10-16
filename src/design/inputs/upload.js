@@ -59,12 +59,12 @@ export const UploadInput = ({
       // Accept the file, upload it.
       setLoading(true)
       try {
-        const file = await onUpload(f)
+        const upload = await onUpload(f)
         setLoading(false)
         setErrors([])
-        onChange([...values, file])
-      } catch {
-        logException(e)
+        onChange([...values, upload])
+      } catch (err) {
+        logException(err)
         setLoading(false)
         setErrors([`Could not upload ${f.name}`])
       }

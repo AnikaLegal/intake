@@ -11,9 +11,6 @@ export class BaseForm {
     this.actions = actions
     this.client = client
   }
-  async onUpload(file: File) {
-    return { id: '', issue: '', file: '' }
-  }
 
   getFieldCount(data: Data) {
     return 0

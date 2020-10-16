@@ -17,7 +17,7 @@ export class IssueForm extends BaseForm implements Form {
   async onSubmit(data: Data, history: any) {
     if (!this.client) return
     const address = data.ADDRESS
-    const started = `${data.START_DATE}T00:00`
+    const started = formatDateStr(data.START_DATE)
     const isOnLease = data.IS_ON_LEASE
     const clientIssues = data.ISSUES
     const promises = []
@@ -83,6 +83,8 @@ export class IssueForm extends BaseForm implements Form {
   }
 }
 
+const formatDateStr = (s: string) => (s.includes('T') ? s : `${s}T00:00`)
+
 const ADDRESS: Field = {
   required: true,
   type: FIELD_TYPES.TEXT,
@@ -122,8 +124,8 @@ const IS_ON_LEASE: Field = {
 }
 
 const FIELDS = [
+  ['ISSUES', ISSUES],
   ['ADDRESS', ADDRESS],
   ['START_DATE', START_DATE],
   ['IS_ON_LEASE', IS_ON_LEASE],
-  ['ISSUES', ISSUES],
 ]

@@ -1,6 +1,6 @@
 //@flow
 import * as React from 'react'
-import type { Client, Data, Upload } from './core'
+import type { Client, Data } from './core'
 import type { Actions } from './state'
 
 export type FieldType =
@@ -33,7 +33,6 @@ export interface Form {
 
   constructor(path: string, actions: Actions, client: ?Client): void;
   onSubmit(data: Data, history: any): Promise<void>;
-  onUpload(file: File): Promise<Upload>;
   toForm(): Data;
   toApi(data: Data): Data;
   getFieldCount(data: Data): number;
