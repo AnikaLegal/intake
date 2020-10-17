@@ -3,6 +3,8 @@
 export const ROUTES = {
   // Splash pages
   LANDING: '/',
+  LANDING_REPAIRS: '/repairs/',
+  LANDING_COVID: '/covid/',
   INELIGIBLE: '/ineligible/',
   SUBMITTED: '/submitted/',
   ABANDON: '/abandon/',

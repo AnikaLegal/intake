@@ -23,6 +23,8 @@ import { FormView } from 'views/form'
 const ROUTE_VIEWS = {
   // Splash views
   [ROUTES.LANDING]: Views.LandingView,
+  [ROUTES.LANDING_REPAIRS]: Views.LandingView,
+  [ROUTES.LANDING_COVID]: Views.LandingView,
   [ROUTES.INELIGIBLE]: Views.IneligibleView,
   [ROUTES.SUBMITTED]: Views.SubmittedView,
   [ROUTES.ABANDON]: Views.AbandonView,
