@@ -21,7 +21,7 @@ export class IssueForm extends BaseForm implements Form {
     const isOnLease = data.IS_ON_LEASE
     const clientIssues = data.ISSUES
     const promises = []
-    const tenancy = this.client.tenancySet.find((t) => t)
+    const tenancy = this.client?.tenancySet.find((t) => t)
     if (tenancy) {
       // Change the tenancy address
       promises.push(

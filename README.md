@@ -21,7 +21,7 @@ You can then start the development server and webpack compilation:
 
 ```bash
 yarn html  # Build HTML from Handlebars template
-yarn serve  # Run dev server on http://localhost:3001
+yarn dev  # Run dev server on http://localhost:3000
 ```
 
 ## Environments

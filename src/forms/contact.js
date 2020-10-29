@@ -55,15 +55,18 @@ export class ContactForm extends BaseForm implements Form {
     } else if (data.REFERRER_TYPE === 'LEGAL_CENTRE') {
       // $FlowFixMe
       return FIELDS[idx][0]
-    } else if (data.REFERRER_TYPE === 'CHARITY') {
+    } else if (data.REFERRER_TYPE === 'HOUSING_SERVICE') {
       // $FlowFixMe
       return FIELDS[idx][1]
-    } else if (data.REFERRER_TYPE === 'SOCIAL_MEDIA') {
+    } else if (data.REFERRER_TYPE === 'CHARITY') {
       // $FlowFixMe
       return FIELDS[idx][2]
-    } else {
+    } else if (data.REFERRER_TYPE === 'SOCIAL_MEDIA') {
       // $FlowFixMe
       return FIELDS[idx][3]
+    } else {
+      // $FlowFixMe
+      return FIELDS[idx][4]
     }
   }
 }
@@ -118,6 +121,7 @@ const REFERRER_TYPE: Field = {
       label: 'Legal centre',
       value: 'LEGAL_CENTRE',
     },
+    { label: 'Housing service', value: 'HOUSING_SERVICE' },
     { label: 'Charity / non-profit', value: 'CHARITY' },
     { label: 'Social media', value: 'SOCIAL_MEDIA' },
     { label: 'Google search', value: 'SEARCH' },
@@ -133,9 +137,27 @@ const LEGAL_CENTER_REFERRER: Field = {
   choices: [
     { label: 'Tenants Victoria', value: 'Tenants Victoria' },
     { label: 'Victoria Legal Aid', value: 'Victoria Legal Aid' },
-    { label: 'Housing Victoria', value: 'Housing Victoria' },
     { label: 'Justice Connect', value: 'Justice Connect' },
     { label: 'Consumer Affairs Victoria', value: 'Consumer Affairs Victoria' },
+    {
+      label: 'Asylum Seeker Resource Centre',
+      value: 'Asylum Seeker Resource Centre',
+    },
+    { label: 'Other', value: 'Other' },
+  ],
+}
+
+const HOUSING_SERVICE_REFERRER: Field = {
+  required: true,
+  Prompt: <span>Which housing service referred you?</span>,
+  type: FIELD_TYPES.CHOICE_SINGLE,
+  choices: [
+    { label: 'Launch Housing', value: 'Launch Housing' },
+    { label: 'Quantum', value: 'Quantum' },
+    { label: 'Women’s Housing', value: 'Women’s Housing' },
+    { label: 'Rental and Housing Union', value: 'Rental and Housing Union' },
+    { label: 'Better Renting', value: 'Better Renting' },
+    { label: 'Tenants Victoria', value: 'Tenants Victoria' },
     { label: 'Other', value: 'Other' },
   ],
 }
@@ -146,10 +168,12 @@ const CHARITY_REFERRER: Field = {
   type: FIELD_TYPES.CHOICE_SINGLE,
   choices: [
     {
-      label: 'Asylum Seeker Resource Centre',
-      value: 'Asylum Seeker Resource Centre',
+      label: 'Ethic Communities Council of Victoria',
+      value: 'Ethic Communities Council of Victoria',
     },
-    { label: 'Launch Housing', value: 'Launch Housing' },
+    { label: 'Jewish Care', value: 'Jewish Care' },
+    { label: 'Sacred Heart Mission', value: 'Sacred Heart Mission' },
+    { label: 'St Vincent De Paul', value: 'St Vincent De Paul' },
     { label: 'Tenants Victoria', value: 'Tenants Victoria' },
     { label: 'Other', value: 'Other' },
   ],
@@ -193,6 +217,7 @@ export const FIELDS = [
   ['REFERRER_TYPE', REFERRER_TYPE],
   [
     ['REFERRER', LEGAL_CENTER_REFERRER],
+    ['REFERRER', HOUSING_SERVICE_REFERRER],
     ['REFERRER', CHARITY_REFERRER],
     ['REFERRER', SOCIAL_REFERRER],
     ['OUTRO', OUTRO],

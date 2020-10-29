@@ -34,4 +34,8 @@ export const TextEl = styled.input`
   &:focus {
     border-bottom: 2px solid ${theme.color.teal.primary};
   }
+  &:disabled {
+    background-color: transparent;
+    cursor: not-allowed;
+  }
 `

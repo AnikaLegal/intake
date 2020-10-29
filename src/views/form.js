@@ -11,8 +11,8 @@ import {
 import { FORM_FIELDS } from 'comps/fields'
 import { ROUTES } from 'consts'
 import { IntakeNavbar } from 'comps'
-import { FadeFooter, Text } from 'design'
-import { useScrollTop } from 'utils'
+import { FadeFooter, Text, FadeInOut } from 'design'
+import { useScrollTop, waitSeconds } from 'utils'
 import type { State, Actions, Form, Data } from 'types'
 
 export const FormView = (FormCls: any) => () => {
@@ -49,8 +49,17 @@ export const FormView = (FormCls: any) => () => {
     history.push(route)
   }
 
+  // Handle form animation transition in / out
+  const [isFormVisible, setIsFormVisible] = useState(false)
+  useEffect(() => {
+    setIsFormVisible(true)
+  }, [])
+
+  // Form data
   const [data, setData] = useState<Data>({})
+  // API loading state
   const [isLoading, setIsLoading] = useState(isStateLoading)
+  // Whether the form has been submitted
   const [isSubmit, setIsSubmit] = useState(false)
 
   const form: Form = new FormCls(path, actions, client)
@@ -92,8 +101,12 @@ export const FormView = (FormCls: any) => () => {
       setIsSubmit(true)
     } else {
       // Progress to the next question.
-      const nextUrl = getNextURL(url, Number(qIdx) + 1)
-      history.push(nextUrl)
+      setIsFormVisible(false)
+      waitSeconds(0.3).then(() => {
+        const nextUrl = getNextURL(url, Number(qIdx) + 1)
+        history.push(nextUrl)
+        setIsFormVisible(true)
+      })
     }
   }
   // User enters some data.
@@ -116,20 +129,22 @@ export const FormView = (FormCls: any) => () => {
   return (
     <>
       <IntakeNavbar current={form.stage} />
-      <FormField
-        onNext={onNext}
-        onSkip={onNext}
-        field={field}
-        data={data}
-        value={value}
-        isLoading={isLoading}
-        onChange={onChange}
-        onUpload={onUpload}
-      >
-        <Text.Header>{field && field.Prompt}</Text.Header>
-        {field && field.Help && <Text.Body>{field && field.Help}</Text.Body>}
-      </FormField>
-      <FadeFooter />
+      <FadeInOut visible={isFormVisible}>
+        <FormField
+          onNext={onNext}
+          onSkip={onNext}
+          field={field}
+          data={data}
+          value={value}
+          isLoading={isLoading}
+          onChange={onChange}
+          onUpload={onUpload}
+        >
+          <Text.Header>{field && field.Prompt}</Text.Header>
+          {field && field.Help && <Text.Body>{field && field.Help}</Text.Body>}
+        </FormField>
+      </FadeInOut>
+      {isFormVisible && <FadeFooter />}
     </>
   )
 }
