@@ -33,9 +33,8 @@ mv dist/build/main.css dist/build/main-${CSS_BUILDHASH}.css
 echo -e "\nBuilding HTML."
 yarn html
 
-echo -e "\nSkipping react-snap!."
-# echo -e "\nReact snap!."
-# yarn snap
+echo -e "\nRunning React Snap to generate static content."
+yarn snap
 
 echo -e "\nCollecting static files."
 cp -R public/* dist
