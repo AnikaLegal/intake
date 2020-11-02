@@ -1,6 +1,7 @@
 // @flow
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import styled from 'styled-components'
 import {
   useHistory,
   useRouteMatch,
@@ -11,7 +12,7 @@ import {
 import { FORM_FIELDS } from 'comps/fields'
 import { ROUTES } from 'consts'
 import { IntakeNavbar } from 'comps'
-import { FadeFooter, Text, FadeInOut } from 'design'
+import { FadeFooter, Text, FadeInOut, ANIMATION_TIME } from 'design'
 import { useScrollTop, waitSeconds } from 'utils'
 import type { State, Actions, Form, Data } from 'types'
 
@@ -95,19 +96,20 @@ export const FormView = (FormCls: any) => () => {
   // Progress form to next question
   const onNext = (e) => {
     e?.preventDefault() // Don't submit HTML form.
-    // User submits the current question.
-    if (isFinalQuestion) {
-      // Trigger submission effect.
-      setIsSubmit(true)
-    } else {
-      // Progress to the next question.
-      setIsFormVisible(false)
-      waitSeconds(0.3).then(() => {
+    setIsFormVisible(false)
+    waitSeconds(ANIMATION_TIME / 2000).then(() => {
+      // User submits the current question.
+      if (isFinalQuestion) {
+        // Trigger submission effect.
+        setIsSubmit(true)
+        setIsFormVisible(true)
+      } else {
+        // Progress to the next question.
         const nextUrl = getNextURL(url, Number(qIdx) + 1)
         history.push(nextUrl)
         setIsFormVisible(true)
-      })
-    }
+      }
+    })
   }
   // User enters some data.
   const onChange = (v) => {
@@ -127,7 +129,7 @@ export const FormView = (FormCls: any) => () => {
   console.log('Form data', data, url)
   if (!field || !FormField) return null
   return (
-    <>
+    <FormEl>
       <IntakeNavbar current={form.stage} />
       <FadeInOut visible={isFormVisible}>
         <FormField
@@ -145,7 +147,7 @@ export const FormView = (FormCls: any) => () => {
         </FormField>
       </FadeInOut>
       {isFormVisible && <FadeFooter />}
-    </>
+    </FormEl>
   )
 }
 
@@ -166,3 +168,7 @@ const getClientId = (query: URLSearchParams) => {
     return localStorage.getItem(CLIENT_KEY)
   }
 }
+
+const FormEl = styled.div`
+  overflow-x: hidden;
+`

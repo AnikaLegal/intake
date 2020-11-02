@@ -9,13 +9,13 @@ type Props = {
   children: any,
 }
 
-const TIME = 300 // ms
+export const ANIMATION_TIME = 400 // ms
 
 export const FadeInOut = ({ visible, children }: Props) => (
   <AnimationStyles>
     <CSSTransition
       in={visible}
-      timeout={TIME}
+      timeout={ANIMATION_TIME}
       classNames="fade-in-out"
       unmountOnExit
     >
@@ -26,17 +26,21 @@ export const FadeInOut = ({ visible, children }: Props) => (
 
 const AnimationStyles = styled.div`
   .fade-in-out-enter {
+    opacity: 0;
     transform: translateX(100vw);
   }
   .fade-in-out-enter-active {
+    opacity: 1;
     transform: translateX(0px);
-    transition: all ${TIME}ms ease;
+    transition: all ${ANIMATION_TIME}ms ease-out;
   }
   .fade-in-out-exit {
+    opacity: 1;
     transform: translateX(0px);
   }
   .fade-in-out-exit-active {
-    transform: translateX(-100vw);
-    transition: all ${TIME}ms ease;
+    opacity: 0;
+    transition: all ${ANIMATION_TIME / 2}ms ease-in;
+    transform: translateX(-50vw);
   }
 `
