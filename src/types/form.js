@@ -15,6 +15,10 @@ export type FieldType =
 
 export type Field = {
   type: FieldType,
+  stage: number,
+  name: string,
+  effect?: (Data) => void,
+  askCondition?: (Data) => boolean,
   required: boolean,
   Prompt: React.Element<'span'>,
   Help?: React.Element<'span'>,
