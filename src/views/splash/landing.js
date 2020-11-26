@@ -23,7 +23,7 @@ export const LandingView = () => {
         </Text.Body>
         <Splash.ButtonGroup>
           <Link
-            to={ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 }, {})}
+            to={ROUTES.build(ROUTES.FORM, { ':qIdx': 0 }, {})}
             onClick={events.onStartIntake}
           >
             <Splash.Button last primary>

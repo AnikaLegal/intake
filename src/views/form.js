@@ -16,7 +16,7 @@ import { FadeFooter, Text, FadeInOut, ANIMATION_TIME } from 'design'
 import { useScrollTop, waitSeconds } from 'utils'
 import type { State, Actions, Form, Data } from 'types'
 
-export const FormView = (FormCls: any) => () => {
+export const FormView = () => {
   useScrollTop()
   const history = useHistory()
   const { path, url } = useRouteMatch()
@@ -33,7 +33,7 @@ export const FormView = (FormCls: any) => () => {
     if (client || !clientId) return
     actions.client.loadClient(clientId).catch((e) => {
       console.error('Failed to fetch client with id', clientId)
-      const route = ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 }, {})
+      const route = ROUTES.build(ROUTES.FORM, { ':qIdx': 0 }, {})
       history.push(route)
       localStorage.setItem(CLIENT_KEY, '')
       actions.client._setLoaded()

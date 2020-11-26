@@ -30,7 +30,7 @@ export const useRedux = () => {
     if (client || !clientId) return
     actions.client.loadClient(clientId).catch((e) => {
       console.error('Failed to fetch client with id', clientId)
-      const route = ROUTES.build(ROUTES.CLIENT_FORM, { ':qIdx': 0 }, {})
+      const route = ROUTES.build(ROUTES.FORM, { ':qIdx': 0 }, {})
       history.push(route)
       localStorage.setItem(CLIENT_KEY, '')
       actions.client._setLoaded()

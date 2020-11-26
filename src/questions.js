@@ -1,4 +1,5 @@
 //@flow
+// All the questions in the questionnaire.
 import * as React from 'react'
 import { createBrowserHistory } from 'history'
 
@@ -11,7 +12,6 @@ const isRentReductionIssue = (data: Data) =>
   data.ISSUES.includes('RENT_REDUCTION')
 const isOtherIssue = (data: Data) => data.ISSUES.includes('OTHER')
 const isManagerAgent = (data: Data) => data.PROPERTY_MANAGER_IS_AGENT
-
 const isManagerLandlord = (data: Data) => !data.PROPERTY_MANAGER_IS_AGENT
 
 export const QUESTIONS: Array<Field> = [

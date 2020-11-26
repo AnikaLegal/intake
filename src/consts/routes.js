@@ -10,16 +10,7 @@ export const ROUTES = {
   ABANDON: '/abandon/',
   NOT_FOUND: '/not-found/',
   // Form pages
-  CLIENT_FORM: '/intake/client/question/:qIdx/',
-  ELIGIBILITY_FORM: '/intake/eligibility/question/:qIdx/',
-  ISSUES_FORM: '/intake/issues/question/:qIdx/',
-  ISSUE_REPAIRS_FORM: '/intake/issues/repairs/question/:qIdx/',
-  ISSUE_RENT_REDUCTION_FORM: '/intake/issues/rent-reduction/question/:qIdx/',
-  ISSUE_OTHER_FORM: '/intake/issues/other/question/:qIdx/',
-  PROPERTY_MANAGER_FORM: '/intake/property-manager/question/:qIdx/',
-  CONTACT_FORM: '/intake/client/contact/question/:qIdx/',
-  SUBMIT_FORM: '/intake/submit/question/:qIdx/',
-
+  FORM: '/intake/form/:qIdx/',
   build: (
     route: string,
     pathArgs: { [string]: any },
