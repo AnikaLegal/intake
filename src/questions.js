@@ -1,10 +1,11 @@
 //@flow
 // All the questions in the questionnaire.
 import * as React from 'react'
-import { createBrowserHistory } from 'history'
 
-import { FIELD_TYPES, ROUTES } from 'consts'
+import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import { events } from 'analytics'
+import { api } from 'api'
+import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
 
 const isRepairIssue = (data: Data) => data.ISSUES.includes('REPAIRS')
@@ -56,8 +57,11 @@ export const QUESTIONS: Array<Field> = [
     stage: 0,
     required: true,
     type: FIELD_TYPES.EMAIL,
-    effect: (data: Data) => {
+    effect: async (data: Data) => {
       events.onFirstSave()
+      const sub = await api.submission.create(data)
+      const formData = { ...data, id: sub.id }
+      storeFormData(formData)
     },
     Prompt: (
       <span>
@@ -76,6 +80,14 @@ export const QUESTIONS: Array<Field> = [
   {
     name: 'IS_VICTORIAN',
     stage: 0,
+    effect: async (data: Data) => {
+      console.log('EFFECT DATA', data)
+
+      if (!data.IS_VICTORIAN) {
+        return ROUTES.INELIGIBLE
+      }
+    },
+
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
@@ -87,11 +99,10 @@ export const QUESTIONS: Array<Field> = [
   {
     name: 'IS_TENANT',
     stage: 0,
-    effect: (data: Data) => {
-      const isEligible = data.IS_VICTORIAN && data.IS_TENANT
-      if (!isEligible) {
-        const history = createBrowserHistory()
-        history.push(ROUTES.INELIGIBLE)
+    effect: async (data: Data) => {
+      console.log('EFFECT DATA', data)
+      if (!data.IS_TENANT) {
+        return ROUTES.INELIGIBLE
       }
     },
     required: true,
@@ -104,13 +115,6 @@ export const QUESTIONS: Array<Field> = [
   },
 
   // Stage 1 - Issues
-  {
-    name: 'ADDRESS',
-    stage: 1,
-    required: true,
-    type: FIELD_TYPES.TEXT,
-    Prompt: <span>What is your address?</span>,
-  },
   {
     name: 'ISSUES',
     stage: 1,
@@ -513,6 +517,13 @@ export const QUESTIONS: Array<Field> = [
     button: { text: 'Continue', Icon: null },
   },
   {
+    name: 'SUBURB',
+    stage: 3,
+    required: true,
+    type: FIELD_TYPES.TEXT,
+    Prompt: <span>What suburb do you live in?</span>,
+  },
+  {
     name: 'POSTCODE',
     stage: 3,
     required: true,
@@ -520,11 +531,11 @@ export const QUESTIONS: Array<Field> = [
     Prompt: <span>What is your post code?</span>,
   },
   {
-    name: 'SUBURB',
-    stage: 3,
+    name: 'ADDRESS',
+    stage: 1,
     required: true,
-    type: FIELD_TYPES.DATE,
-    Prompt: <span>What suburb do you live in?</span>,
+    type: FIELD_TYPES.TEXT,
+    Prompt: <span>What is your street address?</span>,
   },
   {
     name: 'DOB',
@@ -533,7 +544,6 @@ export const QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.DATE,
     Prompt: <span>What is your date of birth?</span>,
   },
-
   {
     name: 'GENDER',
     stage: 3,
@@ -695,5 +705,46 @@ export const QUESTIONS: Array<Field> = [
       { label: 'Reddit', value: 'Reddit' },
       { label: 'Other', value: 'Other' },
     ],
+  },
+  {
+    name: 'SUBMIT',
+    required: true,
+    stage: 3,
+    type: FIELD_TYPES.DISPLAY,
+    Prompt: (
+      <span>
+        By submitting this form, you are agreeing to our{' '}
+        <a href={LINKS.PRIVACY_POLICY}>Privacy Policy</a>,{' '}
+        <a href={LINKS.COLLECTIONS_STATEMENT}>Collections Statement</a> and
+        website <a href={LINKS.TERMS_OF_USE}>Terms of Use</a>.
+      </span>
+    ),
+    buttonText: 'Confirm',
+    effect: async (data: Data) => {
+      const finalData = { ...data }
+      // Set all unasked questions to null.
+      for (let q of QUESTIONS) {
+        const isUndef = typeof data[q.name] === 'undefined'
+        const isFailCondition = q.askCondition && !q.askCondition(data)
+        if (isUndef || isFailCondition) {
+          finalData[q.name] = null
+        }
+      }
+      console.log('Submitting data:', finalData)
+      const subId = data['id']
+      let sub
+      if (subId) {
+        // We have already created this submission
+        sub = await api.submission.update(subId, finalData)
+      } else {
+        // This is a new submission
+        sub = await api.submission.create(finalData)
+      }
+      await api.submission.submit(sub.id)
+      // Wipe stored data.
+      storeFormData('')
+      events.onFinishIntake()
+      return ROUTES.SUBMITTED
+    },
   },
 ]

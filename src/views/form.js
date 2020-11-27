@@ -1,6 +1,5 @@
 // @flow
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
 import {
   useHistory,
@@ -9,46 +8,23 @@ import {
   useLocation,
 } from 'react-router-dom'
 
+// https://intake.anikalegal.com/resume/?sub=*|SUB_ID|*
+import { api } from 'api'
 import { FORM_FIELDS } from 'comps/fields'
 import { ROUTES } from 'consts'
+import { QUESTIONS } from 'questions'
 import { IntakeNavbar } from 'comps'
 import { FadeFooter, Text, FadeInOut, ANIMATION_TIME } from 'design'
-import { useScrollTop, waitSeconds } from 'utils'
-import type { State, Actions, Form, Data } from 'types'
+import { useScrollTop, waitSeconds, loadFormData, storeFormData } from 'utils'
+import type { Field, Data } from 'types'
 
 export const FormView = () => {
+  // Scroll to the top on page change.
   useScrollTop()
   const history = useHistory()
-  const { path, url } = useRouteMatch()
-  const { qIdx } = useParams()
-  const actions: Actions = useDispatch()
-  const query = useQuery()
-  const clientId = getClientId(query)
-  const {
-    client: { client, isLoading: isStateLoading },
-  }: State = useSelector((s) => s, shallowEqual)
-
-  useEffect(() => {
-    // Try to load the client from the backend if we have a client ID.
-    if (client || !clientId) return
-    actions.client.loadClient(clientId).catch((e) => {
-      console.error('Failed to fetch client with id', clientId)
-      const route = ROUTES.build(ROUTES.FORM, { ':qIdx': 0 }, {})
-      history.push(route)
-      localStorage.setItem(CLIENT_KEY, '')
-      actions.client._setLoaded()
-    })
-  }, [])
-
-  // If the client has already submitted some issues, send them to submitted page.
-  if (client?.issueSet.some((i) => i.isSubmitted)) {
-    const route = ROUTES.build(
-      ROUTES.SUBMITTED,
-      {},
-      { client: client?.id || '' }
-    )
-    history.push(route)
-  }
+  const { url } = useRouteMatch()
+  // Form data
+  const [data, setData] = useState<Data>(loadFormData() || {})
 
   // Handle form animation transition in / out
   const [isFormVisible, setIsFormVisible] = useState(false)
@@ -56,94 +32,114 @@ export const FormView = () => {
     setIsFormVisible(true)
   }, [])
 
-  // Form data
-  const [data, setData] = useState<Data>({})
-  // API loading state
-  const [isLoading, setIsLoading] = useState(isStateLoading)
-  // Whether the form has been submitted
-  const [isSubmit, setIsSubmit] = useState(false)
-
-  const form: Form = new FormCls(path, actions, client)
-  const [fieldName, field] = form.getField(qIdx, data)
-  const isFinalQuestion = qIdx >= form.getFieldCount(data) - 1
-
-  // Load default data
+  // Find the next valid question to ask.
+  const { qIdx } = useParams()
+  const [question, setQuestion] = useState<Field | null>(null)
   useEffect(() => {
-    setIsLoading(isStateLoading)
-    const isDataEmpty = Object.keys(data).length === 0
-    if (!isStateLoading && isDataEmpty) {
-      setData(form.toForm())
-    }
-  }, [isStateLoading])
-
-  // Submit data
-  useEffect(() => {
-    if (isSubmit) {
-      // Check that all required field have been filled.
-      if (form.isRequiredFieldMissing(data)) {
-        // Go back to the first question.
-        setIsSubmit(false)
-        const nextUrl = getNextURL(url, 0)
-        history.push(nextUrl)
-      } else {
-        // User has finished the form.
-        setIsLoading(true)
-        form.onSubmit(data, history)
+    let nextQuestion = null
+    const prevQs = []
+    for (let q of QUESTIONS) {
+      // Ignore fields that do not have their "ask condition" met.
+      if (q.askCondition && !q.askCondition(data)) {
+        continue
       }
+      // Ignore fields that have been answered or skipped.
+      if (typeof data[q.name] !== 'undefined') {
+        prevQs.push(q)
+        continue
+      }
+      nextQuestion = q
+      break
     }
-  }, [isSubmit])
+    if (qIdx >= 0 && qIdx < prevQs.length) {
+      // User is looking at an answered question
+      setQuestion(prevQs[qIdx])
+    } else if (qIdx == prevQs.length && nextQuestion) {
+      // User is looking at the next question
+      setQuestion(nextQuestion)
+    } else {
+      // User is looking at some garbage qIdx, send them to next question
+      const newIdx = prevQs.length
+      const route = ROUTES.build(ROUTES.FORM, { ':qIdx': newIdx }, {})
+      history.push(route)
+    }
+  }, [qIdx])
 
-  // Progress form to next question
-  const onNext = (e) => {
-    e?.preventDefault() // Don't submit HTML form.
-    setIsFormVisible(false)
-    waitSeconds(ANIMATION_TIME / 2000).then(() => {
-      // User submits the current question.
-      if (isFinalQuestion) {
-        // Trigger submission effect.
-        setIsSubmit(true)
-        setIsFormVisible(true)
+  // Handle next page event
+  const [isNavigateNext, setIsNavigateNext] = useState(false)
+  useEffect(() => {
+    if (!isNavigateNext || !question) return
+    const latestData = { ...data }
+    // Set non-required fields to null if no answer was given.
+    if (typeof latestData[question.name] === 'undefined') {
+      latestData[question.name] = null
+      setData(latestData)
+    }
+    // Save form data to local storage when question answered
+    storeFormData(latestData)
+    // Run question side effects.
+    const effectPromise = question.effect
+      ? question.effect(latestData)
+      : Promise.resolve()
+    // Trigger animation.
+    effectPromise.then(async (effectNextUrl) => {
+      if (effectNextUrl) {
+        history.push(effectNextUrl)
       } else {
-        // Progress to the next question.
+        setIsFormVisible(false)
+        await waitSeconds(ANIMATION_TIME / 2000)
         const nextUrl = getNextURL(url, Number(qIdx) + 1)
         history.push(nextUrl)
+        setIsNavigateNext(false)
         setIsFormVisible(true)
       }
     })
+  }, [isNavigateNext])
+
+  const onBack = () => {
+    if (qIdx > 0) {
+      const route = ROUTES.build(ROUTES.FORM, { ':qIdx': qIdx - 1 }, {})
+      history.push(route)
+    } else {
+      const route = ROUTES.build(ROUTES.LANDING, {}, {})
+      history.push(route)
+    }
+  }
+  // Progress form to next question
+  const onNext = (e) => {
+    e?.preventDefault() // Don't submit HTML form.
+    setIsNavigateNext(true)
   }
   // User enters some data.
   const onChange = (v) => {
     // $FlowFixMe
-    setData((d) => ({ ...d, [fieldName]: v }))
+    setData((d) => ({ ...d, [question.name]: v }))
   }
   // User tries to upload a file
-  const onUpload = (file: File) => {
-    // User is uploading a file
-    // $FlowFixMe
-    const id = form.getIssue()?.id || ''
-    return actions.client.createUpload({ issue: id, file })
-  }
+  const onUpload = (file: File) => api.upload.create(file)
 
-  const FormField = field ? FORM_FIELDS[field.type] : null
-  const value = data[fieldName]
+  if (!question) {
+    return null
+  }
+  const FormField = FORM_FIELDS[question.type]
+  const value = data[question.name]
   console.log('Form data', data, url)
-  if (!field || !FormField) return null
+  if (!FormField) return null
   return (
     <FormEl>
-      <IntakeNavbar current={form.stage} />
+      <IntakeNavbar current={question.stage} onBack={onBack} />
       <FadeInOut visible={isFormVisible}>
         <FormField
           onNext={onNext}
           onSkip={onNext}
-          field={field}
+          field={question}
           data={data}
           value={value}
-          isLoading={isLoading}
           onChange={onChange}
           onUpload={onUpload}
         >
-          <Text.Header>{field && field.Prompt}</Text.Header>
-          {field && field.Help && <Text.Body>{field && field.Help}</Text.Body>}
+          <Text.Header>{question.Prompt}</Text.Header>
+          {question.Help && <Text.Body>{question.Help}</Text.Body>}
         </FormField>
       </FadeInOut>
       {isFormVisible && <FadeFooter />}
@@ -151,23 +147,9 @@ export const FormView = () => {
   )
 }
 
-const QUESTION_REGEX = /question\/\d+/
+const QUESTION_REGEX = /form\/\d+/
 const getNextURL = (url: string, nextIdx: number) =>
-  url.replace(QUESTION_REGEX, `question/${nextIdx}`) + window.location.search
-
-const useQuery = () => new URLSearchParams(useLocation().search)
-
-const CLIENT_KEY = 'clientId'
-
-const getClientId = (query: URLSearchParams) => {
-  const id = query.get('client')
-  if (id) {
-    localStorage.setItem(CLIENT_KEY, id)
-    return id
-  } else {
-    return localStorage.getItem(CLIENT_KEY)
-  }
-}
+  url.replace(QUESTION_REGEX, `form/${nextIdx}`)
 
 const FormEl = styled.div`
   overflow-x: hidden;

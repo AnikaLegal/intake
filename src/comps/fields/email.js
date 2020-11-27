@@ -11,13 +11,12 @@ export const EmailField = ({
   onSkip,
   field,
   value,
-  isLoading,
   onChange,
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
   const [hasAttemptSubmit, setAttemptSubmit] = useState(false)
-  const isSubmitDisabled = isLoading || !value
+  const isSubmitDisabled = !value
   const isEmailValid = checkIsEmailValid(value)
   const shouldShowError = !isEmailValid && hasAttemptSubmit
   const onSubmit = (e) => {
@@ -39,7 +38,6 @@ export const EmailField = ({
             placeholder="Type your answer here..."
             type="email"
             value={value ? value.toLowerCase() : ''}
-            disabled={isLoading}
             onChange={onChange}
             autoFocus={false}
           />

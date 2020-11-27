@@ -11,12 +11,11 @@ export const ChoiceMultiField = ({
   onSkip,
   field,
   value,
-  isLoading,
   onChange,
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
-  const isDisabled = isLoading || !value
+  const isDisabled = !value
   return (
     <Form.Outer>
       <Form.Content>
@@ -24,7 +23,6 @@ export const ChoiceMultiField = ({
         <form onSubmit={onNext}>
           <MultiSelectInput
             values={value}
-            disabled={isLoading}
             onChange={onChange}
             options={field.choices}
           />

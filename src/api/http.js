@@ -1,7 +1,4 @@
 // @flow
-import camelize from 'camelize'
-import snakeize from 'snakeize'
-
 import { logException } from 'utils'
 import type { Data } from 'types'
 
@@ -66,7 +63,7 @@ export const http = {
   },
 }
 
-const parseJsonBody = (data: Data): string => JSON.stringify(snakeize(data))
+const parseJsonBody = (data: Data): string => JSON.stringify(data)
 
 const handleResponse = async (resp: Response): Promise<Data> => {
   if (!resp.ok) {
@@ -91,7 +88,7 @@ const handleResponse = async (resp: Response): Promise<Data> => {
   try {
     // Try to parse the response data.
     const data = await resp.json()
-    return camelize(data)
+    return data
   } catch (error) {
     // Parsing the response failed.
     logException(error)

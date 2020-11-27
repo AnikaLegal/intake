@@ -7,12 +7,13 @@ import { Navbar } from 'design'
 
 type Props = {
   current: number,
+  onBack?: () => void,
 }
 
-export const IntakeNavbar = ({ current }: Props) => {
+export const IntakeNavbar = ({ current, onBack }: Props) => {
   const history = useHistory()
-  const onBack = () => history.goBack()
+  const _onBack = () => (onBack ? onBack() : history.goBack())
   const onClose = () => history.push(ROUTES.ABANDON)
   const progress = { current: current, steps: PROGRESS.INTAKE }
-  return <Navbar onBack={onBack} onClose={onClose} progress={progress} />
+  return <Navbar onBack={_onBack} onClose={onClose} progress={progress} />
 }

@@ -6,8 +6,6 @@ import { ErrorBoundary } from 'comps'
 import { ROUTES } from 'consts'
 import * as Views from 'views'
 
-import { FormView } from 'views/form'
-
 // Route to view mapping
 const ROUTE_VIEWS = {
   // Splash views
@@ -19,7 +17,8 @@ const ROUTE_VIEWS = {
   [ROUTES.ABANDON]: Views.AbandonView,
   [ROUTES.NOT_FOUND]: Views.NotFoundView,
   // Form views
-  [ROUTES.FORM]: FormView,
+  [ROUTES.FORM]: Views.FormView,
+  [ROUTES.RESUME]: Views.ResumeView,
 }
 
 export const AppRoutes = () => (

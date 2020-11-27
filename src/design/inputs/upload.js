@@ -192,7 +192,4 @@ const DropBox = styled.div`
   border: 2px dashed ${theme.color.teal.secondary};
   box-sizing: border-box;
   border-radius: 4px;
-  @media (max-width: ${theme.screen.mobile}) {
-    height: 150px;
-  }
 `

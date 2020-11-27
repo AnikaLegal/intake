@@ -20,7 +20,7 @@ export type Tenancy = {
 
 export type Upload = {
   id: string,
-  issue: string,
+  issue: string | null,
   file: string,
 }
 

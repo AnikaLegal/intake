@@ -1,8 +1,5 @@
 // @flow
-import { client } from './client'
-import { issue } from './issue'
-import { tenancy } from './tenancy'
-import { person } from './person'
+import { submission } from './submission'
 import { upload } from './upload'
 
-export const api = { client, issue, tenancy, person, upload }
+export const api = { submission, upload }

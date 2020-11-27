@@ -9,6 +9,7 @@ export const ROUTES = {
   SUBMITTED: '/submitted/',
   ABANDON: '/abandon/',
   NOT_FOUND: '/not-found/',
+  RESUME: '/resume/',
   // Form pages
   FORM: '/intake/form/:qIdx/',
   build: (

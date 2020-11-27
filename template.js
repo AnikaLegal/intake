@@ -13,18 +13,17 @@ const onReadFile = (err, htmlText) => {
 // Can use this to send actual messages to GA
 // TEST_GA_ID = '133303109-2'
 
-const getHTML = htmlText => {
+const getHTML = (htmlText) => {
   const integrationTemplate = Handlebars.compile(htmlText)
   return integrationTemplate({
     FB_PIXEL_ID: process.env.FB_PIXEL_ID,
     JS_BUILDHASH: process.env.JS_BUILDHASH,
     CSS_BUILDHASH: process.env.CSS_BUILDHASH,
     GA_ID: process.env.GA_ID,
-    HOTJAR_ID: process.env.HOTJAR_ID,
   })
 }
 
-onWriteIndex = html => {
+onWriteIndex = (html) => {
   fs.writeFile('dist/index.html', html, () =>
     console.log('Integration html written')
   )

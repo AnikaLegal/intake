@@ -30,19 +30,14 @@
     "source": "dist"
   },
   "dependencies": {
-    "@rematch/core": "^1.4.0",
     "@sentry/browser": "^5.22.0",
     "@sentry/cli": "^1.55.2",
     "camelize": "^1.0.0",
     "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-icons": "^3.11.0",
-    "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-transition-group": "^4.4.1",
-    "redux": "^4.0.5",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0",
     "snakeize": "^0.1.0",
     "styled-components": "^5.1.1",
     "universal-cookie": "^4.0.3"

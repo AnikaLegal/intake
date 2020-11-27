@@ -11,13 +11,12 @@ export const UploadField = ({
   onSkip,
   field,
   value,
-  isLoading,
   onChange,
   onUpload,
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
-  const isDisabled = isLoading || !value
+  const isDisabled = !value
   if (!onUpload) {
     throw Error('onUpload required for UploadField')
   }

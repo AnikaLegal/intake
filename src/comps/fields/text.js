@@ -10,12 +10,11 @@ export const TextField = ({
   onSkip,
   field,
   value,
-  isLoading,
   onChange,
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
-  const isDisabled = isLoading || !value
+  const isDisabled = !value
   return (
     <Form.Outer>
       <Form.Content>
@@ -24,7 +23,6 @@ export const TextField = ({
           <TextInput
             placeholder="Type your answer here..."
             value={value}
-            disabled={isLoading}
             onChange={onChange}
             autoFocus={false}
           />

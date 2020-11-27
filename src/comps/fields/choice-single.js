@@ -10,7 +10,6 @@ export const ChoiceSingleField = ({
   onNext,
   field,
   value,
-  isLoading,
   onChange,
   children,
 }: FormFieldProps) => {

@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 
@@ -11,13 +11,12 @@ export const DateField = ({
   onSkip,
   field,
   value,
-  isLoading,
   onChange,
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
   const [hasAttemptSubmit, setAttemptSubmit] = useState(false)
-  const isDisabled = isLoading || !value
+  const isDisabled = !value
   const isDateTooOld = value
     ? getTimestamp(value) < getTimestamp('1900-1-1')
     : false
@@ -34,16 +33,23 @@ export const DateField = ({
       setAttemptSubmit(true)
     }
   }
+  // TODO - use a ref instead of document.
+  // const onKeyPress = (e: any) => {
+  //   if (e.key == 'Enter') {
+  //     onSubmit(e)
+  //   }
+  // }
+  // useEffect(() => {
+  //   document.addEventListener('keypress', onKeyPress)
+  //   return () => {
+  //     document.removeEventListener('keypress', onKeyPress)
+  //   }
+  // })
   return (
     <Form.Outer>
       <FormContent>
         {children}
-        <DateInput
-          value={value}
-          disabled={isLoading}
-          onChange={onChange}
-          autoFocus={false}
-        />
+        <DateInput value={value} onChange={onChange} autoFocus={false} />
         {shouldShowError && isDateTooOld && (
           <ErrorWrapper>
             <ErrorMessage>
