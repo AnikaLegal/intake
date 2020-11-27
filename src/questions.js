@@ -40,6 +40,9 @@ export const QUESTIONS: Array<Field> = [
         Let's start with your <strong>first name.</strong>
       </span>
     ),
+    effect: async (data: Data) => {
+      events.onFirstSave()
+    },
   },
   {
     name: 'LAST_NAME',
@@ -57,12 +60,6 @@ export const QUESTIONS: Array<Field> = [
     stage: 0,
     required: true,
     type: FIELD_TYPES.EMAIL,
-    effect: async (data: Data) => {
-      events.onFirstSave()
-      const sub = await api.submission.create(data)
-      const formData = { ...data, id: sub.id }
-      storeFormData(formData)
-    },
     Prompt: (
       <span>
         What <strong>email address</strong> can we reach you at?
@@ -126,6 +123,11 @@ export const QUESTIONS: Array<Field> = [
       { label: 'Some other rental issue', value: 'OTHER' },
     ],
     Prompt: <span>What do you need help with?</span>,
+    effect: async (data: Data) => {
+      const sub = await api.submission.create(data)
+      const formData = { ...data, id: sub.id }
+      storeFormData(formData)
+    },
   },
   {
     name: 'START_DATE',
