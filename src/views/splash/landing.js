@@ -6,6 +6,7 @@ import { IMAGES, ROUTES } from 'consts'
 import styled from 'styled-components'
 import { events } from 'analytics'
 import { useScrollTop } from 'utils'
+import { LINKS } from 'consts'
 
 export const LandingView = () => {
   useScrollTop()
@@ -26,10 +27,11 @@ export const LandingView = () => {
             to={ROUTES.build(ROUTES.FORM, { ':qIdx': 0 }, {})}
             onClick={events.onStartIntake}
           >
-            <Splash.Button last primary>
-              Let’s get started
-            </Splash.Button>
+            <Splash.Button primary>Let’s get started</Splash.Button>
           </Link>
+          <a href={LINKS.FAQ}>
+            <Splash.Button last>Learn more</Splash.Button>
+          </a>
         </Splash.ButtonGroup>
       </Splash.Content>
       <Splash.Image src={IMAGES.HEROES.PHONE_LADY} />
