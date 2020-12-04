@@ -2,7 +2,7 @@
 export const theme = {
   screen: {
     half: '1440px',
-    mobile: '1100px',
+    mobile: '1220px',
     small: '350px',
   },
   color: {

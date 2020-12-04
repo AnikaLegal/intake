@@ -108,7 +108,7 @@ export const QUESTIONS: Array<Field> = [
       { label: 'Yes', value: true },
       { label: 'No', value: false },
     ],
-    Prompt: <span>Do you rent the property that you are enquring about?</span>,
+    Prompt: <span>Do you rent the property that you are enquiring about?</span>,
   },
 
   // Stage 1 - Issues
@@ -470,7 +470,6 @@ export const QUESTIONS: Array<Field> = [
   {
     name: 'LANDLORD_NAME',
     stage: 2,
-    askCondition: isManagerLandlord,
     required: true,
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What is your landlord's full name?</span>,
@@ -534,7 +533,7 @@ export const QUESTIONS: Array<Field> = [
   },
   {
     name: 'ADDRESS',
-    stage: 1,
+    stage: 3,
     required: true,
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What is your street address?</span>,

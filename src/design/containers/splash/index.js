@@ -57,6 +57,9 @@ const SplashImage = styled.img`
 `
 const SplashContent = styled.div`
   max-width: 589px;
+  @media (max-width: ${theme.screen.mobile}) {
+    max-width: 400px;
+  }
 `
 
 const SplashButtonGroup = styled.div`
