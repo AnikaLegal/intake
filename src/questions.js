@@ -499,6 +499,13 @@ export const QUESTIONS: Array<Field> = [
     Prompt: <span>What is your landlord's phone number?</span>,
   },
   {
+    name: 'WEEKLY_RENT',
+    stage: 2,
+    required: true,
+    type: FIELD_TYPES.NUMBER,
+    Prompt: <span>How much rent do you (and your partner) pay per week?</span>,
+  },
+  {
     name: 'CONTACT_INTRO',
     stage: 3,
     required: true,
@@ -591,6 +598,104 @@ export const QUESTIONS: Array<Field> = [
     Prompt: <span>Do you speak a language other than English?</span>,
   },
   {
+    name: 'WORK_OR_STUDY_CIRCUMSTANCES',
+    stage: 3,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      {
+        label: 'Income reduced due to COVID-19',
+        value: 'INCOME_REDUCED_COVID',
+      },
+      { label: 'Student', value: 'STUDENT' },
+      { label: 'Apprentice or trainee', value: 'APPRENTICE' },
+      { label: 'Looking for work', value: 'LOOKING_FOR_WORK' },
+      { label: 'Working full time', value: 'WORKING_FULL_TIME' },
+      {
+        label: 'Working part time or casually',
+        value: 'WORKING_PART_TIME',
+      },
+      { label: 'Retired', value: 'RETIRED' },
+      { label: 'None of the above', value: null },
+    ],
+    Prompt: <span>Which best describes your work or study circumstances?</span>,
+  },
+
+  {
+    name: 'SPECIAL_CIRCUMSTANCES',
+    stage: 3,
+    required: false,
+    type: FIELD_TYPES.CHOICE_MULTI,
+    choices: [
+      {
+        label:
+          'I am currently experiencing/fleeing or am at risk of experiencing family violence',
+        value: 'FAMILY_VIOLENCE',
+      },
+      {
+        label:
+          'I have a long-term health condition or a disability affects my participation at work or education',
+        value: 'HEALTH_CONDITION',
+      },
+      {
+        label: 'I have a refugee or an asylum seeker status',
+        value: 'REFUGEE',
+      },
+      {
+        label:
+          'I have a Health Care Card or Pensioner Concession Card and an eligible Centrelink payment',
+        value: 'CENTRELINK',
+      },
+      {
+        label: 'I am a single parent',
+        value: 'SINGLE_PARENT',
+      },
+    ],
+    Prompt: (
+      <span>Do any of following special circumstances apply to you?</span>
+    ),
+  },
+  {
+    name: 'WEEKLY_INCOME',
+    stage: 3,
+    required: true,
+    type: FIELD_TYPES.NUMBER,
+    Prompt: <span>What is your weekly income?</span>,
+    Help: (
+      <span>
+        Due to our charity status we are only able to help clients who fall
+        within a certain income brackets. This information will be kept private.
+      </span>
+    ),
+  },
+  {
+    name: 'WELFARE_RELIANCE',
+    stage: 3,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'No reliance', value: 'NO_RELIANCE' },
+      {
+        label: 'Less than 50% of my income',
+        value: 'SOMEWHAT_RELIANT',
+      },
+      { label: 'More than 50% of my income', value: 'RELIANT' },
+    ],
+    Prompt: (
+      <span>
+        Thinking about how much welfare you receive, how would you describe your
+        reliance on welfare?
+      </span>
+    ),
+    Help: (
+      <span>
+        Welfare includes payments from Centrelink/NEIS, Disability Pension,
+        Family Allowance.
+      </span>
+    ),
+  },
+
+  {
     name: 'PHONE',
     stage: 3,
     required: true,
@@ -601,10 +706,10 @@ export const QUESTIONS: Array<Field> = [
     name: 'AVAILIBILITY',
     stage: 3,
     required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
+    type: FIELD_TYPES.CHOICE_MULTI,
     choices: [
-      { label: 'Monday to Friday (9am to 5pm)', value: 'WEEK_DAY' },
-      { label: 'Monday to Friday (5pm to 8pm)', value: 'WEEK_EVENING' },
+      { label: 'Weekdays (9am to 5pm)', value: 'WEEK_DAY' },
+      { label: 'Weekdays (5pm to 8pm)', value: 'WEEK_EVENING' },
       { label: 'Saturday (9am to 5pm)', value: 'SATURDAY' },
       { label: 'Sunday (9am to 5pm)', value: 'SUNDAY' },
     ],

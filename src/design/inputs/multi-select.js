@@ -41,10 +41,8 @@ export const MultiSelectInput = ({
             selected={isSelected}
             onClick={() => onClick(option.value, isSelected)}
           >
-            <span>
-              <span className="letter">{ALPHABET[idx]}</span>
-              {option.label}{' '}
-            </span>
+            <span className="letter">{ALPHABET[idx]}</span>
+            <span className="content">{option.label}</span>
             {isSelected && <Icon.Tick color={theme.color.teal.primary} />}
           </SelectEl>
         )
@@ -54,14 +52,17 @@ export const MultiSelectInput = ({
 }
 
 const SelectEl = styled.div`
-  display: flex;
-  cursor: pointer;
+  display: grid;
+  grid-template-columns: 28px 1fr 18px;
+  column-gap: 8px;
+  justify-items: start;
   align-items: center;
-  justify-content: space-between;
+
+  cursor: pointer;
   font-size: ${theme.text.subtitle};
   font-weight: 500;
   line-height: 28px;
-  height: 46px;
+  min-height: 46px;
   color: ${theme.color.teal.secondary};
   border: 1px solid ${theme.color.teal.tertiary};
   background-color: ${theme.color.teal.quinary};
@@ -72,6 +73,7 @@ const SelectEl = styled.div`
     margin-top: 8px;
   }
   .letter {
+    align-self: start;
     font-size: 16px;
     width: 28px;
     height: 28px;
@@ -83,7 +85,7 @@ const SelectEl = styled.div`
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-right: 8px;
+    flex-shrink: 0;
   }
   &:hover {
     box-shadow: ${theme.shadow};

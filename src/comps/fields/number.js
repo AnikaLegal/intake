@@ -2,11 +2,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button, Icon, MultiSelectInput, Form } from 'design'
-import { timeout } from 'utils'
+import { Button, Icon, NumberInput, Form } from 'design'
 import type { FormFieldProps } from './types'
 
-export const ChoiceMultiField = ({
+export const NumberField = ({
   onNext,
   onSkip,
   field,
@@ -15,22 +14,18 @@ export const ChoiceMultiField = ({
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
-  let isDisabled
-  try {
-    isDisabled = typeof value === 'object' ? value.length < 1 : !value
-  } catch {
-    isDisabled = !value
-  }
-
+  const isDisabled = !value
   return (
     <Form.Outer>
       <Form.Content>
         {children}
         <form onSubmit={onNext}>
-          <MultiSelectInput
-            values={value}
+          <NumberInput
+            placeholder="Type your answer here..."
+            value={value}
             onChange={onChange}
-            options={field.choices}
+            autoFocus={false}
+            type="tel"
           />
         </form>
       </Form.Content>

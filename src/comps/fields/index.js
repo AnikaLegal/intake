@@ -9,8 +9,10 @@ import { ChoiceMultiField } from './choice-multi'
 import { DateField } from './date'
 import { UploadField } from './upload'
 import { PhoneField } from './phone'
+import { NumberField } from './number'
 
 export const FORM_FIELDS = {
+  [FIELD_TYPES.NUMBER]: NumberField,
   [FIELD_TYPES.PHONE]: PhoneField,
   [FIELD_TYPES.DISPLAY]: DisplayField,
   [FIELD_TYPES.TEXT]: TextField,

@@ -11,6 +11,7 @@ export type FieldType =
   | 'UPLOAD'
   | 'DISPLAY'
   | 'PHONE'
+  | 'NUMBER'
 
 export type Field = {
   type: FieldType,
