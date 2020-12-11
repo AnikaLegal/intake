@@ -51,7 +51,7 @@ const SplashImage = styled.img`
   @media (max-width: ${theme.screen.small}), (max-height: 700px) {
     margin-bottom: 43px;
   }
-  @media (max-height: 600px) {
+  @media (max-height: 600px) and (max-width: ${theme.screen.mobile}) {
     max-height: 180px;
   }
 `
