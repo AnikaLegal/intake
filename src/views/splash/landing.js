@@ -22,6 +22,14 @@ export const LandingView = () => {
           help you, we need to ask you a series of simple questions. This
           questionnaire takes approximately 10 minutes to complete.
         </Text.Body>
+        <Text.Header splash></Text.Header>
+        <ChristmasBody splash>
+          <strong>Christmas Closure.</strong> Just so you know, we'll be closing
+          from <strong>14th December</strong> to the{' '}
+          <strong>4th January</strong>. When we're back we'll get on your case
+          as soon as possible.
+        </ChristmasBody>
+
         <Splash.ButtonGroup>
           <Link
             to={ROUTES.build(ROUTES.FORM, { ':qIdx': 0 }, {})}
@@ -38,6 +46,18 @@ export const LandingView = () => {
     </Splash.Container>
   )
 }
+
+const ChristmasBody = styled(Text.Body)`
+  background-color: #ffe1a6;
+  color: ${theme.color.grey.dark};
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 1rem;
+  border-radius: 10px;
+  & > strong {
+    color: #d72207;
+  }
+`
 
 const LogoEl = styled.img`
   height: 122px;
