@@ -27,20 +27,20 @@ export const FadeInOut = ({ visible, children }: Props) => (
 const AnimationStyles = styled.div`
   .fade-in-out-enter {
     opacity: 0.6;
-    transform: translateX(10vw);
+    /* transform: translateX(2vw); */
   }
   .fade-in-out-enter-active {
     opacity: 1;
-    transform: translateX(0px);
+    /* transform: translateX(0px); */
     transition: all ${ANIMATION_TIME}ms ease-out;
   }
   .fade-in-out-exit {
     opacity: 1;
-    transform: translateX(0px);
+    /* transform: translateX(0px); */
   }
   .fade-in-out-exit-active {
     opacity: 0.6;
     transition: all ${ANIMATION_TIME / 2}ms ease-in;
-    transform: translateX(-5vw);
+    /* transform: translateX(-2vw); */
   }
 `
