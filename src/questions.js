@@ -120,7 +120,6 @@ export const QUESTIONS: Array<Field> = [
     choices: [
       { label: 'I need rental repairs', value: 'REPAIRS' },
       { label: 'I need a reduction in rent', value: 'RENT_REDUCTION' },
-      { label: 'Some other rental issue', value: 'OTHER' },
     ],
     Prompt: <span>What do you need help with?</span>,
     effect: async (data: Data) => {
@@ -245,7 +244,7 @@ export const QUESTIONS: Array<Field> = [
     ),
     button: { text: 'Continue', Icon: null },
   },
-  // Stage 1 - Rend reduction issues.
+  // Stage 1 - Rent reduction issues.
   {
     name: 'RENT_REDUCTION_INTRO',
     stage: 1,
@@ -361,48 +360,6 @@ export const QUESTIONS: Array<Field> = [
     Prompt: (
       <span>
         Thank you. That is all the questions about COVID-19 rental assistance.
-      </span>
-    ),
-    button: { text: 'Continue', Icon: null },
-  },
-  // Stage 1 - Other issues.
-  {
-    name: 'OTHER_INTRO',
-    stage: 1,
-    askCondition: isOtherIssue,
-    required: true,
-    type: FIELD_TYPES.DISPLAY,
-    Prompt: <span>Other rental issues.</span>,
-    Help: (
-      <span>
-        We will now ask you a few questions around your other issues with your
-        rental property.
-      </span>
-    ),
-    button: { text: 'Continue', Icon: null },
-  },
-  {
-    name: 'OTHER_ISSUE_DESCRIPTION',
-    stage: 1,
-    askCondition: isOtherIssue,
-    required: true,
-    type: FIELD_TYPES.TEXT,
-    Prompt: (
-      <span>
-        Please provide a short description of how you have been affected.
-      </span>
-    ),
-  },
-  {
-    name: 'OTHER_OUTRO',
-    stage: 1,
-    askCondition: isOtherIssue,
-    required: true,
-    type: FIELD_TYPES.DISPLAY,
-    Prompt: (
-      <span>
-        Thank you. That is all the questions about other issues with your rental
-        property.
       </span>
     ),
     button: { text: 'Continue', Icon: null },
