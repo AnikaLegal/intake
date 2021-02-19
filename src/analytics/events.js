@@ -15,6 +15,36 @@ export const events = {
       event_category: 'questionnaire',
     })
   },
+  // Intake / Section 1 Complete (Basic Details)
+  onBasicDetailsComplete: () => {
+    gtag('event', 'basicDetailsSection', {
+      event_category: 'questionnaire',
+    })
+  },
+  // Intake / Section 2 Complete (Eligibility)
+  onEligibilityComplete: () => {
+    gtag('event', 'eligibilitySection', {
+      event_category: 'questionnaire',
+    })
+  },
+  // Intake / Section 3 Complete (Issues)
+  onIssueDetailsComplete: () => {
+    gtag('event', 'issueSection', {
+      event_category: 'questionnaire',
+    })
+  },
+  // Intake / Section 4 Complete (Landlord)
+  onLandlordDetailsComplete: () => {
+    gtag('event', 'landlordSection', {
+      event_category: 'questionnaire',
+    })
+  },
+  // Intake / Section 5 Complete (Personal Details)
+  onPersonalDetailsComplete: () => {
+    gtag('event', 'personalDetailsSection', {
+      event_category: 'questionnaire',
+    })
+  },
   onFinishIntake: () => {
     // User submits the questionnaire
     gtag('event', 'finishIntake', {
