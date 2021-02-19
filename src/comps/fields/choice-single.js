@@ -15,7 +15,7 @@ export const ChoiceSingleField = ({
 }: FormFieldProps) => {
   const onClick = async (val) => {
     onChange(val)
-    await timeout(400)
+    await timeout(200)
     onNext({ preventDefault: () => {} })
   }
 

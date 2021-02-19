@@ -71,6 +71,9 @@ export const QUESTIONS: Array<Field> = [
         the questionnaire.
       </span>
     ),
+    effect: async (data: Data) => {
+      events.onBasicDetailsComplete()
+    },
   },
 
   // Stage 0 - eligibility
@@ -78,8 +81,6 @@ export const QUESTIONS: Array<Field> = [
     name: 'IS_VICTORIAN',
     stage: 0,
     effect: async (data: Data) => {
-      console.log('EFFECT DATA', data)
-
       if (!data.IS_VICTORIAN) {
         return ROUTES.INELIGIBLE
       }
@@ -97,7 +98,7 @@ export const QUESTIONS: Array<Field> = [
     name: 'IS_TENANT',
     stage: 0,
     effect: async (data: Data) => {
-      console.log('EFFECT DATA', data)
+      events.onEligibilityComplete()
       if (!data.IS_TENANT) {
         return ROUTES.INELIGIBLE
       }
@@ -371,6 +372,9 @@ export const QUESTIONS: Array<Field> = [
     stage: 2,
     required: true,
     type: FIELD_TYPES.DISPLAY,
+    effect: async (data: Data) => {
+      events.onIssueDetailsComplete()
+    },
     Prompt: (
       <span>Almost done! Now just a few questions about your landlord.</span>
     ),
@@ -462,11 +466,15 @@ export const QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>How much rent do you (and your partner) pay per week?</span>,
   },
+  // Contact details stage 3
   {
     name: 'CONTACT_INTRO',
     stage: 3,
     required: true,
     type: FIELD_TYPES.DISPLAY,
+    effect: async (data: Data) => {
+      events.onLandlordDetailsComplete()
+    },
     Prompt: (
       <span>
         Great job. That is all the questions we have about your property. Now we
@@ -678,6 +686,10 @@ export const QUESTIONS: Array<Field> = [
     required: true,
     Prompt: <span>How did you hear about Anika?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
+    effect: async (data: Data) => {
+      // Not the final question but pretty close.
+      events.onPersonalDetailsComplete()
+    },
     choices: [
       {
         label: 'Legal centre',

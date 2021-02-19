@@ -21,7 +21,7 @@ export const NumberField = ({
         {children}
         <form onSubmit={onNext}>
           <NumberInput
-            placeholder="Type your answer here..."
+            placeholder="Enter a number here..."
             value={value}
             onChange={onChange}
             autoFocus={false}
