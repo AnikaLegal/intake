@@ -124,12 +124,14 @@ export const FormView = () => {
   const FormField = FORM_FIELDS[question.type]
   const value = data[question.name]
   console.log('Form data', data, url)
+  console.log('Current question', question.name, value)
   if (!FormField) return null
   return (
     <FormEl>
       <IntakeNavbar current={question.stage} onBack={onBack} />
       <FadeInOut visible={isFormVisible}>
         <FormField
+          key={question.name}
           onNext={onNext}
           onSkip={onNext}
           field={question}

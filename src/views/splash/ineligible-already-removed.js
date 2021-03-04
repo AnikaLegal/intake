@@ -5,15 +5,15 @@ import { IMAGES, LINKS } from 'consts'
 import styled from 'styled-components'
 import { useScrollTop } from 'utils'
 
-export const IneligibleView = () => {
+export const IneligibleAlreadyRemovedView = () => {
   useScrollTop()
   return (
     <Splash.Container left>
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          Unfortunately we are currently only able to help with rental issues in
-          Victoria.
+          Unfortunately we are currently only able to help those who have not
+          been forcibly evicted yet.
         </Text.Header>
         <Text.Body splash>
           If you wish to enquire further you can email us at

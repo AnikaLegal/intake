@@ -5,15 +5,16 @@ import { IMAGES, LINKS } from 'consts'
 import styled from 'styled-components'
 import { useScrollTop } from 'utils'
 
-export const IneligibleView = () => {
+export const IneligibleNoNoticeView = () => {
   useScrollTop()
   return (
     <Splash.Container left>
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          Unfortunately we are currently only able to help with rental issues in
-          Victoria.
+          Unfortunately we are currently only able to help when your landlord or
+          real estate agent has begun the evictions process by sending you a
+          Notice to Vacate. If that happens, please come back and let us know.
         </Text.Header>
         <Text.Body splash>
           If you wish to enquire further you can email us at

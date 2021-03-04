@@ -10,7 +10,7 @@ import { Button } from './button'
 import { theme } from '../theme'
 import { ErrorMessage } from '../message'
 
-const ALLOWED_FILE_TYPES = ['png', 'jpg', 'jpeg', 'pdf']
+const ALLOWED_FILE_TYPES = ['png', 'jpg', 'jpeg', 'pdf', 'docx']
 const IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg']
 
