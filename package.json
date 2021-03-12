@@ -18,6 +18,7 @@
   "reactSnap": {
     "include": [
       "/",
+      "/download/",
       "/repairs/",
       "/covid/",
       "/ineligible/",
