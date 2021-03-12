@@ -10,9 +10,6 @@ const onReadFile = (err, htmlText) => {
   onWriteIndex(html)
 }
 
-// Can use this to send actual messages to GA
-// TEST_GA_ID = '133303109-2'
-
 const getHTML = (htmlText) => {
   const integrationTemplate = Handlebars.compile(htmlText)
   return integrationTemplate({

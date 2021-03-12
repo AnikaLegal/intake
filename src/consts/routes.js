@@ -13,6 +13,7 @@ export const ROUTES = {
   ABANDON: '/abandon/',
   NOT_FOUND: '/not-found/',
   RESUME: '/resume/',
+  DOWNLOAD: '/download/',
   // Form pages
   FORM: '/intake/form/:qIdx/',
   build: (

@@ -19,6 +19,7 @@ const ROUTE_VIEWS = {
   [ROUTES.SUBMITTED]: Views.SubmittedView,
   [ROUTES.ABANDON]: Views.AbandonView,
   [ROUTES.NOT_FOUND]: Views.NotFoundView,
+  [ROUTES.DOWNLOAD]: Views.DownloadQuestionsView,
   // Form views
   [ROUTES.FORM]: Views.FormView,
   [ROUTES.RESUME]: Views.ResumeView,
