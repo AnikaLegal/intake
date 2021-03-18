@@ -1,5 +1,6 @@
 //@flow
 export const LINKS = {
+  NOTICE_TO_VACATE_PDF: '/static/notice-to-vacate-example.pdf',
   FAQ: 'https://www.anikalegal.com/faq/faq-index',
   HOME: 'https://www.anikalegal.com',
   TERMS_OF_USE: 'https://www.anikalegal.com/terms-of-use',

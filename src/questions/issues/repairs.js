@@ -20,8 +20,8 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     Prompt: <span>Rental repairs</span>,
     Help: (
       <span>
-        Thank you for your responses so far. We will now ask a few questions
-        around your rental repairs.
+        Thanks for your answers so far. We have a few questions around your
+        rental repairs.
       </span>
     ),
     button: { text: 'Continue', Icon: null },
@@ -44,8 +44,8 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
       { label: 'Laundry', value: 'Laundry' },
       { label: 'Other', value: 'Other' },
     ],
-    Prompt: <span>What do your rental repairs relate to?</span>,
-    Help: <span>Choose as many as you like</span>,
+    Prompt: <span>What needs to be repaired?</span>,
+    Help: <span>Choose as many as you need</span>,
   },
   {
     name: 'REPAIRS_ISSUE_DESCRIPTION',
@@ -55,8 +55,7 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.TEXT,
     Prompt: (
       <span>
-        Please provide a short description of the problems at your rental
-        property.
+        Tell us more about the repair problems at your rental property.
       </span>
     ),
   },
@@ -66,7 +65,7 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     askCondition: isRepairIssue,
     required: true,
     type: FIELD_TYPES.DATE,
-    Prompt: <span>When did these problems arise?</span>,
+    Prompt: <span>When did these problems first happen?</span>,
     Help: (
       <span>
         If you don't know the exact date, that's okay. An approximate date is
@@ -81,26 +80,12 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     required: false,
     type: FIELD_TYPES.UPLOAD,
     Prompt: (
-      <span>
-        Do you have any photos of the problem(s) that you could upload?
-      </span>
+      <span>Do you have any photos of the problems that you could upload?</span>
     ),
     Help: (
       <span>
-        If you do not have any photos of the problem(s) to upload, that’s
-        completely okay.
+        If you do not have any photos of the problems to upload, that’s okay.
       </span>
     ),
-  },
-  {
-    name: 'REPAIRS_OUTRO',
-    stage: 1,
-    askCondition: isRepairIssue,
-    required: true,
-    type: FIELD_TYPES.DISPLAY,
-    Prompt: (
-      <span>Thanks. That is all the questions about rental repairs.</span>
-    ),
-    button: { text: 'Continue', Icon: null },
   },
 ]

@@ -3,6 +3,8 @@ import * as React from 'react'
 
 import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import { events } from 'analytics'
+import { api } from 'api'
+import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
 
 export const ABOUT_QUESTIONS: Array<Field> = [
@@ -18,7 +20,46 @@ export const ABOUT_QUESTIONS: Array<Field> = [
         rental issues.
       </span>
     ),
+    Help: (
+      <span>
+        Once you submit this form, we'll give you a phone call or email in a few
+        business days to talk about how we can help you.
+      </span>
+    ),
     button: { text: 'Thank you', Icon: null },
+  },
+  {
+    name: 'IS_VICTORIAN_TENANT',
+    stage: 0,
+    effect: async (data: Data) => {
+      if (!data.IS_VICTORIAN_TENANT) {
+        return ROUTES.INELIGIBLE
+      }
+    },
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+    Prompt: <span>Do you rent a property in Victoria, Australia?</span>,
+    Help: <span>We can only help renters in Victoria.</span>,
+  },
+  {
+    name: 'ISSUES',
+    stage: 0,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'I am being evicted for unpaid rent', value: 'EVICTION' },
+      { label: 'I need something repaired', value: 'REPAIRS' },
+      {
+        label: 'I need a reduction in rent',
+        value: 'RENT_REDUCTION',
+      },
+    ],
+    Prompt: <span>What do you need help with?</span>,
+    Help: <span>Anika can help with these types of problems.</span>,
   },
   {
     name: 'FIRST_NAME',
@@ -27,7 +68,7 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.TEXT,
     Prompt: (
       <span>
-        Let's start with your <strong>first name.</strong>
+        Okay, what's your <strong>first name?</strong>
       </span>
     ),
     effect: async (data: Data) => {
@@ -57,48 +98,50 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     ),
     Help: (
       <span>
-        Our paralegals will use this address to contact you once you complete
-        the questionnaire.
+        Our paralegals will use this to contact you after you complete this
+        questionnaire.
       </span>
     ),
     effect: async (data: Data) => {
       events.onBasicDetailsComplete()
+      const sub = await api.submission.create(data)
+      const formData = { ...data, id: sub.id }
+      storeFormData(formData)
     },
   },
-
-  // Stage 0 - eligibility
   {
-    name: 'IS_VICTORIAN',
+    name: 'PHONE',
     stage: 0,
-    effect: async (data: Data) => {
-      if (!data.IS_VICTORIAN) {
-        return ROUTES.INELIGIBLE
-      }
-    },
-
     required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
-    ],
-    Prompt: <span>Do you live in Victoria?</span>,
+    type: FIELD_TYPES.PHONE,
+    Prompt: (
+      <span>
+        What is the best <strong>phone number</strong> to contact you on?
+      </span>
+    ),
+    Help: (
+      <span>
+        Our paralegals will use this to contact you after you complete this
+        questionnaire.
+      </span>
+    ),
   },
   {
-    name: 'IS_TENANT',
+    name: 'AVAILIBILITY',
     stage: 0,
-    effect: async (data: Data) => {
-      events.onEligibilityComplete()
-      if (!data.IS_TENANT) {
-        return ROUTES.INELIGIBLE
-      }
-    },
     required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
+    type: FIELD_TYPES.CHOICE_MULTI,
     choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
+      { label: 'Weekdays (9am to 5pm)', value: 'WEEK_DAY' },
+      { label: 'Weekdays (5pm to 8pm)', value: 'WEEK_EVENING' },
+      { label: 'Saturday (9am to 5pm)', value: 'SATURDAY' },
+      { label: 'Sunday (9am to 5pm)', value: 'SUNDAY' },
     ],
-    Prompt: <span>Do you rent the property that you are enquiring about?</span>,
+    Prompt: <span>What are the best times for us to call you?</span>,
+    Help: (
+      <span>
+        We know you're busy: we'll try to call you during these times.
+      </span>
+    ),
   },
 ]

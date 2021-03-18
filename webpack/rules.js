@@ -51,7 +51,7 @@ const styleRule = (isDev) => ({
   ],
 })
 const fileRule = (isDev) => ({
-  test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+  test: /\.(png|woff|woff2|eot|ttf|svg|pdf)$/,
   use: [
     {
       loader: 'url-loader',

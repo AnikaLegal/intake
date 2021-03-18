@@ -6,6 +6,8 @@ import moment from 'moment'
 import { Button, Icon, DateInput, ErrorMessage, Form, theme } from 'design'
 import type { FormFieldProps } from './types'
 
+const THREE_YEARS_SECONDS = 3600 * 24 * 3 * 365
+
 export const DateField = ({
   onNext,
   onSkip,
@@ -21,8 +23,9 @@ export const DateField = ({
     ? getTimestamp(value) < getTimestamp('1900-1-1')
     : false
   const isDateInFuture = value
-    ? getTimestamp(value) >= getTimestampNow()
+    ? getTimestamp(value) >= getTimestampNow() + THREE_YEARS_SECONDS
     : false
+
   const isDateValid = !isDateTooOld && !isDateInFuture
   const shouldShowError = !isDateValid && hasAttemptSubmit
   const onSubmit = (e) => {
@@ -59,7 +62,9 @@ export const DateField = ({
         )}
         {shouldShowError && isDateInFuture && (
           <ErrorWrapper>
-            <ErrorMessage>Hold on, that date is in the future!</ErrorMessage>
+            <ErrorMessage>
+              Hold on, that date is far in the future!
+            </ErrorMessage>
           </ErrorWrapper>
         )}
       </FormContent>

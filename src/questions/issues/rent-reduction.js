@@ -21,8 +21,8 @@ export const RENT_REDUCTION_QUESTIONS: Array<Field> = [
     Prompt: <span>Rent reduction</span>,
     Help: (
       <span>
-        Thank you for your responses so far. We will now ask you some questions
-        about your rental situation.
+        Thanks for your answers so far. We have some questions about your rental
+        situation.
       </span>
     ),
     button: { text: 'Continue', Icon: null },
@@ -44,7 +44,7 @@ export const RENT_REDUCTION_QUESTIONS: Array<Field> = [
       { label: 'Other', value: 'Other' },
     ],
     Prompt: <span>How have you been affected by COVID-19?</span>,
-    Help: <span>Choose as many as you like</span>,
+    Help: <span>Choose as many as you need</span>,
   },
   {
     name: 'RENT_REDUCTION_ISSUE_DESCRIPTION',
@@ -52,11 +52,7 @@ export const RENT_REDUCTION_QUESTIONS: Array<Field> = [
     askCondition: isRentReductionIssue,
     required: true,
     type: FIELD_TYPES.TEXT,
-    Prompt: (
-      <span>
-        Please provide a short description of how you have been affected.
-      </span>
-    ),
+    Prompt: <span>Tell us about how you have been affected by COVID-19.</span>,
   },
   {
     name: 'RENT_REDUCTION_ISSUE_START',
@@ -64,7 +60,7 @@ export const RENT_REDUCTION_QUESTIONS: Array<Field> = [
     askCondition: isRentReductionIssue,
     required: true,
     type: FIELD_TYPES.DATE,
-    Prompt: <span>When did these problems arise?</span>,
+    Prompt: <span>When did these problems start happening?</span>,
     Help: (
       <span>
         If you don't know the exact date, that's okay. An approximate date is
@@ -80,7 +76,8 @@ export const RENT_REDUCTION_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.UPLOAD,
     Prompt: (
       <span>
-        Please upload a photo of any evidence of how you have been affected.
+        Please upload a photo of any evidence of how you have been affected by
+        COVID-19.
       </span>
     ),
     Help: (
@@ -104,8 +101,13 @@ export const RENT_REDUCTION_QUESTIONS: Array<Field> = [
     ],
     Prompt: (
       <span>
-        Has the landlord tried to evict you by providing you with a Notice to
-        Vacate?
+        Has the landlord tried to evict you by giving you a Notice to Vacate?
+      </span>
+    ),
+    Help: (
+      <span>
+        It's a specific kind of legal document that{' '}
+        <a href={LINKS.NOTICE_TO_VACATE_PDF}>looks like this</a>.
       </span>
     ),
   },
@@ -116,19 +118,10 @@ export const RENT_REDUCTION_QUESTIONS: Array<Field> = [
       isRentReductionIssue(data) && data.RENT_REDUCTION_IS_NOTICE_TO_VACATE,
     required: false,
     type: FIELD_TYPES.UPLOAD,
-    Prompt: <span>Please upload a photo of your Notice to Vacate.</span>,
-  },
-  {
-    name: 'RENT_REDUCTION_OUTRO',
-    stage: 1,
-    askCondition: isRentReductionIssue,
-    required: true,
-    type: FIELD_TYPES.DISPLAY,
     Prompt: (
       <span>
-        Thank you. That is all the questions about COVID-19 rental assistance.
+        Please upload a photo of the Notice to Vacate that the landlord sent.
       </span>
     ),
-    button: { text: 'Continue', Icon: null },
   },
 ]

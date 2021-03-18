@@ -7,10 +7,10 @@ import { api } from 'api'
 import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
 
-export const PREFERENCE_QUESTIONS: Array<Field> = [
+export const IMPACT_QUESTIONS: Array<Field> = [
   {
-    name: 'CONTACT_INTRO',
-    stage: 3,
+    name: 'IMPACT_INTRO',
+    stage: 4,
     required: true,
     type: FIELD_TYPES.DISPLAY,
     effect: async (data: Data) => {
@@ -18,8 +18,8 @@ export const PREFERENCE_QUESTIONS: Array<Field> = [
     },
     Prompt: (
       <span>
-        Great job. That is all the questions we have about your property. Now we
-        just need a few details about you.
+        Great job. That is all the questions we have about your landlord.
+        Finally, we just need a few details about you.
       </span>
     ),
     Help: (
@@ -31,57 +31,29 @@ export const PREFERENCE_QUESTIONS: Array<Field> = [
     button: { text: 'Continue', Icon: null },
   },
   {
-    name: 'SUBURB',
-    stage: 3,
-    required: true,
-    type: FIELD_TYPES.TEXT,
-    Prompt: <span>What suburb do you live in?</span>,
-  },
-  {
-    name: 'POSTCODE',
-    stage: 3,
-    required: true,
-    type: FIELD_TYPES.TEXT,
-    Prompt: <span>What is your post code?</span>,
-  },
-  {
-    name: 'ADDRESS',
-    stage: 3,
-    required: true,
-    type: FIELD_TYPES.TEXT,
-    Prompt: <span>What is your street address?</span>,
-  },
-  {
     name: 'DOB',
-    stage: 3,
+    stage: 4,
     required: true,
     type: FIELD_TYPES.DATE,
     Prompt: <span>What is your date of birth?</span>,
   },
   {
     name: 'GENDER',
-    stage: 3,
+    stage: 4,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
       { label: 'Male', value: 'male' },
       { label: 'Female', value: 'female' },
-      { label: 'Self-described', value: 'other' },
+      { label: 'Genderqueer or non-binary', value: 'genderqueer' },
       { label: 'Prefer not to say', value: 'omitted' },
+      { label: 'Other', value: 'other' },
     ],
     Prompt: <span>What gender do you identify as?</span>,
   },
   {
-    name: 'GENDER_DETAILS',
-    stage: 3,
-    required: true,
-    askCondition: (data: Data) => data.GENDER == 'other',
-    type: FIELD_TYPES.TEXT,
-    Prompt: <span>Please describe your gender.</span>,
-  },
-  {
     name: 'IS_ABORIGINAL_OR_TORRES_STRAIT_ISLANDER',
-    stage: 3,
+    stage: 4,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
@@ -94,136 +66,185 @@ export const PREFERENCE_QUESTIONS: Array<Field> = [
   },
   {
     name: 'CAN_SPEAK_NON_ENGLISH',
-    stage: 3,
+    stage: 4,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
       { label: 'Yes', value: true },
       { label: 'No', value: false },
     ],
-    Prompt: <span>Do you speak a language other than English?</span>,
+    Prompt: (
+      <span>
+        Do you speak a <strong>first</strong> language other than English?
+      </span>
+    ),
+  },
+  {
+    name: 'FIRST_LANGUAGE',
+    stage: 4,
+    required: true,
+    type: FIELD_TYPES.TEXT,
+    Prompt: (
+      <span>
+        What is your <strong>first</strong> language?
+      </span>
+    ),
+    askCondition: (data) => data.CAN_SPEAK_NON_ENGLISH,
   },
   {
     name: 'WORK_OR_STUDY_CIRCUMSTANCES',
-    stage: 3,
+    stage: 4,
     required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
+    Prompt: <span>Which best describes your work or study situation?</span>,
+    type: FIELD_TYPES.CHOICE_MULTI,
     choices: [
-      {
-        label: 'Income reduced due to COVID-19',
-        value: 'INCOME_REDUCED_COVID',
-      },
-      { label: 'Student', value: 'STUDENT' },
-      { label: 'Apprentice or trainee', value: 'APPRENTICE' },
-      { label: 'Looking for work', value: 'LOOKING_FOR_WORK' },
-      { label: 'Working full time', value: 'WORKING_FULL_TIME' },
       {
         label: 'Working part time or casually',
         value: 'WORKING_PART_TIME',
       },
+      { label: 'Working full time', value: 'WORKING_FULL_TIME' },
+      { label: 'Student', value: 'STUDENT' },
+      { label: 'Apprentice or trainee', value: 'APPRENTICE' },
+      { label: 'Looking for work', value: 'LOOKING_FOR_WORK' },
+      {
+        label: 'Income reduced due to COVID-19',
+        value: 'INCOME_REDUCED_COVID',
+      },
       { label: 'Retired', value: 'RETIRED' },
       { label: 'None of the above', value: null },
     ],
-    Prompt: <span>Which best describes your work or study circumstances?</span>,
   },
 
+  // Income and rent payments
   {
-    name: 'SPECIAL_CIRCUMSTANCES',
-    stage: 3,
-    required: false,
-    type: FIELD_TYPES.CHOICE_MULTI,
+    name: 'IS_MULTI_INCOME_HOUSEHOLD',
+    stage: 4,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
-      {
-        label:
-          'I am currently experiencing/fleeing or am at risk of experiencing family violence',
-        value: 'FAMILY_VIOLENCE',
-      },
-      {
-        label:
-          'I have a long-term health condition or a disability affects my participation at work or education',
-        value: 'HEALTH_CONDITION',
-      },
-      {
-        label: 'I have a refugee or an asylum seeker status',
-        value: 'REFUGEE',
-      },
-      {
-        label:
-          'I have a Health Care Card or Pensioner Concession Card and an eligible Centrelink payment',
-        value: 'CENTRELINK',
-      },
-      {
-        label: 'I am a single parent',
-        value: 'SINGLE_PARENT',
-      },
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
     ],
     Prompt: (
-      <span>Do any of following special circumstances apply to you?</span>
+      <span>
+        Are there other members of your household contributing to your income?
+      </span>
+    ),
+    Help: (
+      <span>
+        For example, a partner, spouse or parent who help you pay the rent
+      </span>
     ),
   },
   {
     name: 'WEEKLY_INCOME',
-    stage: 3,
+    stage: 4,
     required: true,
     type: FIELD_TYPES.NUMBER,
-    Prompt: <span>What is your weekly income?</span>,
-    Help: (
-      <span>
-        Due to our charity status we are only able to help clients who fall
-        within a certain income brackets. This information will be kept private.
-      </span>
-    ),
+    Prompt: <span>What is your weekly personal income?</span>,
+    askCondition: (data) => !data.IS_MULTI_INCOME_HOUSEHOLD,
   },
   {
-    name: 'WELFARE_RELIANCE',
-    stage: 3,
+    name: 'WEEKLY_INCOME',
+    stage: 4,
     required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    choices: [
-      { label: 'No reliance', value: 'NO_RELIANCE' },
-      {
-        label: 'Less than 50% of my income',
-        value: 'SOMEWHAT_RELIANT',
-      },
-      { label: 'More than 50% of my income', value: 'RELIANT' },
-    ],
-    Prompt: (
-      <span>
-        Thinking about how much welfare you receive, how would you describe your
-        reliance on welfare?
-      </span>
-    ),
+    type: FIELD_TYPES.NUMBER,
+    Prompt: <span>What is your combined household weekly income?</span>,
     Help: (
       <span>
-        Welfare includes payments from Centrelink/NEIS, Disability Pension,
-        Family Allowance.
+        That is, the combined income of you and your partner, spouse or parent
+      </span>
+    ),
+    askCondition: (data) => data.IS_MULTI_INCOME_HOUSEHOLD,
+  },
+  {
+    name: 'WEEKLY_RENT',
+    stage: 4,
+    required: true,
+    type: FIELD_TYPES.NUMBER,
+    Prompt: <span>How much rent do you pay per week?</span>,
+    askCondition: (data) => !data.IS_MULTI_INCOME_HOUSEHOLD,
+  },
+  {
+    name: 'WEEKLY_RENT',
+    stage: 4,
+    required: true,
+    type: FIELD_TYPES.NUMBER,
+    Prompt: <span>How much rent do you and your partner pay per week?</span>,
+    askCondition: (data) => data.IS_MULTI_INCOME_HOUSEHOLD,
+  },
+
+  {
+    name: 'NUMBER_OF_DEPENDENTS',
+    stage: 4,
+    required: true,
+    type: FIELD_TYPES.NUMBER,
+    Prompt: <span>How many dependents do you have?</span>,
+    Help: (
+      <span>
+        People who rely on your support, like a stay-at-home spouse or children
       </span>
     ),
   },
 
   {
-    name: 'PHONE',
-    stage: 3,
-    required: true,
-    type: FIELD_TYPES.PHONE,
-    Prompt: <span>What is the best phone number to contact you on?</span>,
+    name: 'SPECIAL_CIRCUMSTANCES',
+    stage: 4,
+    required: false,
+    type: FIELD_TYPES.CHOICE_MULTI,
+    Prompt: <span>Do any of the following apply to you?</span>,
+    choices: [
+      {
+        label: 'I receive a Centrelink payment or have a concession card',
+        value: 'CENTRELINK',
+      },
+      {
+        label: 'I have a mental illness or intellectual disability',
+        value: 'MENTAL_ILLNESS_OR_DISABILITY',
+      },
+      {
+        label: 'I am currently living in public or community housing',
+        value: 'PUBLIC_HOUSING',
+      },
+      {
+        label: 'I am experiencing (or at risk of) family violence',
+        value: 'FAMILY_VIOLENCE',
+      },
+      {
+        label:
+          'I have a long-term health condition or a disability that affects my work or education',
+        value: 'HEALTH_CONDITION',
+      },
+      {
+        label: 'I have refugee or asylum seeker status',
+        value: 'REFUGEE',
+      },
+    ],
   },
   {
-    name: 'AVAILIBILITY',
-    stage: 3,
-    required: true,
+    name: 'LEGAL_ACCESS_DIFFICULTIES',
+    stage: 4,
+    required: false,
     type: FIELD_TYPES.CHOICE_MULTI,
+    Prompt: (
+      <span>
+        Do any of the following make it difficult for you to get legal help?
+      </span>
+    ),
     choices: [
-      { label: 'Weekdays (9am to 5pm)', value: 'WEEK_DAY' },
-      { label: 'Weekdays (5pm to 8pm)', value: 'WEEK_EVENING' },
-      { label: 'Saturday (9am to 5pm)', value: 'SATURDAY' },
-      { label: 'Sunday (9am to 5pm)', value: 'SUNDAY' },
+      {
+        label: 'Substance abuse issues',
+        value: 'SUBSTANCE_ABUSE',
+      },
+      { label: 'Have parent/caring duties', value: 'CARING' },
+      { label: 'A physical disability', value: 'DISABILITY' },
+      { label: 'Other', value: 'OTHER' },
     ],
-    Prompt: <span>When is your preferred time for us to call you?</span>,
   },
+
   {
     name: 'REFERRER_TYPE',
-    stage: 3,
+    stage: 4,
     required: true,
     Prompt: <span>How did you hear about Anika?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -246,7 +267,7 @@ export const PREFERENCE_QUESTIONS: Array<Field> = [
   },
   {
     name: 'LEGAL_CENTER_REFERRER',
-    stage: 3,
+    stage: 4,
     required: true,
     askCondition: (data: Data) => data.REFERRER_TYPE == 'LEGAL_CENTRE',
     Prompt: <span>Which legal centre referred you?</span>,
@@ -269,7 +290,7 @@ export const PREFERENCE_QUESTIONS: Array<Field> = [
   {
     name: 'HOUSING_SERVICE_REFERRER',
     askCondition: (data: Data) => data.REFERRER_TYPE == 'HOUSING_SERVICE',
-    stage: 3,
+    stage: 4,
     required: true,
     Prompt: <span>Which housing service referred you?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -286,7 +307,7 @@ export const PREFERENCE_QUESTIONS: Array<Field> = [
   {
     name: 'CHARITY_REFERRER',
     askCondition: (data: Data) => data.REFERRER_TYPE == 'CHARITY',
-    stage: 3,
+    stage: 4,
     required: true,
     Prompt: <span>Which charity or non-profit referred you?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -304,7 +325,7 @@ export const PREFERENCE_QUESTIONS: Array<Field> = [
   },
   {
     name: 'SOCIAL_REFERRER',
-    stage: 3,
+    stage: 4,
     askCondition: (data: Data) => data.REFERRER_TYPE == 'SOCIAL_MEDIA',
     required: true,
     Prompt: <span>Which social media site did you find us on?</span>,

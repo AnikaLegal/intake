@@ -11,17 +11,19 @@ import type { Field, Data } from 'types'
 import { ABOUT_QUESTIONS } from './about'
 import { ISSUE_QUESTIONS } from './issues'
 import { LANDLORD_QUESTIONS } from './landlord'
-import { PREFERENCE_QUESTIONS } from './preferences'
+import { IMPACT_QUESTIONS } from './impact'
+import { PROPERTY_QUESTIONS } from './property'
 
 export const QUESTIONS: Array<Field> = [
   ...ABOUT_QUESTIONS,
   ...ISSUE_QUESTIONS,
+  ...PROPERTY_QUESTIONS,
   ...LANDLORD_QUESTIONS,
-  ...PREFERENCE_QUESTIONS,
+  ...IMPACT_QUESTIONS,
   {
     name: 'SUBMIT',
     required: true,
-    stage: 3,
+    stage: 4,
     type: FIELD_TYPES.DISPLAY,
     Prompt: (
       <span>

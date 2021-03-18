@@ -5,7 +5,15 @@ import styled from 'styled-components'
 import { Button, Icon, TextInput, ErrorMessage, Form, theme } from 'design'
 import type { FormFieldProps } from './types'
 
-// TODO: email validation.
+// Grabbed a regex off the internet.
+// https://html.form.guide/best-practices/validate-email-address-using-javascript/
+const EMAIL_REGEX = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/
+
+const checkIsEmailValid = (email: string): boolean => {
+  if (!email) return true
+  return EMAIL_REGEX.test(email)
+}
+
 export const EmailField = ({
   onNext,
   onSkip,
@@ -32,10 +40,9 @@ export const EmailField = ({
     <Form.Outer>
       <FormContent>
         {children}
-
         <form onSubmit={onSubmit}>
           <TextInput
-            placeholder="Type your answer here..."
+            placeholder="Type your email here..."
             type="email"
             value={value ? value.toLowerCase() : ''}
             onChange={onChange}
@@ -81,12 +88,3 @@ const FooterForm = styled.form`
 const FormContent = styled(Form.Content)`
   position: relative;
 `
-
-// Grabbed a regex off the internet.
-// https://html.form.guide/best-practices/validate-email-address-using-javascript/
-const EMAIL_REGEX = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/
-
-const checkIsEmailValid = (email: string): boolean => {
-  if (!email) return true
-  return EMAIL_REGEX.test(email)
-}

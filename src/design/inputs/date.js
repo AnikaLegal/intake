@@ -64,7 +64,7 @@ export const DateInput = ({
   }
   const onYearChange = (val) => {
     const newYear = Number(val)
-    if (newYear > new Date().getFullYear()) return
+    if (newYear > new Date().getFullYear() + 3) return
     const newDate = getDateFromVals(newYear, month, day)
     setYear(newYear)
     if (newDate) {

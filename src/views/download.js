@@ -117,6 +117,7 @@ const parseFunctionString = (f) => {
       .replace('.includes(', ' includes ')
       .replace('d.name', 'this document')
       .replace(')', '')
+      .replace('!', 'not ')
 
     return fs
   }

@@ -20,9 +20,8 @@ export const SubmittedView = () => {
           <strong>Success!</strong> Your case has been submitted.
         </Text.Header>
         <Text.Body splash>
-          Thank you so much for providing us with your rental assistance
-          information. Our staff will contact you within the next two business
-          days to discuss how we can help you.
+          Our paralegals will contact you within the next two business days to
+          discuss how we can help you.
         </Text.Body>
         <Splash.ButtonGroup>
           <a href={LINKS.HOME}>

@@ -76,35 +76,13 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     Prompt: <span>Eviction for unpaid rent</span>,
     Help: (
       <span>
-        Thank you for your responses so far. We will now ask a few questions
-        around your eviction.
+        Thanks for your answers so far. We have a few questions about your
+        eviction.
       </span>
     ),
     button: { text: 'Continue', Icon: null },
   },
   // Eligibility questions
-  {
-    name: 'EVICTIONS_HAS_NOTICE',
-    stage: 1,
-    askCondition: isEvictionIssue,
-    effect: async (data: Data) => {
-      if (!data.EVICTIONS_HAS_NOTICE) {
-        return ROUTES.INELIGIBLE_NO_EVICTIONS_NOTICE
-      }
-    },
-    required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
-    ],
-    Prompt: (
-      <span>
-        Have you received a Notice to Vacate from your landlord or your real
-        estate agent?
-      </span>
-    ),
-  },
   {
     name: 'EVICTIONS_IS_UNPAID_RENT',
     stage: 1,
@@ -141,9 +119,33 @@ export const EVICTION_QUESTIONS: Array<Field> = [
       { label: 'Yes', value: true },
       { label: 'No', value: false },
     ],
+    Prompt: <span>Have you been removed from your home?</span>,
+  },
+  {
+    name: 'EVICTIONS_HAS_NOTICE',
+    stage: 1,
+    askCondition: isEvictionIssue,
+    effect: async (data: Data) => {
+      if (!data.EVICTIONS_HAS_NOTICE) {
+        return ROUTES.INELIGIBLE_NO_EVICTIONS_NOTICE
+      }
+    },
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
     Prompt: (
       <span>
-        Have you already been forcibly removed from your home by the police?
+        Have you received a Notice to Vacate from your landlord or your real
+        estate agent?
+      </span>
+    ),
+    Help: (
+      <span>
+        It's a specific kind of legal document that{' '}
+        <a href={LINKS.NOTICE_TO_VACATE_PDF}>looks like this</a>.
       </span>
     ),
   },
@@ -156,8 +158,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     choices: DOC_TYPES.map((d) => ({ label: d.name, value: d.name })),
     Prompt: (
       <span>
-        What documents did the landlord provide to you in relation to your
-        eviction?
+        What documents did the landlord give you in relation to your eviction?
       </span>
     ),
   },
@@ -169,8 +170,8 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.UPLOAD,
     Prompt: (
       <span>
-        Please upload a copy of all the documentation your landlord or agent has
-        provided you in relation to your eviction.
+        Please upload a copy of all the documents that your landlord or agent
+        has given you in relation to your eviction.
       </span>
     ),
   },
@@ -246,18 +247,18 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     stage: 1,
     askCondition: isEvictionIssue,
     required: true,
+    Prompt: <span>How often do you pay your rent?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
-      { label: 'Weekly', value: 'Weekly' },
-      { label: 'Fortnightly', value: 'Fortnightly' },
-      { label: 'Monthly', value: 'Monthly' },
-      { label: 'Quarterly', value: 'Quarterly' },
-      { label: 'Other', value: 'Other' },
+      { label: 'Weekly', value: 'WEEKLY' },
+      { label: 'Fortnightly', value: 'FORTNIGHTLY' },
+      { label: 'Monthly', value: 'MONTHLY' },
+      { label: 'Quarterly', value: 'QUATERLY' },
+      { label: 'Other', value: 'OTHER' },
     ],
-    Prompt: <span>What cycles do you usually use to pay your rent?</span>,
   },
   {
-    name: 'EVICTIONS_CAN_AFFORD_PAYMENT_PLAN',
+    name: 'EVICTIONS_IS_ON_PAYMENT_PLAN',
     stage: 1,
     askCondition: isEvictionIssue,
     required: true,
@@ -267,9 +268,30 @@ export const EVICTION_QUESTIONS: Array<Field> = [
       { label: 'No', value: false },
     ],
     Prompt: (
+      <span>Are you currently on a payment plan with your landlord?</span>
+    ),
+    Help: (
       <span>
-        Would you be able to afford agreeing to a payment plan with your
-        landlord?
+        This is an agreement where you pay back extra rent to cover the
+        previously unpaid rent.
+      </span>
+    ),
+  },
+  {
+    name: 'EVICTIONS_CAN_AFFORD_PAYMENT_PLAN',
+    stage: 1,
+    askCondition: (data) =>
+      isEvictionIssue(data) && !data.EVICTIONS_IS_ON_PAYMENT_PLAN,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Yes', value: 'YES' },
+      { label: 'No', value: 'NO' },
+      { label: 'Prefer to discuss over phone', value: 'DISCUSS_OVER_PHONE' },
+    ],
+    Prompt: (
+      <span>
+        Would you be able to afford a payment plan with your landlord?
       </span>
     ),
   },
@@ -278,23 +300,29 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     name: 'EVICTIONS_PAYMENT_AMOUNT',
     stage: 1,
     askCondition: (data) =>
-      isEvictionIssue(data) && data.EVICTIONS_CAN_AFFORD_PAYMENT_PLAN,
+      isEvictionIssue(data) &&
+      !data.EVICTIONS_IS_ON_PAYMENT_PLAN &&
+      data.EVICTIONS_CAN_AFFORD_PAYMENT_PLAN == 'YES',
     required: true,
     type: FIELD_TYPES.NUMBER,
     Prompt: (
-      <span>How much extra rent would you be able to pay each rent cycle?</span>
+      <span>
+        How much additional rent could you pay on top of your normal rent
+        payment?
+      </span>
     ),
+    Help: <span>This would be to pay off the unpaid rent</span>,
   },
   {
     name: 'EVICTIONS_PAYMENT_FAIL_REASON',
     stage: 1,
     askCondition: (data) =>
-      isEvictionIssue(data) && data.EVICTIONS_CAN_AFFORD_PAYMENT_PLAN,
+      isEvictionIssue(data) &&
+      !data.EVICTIONS_IS_ON_PAYMENT_PLAN &&
+      data.EVICTIONS_CAN_AFFORD_PAYMENT_PLAN == 'YES',
     required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    Prompt: (
-      <span>What was the cause for you to fall behind on rent payments?</span>
-    ),
+    type: FIELD_TYPES.CHOICE_MULTI,
+    Prompt: <span>Why did you fall behind on rent payments?</span>,
     choices: [
       { label: 'Reduced income', value: 'Reduced income' },
       { label: 'Unable to work', value: 'Unable to work' },
@@ -310,15 +338,12 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     name: 'EVICTIONS_PAYMENT_FAIL_DESCRIPTION',
     stage: 1,
     askCondition: (data) =>
-      isEvictionIssue(data) && data.EVICTIONS_CAN_AFFORD_PAYMENT_PLAN,
+      isEvictionIssue(data) &&
+      !data.EVICTIONS_IS_ON_PAYMENT_PLAN &&
+      data.EVICTIONS_CAN_AFFORD_PAYMENT_PLAN == 'YES',
     required: false,
     type: FIELD_TYPES.TEXT,
-    Prompt: (
-      <span>
-        Tell us a short description of what caused you to fall behind on rent
-        payments.
-      </span>
-    ),
+    Prompt: <span>Tell us about why you fell behind on rent payments.</span>,
     Help: (
       <span>
         Please provide only as much information as you are comfortable with
@@ -330,8 +355,10 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     name: 'EVICTIONS_PAYMENT_FAIL_CHANGE',
     stage: 1,
     askCondition: (data) =>
-      isEvictionIssue(data) && data.EVICTIONS_CAN_AFFORD_PAYMENT_PLAN,
-    required: true,
+      isEvictionIssue(data) &&
+      !data.EVICTIONS_IS_ON_PAYMENT_PLAN &&
+      data.EVICTIONS_CAN_AFFORD_PAYMENT_PLAN == 'YES',
+    required: false,
     type: FIELD_TYPES.TEXT,
     Prompt: (
       <span>

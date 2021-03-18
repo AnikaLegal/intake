@@ -1,9 +1,13 @@
 // @flow
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { Button, Icon, TextInput, Form } from 'design'
+import { Button, Icon, TextInput, ErrorMessage, Form, theme } from 'design'
 import type { FormFieldProps } from './types'
+
+const checkIsPhoneValid = (phone: string): boolean => {
+  return Boolean(phone) && phone.length < 16
+}
 
 export const PhoneField = ({
   onNext,
@@ -14,34 +18,68 @@ export const PhoneField = ({
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
-  const isDisabled = !value
+  const [hasAttemptSubmit, setAttemptSubmit] = useState(false)
+  const isSubmitDisabled = !value
+  const isPhoneValid = checkIsPhoneValid(value)
+  const shouldShowError = !isPhoneValid && hasAttemptSubmit
+  const onSubmit = (e) => {
+    if (isPhoneValid) {
+      onNext(e)
+    } else {
+      e.preventDefault()
+      setAttemptSubmit(true)
+    }
+  }
+
   return (
     <Form.Outer>
-      <Form.Content>
+      <FormContent>
         {children}
-        <form onSubmit={onNext}>
+        <form onSubmit={onSubmit}>
           <TextInput
-            placeholder="Type your answer here..."
-            value={value}
+            placeholder="Type your phone number here..."
+            type="tel"
+            value={value || ''}
             onChange={onChange}
             autoFocus={false}
-            type="tel"
           />
+          {shouldShowError && (
+            <ErrorWrapper>
+              <ErrorMessage>
+                Hold on, that phone number doesn't look valid
+              </ErrorMessage>
+            </ErrorWrapper>
+          )}
         </form>
-      </Form.Content>
+      </FormContent>
       <Form.Footer>
-        <form onSubmit={onNext}>
+        <FooterForm invalid={shouldShowError} onSubmit={onSubmit}>
           <Button
             primary
-            disabled={isDisabled}
+            disabled={isSubmitDisabled}
             type="submit"
             Icon={field.button ? field.button.Icon : Icon.Tick}
           >
             {field.button ? field.button.text : 'OK'}
           </Button>
           {!field.required && <Button onClick={onSkip}>Skip</Button>}
-        </form>
+        </FooterForm>
       </Form.Footer>
     </Form.Outer>
   )
 }
+
+const ErrorWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+`
+
+const FooterForm = styled.form`
+  ${theme.switch({ invalid: `opacity: 0; pointer-events: none;` })}
+`
+
+const FormContent = styled(Form.Content)`
+  position: relative;
+`

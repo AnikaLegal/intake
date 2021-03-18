@@ -1,4 +1,10 @@
 //@flow
 export const PROGRESS = {
-  INTAKE: ['About you', 'Your situation', 'Your landlord', 'Contact details'],
+  INTAKE: [
+    'About you',
+    'Your problem',
+    'Your home',
+    'Your landlord',
+    'More about you',
+  ],
 }
