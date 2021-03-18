@@ -37,6 +37,7 @@ echo -e "\nRunning React Snap to generate static content."
 yarn snap
 
 echo -e "\nCollecting static files."
+rm -rf dist/static
 cp -R public/* dist
 
 # Print build output to the console.
