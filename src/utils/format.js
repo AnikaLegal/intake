@@ -54,7 +54,7 @@ export const format = {
         return value
       } else if (typeof value === 'string') {
         const cleaned = cleanNumString(value)
-        if (cleaned) {
+        if (cleaned || cleaned === 0) {
           return cleaned
         }
       }
@@ -64,20 +64,14 @@ export const format = {
 }
 
 const cleanDollarString = (s: string): number | null => {
-  const numString = s
-    .replace('$', '')
-    .replace(/,/g, '')
-    .replace(/\s/g, '')
+  const numString = s.replace('$', '').replace(/,/g, '').replace(/\s/g, '')
   if (!numString || isNaN(numString)) return null
   return parseFloat(numString)
 }
 
 const cleanNumString = (s: string): number | null => {
-  const numString = s
-    .replace(/,/g, '')
-    .replace(/\s/g, '')
-    .trim()
-  if (!numString || isNaN(numString)) return null
+  const numString = String(s).replace(/,/g, '').replace(/\s/g, '').trim()
+  if ((numString !== 0 && !numString) || isNaN(numString)) return null
   return parseFloat(numString)
 }
 

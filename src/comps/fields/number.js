@@ -14,7 +14,7 @@ export const NumberField = ({
   children,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
-  const isDisabled = !value
+  const isDisabled = !value && value !== 0
   return (
     <Form.Outer>
       <Form.Content>

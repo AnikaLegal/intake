@@ -10,7 +10,7 @@ export const NumberInput = ({ value, onChange, ...props }: any) => {
   const _onChange = (e) => {
     const val = e.target.value
     const newAmount = format.integer.toValue(val)
-    if (newAmount || val === '') {
+    if (newAmount || val === '' || newAmount === 0) {
       onChange(newAmount)
     }
   }
