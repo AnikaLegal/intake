@@ -57,11 +57,24 @@ export const ABOUT_QUESTIONS: Array<Field> = [
         label: 'I need a reduction in rent',
         value: 'RENT_REDUCTION',
       },
+      {
+        label: 'I need help with something else',
+        value: 'OTHER',
+      },
     ],
+    effect: async (data: Data) => {
+      if (data.ISSUES === 'OTHER') {
+        return ROUTES.INELIGIBLE
+      }
+    },
     Prompt: <span>What do you need help with?</span>,
     Help: (
       <span>
-        Anika can help with evictions for unpaid rent,{' '}
+        Anika can help with{' '}
+        <a target="_blank" href={LINKS.EVICTION_INFO}>
+          evictions
+        </a>{' '}
+        for unpaid rent,{' '}
         <a target="_blank" href={LINKS.REPAIRS_INFO}>
           rental repairs
         </a>

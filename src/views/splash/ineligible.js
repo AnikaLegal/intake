@@ -12,10 +12,30 @@ export const IneligibleView = () => {
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          Unfortunately we are currently only able to help with rental issues in
-          Victoria.
+          Unfortunately we are currently only able to help with the following
+          rental issues in Victoria, Australia:
         </Text.Header>
         <Text.Body splash>
+          <ul>
+            <li>
+              <a target="_blank" href={LINKS.EVICTION_INFO}>
+                Evictions
+              </a>{' '}
+              for unpaid rent
+            </li>
+            <li>
+              <a target="_blank" href={LINKS.REPAIRS_INFO}>
+                Rental repairs
+              </a>{' '}
+              in your home
+            </li>
+            <li>
+              <a target="_blank" href={LINKS.RENT_REDUCTION_INFO}>
+                Rent reductions
+              </a>{' '}
+              for COVID related hardship.
+            </li>
+          </ul>
           If you wish to enquire further you can email us at
           contact@anikalegal.com
         </Text.Body>
