@@ -59,7 +59,19 @@ export const ABOUT_QUESTIONS: Array<Field> = [
       },
     ],
     Prompt: <span>What do you need help with?</span>,
-    Help: <span>Anika can help with these types of problems.</span>,
+    Help: (
+      <span>
+        Anika can help with evictions for unpaid rent,{' '}
+        <a target="_blank" href={LINKS.REPAIRS_INFO}>
+          rental repairs
+        </a>
+        , and{' '}
+        <a target="_blank" href={LINKS.RENT_REDUCTION_INFO}>
+          rent reductions
+        </a>{' '}
+        for COVID related hardship.
+      </span>
+    ),
   },
   {
     name: 'FIRST_NAME',

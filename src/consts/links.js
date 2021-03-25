@@ -11,4 +11,7 @@ export const LINKS = {
     COVID: 'https://form.jotform.com/201512255660042',
     REPAIRS: 'https://form.jotform.com/201900961250850',
   },
+  RENT_REDUCTION_INFO:
+    'https://www.anikalegal.com/covid-19-rent-reduction-support',
+  REPAIRS_INFO: 'https://www.anikalegal.com/rental-repairs-support',
 }

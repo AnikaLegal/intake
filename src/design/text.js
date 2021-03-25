@@ -33,6 +33,12 @@ const Header = styled.h2`
   &:last-child {
     margin: 0;
   }
+  a {
+    color: ${theme.color.teal.secondary};
+    &::visited {
+      color: ${theme.color.teal.secondary};
+    }
+  }
 `
 
 const Body = styled.p`
@@ -61,6 +67,13 @@ const Body = styled.p`
   }
   &:last-child {
     margin: 0;
+  }
+
+  a {
+    color: ${theme.color.teal.secondary};
+    &::visited {
+      color: ${theme.color.teal.secondary};
+    }
   }
 `
 

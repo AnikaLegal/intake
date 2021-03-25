@@ -28,7 +28,7 @@ const DOC_TYPES = [
   },
   {
     name: 'Form 16 - Rights in relation to a Possession Order',
-    key: 'FORM-16',
+    key: 'FORM_16',
     lower: 'Form 16 - Rights in relation to a Possession Order',
   },
   { name: 'Other documents', key: 'OTHER_DOCS', lower: 'other documents' },

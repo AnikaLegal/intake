@@ -145,7 +145,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     askCondition: (data) => !data.IS_MULTI_INCOME_HOUSEHOLD,
   },
   {
-    name: 'WEEKLY_INCOME',
+    name: 'WEEKLY_INCOME_MULTI',
     stage: 4,
     required: true,
     type: FIELD_TYPES.NUMBER,
@@ -166,7 +166,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     askCondition: (data) => !data.IS_MULTI_INCOME_HOUSEHOLD,
   },
   {
-    name: 'WEEKLY_RENT',
+    name: 'WEEKLY_RENT_MULTI',
     stage: 4,
     required: true,
     type: FIELD_TYPES.NUMBER,
