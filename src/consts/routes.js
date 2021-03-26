@@ -5,6 +5,7 @@ export const ROUTES = {
   LANDING: '/',
   LANDING_REPAIRS: '/repairs/',
   LANDING_COVID: '/covid/',
+  LANDING_EVICTIONS: '/evictions/',
   INELIGIBLE: '/ineligible/',
   INELIGIBLE_NO_EVICTIONS_NOTICE: '/ineligible/no-notice/',
   INELIGIBLE_NOT_UNPAID_RENT: '/ineligible/not-unpaid/',

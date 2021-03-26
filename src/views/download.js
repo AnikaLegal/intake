@@ -1,3 +1,4 @@
+//@flow
 import React from 'react'
 import styled from 'styled-components'
 import { Text, Button } from 'design'
@@ -126,10 +127,12 @@ const parseFunctionString = (f) => {
 
 const renderToString = (Element): string => {
   if (typeof Element == 'string') return Element
+  // $FlowFixMe
   const children = Element?.props?.children
   if (typeof children == 'string') return children
   if (typeof children == 'object') {
     let s = ''
+    // $FlowFixMe
     for (let child of children) {
       s += renderToString(child)
     }
@@ -159,6 +162,7 @@ const buildText = () => {
     if (q.Help) text.push('## ' + renderToString(q.Help))
     if (q.choices) {
       text.push('\nChoices:')
+      // $FlowFixMe
       for (let choice of q.choices) {
         text.push('- ' + choice.label)
       }

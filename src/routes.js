@@ -12,6 +12,7 @@ const ROUTE_VIEWS = {
   [ROUTES.LANDING]: Views.LandingView,
   [ROUTES.LANDING_REPAIRS]: Views.LandingView,
   [ROUTES.LANDING_COVID]: Views.LandingView,
+  [ROUTES.LANDING_EVICTIONS]: Views.LandingView,
   [ROUTES.INELIGIBLE]: Views.IneligibleView,
   [ROUTES.INELIGIBLE_NO_EVICTIONS_NOTICE]: Views.IneligibleNoNoticeView,
   [ROUTES.INELIGIBLE_NOT_UNPAID_RENT]: Views.IneligibleNotUnpaidRentView,
