@@ -29,12 +29,6 @@ export const IneligibleView = () => {
               </a>{' '}
               in your home
             </li>
-            <li>
-              <a target="_blank" href={LINKS.RENT_REDUCTION_INFO}>
-                Rent reductions
-              </a>{' '}
-              for COVID related hardship.
-            </li>
           </ul>
           If you wish to enquire further you can email us at
           contact@anikalegal.com

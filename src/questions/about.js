@@ -54,10 +54,6 @@ export const ABOUT_QUESTIONS: Array<Field> = [
       { label: 'I am being evicted for unpaid rent', value: 'EVICTION' },
       { label: 'I need something repaired', value: 'REPAIRS' },
       {
-        label: 'I need a reduction in rent',
-        value: 'RENT_REDUCTION',
-      },
-      {
         label: 'I need help with something else',
         value: 'OTHER',
       },
@@ -74,15 +70,11 @@ export const ABOUT_QUESTIONS: Array<Field> = [
         <a target="_blank" href={LINKS.EVICTION_INFO}>
           evictions
         </a>{' '}
-        for unpaid rent,{' '}
+        for unpaid rent and{' '}
         <a target="_blank" href={LINKS.REPAIRS_INFO}>
           rental repairs
         </a>
-        , and{' '}
-        <a target="_blank" href={LINKS.RENT_REDUCTION_INFO}>
-          rent reductions
-        </a>{' '}
-        for COVID related hardship.
+        .
       </span>
     ),
   },
