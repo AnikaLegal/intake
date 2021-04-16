@@ -263,6 +263,9 @@ export const IMPACT_QUESTIONS: Array<Field> = [
       { label: 'Google search', value: 'SEARCH' },
       { label: 'Word of mouth', value: 'WORD_OF_MOUTH' },
       { label: 'Online ad', value: 'ONLINE_AD' },
+      { label: 'Radio', value: 'RADIO' },
+      { label: 'Billboard', value: 'BILLBOARD' },
+      { label: 'Poster', value: 'POSTER' },
     ],
   },
   {
