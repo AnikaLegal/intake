@@ -10,45 +10,6 @@ import type { Field, Data } from 'types'
 
 const isEvictionIssue = (data: Data) => data.ISSUES.includes('EVICTION')
 
-const DOC_TYPES = [
-  {
-    name: 'Notice to Vacate',
-    key: 'NOTICE_TO_VACATE',
-    lower: 'Notice to Vacate',
-  },
-]
-
-const DOC_DELIVERY_METHOD_QS = DOC_TYPES.map((d) => ({
-  name: `EVICTIONS_DOC_DELIVERY_METHOD_${d.key}`,
-  stage: 1,
-  askCondition: (data) =>
-    isEvictionIssue(data) && data.EVICTIONS_DOCUMENTS_PROVIDED.includes(d.name),
-  required: true,
-  type: FIELD_TYPES.CHOICE_SINGLE,
-  choices: [
-    { label: 'Delivered personally', value: 'Delivered personally' },
-    { label: 'By registered post', value: 'By registered post' },
-    { label: 'By email', value: 'By email' },
-    { label: 'Another delivery method', value: 'Another delivery method' },
-  ],
-  Prompt: <span>How did you receive the {d.lower}?</span>,
-}))
-const DOC_DELIVERY_TIME_QS = DOC_TYPES.map((d) => ({
-  name: `EVICTIONS_DOC_DELIVERY_TIME_${d.key}`,
-  stage: 1,
-  askCondition: (data) =>
-    isEvictionIssue(data) && data.EVICTIONS_DOCUMENTS_PROVIDED.includes(d.name),
-  required: true,
-  type: FIELD_TYPES.DATE,
-  Prompt: <span>When did you receive the {d.lower}?</span>,
-}))
-
-const DOC_DELIVERY_QS = []
-for (let i = 0; i < DOC_TYPES.length; i++) {
-  DOC_DELIVERY_QS.push(DOC_DELIVERY_METHOD_QS[i])
-  DOC_DELIVERY_QS.push(DOC_DELIVERY_TIME_QS[i])
-}
-
 export const EVICTION_QUESTIONS: Array<Field> = [
   {
     name: 'EVICTIONS_INTRO',
@@ -147,6 +108,23 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     ),
   },
   {
+    name: 'EVICTIONS_NOTICE_VACATE_DATE',
+    stage: 1,
+    askCondition: isEvictionIssue,
+    required: true,
+    type: FIELD_TYPES.DATE,
+    Prompt: (
+      <span>
+        What is the date that you are required to vacate the property?
+      </span>
+    ),
+    Help: (
+      <span>
+        You will be able to find this information on the Notice to Vacate.
+      </span>
+    ),
+  },
+  {
     name: 'EVICTIONS_NOTICE_SEND_DATE',
     stage: 1,
     askCondition: isEvictionIssue,
@@ -165,23 +143,31 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'EVICTIONS_NOTICE_VACATE_DATE',
+    name: 'EVICTIONS_DOC_DELIVERY_TIME_NOTICE_TO_VACATE',
     stage: 1,
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.DATE,
     Prompt: (
       <span>
-        What is the date that you are required to vacate the property?
-      </span>
-    ),
-    Help: (
-      <span>
-        You will be able to find this information on the Notice to Vacate.
+        When did you <strong>receive</strong> the Notice to Vacate?
       </span>
     ),
   },
-  ...DOC_DELIVERY_QS,
+  {
+    name: 'EVICTIONS_DOC_DELIVERY_METHOD_NOTICE_TO_VACATE',
+    stage: 1,
+    askCondition: isEvictionIssue,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Delivered personally', value: 'Delivered personally' },
+      { label: 'By registered post', value: 'By registered post' },
+      { label: 'By email', value: 'By email' },
+      { label: 'Another delivery method', value: 'Another delivery method' },
+    ],
+    Prompt: <span>How did you receive the Notice to Vacate?</span>,
+  },
   {
     name: 'EVICTIONS_IS_VCAT_DATE',
     stage: 1,
