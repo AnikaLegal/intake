@@ -16,22 +16,6 @@ const DOC_TYPES = [
     key: 'NOTICE_TO_VACATE',
     lower: 'Notice to Vacate',
   },
-  {
-    name: 'Application for a Possession Order',
-    key: 'POSSESION_ORDER',
-    lower: 'Application for a Possession Order',
-  },
-  {
-    name: 'Form 15 - Notice of Objection',
-    key: 'FORM_15',
-    lower: 'Form 15 - Notice of Objection',
-  },
-  {
-    name: 'Form 16 - Rights in relation to a Possession Order',
-    key: 'FORM_16',
-    lower: 'Form 16 - Rights in relation to a Possession Order',
-  },
-  { name: 'Other documents', key: 'OTHER_DOCS', lower: 'other documents' },
 ]
 
 const DOC_DELIVERY_METHOD_QS = DOC_TYPES.map((d) => ({
@@ -150,19 +134,6 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'EVICTIONS_DOCUMENTS_PROVIDED',
-    stage: 1,
-    askCondition: isEvictionIssue,
-    required: true,
-    type: FIELD_TYPES.CHOICE_MULTI,
-    choices: DOC_TYPES.map((d) => ({ label: d.name, value: d.name })),
-    Prompt: (
-      <span>
-        What documents did the landlord give you in relation to your eviction?
-      </span>
-    ),
-  },
-  {
     name: 'EVICTIONS_DOCUMENTS_UPLOAD',
     stage: 1,
     askCondition: isEvictionIssue,
@@ -170,8 +141,8 @@ export const EVICTION_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.UPLOAD,
     Prompt: (
       <span>
-        Please upload a copy of all the documents that your landlord or agent
-        has given you in relation to your eviction.
+        Please upload a copy of the Notice to Vacate that your landlord or agent
+        has given you.
       </span>
     ),
   },
