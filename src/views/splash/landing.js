@@ -30,7 +30,7 @@ export const LandingView = () => {
           >
             <Splash.Button primary>Let’s get started</Splash.Button>
           </Link>
-          <a href={LINKS.FAQ}>
+          <a href={LINKS.SERVICES}>
             <Splash.Button last>Learn more</Splash.Button>
           </a>
         </Splash.ButtonGroup>
