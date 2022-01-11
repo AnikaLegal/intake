@@ -4,6 +4,7 @@ import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import type { Field, Data } from 'types'
 
 const RTBA_LINK = 'https://rentalbonds.vic.gov.au/'
+const VCAT_LINK = 'https://www.vcat.vic.gov.au/'
 
 const REASONS = {
   DAMAGE: 'Damage',
@@ -14,8 +15,10 @@ const REASONS = {
 }
 
 const isBondsIssue = (data: Data) => data.ISSUES.includes('BONDS')
+const isBondsIssueWithClaim = (data: Data) =>
+  isBondsIssue(data) && data.BONDS_LANDLORD_INTENTS_TO_MAKE_CLAIM
 const isClaimReason = (reason: string) => (data) =>
-  isBondsIssue(data) &&
+  isBondsIssueWithClaim(data) &&
   data.BONDS_CLAIM_REASONS &&
   data.BONDS_CLAIM_REASONS.includes(reason)
 
@@ -49,52 +52,6 @@ export const BONDS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'BONDS_HAS_LANDLORD_MADE_RTBA_APPLICATION',
-    stage: 1,
-    askCondition: isBondsIssue,
-    required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
-    ],
-    Prompt: (
-      <span>
-        Has your landlord/real estate agent made an application to the{' '}
-        <a href={RTBA_LINK} target="_blank">
-          RTBA
-        </a>{' '}
-        for your bond?
-      </span>
-    ),
-  },
-  {
-    name: 'BONDS_TENANT_HAS_RTBA_APPLICATION_COPY',
-    stage: 1,
-    askCondition: (data) =>
-      isBondsIssue(data) && data.BONDS_HAS_LANDLORD_MADE_RTBA_APPLICATION,
-    required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
-    ],
-    Prompt: <span>Do you have a copy of the RTBA application?</span>,
-  },
-  {
-    name: 'BONDS_RTBA_APPLICATION_UPLOAD',
-    stage: 1,
-    askCondition: (data) =>
-      isBondsIssue(data) && data.BONDS_TENANT_HAS_RTBA_APPLICATION_COPY,
-    required: false,
-    type: FIELD_TYPES.UPLOAD,
-    Prompt: (
-      <span>
-        Please upload the landlord/real estate agent's RTBA application.
-      </span>
-    ),
-  },
-  {
     name: 'BONDS_LANDLORD_INTENTS_TO_MAKE_CLAIM',
     stage: 1,
     askCondition: isBondsIssue,
@@ -112,10 +69,61 @@ export const BONDS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'BONDS_CLAIM_REASONS',
+    name: 'BONDS_HAS_LANDLORD_MADE_RTBA_APPLICATION',
+    stage: 1,
+    askCondition: isBondsIssueWithClaim,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+    Prompt: (
+      <span>
+        Has your landlord/real estate agent made an application to the{' '}
+        <a href={RTBA_LINK} target="_blank">
+          RTBA
+        </a>{' '}
+        or{' '}
+        <a href={VCAT_LINK} target="_blank">
+          VCAT
+        </a>{' '}
+        for your bond?
+      </span>
+    ),
+  },
+  {
+    name: 'BONDS_TENANT_HAS_RTBA_APPLICATION_COPY',
     stage: 1,
     askCondition: (data) =>
-      isBondsIssue(data) && data.BONDS_LANDLORD_INTENTS_TO_MAKE_CLAIM,
+      isBondsIssueWithClaim(data) &&
+      data.BONDS_HAS_LANDLORD_MADE_RTBA_APPLICATION,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+    Prompt: <span>Do you have a copy of the RTBA or VCAT application?</span>,
+  },
+  {
+    name: 'BONDS_RTBA_APPLICATION_UPLOAD',
+    stage: 1,
+    askCondition: (data) =>
+      isBondsIssueWithClaim(data) &&
+      data.BONDS_TENANT_HAS_RTBA_APPLICATION_COPY,
+    required: false,
+    type: FIELD_TYPES.UPLOAD,
+    Prompt: (
+      <span>
+        Please upload the landlord/real estate agent's RTBA or VCAT application.
+      </span>
+    ),
+  },
+  {
+    name: 'BONDS_CLAIM_REASONS',
+    stage: 1,
+    askCondition: isBondsIssueWithClaim,
     required: true,
     type: FIELD_TYPES.CHOICE_MULTI,
     choices: [
