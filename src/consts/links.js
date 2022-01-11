@@ -14,4 +14,5 @@ export const LINKS = {
   },
   REPAIRS_INFO: 'https://www.anikalegal.com/services/rental-repairs/',
   EVICTION_INFO: 'https://www.anikalegal.com/services/eviction-support/',
+  BONDS_INFO: 'https://www.anikalegal.com/services/bonds-recovery/',
 }

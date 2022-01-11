@@ -53,6 +53,7 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     choices: [
       { label: 'I am being evicted for unpaid rent', value: 'EVICTION' },
       { label: 'I need something repaired', value: 'REPAIRS' },
+      { label: 'I am moving out and want to claim my bond', value: 'BONDS' },
       {
         label: 'I need help with something else',
         value: 'OTHER',
@@ -67,14 +68,18 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     Help: (
       <span>
         Anika can help with{' '}
+        <a target="_blank" href={LINKS.BONDS_INFO}>
+          bond recovery
+        </a>
+        ,{' '}
+        <a target="_blank" href={LINKS.REPAIRS_INFO}>
+          rental repairs
+        </a>{' '}
+        and{' '}
         <a target="_blank" href={LINKS.EVICTION_INFO}>
           evictions
         </a>{' '}
-        for unpaid rent and{' '}
-        <a target="_blank" href={LINKS.REPAIRS_INFO}>
-          rental repairs
-        </a>
-        .
+        for unpaid rent.
       </span>
     ),
   },

@@ -29,6 +29,11 @@ export const IneligibleView = () => {
               </a>{' '}
               in your home
             </li>
+            <li>
+              <a target="_blank" href={LINKS.BONDS_INFO}>
+                Bond recovery
+              </a>
+            </li>
           </ul>
           If you wish to enquire further you can email us at
           contact@anikalegal.com
