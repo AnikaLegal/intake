@@ -11,6 +11,7 @@ export const ROUTES = {
   INELIGIBLE_NOT_UNPAID_RENT: '/ineligible/not-unpaid/',
   INELIGIBLE_ALREADY_REMOVED: '/ineligible/already-removed/',
   SUBMITTED: '/submitted/',
+  NO_EMAIL: '/no-email/',
   ABANDON: '/abandon/',
   NOT_FOUND: '/not-found/',
   RESUME: '/resume/',
