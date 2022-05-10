@@ -33,7 +33,7 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     stage: 0,
     effect: async (data: Data) => {
       if (!data.IS_VICTORIAN_TENANT) {
-        return ROUTES.NO_EMAIL
+        return ROUTES.INELIGIBLE
       }
     },
     required: true,
