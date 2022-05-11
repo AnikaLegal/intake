@@ -33,7 +33,7 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     stage: 0,
     effect: async (data: Data) => {
       if (!data.IS_VICTORIAN_TENANT) {
-        return ROUTES.INELIGIBLE
+        return ROUTES.GEOGRAPHY
       }
     },
     required: true,
@@ -73,8 +73,9 @@ export const ABOUT_QUESTIONS: Array<Field> = [
   {
     name: 'EMAIL',
     stage: 0,
-    required: true,
+    required: false,
     type: FIELD_TYPES.EMAIL,
+    skipText: 'I do not have an email address',
     Prompt: (
       <span>
         What <strong>email address</strong> can we reach you at?
@@ -87,10 +88,14 @@ export const ABOUT_QUESTIONS: Array<Field> = [
       </span>
     ),
     effect: async (data: Data) => {
-      events.onBasicDetailsComplete()
-      const sub = await api.submission.create(data)
-      const formData = { ...data, id: sub.id }
-      storeFormData(formData)
+      if (!data.EMAIL) {
+        return ROUTES.NO_EMAIL
+      } else {
+        events.onBasicDetailsComplete()
+        const sub = await api.submission.create(data)
+        const formData = { ...data, id: sub.id }
+        storeFormData(formData)
+      }
     },
   },
   {
@@ -129,22 +134,33 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     ),
   },
   {
+    name: 'POSTCODE',
+    stage: 0,
+    required: true,
+    type: FIELD_TYPES.NUMBER,
+    Prompt: <span>What is your post code?</span>,
+  },
+  {
     name: 'ISSUES',
     stage: 0,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
       { label: 'I am being evicted for unpaid rent', value: 'EVICTION' },
+      { label: 'I am being evicted for another reason', value: 'INELIGIBLE' },
       { label: 'I need something repaired', value: 'REPAIRS' },
-      { label: 'I am moving out and want to claim my bond', value: 'BONDS' },
+      { label: 'I want to claim my bond', value: 'BONDS' },
       {
-        label: 'I need help with something else',
-        value: 'OTHER',
+        label: 'I want compensation from my landlord',
+        value: 'INELIGIBLE_COMPENSATION',
       },
     ],
     effect: async (data: Data) => {
-      if (data.ISSUES === 'OTHER') {
-        return ROUTES.INELIGIBLE
+      if (
+        data.ISSUES === 'INELIGIBLE' ||
+        data.ISSUES === 'INELIGIBLE_COMPENSATION'
+      ) {
+        return ROUTES.LEGAL_SCOPE
       }
     },
     Prompt: <span>What do you need help with?</span>,

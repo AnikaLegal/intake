@@ -19,6 +19,7 @@ export type Field = {
   name: string,
   effect?: (data: Data) => Promise<string | void>,
   askCondition?: (data: Data) => boolean,
+  skipText?: string,
   required: boolean,
   Prompt: React.Element<'span'>,
   Help?: React.Element<'span'>,

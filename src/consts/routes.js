@@ -12,6 +12,8 @@ export const ROUTES = {
   INELIGIBLE_ALREADY_REMOVED: '/ineligible/already-removed/',
   SUBMITTED: '/submitted/',
   NO_EMAIL: '/no-email/',
+  LEGAL_SCOPE: '/legal-scope/',
+  GEOGRAPHY: '/geography/',
   ABANDON: '/abandon/',
   NOT_FOUND: '/not-found/',
   RESUME: '/resume/',
