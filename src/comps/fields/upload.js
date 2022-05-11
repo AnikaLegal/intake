@@ -39,7 +39,9 @@ export const UploadField = ({
             >
               {field.button ? field.button.text : 'OK'}
             </Button>
-            {!field.required && <Button onClick={onNext}>Skip</Button>}
+            {!field.required && (
+              <Button onClick={onNext}>{field.skipText || 'Skip'}</Button>
+            )}
           </ButtonGroupEl>
         </form>
       </Form.Content>

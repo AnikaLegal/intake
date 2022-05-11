@@ -19,6 +19,8 @@ const ROUTE_VIEWS = {
   [ROUTES.INELIGIBLE_ALREADY_REMOVED]: Views.IneligibleAlreadyRemovedView,
   [ROUTES.SUBMITTED]: Views.SubmittedView,
   [ROUTES.NO_EMAIL]: Views.NoEmailView,
+  [ROUTES.GEOGRAPHY]: Views.GeographyView,
+  [ROUTES.LEGAL_SCOPE]: Views.LegalScopeView,
   [ROUTES.ABANDON]: Views.AbandonView,
   [ROUTES.NOT_FOUND]: Views.NotFoundView,
   [ROUTES.DOWNLOAD]: Views.DownloadQuestionsView,

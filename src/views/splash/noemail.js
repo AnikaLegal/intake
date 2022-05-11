@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { Splash, Text, BigButton } from 'design'
-import { IMAGES, LINKS } from 'consts'
+import { IMAGES } from 'consts'
 import styled from 'styled-components'
 import { useScrollTop } from 'utils'
 

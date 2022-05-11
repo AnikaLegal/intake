@@ -67,7 +67,9 @@ export const EmailField = ({
           >
             {field.button ? field.button.text : 'OK'}
           </Button>
-          {!field.required && <Button onClick={onSkip}>Skip</Button>}
+          {!field.required && (
+            <Button onClick={onSkip}>{field.skipText || 'Skip'}</Button>
+          )}
         </FooterForm>
       </Form.Footer>
     </Form.Outer>

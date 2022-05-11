@@ -67,13 +67,6 @@ export const PROPERTY_QUESTIONS: Array<Field> = [
     Prompt: <span>What suburb do you live in?</span>,
   },
   {
-    name: 'POSTCODE',
-    stage: 2,
-    required: true,
-    type: FIELD_TYPES.NUMBER,
-    Prompt: <span>What is your post code?</span>,
-  },
-  {
     name: 'ADDRESS',
     stage: 2,
     required: true,

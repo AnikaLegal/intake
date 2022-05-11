@@ -74,6 +74,7 @@ const SplashButtonGroup = styled.div`
 `
 
 const SplashButton = styled(BigButton)`
+  cursor: pointer;
   margin-right: 30px;
   ${theme.switch({ last: `margin-right: 0;` })}
   @media (max-width: ${theme.screen.mobile}) {
