@@ -21,7 +21,6 @@ export const NoEmailView = () => {
           to direct you to another organisation.
         </Text.Body>
         <Text.Body splash>*INSERT FORM HERE*</Text.Body>{' '}
-        {/* Need to insert form here (Can be found in Clerk but need to convert to React) */}
       </Splash.Content>
     </Splash.Container>
   )

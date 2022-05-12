@@ -156,11 +156,10 @@ export const ABOUT_QUESTIONS: Array<Field> = [
       },
     ],
     effect: async (data: Data) => {
-      if (
-        data.ISSUES === 'INELIGIBLE' ||
-        data.ISSUES === 'INELIGIBLE_COMPENSATION'
-      ) {
-        return ROUTES.LEGAL_SCOPE
+      if (data.ISSUES === 'INELIGIBLE') {
+        return ROUTES.LEGAL_SCOPE_EVICTED
+      } else if (data.ISSUES === 'INELIGIBLE_COMPENSATION') {
+        return ROUTES.LEGAL_SCOPE_COMPENSATION
       }
     },
     Prompt: <span>What do you need help with?</span>,

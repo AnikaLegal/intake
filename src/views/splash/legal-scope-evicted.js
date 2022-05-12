@@ -4,16 +4,18 @@ import { Splash, Text, BigButton } from 'design'
 import { IMAGES, LINKS } from 'consts'
 import styled from 'styled-components'
 import { useScrollTop } from 'utils'
+import type { Field, Data } from 'types'
 
-export const LegalScopeView = () => {
+export const LegalScopeEvictedView = () => {
   useScrollTop()
   return (
     <Splash.Container left>
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          As your matter is about XX, your issue is outside of Anika’s current
-          scope. Unfortunately, we are not able to assist you at this time.
+          As your matter is about being evicted for another reason, your issue
+          is outside of Anika’s current scope. Unfortunately, we are not able to
+          assist you at this time.
         </Text.Header>
         <Text.Body splash>
           You may wish to contact your local community legal centres who will be
