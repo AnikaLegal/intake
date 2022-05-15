@@ -124,86 +124,77 @@ export const NoEmailView = ({
           If you don't have an email address, please complete the form below and
           we'll call you to see if we're able to help. If not then we'll be able
           to direct you to another organisation.
-        </Text.Body>
-        <OuterContainer>
-          <OuterForm>
-            <form
-              onSubmit={handleSubmit}
-              style={{
-                boxShadow: '0px 4px 41px rgb(0 55 123 / 15%)',
-                borderRadius: '12px',
-                padding: '50px 55px 50px 55px',
-                width: '100%',
-                maxWidth: '630px',
-                display: 'flex',
-                flexDirection: 'column',
-                boxSizing: 'border-box',
-              }}
-            >
-              <InputEl
-                placeholder="Name"
-                type="text"
-                name="name"
-                value={inputs.name}
-                onChange={handleInputChange}
-                autoFocus={false}
-                required=""
-              />
-              {errors.name && (
-                <div className="error_wrapper">
-                  <ErrorMessage>{errors.name}</ErrorMessage>
-                </div>
-              )}
-              <InputEl
-                placeholder="Phone Number"
-                name="phone_number"
-                type="tel"
-                value={inputs.phone_number}
-                onChange={handleInputChange}
-                autoFocus={false}
-                required=""
-              />
-              {errors.phone_number && (
-                <div className="error_wrapper">
-                  <ErrorMessage>{errors.phone_number}</ErrorMessage>
-                </div>
-              )}
-              <Checkbox>
-                I agree to share my details with Anika Legal by ticking this
-                box.
-                <input
-                  className="input"
-                  onClick={handleClick}
-                  type="checkbox"
-                  checked={checked}
-                  required
-                ></input>
-                <Checkmark className="check"></Checkmark>
-              </Checkbox>
-              <Button primary type="submit" onClick={() => setModalShow(true)}>
-                Contact Us
-              </Button>
-            </form>
-            {formState && (
-              <div
-                show={modalShow}
+          <OuterContainer>
+            <OuterForm>
+              <form
+                onSubmit={handleSubmit}
                 style={{
-                  padding: '20px',
-                  borderRadius: '14px',
-                  lineHeight: '100%',
-                  marginTop: '20px',
-                  color: '#ebb900',
-                  fontWeight: 'bold',
-                  background: '#fff9e8',
-                  border: '2px solid #ebb900',
-                  display: 'block',
+                  boxShadow: '0px 4px 41px rgb(0 55 123 / 15%)',
+                  borderRadius: '12px',
+                  padding: '50px 55px 50px 55px',
+                  width: '100%',
+                  maxWidth: '630px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  boxSizing: 'border-box',
                 }}
               >
-                Contact request submitted
-              </div>
-            )}
-          </OuterForm>
-        </OuterContainer>
+                <InputEl
+                  placeholder="Name"
+                  type="text"
+                  name="name"
+                  value={inputs.name}
+                  onChange={handleInputChange}
+                  autoFocus={false}
+                  required=""
+                />
+                {errors.name && (
+                  <div className="error_wrapper">
+                    <ErrorMessage>{errors.name}</ErrorMessage>
+                  </div>
+                )}
+                <InputEl
+                  placeholder="Phone Number"
+                  name="phone_number"
+                  type="tel"
+                  value={inputs.phone_number}
+                  onChange={handleInputChange}
+                  autoFocus={false}
+                  required=""
+                />
+                {errors.phone_number && (
+                  <div className="error_wrapper">
+                    <ErrorMessage>{errors.phone_number}</ErrorMessage>
+                  </div>
+                )}
+                <Checkbox>
+                  I agree to share my details with Anika Legal by ticking this
+                  box.
+                  <input
+                    className="input"
+                    onClick={handleClick}
+                    type="checkbox"
+                    checked={checked}
+                    required
+                  ></input>
+                  <Checkmark className="check"></Checkmark>
+                </Checkbox>
+                <Button
+                  primary
+                  type="submit"
+                  onClick={() => setModalShow(true)}
+                >
+                  Contact Us
+                </Button>
+                {formState && (
+                  <div className="modal" show={modalShow}>
+                    Contact request submitted
+                  </div>
+                )}
+              </form>
+            </OuterForm>
+          </OuterContainer>
+        </Text.Body>
       </Splash.Content>
     </Splash.Container>
   )
@@ -215,10 +206,7 @@ const SplashButton = styled(BigButton)`
 const OuterContainer = styled.div`
   display: block;
   text-align: center;
-  width: 500px;
-  @media (max-width: 590px) {
-    width: 400px;
-  }
+  width: 100%;
 `
 
 const Checkbox = styled.label`
@@ -232,6 +220,10 @@ const Checkbox = styled.label`
   font-size: 16px;
   letter-spacing: 0.02em;
   color: #3f3f3f;
+
+  @media (max-width: 350px) {
+    font-size: 13px;
+  }
 
   .input {
     position: absolute;
@@ -289,6 +281,37 @@ const OuterForm = styled.div`
     margin-top: -25px;
     margin-bottom: 10px;
   }
+
+  .modal {
+    padding: 20px;
+    border-radius: 14px;
+    line-height: 100%;
+    margin-top: 20px;
+    color: #ebb900;
+    font-weight: bold;
+    background: #fff9e8;
+    border: 2px solid #ebb900;
+    display: flex;
+
+    @media (max-width: 398px) {
+      font-size: 15px;
+    }
+    @media (max-width: 385px) {
+      font-size: 14px;
+    }
+    @media (max-width: 371px) {
+      font-size: 13px;
+    }
+    @media (max-width: 359px) {
+      font-size: 12px;
+    }
+    @media (max-width: 346px) {
+      font-size: 11px;
+    }
+    @media (max-width: 333px) {
+      font-size: 10px;
+    }
+  }
 `
 
 const InputEl = styled.input`
@@ -316,5 +339,9 @@ const InputEl = styled.input`
   &:disabled {
     background-color: transparent;
     cursor: not-allowed;
+  }
+
+  @media (max-width: 350px) {
+    font-size: 13px;
   }
 `
