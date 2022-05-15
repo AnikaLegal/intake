@@ -1,6 +1,15 @@
 // @flow
 import React, { useState, useEffect } from 'react'
-import { Splash, Text, TextInput, Button, Form, Icon, BigButton } from 'design'
+import {
+  Splash,
+  Text,
+  TextInput,
+  Button,
+  Form,
+  ErrorMessage,
+  Icon,
+  BigButton,
+} from 'design'
 import { IMAGES } from 'consts'
 import { api } from 'api'
 import styled from 'styled-components'
@@ -24,9 +33,9 @@ export const NoEmailView = ({
   const [modalShow, setModalShow] = useState(false)
   const [formState, setFormState] = useState(false)
   const [errors, setErrors] = useState({})
+  const [inputs, setInputs] = useState({})
 
   const useForm = (initialValues) => {
-    const [inputs, setInputs] = useState(initialValues)
     const handleSubmit = (e) => {
       if (e) {
         e.preventDefault()
@@ -48,19 +57,23 @@ export const NoEmailView = ({
   }
 
   const validate = (inputs) => {
+    const cond = '[0-9]'
+    const cond2 = '[a-z, A-Z]'
+
     // Name Errors
     const errors = {}
     if (!inputs.name) {
-      errors.name = 'Name is required'
+      errors.name = 'Hold on, a name is required'
+    } else if (!inputs.name.match(cond2)) {
+      errors.name = "Hold on, that name doesn't look valid"
     }
-    // Phone Number Errors
-    const cond = '[0-9]'
     if (!inputs.phone_number) {
-      errors.phone_number = 'Phone number is required'
+      // Phone Number Errors
+      errors.phone_number = 'Hold on, a phone number is required'
     } else if (inputs.phone_number.trim().length < 12) {
-      errors.phone_number = "Phone number isn't enough numbers"
+      errors.phone_number = "Hold on, that phone number doesn't look valid"
     } else if (!inputs.phone_number.match(cond)) {
-      errors.phone_number = 'Phone number is not valid'
+      errors.phone_number = "Hold on, that phone number doesn't look valid"
     }
     return errors
   }
@@ -78,14 +91,20 @@ export const NoEmailView = ({
       await api.submission.submit(sub.id)
       setFormState(true)
       console.log('Authenticated', inputs)
-      setInputs.name = ''
-      inputs.phone_number = ''
+      handleReset()
     } else {
       console.log('errors try again', validationErrors)
     }
   }
 
-  const { inputs, handleInputChange } = useForm({
+  const handleReset = () => {
+    setInputs({
+      name: '',
+      phone_number: '',
+    })
+  }
+
+  const { handleInputChange } = useForm({
     name: '',
     phone_number: '',
     validate,
@@ -93,85 +112,15 @@ export const NoEmailView = ({
 
   const handleClick = () => setChecked(!checked)
 
-  // const [inputValue, setInputValue] = useState({
-  //   name: '',
-  //   phone_number: '',
-  // })
-
-  // const [validation, setValidation] = useState({
-  //   name: '',
-  //   phone_number: '',
-  // })
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target
-  //   setInputValue({ ...inputValue, [name]: value })
-  // }
-
-  // // Keeping track of the input values
-  // const inputsHandler = (e) => {
-  //   setInputValue({ ...inputValue, [e.target.name]: e.target.value })
-  // }
-
-  // const checkValidation = () => {
-  //   console.log('blah')
-  //   let errors = validation
-
-  //   // Name validation
-  //   if (!inputValue.name.trim()) {
-  //     errors.name = 'Name is required'
-  //   } else {
-  //     errors.name = ''
-  //   }
-
-  //   // Phone number validation
-  //   const cond = '[0-9]'
-  //   const phone_number = inputValue.phone_number
-  //   if (!phone_number) {
-  //     errors.phone_number = 'Phone number is required'
-  //   } else if (phone_number.trim().length < 12) {
-  //     errors.phone_number = "Phone number isn't enough characters"
-  //   } else if (!phone_number.match(cond)) {
-  //     errors.phone_number = 'Phone number is not valid'
-  //   } else {
-  //     console.log('blah')
-  //     errors.phone_number = ''
-  //   }
-  //   console.log(errors)
-  //   setValidation(errors)
-  // }
-
-  // useEffect(() => {
-  //   checkValidation()
-  // }, [inputValue])
-
-  // Submitting the form data to Clerk
-  // const handleSubmit = async (e) => {
-  //   if (validation) {
-  //     e.preventDefault()
-  //     const finalData = { ...inputValue }
-  //     const subId = 1
-  //     let sub
-  //     sub = await api.submission.create(finalData)
-  //     await api.submission.submit(sub.id)
-  //     setFormState(true)
-  //     console.log('ubh')
-  //     setInputValue({ name: '', phone_number: '' }) // Should this be placed before the await api.submission.submit(sub.id) ??? Or will it erase the data?
-  //   } else {
-  //     e.preventDefault()
-  //     checkValidation()
-  //   }
-  // }
-
   return (
     <Splash.Container left>
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
-        <Text.Header splash style={{ width: '500px' }}>
+        <Text.Header splash>
           Anika Legal is an online service, with the majority of communication
           and advice sent via email.
         </Text.Header>
-        <Text.Body splash style={{ width: '500px' }}>
+        <Text.Body splash>
           If you don't have an email address, please complete the form below and
           we'll call you to see if we're able to help. If not then we'll be able
           to direct you to another organisation.
@@ -191,7 +140,7 @@ export const NoEmailView = ({
                 boxSizing: 'border-box',
               }}
             >
-              <TextEl
+              <InputEl
                 placeholder="Name"
                 type="text"
                 name="name"
@@ -200,8 +149,12 @@ export const NoEmailView = ({
                 autoFocus={false}
                 required=""
               />
-              {errors.name && <p>{errors.name}</p>}
-              <TextEl
+              {errors.name && (
+                <div className="error_wrapper">
+                  <ErrorMessage>{errors.name}</ErrorMessage>
+                </div>
+              )}
+              <InputEl
                 placeholder="Phone Number"
                 name="phone_number"
                 type="tel"
@@ -210,7 +163,11 @@ export const NoEmailView = ({
                 autoFocus={false}
                 required=""
               />
-              {errors.phone_number && <p>{errors.phone_number}</p>}
+              {errors.phone_number && (
+                <div className="error_wrapper">
+                  <ErrorMessage>{errors.phone_number}</ErrorMessage>
+                </div>
+              )}
               <Checkbox>
                 I agree to share my details with Anika Legal by ticking this
                 box.
@@ -259,6 +216,9 @@ const OuterContainer = styled.div`
   display: block;
   text-align: center;
   width: 500px;
+  @media (max-width: 590px) {
+    width: 400px;
+  }
 `
 
 const Checkbox = styled.label`
@@ -325,9 +285,13 @@ const OuterForm = styled.div`
     flex-direction: column;
     padding-top: 30px;
   }
+  .error_wrapper {
+    margin-top: -25px;
+    margin-bottom: 10px;
+  }
 `
 
-const TextEl = styled.input`
+const InputEl = styled.input`
   font-size: ${theme.text.subtitle};
   margin-bottom: 25px;
   font-weight: 500;
