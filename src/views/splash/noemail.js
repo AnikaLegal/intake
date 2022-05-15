@@ -18,8 +18,6 @@ import { theme } from '../../design/theme'
 import type { FormFieldProps } from '../../comps/fields/types'
 import type { Field, Data } from 'types'
 
-// Improvement - Move the form functionality out into it's own file and then call it here.
-
 export const NoEmailView = ({
   onNext,
   onSkip,
@@ -149,9 +147,9 @@ export const NoEmailView = ({
                   required=""
                 />
                 {errors.name && (
-                  <div className="error_wrapper">
+                  <p className="error_wrapper">
                     <ErrorMessage>{errors.name}</ErrorMessage>
-                  </div>
+                  </p>
                 )}
                 <InputEl
                   placeholder="Phone Number"
@@ -163,9 +161,9 @@ export const NoEmailView = ({
                   required=""
                 />
                 {errors.phone_number && (
-                  <div className="error_wrapper">
+                  <p className="error_wrapper">
                     <ErrorMessage>{errors.phone_number}</ErrorMessage>
-                  </div>
+                  </p>
                 )}
                 <Checkbox>
                   I agree to share my details with Anika Legal by ticking this
@@ -187,9 +185,9 @@ export const NoEmailView = ({
                   Contact Us
                 </Button>
                 {formState && (
-                  <div className="modal" show={modalShow}>
+                  <p className="modal" show={modalShow}>
                     Contact request submitted
-                  </div>
+                  </p>
                 )}
               </form>
             </OuterForm>
