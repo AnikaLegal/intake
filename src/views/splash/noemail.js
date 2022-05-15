@@ -23,71 +23,145 @@ export const NoEmailView = ({
   const [data, setData] = useState()
   const [modalShow, setModalShow] = useState(false)
   const [formState, setFormState] = useState(false)
+  const [errors, setErrors] = useState({})
 
-  const [inputValue, setInputValue] = useState({
+  const useForm = (initialValues) => {
+    const [inputs, setInputs] = useState(initialValues)
+    const handleSubmit = (e) => {
+      if (e) {
+        e.preventDefault()
+      }
+      console.log(inputs)
+    }
+    const handleInputChange = (e) => {
+      e.persist()
+      setInputs((inputs) => ({
+        ...inputs,
+        [e.target.name]: e.target.value,
+      }))
+    }
+    return {
+      handleSubmit,
+      handleInputChange,
+      inputs,
+    }
+  }
+
+  const validate = (inputs) => {
+    // Name Errors
+    const errors = {}
+    if (!inputs.name) {
+      errors.name = 'Name is required'
+    }
+    // Phone Number Errors
+    const cond = '[0-9]'
+    if (!inputs.phone_number) {
+      errors.phone_number = 'Phone number is required'
+    } else if (inputs.phone_number.trim().length < 12) {
+      errors.phone_number = "Phone number isn't enough numbers"
+    } else if (!inputs.phone_number.match(cond)) {
+      errors.phone_number = 'Phone number is not valid'
+    }
+    return errors
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const validationErrors = validate(inputs)
+    const noErrors = Object.keys(validationErrors).length === 0
+    setErrors(validationErrors)
+    if (noErrors) {
+      const finalData = { ...inputs }
+      const subId = 1
+      let sub
+      sub = await api.submission.create(finalData)
+      await api.submission.submit(sub.id)
+      setFormState(true)
+      console.log('Authenticated', inputs)
+      setInputs.name = ''
+      inputs.phone_number = ''
+    } else {
+      console.log('errors try again', validationErrors)
+    }
+  }
+
+  const { inputs, handleInputChange } = useForm({
     name: '',
     phone_number: '',
+    validate,
   })
 
   const handleClick = () => setChecked(!checked)
 
-  const [validation, setValidation] = useState({
-    name: '',
-    phone_number: '',
-  })
+  // const [inputValue, setInputValue] = useState({
+  //   name: '',
+  //   phone_number: '',
+  // })
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setInputValue({ ...inputValue, [name]: value })
-  }
+  // const [validation, setValidation] = useState({
+  //   name: '',
+  //   phone_number: '',
+  // })
 
-  // Keeping track of the input values
-  const inputsHandler = (e) => {
-    setInputValue({ ...inputValue, [e.target.name]: e.target.value })
-  }
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target
+  //   setInputValue({ ...inputValue, [name]: value })
+  // }
 
-  const checkValidation = () => {
-    let errors = validation
+  // // Keeping track of the input values
+  // const inputsHandler = (e) => {
+  //   setInputValue({ ...inputValue, [e.target.name]: e.target.value })
+  // }
 
-    // Name validation
-    if (!inputValue.name.trim()) {
-      errors.name = 'Name is required'
-    } else {
-      errors.name = ''
-    }
+  // const checkValidation = () => {
+  //   console.log('blah')
+  //   let errors = validation
 
-    // Phone number validation
-    const cond = '[0-9]'
-    const phone_number = inputValue.phone_number
-    if (!phone_number) {
-      errors.phone_number = 'Phone number is required'
-    } else if (phone_number.trim().length < 12) {
-      errors.phone_number = "Phone number isn't enough characters"
-    } else if (!phone_number.match(cond)) {
-      errors.phone_number = 'Phone number is not valid'
-    } else {
-      errors.phone_number = ''
-    }
+  //   // Name validation
+  //   if (!inputValue.name.trim()) {
+  //     errors.name = 'Name is required'
+  //   } else {
+  //     errors.name = ''
+  //   }
 
-    setValidation(errors)
-  }
+  //   // Phone number validation
+  //   const cond = '[0-9]'
+  //   const phone_number = inputValue.phone_number
+  //   if (!phone_number) {
+  //     errors.phone_number = 'Phone number is required'
+  //   } else if (phone_number.trim().length < 12) {
+  //     errors.phone_number = "Phone number isn't enough characters"
+  //   } else if (!phone_number.match(cond)) {
+  //     errors.phone_number = 'Phone number is not valid'
+  //   } else {
+  //     console.log('blah')
+  //     errors.phone_number = ''
+  //   }
+  //   console.log(errors)
+  //   setValidation(errors)
+  // }
+
+  // useEffect(() => {
+  //   checkValidation()
+  // }, [inputValue])
 
   // Submitting the form data to Clerk
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const finalData = { ...inputValue }
-    const subId = 1
-    let sub
-    sub = await api.submission.create(finalData)
-    await api.submission.submit(sub.id)
-    setInputValue({ name: '', phone_number: '' }) // Should this be placed before the await api.submission.submit(sub.id) ??? Or will it erase the data?
-    setFormState(true)
-  }
-
-  // Need to ensure form is valid before submitting
-
-  // index.js src\questions - for the api call when submitting form
-  // but also need to look inside intake code to see what api
+  // const handleSubmit = async (e) => {
+  //   if (validation) {
+  //     e.preventDefault()
+  //     const finalData = { ...inputValue }
+  //     const subId = 1
+  //     let sub
+  //     sub = await api.submission.create(finalData)
+  //     await api.submission.submit(sub.id)
+  //     setFormState(true)
+  //     console.log('ubh')
+  //     setInputValue({ name: '', phone_number: '' }) // Should this be placed before the await api.submission.submit(sub.id) ??? Or will it erase the data?
+  //   } else {
+  //     e.preventDefault()
+  //     checkValidation()
+  //   }
+  // }
 
   return (
     <Splash.Container left>
@@ -121,21 +195,22 @@ export const NoEmailView = ({
                 placeholder="Name"
                 type="text"
                 name="name"
-                value={inputValue.name}
-                onChange={(e) => handleChange(e)}
+                value={inputs.name}
+                onChange={handleInputChange}
                 autoFocus={false}
-                required
+                required=""
               />
+              {errors.name && <p>{errors.name}</p>}
               <TextEl
                 placeholder="Phone Number"
                 name="phone_number"
                 type="tel"
-                value={inputValue.phone_number}
-                onChange={(e) => handleChange(e)}
+                value={inputs.phone_number}
+                onChange={handleInputChange}
                 autoFocus={false}
-                required
+                required=""
               />
-              {!validation.phone_number && <p>{validation.phone_number}</p>}
+              {errors.phone_number && <p>{errors.phone_number}</p>}
               <Checkbox>
                 I agree to share my details with Anika Legal by ticking this
                 box.
@@ -152,7 +227,7 @@ export const NoEmailView = ({
                 Contact Us
               </Button>
             </form>
-            {formState && modalShow && (
+            {formState && (
               <div
                 show={modalShow}
                 style={{
