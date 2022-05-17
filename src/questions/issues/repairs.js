@@ -13,7 +13,7 @@ const isRepairIssue = (data: Data) => data.ISSUES.includes('REPAIRS')
 export const REPAIRS_QUESTIONS: Array<Field> = [
   {
     name: 'REPAIRS_INTRO',
-    stage: 1,
+    stage: 2,
     askCondition: isRepairIssue,
     required: true,
     type: FIELD_TYPES.DISPLAY,
@@ -28,7 +28,7 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'REPAIRS_REQUIRED',
-    stage: 1,
+    stage: 2,
     askCondition: isRepairIssue,
     required: true,
     type: FIELD_TYPES.CHOICE_MULTI,
@@ -49,7 +49,7 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'REPAIRS_ISSUE_DESCRIPTION',
-    stage: 1,
+    stage: 2,
     askCondition: isRepairIssue,
     required: true,
     type: FIELD_TYPES.TEXT,
@@ -61,7 +61,7 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'REPAIRS_ISSUE_START',
-    stage: 1,
+    stage: 2,
     askCondition: isRepairIssue,
     required: true,
     type: FIELD_TYPES.DATE,
@@ -75,7 +75,7 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'REPAIRS_ISSUE_PHOTO',
-    stage: 1,
+    stage: 2,
     askCondition: isRepairIssue,
     required: false,
     type: FIELD_TYPES.UPLOAD,

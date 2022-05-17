@@ -8,7 +8,7 @@ import type { Field, Data } from 'types'
 export const PROPERTY_QUESTIONS: Array<Field> = [
   {
     name: 'PROPERTY_INTRO',
-    stage: 2,
+    stage: 3,
     required: true,
     type: FIELD_TYPES.DISPLAY,
     Prompt: <span>Your rental property</span>,
@@ -22,7 +22,7 @@ export const PROPERTY_QUESTIONS: Array<Field> = [
   },
   {
     name: 'RENTAL_CIRCUMSTANCES',
-    stage: 2,
+    stage: 3,
     required: true,
     Prompt: <span>Who are you renting with?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -36,7 +36,7 @@ export const PROPERTY_QUESTIONS: Array<Field> = [
   },
   {
     name: 'IS_ON_LEASE',
-    stage: 2,
+    stage: 3,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     Prompt: <span>Are you named as a tenant on the lease?</span>,
@@ -53,7 +53,7 @@ export const PROPERTY_QUESTIONS: Array<Field> = [
   },
   {
     name: 'START_DATE',
-    stage: 2,
+    stage: 3,
     required: true,
     type: FIELD_TYPES.DATE,
     Prompt: <span>When did you start living at this property?</span>,
@@ -61,14 +61,14 @@ export const PROPERTY_QUESTIONS: Array<Field> = [
   },
   {
     name: 'SUBURB',
-    stage: 2,
+    stage: 3,
     required: true,
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What suburb do you live in?</span>,
   },
   {
     name: 'ADDRESS',
-    stage: 2,
+    stage: 3,
     required: true,
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What is your street address?</span>,
