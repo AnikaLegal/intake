@@ -20,8 +20,7 @@ export const SubmittedView = () => {
           <strong>Success!</strong> Your case has been submitted.
         </Text.Header>
         <Text.Body splash>
-          Our paralegals will contact you within the next two business days to
-          discuss how we can help you.
+          Our paralegals will contact you soon to discuss how we can help you.
         </Text.Body>
         <Splash.ButtonGroup>
           <a href={LINKS.HOME}>
