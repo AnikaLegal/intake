@@ -13,9 +13,11 @@ import { ISSUE_QUESTIONS } from './issues'
 import { LANDLORD_QUESTIONS } from './landlord'
 import { IMPACT_QUESTIONS } from './impact'
 import { PROPERTY_QUESTIONS } from './property'
+import { ELIGIBILITY_QUESTIONS } from './eligibility'
 
 export const QUESTIONS: Array<Field> = [
   ...ABOUT_QUESTIONS,
+  ...ELIGIBILITY_QUESTIONS,
   ...ISSUE_QUESTIONS,
   ...PROPERTY_QUESTIONS,
   ...LANDLORD_QUESTIONS,
