@@ -10,7 +10,7 @@ const isEvictionIssue = (data: Data) => data.ISSUES.includes('EVICTION')
 export const EVICTION_QUESTIONS: Array<Field> = [
   {
     name: 'EVICTIONS_INTRO',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
 
     required: true,
@@ -27,7 +27,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   // Eligibility questions
   {
     name: 'EVICTIONS_IS_UNPAID_RENT',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     effect: async (data: Data) => {
       if (!data.EVICTIONS_IS_UNPAID_RENT) {
@@ -48,7 +48,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_IS_ALREADY_REMOVED',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     effect: async (data: Data) => {
       if (data.EVICTIONS_IS_ALREADY_REMOVED) {
@@ -65,7 +65,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_HAS_NOTICE',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     effect: async (data: Data) => {
       if (!data.EVICTIONS_HAS_NOTICE) {
@@ -93,7 +93,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_DOCUMENTS_UPLOAD',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.UPLOAD,
@@ -106,7 +106,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_NOTICE_VACATE_DATE',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.DATE,
@@ -123,7 +123,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_NOTICE_SEND_DATE',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.DATE,
@@ -141,7 +141,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_DOC_DELIVERY_TIME_NOTICE_TO_VACATE',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.DATE,
@@ -153,7 +153,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_DOC_DELIVERY_METHOD_NOTICE_TO_VACATE',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -167,7 +167,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_IS_VCAT_DATE',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -181,7 +181,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_VCAT_DATE',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isEvictionIssue(data) && data.EVICTIONS_IS_VCAT_DATE,
     required: true,
@@ -190,7 +190,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_RENT_UNPAID',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.NUMBER,
@@ -198,7 +198,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_RENT_CYCLE',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: true,
     Prompt: <span>How often do you pay your rent?</span>,
@@ -213,7 +213,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_IS_ON_PAYMENT_PLAN',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -233,7 +233,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_CAN_AFFORD_PAYMENT_PLAN',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isEvictionIssue(data) && !data.EVICTIONS_IS_ON_PAYMENT_PLAN,
     required: true,
@@ -252,7 +252,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   // Payment plan stuff
   {
     name: 'EVICTIONS_PAYMENT_AMOUNT',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isEvictionIssue(data) &&
       !data.EVICTIONS_IS_ON_PAYMENT_PLAN &&
@@ -269,7 +269,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_PAYMENT_FAIL_REASON',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isEvictionIssue(data) &&
       !data.EVICTIONS_IS_ON_PAYMENT_PLAN &&
@@ -290,7 +290,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_PAYMENT_FAIL_DESCRIPTION',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isEvictionIssue(data) &&
       !data.EVICTIONS_IS_ON_PAYMENT_PLAN &&
@@ -307,7 +307,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_PAYMENT_FAIL_CHANGE',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isEvictionIssue(data) &&
       !data.EVICTIONS_IS_ON_PAYMENT_PLAN &&
@@ -328,7 +328,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   {
     name: 'EVICTIONS_MISC',
-    stage: 1,
+    stage: 2,
     askCondition: isEvictionIssue,
     required: false,
     type: FIELD_TYPES.TEXT,

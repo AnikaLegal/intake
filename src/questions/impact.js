@@ -10,7 +10,7 @@ import type { Field, Data } from 'types'
 export const IMPACT_QUESTIONS: Array<Field> = [
   {
     name: 'IMPACT_INTRO',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.DISPLAY,
     effect: async (data: Data) => {
@@ -32,14 +32,14 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'DOB',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.DATE,
     Prompt: <span>What is your date of birth?</span>,
   },
   {
     name: 'GENDER',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
@@ -53,7 +53,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'IS_ABORIGINAL_OR_TORRES_STRAIT_ISLANDER',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
@@ -66,7 +66,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'CAN_SPEAK_NON_ENGLISH',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
@@ -81,7 +81,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'FIRST_LANGUAGE',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.TEXT,
     Prompt: (
@@ -93,7 +93,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'WORK_OR_STUDY_CIRCUMSTANCES',
-    stage: 4,
+    stage: 5,
     required: true,
     Prompt: <span>Which best describes your work or study situation?</span>,
     type: FIELD_TYPES.CHOICE_MULTI,
@@ -118,7 +118,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   // Income and rent payments
   {
     name: 'IS_MULTI_INCOME_HOUSEHOLD',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
@@ -138,7 +138,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'WEEKLY_INCOME',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>What is your weekly personal income?</span>,
@@ -146,7 +146,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'WEEKLY_INCOME_MULTI',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>What is your combined household weekly income?</span>,
@@ -159,7 +159,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'WEEKLY_RENT',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>How much rent do you pay per week?</span>,
@@ -167,7 +167,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'WEEKLY_RENT_MULTI',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>How much rent do you and your partner pay per week?</span>,
@@ -176,7 +176,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
 
   {
     name: 'NUMBER_OF_DEPENDENTS',
-    stage: 4,
+    stage: 5,
     required: true,
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>How many dependents do you have?</span>,
@@ -189,7 +189,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
 
   {
     name: 'SPECIAL_CIRCUMSTANCES',
-    stage: 4,
+    stage: 5,
     required: false,
     type: FIELD_TYPES.CHOICE_MULTI,
     Prompt: <span>Do any of the following apply to you?</span>,
@@ -223,7 +223,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'LEGAL_ACCESS_DIFFICULTIES',
-    stage: 4,
+    stage: 5,
     required: false,
     type: FIELD_TYPES.CHOICE_MULTI,
     Prompt: (
@@ -244,7 +244,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
 
   {
     name: 'REFERRER_TYPE',
-    stage: 4,
+    stage: 5,
     required: true,
     Prompt: <span>How did you hear about Anika?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -270,7 +270,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'LEGAL_CENTER_REFERRER',
-    stage: 4,
+    stage: 5,
     required: true,
     askCondition: (data: Data) => data.REFERRER_TYPE == 'LEGAL_CENTRE',
     Prompt: <span>Which legal centre referred you?</span>,
@@ -293,7 +293,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   {
     name: 'HOUSING_SERVICE_REFERRER',
     askCondition: (data: Data) => data.REFERRER_TYPE == 'HOUSING_SERVICE',
-    stage: 4,
+    stage: 5,
     required: true,
     Prompt: <span>Which housing service referred you?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -310,7 +310,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   {
     name: 'CHARITY_REFERRER',
     askCondition: (data: Data) => data.REFERRER_TYPE == 'CHARITY',
-    stage: 4,
+    stage: 5,
     required: true,
     Prompt: <span>Which charity or non-profit referred you?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -328,7 +328,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'SOCIAL_REFERRER',
-    stage: 4,
+    stage: 5,
     askCondition: (data: Data) => data.REFERRER_TYPE == 'SOCIAL_MEDIA',
     required: true,
     Prompt: <span>Which social media site did you find us on?</span>,

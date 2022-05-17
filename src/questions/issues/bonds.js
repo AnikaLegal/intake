@@ -25,7 +25,7 @@ const isClaimReason = (reason: string) => (data) =>
 export const BONDS_QUESTIONS: Array<Field> = [
   {
     name: 'BONDS_INTRO',
-    stage: 1,
+    stage: 2,
     askCondition: isBondsIssue,
 
     required: true,
@@ -40,7 +40,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_MOVE_OUT_DATE',
-    stage: 1,
+    stage: 2,
     askCondition: isBondsIssue,
     required: true,
     type: FIELD_TYPES.DATE,
@@ -53,7 +53,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_LANDLORD_INTENTS_TO_MAKE_CLAIM',
-    stage: 1,
+    stage: 2,
     askCondition: isBondsIssue,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -70,7 +70,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_HAS_LANDLORD_MADE_RTBA_APPLICATION',
-    stage: 1,
+    stage: 2,
     askCondition: isBondsIssueWithClaim,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -94,7 +94,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_TENANT_HAS_RTBA_APPLICATION_COPY',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isBondsIssueWithClaim(data) &&
       data.BONDS_HAS_LANDLORD_MADE_RTBA_APPLICATION,
@@ -108,7 +108,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_RTBA_APPLICATION_UPLOAD',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isBondsIssueWithClaim(data) &&
       data.BONDS_TENANT_HAS_RTBA_APPLICATION_COPY,
@@ -122,7 +122,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_CLAIM_REASONS',
-    stage: 1,
+    stage: 2,
     askCondition: isBondsIssueWithClaim,
     required: true,
     type: FIELD_TYPES.CHOICE_MULTI,
@@ -143,7 +143,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_DAMAGE_INTRO',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.DAMAGE),
     required: true,
     type: FIELD_TYPES.DISPLAY,
@@ -157,7 +157,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_DAMAGE_CLAIM_DESCRIPTION',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.DAMAGE),
     required: true,
     type: FIELD_TYPES.TEXT,
@@ -169,7 +169,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_DAMAGE_CLAIM_AMOUNT',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.DAMAGE),
     required: true,
     type: FIELD_TYPES.NUMBER,
@@ -177,7 +177,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_DAMAGE_CAUSED_BY_TENANT',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.DAMAGE),
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -189,7 +189,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_DAMAGE_QUOTE_UPLOAD',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isClaimReason(REASONS.DAMAGE)(data) && data.BONDS_DAMAGE_CAUSED_BY_TENANT,
     required: false,
@@ -203,7 +203,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_MONEY_OWED_INTRO',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.MONEY_OWED),
     required: true,
     type: FIELD_TYPES.DISPLAY,
@@ -217,7 +217,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_MONEY_OWED_CLAIM_DESCRIPTION',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.MONEY_OWED),
     required: true,
     type: FIELD_TYPES.TEXT,
@@ -227,7 +227,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_MONEY_OWED_CLAIM_AMOUNT',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.MONEY_OWED),
     required: true,
     type: FIELD_TYPES.NUMBER,
@@ -235,7 +235,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_MONEY_IS_OWED_BY_TENANT',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.MONEY_OWED),
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -248,7 +248,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
 
   {
     name: 'BONDS_CLEANING_INTRO',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.CLEANING),
     required: true,
     type: FIELD_TYPES.DISPLAY,
@@ -262,7 +262,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_CLEANING_CLAIM_DESCRIPTION',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.CLEANING),
     required: true,
     type: FIELD_TYPES.TEXT,
@@ -274,7 +274,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_CLEANING_CLAIM_AMOUNT',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.CLEANING),
     required: true,
     type: FIELD_TYPES.NUMBER,
@@ -282,7 +282,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_CLEANING_DOCUMENT_UPLOADS',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.CLEANING),
     required: false,
     type: FIELD_TYPES.UPLOAD,
@@ -301,7 +301,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_LOCKS_INTRO',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.LOCKS),
     required: true,
     type: FIELD_TYPES.DISPLAY,
@@ -316,7 +316,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_LOCKS_CLAIM_AMOUNT',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.LOCKS),
     required: true,
     type: FIELD_TYPES.NUMBER,
@@ -328,7 +328,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_LOCKS_CHANGED_BY_TENANT',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.LOCKS),
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
@@ -342,7 +342,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_LOCKS_CHANGE_QUOTE',
-    stage: 1,
+    stage: 2,
     askCondition: (data) =>
       isClaimReason(REASONS.LOCKS)(data) && data.BONDS_LOCKS_CHANGED_BY_TENANT,
     required: false,
@@ -356,7 +356,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_OTHER_INTRO',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.OTHER),
     required: true,
     type: FIELD_TYPES.DISPLAY,
@@ -370,7 +370,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_OTHER_REASONS_DESCRIPTION',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.OTHER),
     required: true,
     type: FIELD_TYPES.TEXT,
@@ -380,7 +380,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
   },
   {
     name: 'BONDS_OTHER_REASONS_AMOUNT',
-    stage: 1,
+    stage: 2,
     askCondition: isClaimReason(REASONS.OTHER),
     required: true,
     type: FIELD_TYPES.NUMBER,

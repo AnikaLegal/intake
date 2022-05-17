@@ -14,7 +14,7 @@ const isManagerLandlord = (data: Data) => !data.PROPERTY_MANAGER_IS_AGENT
 export const LANDLORD_QUESTIONS: Array<Field> = [
   {
     name: 'PROPERTY_MANAGER_INTRO',
-    stage: 3,
+    stage: 4,
     required: true,
     type: FIELD_TYPES.DISPLAY,
     effect: async (data: Data) => {
@@ -34,7 +34,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   },
   {
     name: 'PROPERTY_MANAGER_IS_AGENT',
-    stage: 3,
+    stage: 4,
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
@@ -56,7 +56,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   },
   {
     name: 'AGENT_NAME',
-    stage: 3,
+    stage: 4,
     askCondition: isManagerAgent,
     required: true,
     type: FIELD_TYPES.TEXT,
@@ -70,7 +70,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   },
   {
     name: 'AGENT_ADDRESS',
-    stage: 3,
+    stage: 4,
     askCondition: isManagerAgent,
     required: true,
     type: FIELD_TYPES.TEXT,
@@ -84,7 +84,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   },
   {
     name: 'AGENT_EMAIL',
-    stage: 3,
+    stage: 4,
     askCondition: isManagerAgent,
     required: true,
     type: FIELD_TYPES.EMAIL,
@@ -99,7 +99,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   },
   {
     name: 'AGENT_PHONE',
-    stage: 3,
+    stage: 4,
     askCondition: isManagerAgent,
     required: true,
     type: FIELD_TYPES.PHONE,
@@ -113,7 +113,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   },
   {
     name: 'LANDLORD_NAME',
-    stage: 3,
+    stage: 4,
     required: true,
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What is your landlord's full name?</span>,
@@ -126,7 +126,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   },
   {
     name: 'LANDLORD_ADDRESS',
-    stage: 3,
+    stage: 4,
     askCondition: isManagerLandlord,
     required: true,
     type: FIELD_TYPES.TEXT,
@@ -140,7 +140,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   },
   {
     name: 'LANDLORD_EMAIL',
-    stage: 3,
+    stage: 4,
     askCondition: isManagerLandlord,
     required: true,
     type: FIELD_TYPES.EMAIL,
@@ -154,7 +154,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   },
   {
     name: 'LANDLORD_PHONE',
-    stage: 3,
+    stage: 4,
     askCondition: isManagerLandlord,
     required: true,
     type: FIELD_TYPES.PHONE,
