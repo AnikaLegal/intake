@@ -64,16 +64,16 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     effect: async (data: Data) => {
       if (
         (data.DEPENDENTS === 0 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 90000 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 1731 &&
           data.APPLY.length === 0) ||
         (data.DEPENDENTS === 2 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 115000 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
           data.APPLY.length === 0) ||
         (data.DEPENDENTS === 4 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 140000 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
           data.APPLY.length === 0) ||
         (data.DEPENDENTS === 5 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 155000 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 2981 &&
           data.APPLY.length === 0)
       ) {
         // Currently a user can click an option then click skip and the option will still apply meaning they are actually ineligible but go through due to the skip button functionality not deselecting user input.
