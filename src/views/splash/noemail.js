@@ -180,6 +180,7 @@ export const NoEmailView = ({
                 <Button
                   primary
                   type="submit"
+                  style={{ cursor: 'pointer' }}
                   onClick={() => setModalShow(true)}
                 >
                   Contact Us

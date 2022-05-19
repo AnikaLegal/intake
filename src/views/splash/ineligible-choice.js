@@ -9,7 +9,7 @@ export const IneligibleChoiceView = () => {
   useScrollTop()
   return (
     <Splash.Container left>
-      <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
+      <Splash.Image src={IMAGES.HEROES.PAPER_GUY} />
       <Splash.Content>
         <Text.Header splash>
           It looks like you're not eligible for our service. If you continue
