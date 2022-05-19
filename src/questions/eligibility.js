@@ -62,11 +62,25 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     name: 'APPLY',
     stage: 1,
     effect: async (data: Data) => {
-      if (data.DEPENDENTS === 0) {
+      if (
+        (data.DEPENDENTS === 0 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 90000 &&
+          data.APPLY.length === 0) ||
+        (data.DEPENDENTS === 2 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 115000 &&
+          data.APPLY.length === 0) ||
+        (data.DEPENDENTS === 4 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 140000 &&
+          data.APPLY.length === 0) ||
+        (data.DEPENDENTS === 5 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 155000 &&
+          data.APPLY.length === 0)
+      ) {
+        // Currently a user can click an option then click skip and the option will still apply meaning they are actually ineligible but go through due to the skip button functionality not deselecting user input.
         return ROUTES.INELIGIBLE_CHOICE
       }
     },
-    required: true,
+    required: false,
     type: FIELD_TYPES.CHOICE_MULTI,
     choices: [
       {
