@@ -5,19 +5,19 @@ import { IMAGES, ROUTES, LINKS } from 'consts'
 import styled from 'styled-components'
 import { useScrollTop } from 'utils'
 
-export const IneligibleChoiceView = () => {
+export const AssessCircumstancesView = () => {
   useScrollTop()
   return (
     <Splash.Container left>
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          It looks like you're not eligible for our service. If you continue
-          with our intake form, we cannot guarantee that we can assist you.
-          Would you still like to continue?
+          So that we can assess your circumstances holistically, please tell
+          us if you have any other special circumstances that you would like us
+          to consider.
         </Text.Header>
         <Splash.ButtonGroup>
-          <a href={ROUTES.ASSESS_CIRCUMSTANCES}>
+          <a href={ROUTES.INELIGIBLE_MEANS}>
             <Splash.Button>Yes</Splash.Button>
           </a>
           <a href={ROUTES.INELIGIBLE_MEANS}>

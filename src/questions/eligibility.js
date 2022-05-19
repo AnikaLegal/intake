@@ -62,10 +62,8 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     name: 'APPLY',
     stage: 1,
     effect: async (data: Data) => {
-      if (data.DEPENDENTS === 0 && data.WEEKLY_HOUSEHOLD_INCOME > 90000) {
-        if (data.APPLY === '') {
-          
-        }
+      if (data.DEPENDENTS === 0) {
+        return ROUTES.INELIGIBLE_CHOICE
       }
     },
     required: true,
@@ -114,22 +112,5 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
       },
     ],
     Prompt: <span>Do any of the following apply to you?</span>,
-  },
-  {
-    name: 'NONELIGIBLE',
-    stage: 1,
-    required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
-    ],
-    Prompt: (
-      <span>
-        It looks like you're not eligible for our service. If you continue with
-        our intake form, we cannot guarantee that we can assist you. Would you
-        still like to continue?
-      </span>
-    ),
   },
 ]
