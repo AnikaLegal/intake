@@ -6,16 +6,14 @@ import styled from 'styled-components'
 import { useScrollTop } from 'utils'
 import type { Field, Data } from 'types'
 
-export const LegalScopeCompensationView = () => {
+export const IneligibleRepairsVCATStageView = () => {
   useScrollTop()
   return (
     <Splash.Container left>
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          As your matter is about compensation from your landlord, your issue is
-          outside of Anika’s current scope. Unfortunately, we are not able to
-          assist you at this time.
+          We are sorry we cannot represent you at VCAT.
         </Text.Header>
         <Text.Body splash>
           You may wish to contact your local community legal centres who will be

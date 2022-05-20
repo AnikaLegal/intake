@@ -6,16 +6,18 @@ import styled from 'styled-components'
 import { useScrollTop } from 'utils'
 import type { Field, Data } from 'types'
 
-export const LegalScopeCompensationView = () => {
+export const IneligibleRepairsGottenVCATView = () => {
   useScrollTop()
   return (
     <Splash.Container left>
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          As your matter is about compensation from your landlord, your issue is
-          outside of Anika’s current scope. Unfortunately, we are not able to
-          assist you at this time.
+          Our Repairs service focusses on helping renters write a formal
+          compliance request to their real estate agent and/or rental provider,
+          and our service scope ends once a Repairs Order has been obtained.
+          Based on what you've told us, you have already obtained a Repairs
+          Order.
         </Text.Header>
         <Text.Body splash>
           You may wish to contact your local community legal centres who will be
