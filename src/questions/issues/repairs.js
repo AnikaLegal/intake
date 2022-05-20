@@ -27,35 +27,17 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     button: { text: 'Continue', Icon: null },
   },
   {
-    name: 'REPAIRS_REQUIRED',
+    name: 'REPAIRS_ISSUE_PHOTO',
     stage: 2,
     askCondition: isRepairIssue,
-    required: true,
-    type: FIELD_TYPES.CHOICE_MULTI,
-    choices: [
-      { label: 'Water', value: 'Water' },
-      { label: 'Roof', value: 'Roof' },
-      { label: 'Heating or cooling', value: 'Heating or cooling' },
-      { label: 'Toilet', value: 'Toilet' },
-      { label: 'Cooking', value: 'Cooking' },
-      { label: 'Electricity', value: 'Electricity' },
-      { label: 'Fire', value: 'Fire' },
-      { label: 'Gas', value: 'Gas' },
-      { label: 'Laundry', value: 'Laundry' },
-      { label: 'Other', value: 'Other' },
-    ],
-    Prompt: <span>What needs to be repaired?</span>,
-    Help: <span>Choose as many as you need</span>,
-  },
-  {
-    name: 'REPAIRS_ISSUE_DESCRIPTION',
-    stage: 2,
-    askCondition: isRepairIssue,
-    required: true,
-    type: FIELD_TYPES.TEXT,
+    required: false,
+    type: FIELD_TYPES.UPLOAD,
     Prompt: (
+      <span>Do you have any photos of the problems that you could upload?</span>
+    ),
+    Help: (
       <span>
-        Tell us more about the repair problems at your rental property.
+        If you do not have any photos of the problems to upload, that’s okay.
       </span>
     ),
   },
@@ -74,18 +56,26 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'REPAIRS_ISSUE_PHOTO',
+    name: 'REPAIRS_DONE_ANY',
     stage: 2,
     askCondition: isRepairIssue,
-    required: false,
-    type: FIELD_TYPES.UPLOAD,
-    Prompt: (
-      <span>Do you have any photos of the problems that you could upload?</span>
-    ),
-    Help: (
-      <span>
-        If you do not have any photos of the problems to upload, that’s okay.
-      </span>
-    ),
+    required: true,
+    type: FIELD_TYPES.CHOICE_MULTI,
+    choices: [
+      { label: 'I told the landlord verbally', value: 'Landlord' },
+      { label: "I've issued formal notices of breaches", value: 'Breaches' },
+      { label: "I've applied to CAV for a report", value: 'CAV' },
+      { label: "I've applied to VCAT", value: 'APPLIED_VCAT' },
+      { label: "I've already gotten a VCAT order", value: 'GOTTEN_VCAT' },
+    ],
+    effect: async (data: Data) => {
+      if (data.REPAIRS_DONE_ANY.indexOf('APPLIED_VCAT')) {
+        return ROUTES.INELIGIBLE_REPAIRS_APPLIED_VCAT
+      } else if (data.REPAIRS_DONE_ANY.indexOf('GOTTEN_VCAT')) {
+        return ROUTES.INELIGIBLE_REPAIRS_GOTTEN_VCAT
+      }
+    },
+    Prompt: <span>Have you done any of the following?</span>,
+    Help: <span>Please select all that apply</span>,
   },
 ]
