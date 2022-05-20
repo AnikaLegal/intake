@@ -66,8 +66,14 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
         (data.DEPENDENTS === 0 &&
           data.WEEKLY_HOUSEHOLD_INCOME > 1731 &&
           data.APPLY.length === 0) ||
+        (data.DEPENDENTS === 1 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
+          data.APPLY.length === 0) ||
         (data.DEPENDENTS === 2 &&
           data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
+          data.APPLY.length === 0) ||
+        (data.DEPENDENTS === 3 &&
+          data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
           data.APPLY.length === 0) ||
         (data.DEPENDENTS === 4 &&
           data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&

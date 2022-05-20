@@ -18,12 +18,21 @@ export const IneligibleMeansView = () => {
         </Text.Header>
         <Text.Body splash>
           Based on your responses, your income is above our eligibility
-          requirements. Due to our capacity, we must prioritise people who fall
-          within our eligibility criteria. We hope that you understand our
-          capacity limitations. If you are not eligible for free legal help, you
-          might wish to get legal information from Consumer Affairs Victoria
-          [link to infoline] or engage a private lawyer [link to LIV Legal
-          Referrals]
+          requirements.
+        </Text.Body>
+        <Text.Body splash>
+          Due to our capacity, we must prioritise people who fall within our
+          eligibility criteria. We hope that you understand our capacity
+          limitations.
+        </Text.Body>
+        <Text.Body splash>
+          If you are not eligible for free legal help, you might wish to get
+          legal information from&nbsp;
+          <a href="https://www.consumer.vic.gov.au/contact-us">
+            Consumer Affairs Victoria
+          </a>
+          &nbsp;or engage a&nbsp;
+          <a href="https://www.liv.asn.au/Referral">private lawyer.</a>
         </Text.Body>
       </Splash.Content>
     </Splash.Container>
