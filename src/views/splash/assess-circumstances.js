@@ -114,11 +114,6 @@ export const AssessCircumstancesView = ({
                 autoFocus={false}
                 required=""
               />
-              {errors.name && (
-                <p className="error_wrapper">
-                  <ErrorMessage>{errors.text}</ErrorMessage>
-                </p>
-              )}
               <Button
                 primary
                 type="submit"
@@ -127,13 +122,6 @@ export const AssessCircumstancesView = ({
               >
                 Submit
               </Button>
-              <Splash.ButtonGroup className="home">
-                <a href={LINKS.HOME}>
-                  <Splash.Button last className="home_button">
-                    Return home
-                  </Splash.Button>
-                </a>
-              </Splash.ButtonGroup>
               {formState && (
                 <p className="modal" show={modalShow}>
                   Contact request submitted
@@ -155,6 +143,19 @@ const OuterContainer = styled.div`
 const OuterForm = styled.div`
   display: flex;
   flex-flow: column;
+
+  .modal {
+    padding: 10px;
+    text-align: center;
+    border-radius: 14px;
+    line-height: 100%;
+    margin-top: 20px;
+    color: #ebb900;
+    font-weight: bold;
+    background: #fff9e8;
+    border: 2px solid #ebb900;
+  }
+
   @media (max-width: 398px) {
     font-size: 15px;
   }
@@ -172,35 +173,6 @@ const OuterForm = styled.div`
   }
   @media (max-width: 333px) {
     font-size: 10px;
-  }
-
-  .home {
-    margin-top: 20px;
-  }
-
-  .home_button {
-    font-size: 20px;
-    @media (max-width: 380px) {
-      font-size: 19px;
-    }
-    @media (max-width: 375px) {
-      font-size: 18px;
-    }
-    @media (max-width: 350px) {
-      font-size: 15px;
-    }
-    @media (max-width: 347px) {
-      font-size: 14px;
-    }
-    @media (max-width: 340px) {
-      font-size: 13px;
-    }
-    @media (max-width: 333px) {
-      font-size: 12px;
-    }
-    @media (max-width: 325px) {
-      font-size: 11px;
-    }
   }
 
   .form {
