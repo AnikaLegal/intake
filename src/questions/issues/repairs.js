@@ -56,8 +56,15 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'REPAIRS_DONE_ANY',
+    name: 'REPAIRS_VCAT',
     stage: 2,
+    effect: async (data: Data) => {
+      if (data.REPAIRS_VCAT.includes('APPLIED_VCAT')) {
+        return ROUTES.INELIGIBLE_REPAIRS_APPLIED_VCAT
+      } else if (data.REPAIRS_VCAT.includes('GOTTEN_VCAT')) {
+        return ROUTES.INELIGIBLE_REPAIRS_GOTTEN_VCAT
+      }
+    },
     askCondition: isRepairIssue,
     required: true,
     type: FIELD_TYPES.CHOICE_MULTI,
@@ -68,13 +75,6 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
       { label: "I've applied to VCAT", value: 'APPLIED_VCAT' },
       { label: "I've already gotten a VCAT order", value: 'GOTTEN_VCAT' },
     ],
-    effect: async (data: Data) => {
-      if (data.REPAIRS_DONE_ANY.indexOf('APPLIED_VCAT')) {
-        return ROUTES.INELIGIBLE_REPAIRS_APPLIED_VCAT
-      } else if (data.REPAIRS_DONE_ANY.indexOf('GOTTEN_VCAT')) {
-        return ROUTES.INELIGIBLE_REPAIRS_GOTTEN_VCAT
-      }
-    },
     Prompt: <span>Have you done any of the following?</span>,
     Help: <span>Please select all that apply</span>,
   },
