@@ -21,6 +21,7 @@ export const ROUTES = {
   INELIGIBLE_WRONG_REASON: '/ineligible/wrong-reason',
   SUBMITTED: '/submitted/',
   NO_EMAIL: '/no-email/',
+  BONDS_RECOVERY: '/bonds-reovery/',
   LEGAL_SCOPE_EVICTED: '/legal-scope-evicted/',
   LEGAL_SCOPE_COMPENSATION: '/legal-scope-compensation/',
   GEOGRAPHY: '/geography/',
