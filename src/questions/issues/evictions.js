@@ -26,6 +26,23 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   },
   // Eligibility questions
   {
+    name: 'EVICTIONS_IS_ALREADY_REMOVED',
+    stage: 2,
+    askCondition: isEvictionIssue,
+    effect: async (data: Data) => {
+      if (data.EVICTIONS_IS_ALREADY_REMOVED) {
+        return ROUTES.INELIGIBLE_ALREADY_REMOVED
+      }
+    },
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+    Prompt: <span>Have you been removed from your home?</span>,
+  },
+  {
     name: 'EVICTIONS_IS_UNPAID_RENT',
     stage: 2,
     askCondition: isEvictionIssue,
@@ -45,23 +62,6 @@ export const EVICTION_QUESTIONS: Array<Field> = [
         Are you being evicted due to unpaid rent or some other reason?
       </span>
     ),
-  },
-  {
-    name: 'EVICTIONS_IS_ALREADY_REMOVED',
-    stage: 2,
-    askCondition: isEvictionIssue,
-    effect: async (data: Data) => {
-      if (data.EVICTIONS_IS_ALREADY_REMOVED) {
-        return ROUTES.INELIGIBLE_ALREADY_REMOVED
-      }
-    },
-    required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
-    ],
-    Prompt: <span>Have you been removed from your home?</span>,
   },
   {
     name: 'EVICTIONS_HAS_NOTICE',
