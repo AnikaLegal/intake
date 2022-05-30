@@ -14,15 +14,17 @@ const ROUTE_VIEWS = {
   [ROUTES.LANDING_COVID]: Views.LandingView,
   [ROUTES.LANDING_EVICTIONS]: Views.LandingView,
   [ROUTES.INELIGIBLE]: Views.IneligibleView,
+  [ROUTES.INELIGIBLE_EVICTED]: Views.IneligibleEvictedView,
   [ROUTES.INELIGIBLE_NO_EVICTIONS_NOTICE]: Views.IneligibleNoNoticeView,
   [ROUTES.INELIGIBLE_NOT_UNPAID_RENT]: Views.IneligibleNotUnpaidRentView,
   [ROUTES.INELIGIBLE_REPAIRS_APPLIED_VCAT]:
     Views.IneligibleRepairsAppliedVCATView,
   [ROUTES.INELIGIBLE_REPAIRS_GOTTEN_VCAT]:
     Views.IneligibleRepairsGottenVCATView,
-  [ROUTES.INELIGIBLE_REPAIRS_VCAT_STAGE]:
-    Views.IneligibleRepairsVCATStageView,
+  [ROUTES.INELIGIBLE_REPAIRS_VCAT_STAGE]: Views.IneligibleRepairsVCATStageView,
   [ROUTES.INELIGIBLE_CHOICE]: Views.IneligibleChoiceView,
+  [ROUTES.INELIGIBLE_WRONG_REASON]: Views.IneligibleWrongReasonView,
+  [ROUTES.INELIGIBLE_VCAT_HEARING]: Views.IneligibleVcatHearingView,
   [ROUTES.INELIGIBLE_MEANS]: Views.IneligibleMeansView,
   [ROUTES.ASSESS_CIRCUMSTANCES]: Views.AssessCircumstancesView,
   [ROUTES.INELIGIBLE_ALREADY_REMOVED]: Views.IneligibleAlreadyRemovedView,
