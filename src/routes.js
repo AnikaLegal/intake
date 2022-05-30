@@ -17,6 +17,7 @@ const ROUTE_VIEWS = {
   [ROUTES.INELIGIBLE_EVICTED]: Views.IneligibleEvictedView,
   [ROUTES.INELIGIBLE_NO_EVICTIONS_NOTICE]: Views.IneligibleNoNoticeView,
   [ROUTES.INELIGIBLE_NOT_UNPAID_RENT]: Views.IneligibleNotUnpaidRentView,
+  [ROUTES.BONDS_RECOVERY]: Views.BondsRecoveryView,
   [ROUTES.INELIGIBLE_REPAIRS_APPLIED_VCAT]:
     Views.IneligibleRepairsAppliedVCATView,
   [ROUTES.INELIGIBLE_REPAIRS_GOTTEN_VCAT]:

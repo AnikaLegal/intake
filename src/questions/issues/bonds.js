@@ -42,8 +42,14 @@ export const BONDS_QUESTIONS: Array<Field> = [
     name: 'BONDS_MOVE_OUT_DATE',
     stage: 2,
     askCondition: isBondsIssue,
-    required: true,
+    effect: async (data: Data) => {
+      if (!data.BONDS_MOVE_OUT_DATE) {
+        return ROUTES.BONDS_RECOVERY
+      }
+    },
+    required: false,
     type: FIELD_TYPES.DATE,
+    skipText: "I'm not moving out.",
     Prompt: (
       <span>
         When was, or what will be, the date you move out of your rental
@@ -77,18 +83,12 @@ export const BONDS_QUESTIONS: Array<Field> = [
     choices: [
       { label: 'Yes', value: true },
       { label: 'No', value: false },
+      { label: "I don't know", value: "I don't know" },
     ],
     Prompt: (
       <span>
-        Has your landlord/real estate agent made an application to the{' '}
-        <a href={RTBA_LINK} target="_blank">
-          RTBA
-        </a>{' '}
-        or{' '}
-        <a href={VCAT_LINK} target="_blank">
-          VCAT
-        </a>{' '}
-        for your bond?
+        Has your landlord/real estate agent made an application to VCAT for your
+        bond?
       </span>
     ),
   },
