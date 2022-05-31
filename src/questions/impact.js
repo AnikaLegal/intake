@@ -61,7 +61,9 @@ export const IMPACT_QUESTIONS: Array<Field> = [
       { label: 'No', value: false },
     ],
     Prompt: (
-      <span>Are you of Aboriginal or Torres Strait Islander origin?</span>
+      <span>
+        You identify as an Aboriginal or Torres Strait Islander person
+      </span>
     ),
   },
   {
@@ -111,82 +113,12 @@ export const IMPACT_QUESTIONS: Array<Field> = [
         value: 'INCOME_REDUCED_COVID',
       },
       { label: 'Retired', value: 'RETIRED' },
+      { label: 'Full time parent', value: 'PARENT' },
+      { label: 'Currently unemployed', value: 'UNEMPLOYED' },
+      { label: 'Not looking for work', value: 'NOT_LOOKING_FOR_WORK' },
       { label: 'None of the above', value: null },
     ],
   },
-
-  // Income and rent payments
-  {
-    name: 'IS_MULTI_INCOME_HOUSEHOLD',
-    stage: 5,
-    required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
-    ],
-    Prompt: (
-      <span>
-        Are there other members of your household contributing to your income?
-      </span>
-    ),
-    Help: (
-      <span>
-        For example, a partner, spouse or parent who help you pay the rent
-      </span>
-    ),
-  },
-  {
-    name: 'WEEKLY_INCOME',
-    stage: 5,
-    required: true,
-    type: FIELD_TYPES.NUMBER,
-    Prompt: <span>What is your weekly personal income?</span>,
-    askCondition: (data) => !data.IS_MULTI_INCOME_HOUSEHOLD,
-  },
-  {
-    name: 'WEEKLY_INCOME_MULTI',
-    stage: 5,
-    required: true,
-    type: FIELD_TYPES.NUMBER,
-    Prompt: <span>What is your combined household weekly income?</span>,
-    Help: (
-      <span>
-        That is, the combined income of you and your partner, spouse or parent
-      </span>
-    ),
-    askCondition: (data) => data.IS_MULTI_INCOME_HOUSEHOLD,
-  },
-  {
-    name: 'WEEKLY_RENT',
-    stage: 5,
-    required: true,
-    type: FIELD_TYPES.NUMBER,
-    Prompt: <span>How much rent do you pay per week?</span>,
-    askCondition: (data) => !data.IS_MULTI_INCOME_HOUSEHOLD,
-  },
-  {
-    name: 'WEEKLY_RENT_MULTI',
-    stage: 5,
-    required: true,
-    type: FIELD_TYPES.NUMBER,
-    Prompt: <span>How much rent do you and your partner pay per week?</span>,
-    askCondition: (data) => data.IS_MULTI_INCOME_HOUSEHOLD,
-  },
-
-  {
-    name: 'NUMBER_OF_DEPENDENTS',
-    stage: 5,
-    required: true,
-    type: FIELD_TYPES.NUMBER,
-    Prompt: <span>How many dependents do you have?</span>,
-    Help: (
-      <span>
-        People who rely on your support, like a stay-at-home spouse or children
-      </span>
-    ),
-  },
-
   {
     name: 'SPECIAL_CIRCUMSTANCES',
     stage: 5,
@@ -344,6 +276,17 @@ export const IMPACT_QUESTIONS: Array<Field> = [
       { label: 'Pintrest', value: 'Pintrest' },
       { label: 'Reddit', value: 'Reddit' },
       { label: 'Other', value: 'Other' },
+    ],
+  },
+  {
+    name: 'INTERPRETER',
+    stage: 5,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    Prompt: <span>Do you need an interpreter?</span>,
+    choices: [
+      { label: 'Yes', value: 'YES' },
+      { label: 'No', value: 'NO' },
     ],
   },
 ]
