@@ -10,7 +10,7 @@ jobs:
 
       # Install node modules
       - name: Install node modules
-        run: yarn build
+        run: yarn install
 
       # Build and deploy
       - name: Run deploy script
