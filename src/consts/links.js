@@ -1,18 +1,18 @@
 //@flow
 export const LINKS = {
   NOTICE_TO_VACATE_PDF: '/static/notice-to-vacate-example.pdf',
-  SERVICES: 'https://www.anikalegal.com/services/',
-  HOME: 'https://www.anikalegal.com',
-  TERMS_OF_USE: 'https://www.anikalegal.com/resources/terms-of-use/',
-  PRIVACY_POLICY: 'https://www.anikalegal.com/resources/privacy-policy/',
-  COLLECTIONS_STATEMENT:
-    'https://www.anikalegal.com/resources/collections-statement/',
-  ELIGIBILIY_PAGE: 'https://www.anikalegal.com/resources/eligibility-criteria/',
+  SERVICES: `${SERVER}/services/`,
+  HOME: SERVER,
+  TERMS_OF_USE: `${SERVER}/resources/terms-of-use/`,
+  PRIVACY_POLICY: `${SERVER}/resources/privacy-policy/`,
+  COLLECTIONS_STATEMENT: `${SERVER}/resources/collections-statement/`,
+  ELIGIBILIY_PAGE: `${SERVER}/resources/eligibility-criteria/`,
   PRE_IMPACT_SURVEY: {
     COVID: 'https://form.jotform.com/201512255660042',
     REPAIRS: 'https://form.jotform.com/201900961250850',
   },
-  REPAIRS_INFO: 'https://www.anikalegal.com/services/rental-repairs/',
-  EVICTION_INFO: 'https://www.anikalegal.com/services/eviction-support/',
-  BONDS_INFO: 'https://www.anikalegal.com/services/bond-recovery/',
+  REPAIRS_INFO: `${SERVER}/services/rental-repairs/`,
+  EVICTION_INFO: `${SERVER}/services/eviction-support/`,
+  BONDS_INFO: `${SERVER}/services/bond-recovery/`,
+  CLOSED_CONTACT: `${SERVER}/closed-contact/`,
 }
