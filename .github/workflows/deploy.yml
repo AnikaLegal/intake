@@ -30,7 +30,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
-            ./scripts/release/test.sh
+            ./scripts/release/staging.sh
           elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
             ./scripts/release/prod.sh
           else

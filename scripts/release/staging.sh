@@ -1,6 +1,6 @@
 #/bin/bash
 set -e
 
-. ./scripts/envars/test.sh
+export $(grep -v '^#' env/staging.env | xargs)
 . ./scripts/build.sh
 . ./scripts/deploy.sh
