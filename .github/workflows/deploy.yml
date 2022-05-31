@@ -18,6 +18,10 @@ jobs:
       - name: Initialise transcrypt
         run: ./transcrypt/transcrypt -c aes-256-cbc -p '${{ secrets.TRANSCRYPT_PASSWORD }}' --yes
 
+      # Install AWS CLI
+      - id: install-aws-cli
+        uses: unfor19/install-aws-cli-action@v1.0.3
+
       # Install node modules
       - name: Install node modules
         run: yarn install
