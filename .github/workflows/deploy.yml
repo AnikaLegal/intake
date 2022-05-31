@@ -8,6 +8,16 @@ jobs:
       # Checkout repo from GitHub
       - uses: actions/checkout@v2
 
+      # Setup transcrypt so that we can read secrets
+      - name: Checkout transcrypt
+        uses: actions/checkout@v2
+        with:
+          repository: elasticdog/transcrypt
+          path: transcrypt
+
+      - name: Initialise transcrypt
+        run: ./transcrypt/transcrypt -c aes-256-cbc -p '${{ secrets.TRANSCRYPT_PASSWORD }}' --yes
+
       # Install node modules
       - name: Install node modules
         run: yarn install

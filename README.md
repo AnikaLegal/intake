@@ -11,6 +11,24 @@ which then stores their case info and alerts Anika staff.
 
 ## Local Development
 
+If you are using Windows ensure that git is setup to use LF not CLRF
+
+```
+git config core.autocrlf false
+git rm --cached -r .
+git reset --hard
+```
+
+Envars are stored in .env and encrypted using transcrypt. You can see encryoted files with `transcrypt --list`.
+
+To intialise the repository on cloning run
+
+```bash
+transcrypt -c aes-256-cbc -p $TRANSCRYPT_PASSWORD
+```
+
+The values of these secrets will be provided to you if you need them. They should be available in the Tech team Bitwarden account.
+
 You will need Node (prefer v11+) and [yarn](https://yarnpkg.com/en/) installed locally.
 
 ```bash
@@ -48,14 +66,10 @@ When making a change or bugfix, you should:
 - check your changes in the test environment
 - merge the `develop` into `master` and push to GitHub to release your change to prod
 
-Deployment is run automatically via [CircleCI](https://circleci.com/dashboard) using the bash scripts in `/scripts/circleci/`.
+Deployment is run automatically via GitHub Actions using the bash scripts in `/scripts`.
 They are triggered by changes to the develop or master branches on GitHub.
 
-Deployment can also be run manually using the bash scripts in `/scripts/release/`. You must have awscli installed and have set the following envars to run the scripts:
-
-- AWS_ACCESS_KEY_ID
-- AWS_SECRET_ACCESS_KEY
-- SENTRY_AUTH_TOKEN
+Deployment can also be run manually using the bash scripts in `/scripts/release/`.
 
 ## Errors and Logging
 
