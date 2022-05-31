@@ -1,13 +1,6 @@
-# Python
-*.pyc
-env/
-output/
 
 # Project
 *secret*
-
-# Docker
-.env
 
 # Random crap
 *.sqlite3
