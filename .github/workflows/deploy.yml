@@ -30,8 +30,8 @@ jobs:
       - name: Run deploy script
         shell: bash
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          # I don't know why we need this but AWS CLI breaks without it.
+          AWS_EC2_METADATA_DISABLED: true
         run: |
           if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
             ./scripts/release/staging.sh
