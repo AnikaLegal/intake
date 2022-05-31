@@ -10,5 +10,4 @@ export SENTRY_ENV=prod
 export SENTRY_ORG=anika-legal
 export SENTRY_PROJECT=intake
 export GA_ID=UA-133303109-1
-export HOTJAR_ID=1449266
 export FB_PIXEL_ID=580273702543728
