@@ -118,7 +118,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
         value: 'SUBSTANCE_ABUSE',
       },
       {
-        label: 'You identify as Aboriginal or Torres Strait Islander',
+        label: 'You identify as an Aboriginal or Torres Strait Islander person',
         value: 'IDENTIFY',
       },
       {
