@@ -8,6 +8,10 @@ jobs:
       # Checkout repo from GitHub
       - uses: actions/checkout@v2
 
+      # Install node modules
+      - name: Install node modules
+        run: yarn build
+
       # Build and deploy
       - name: Run deploy script
         shell: bash
