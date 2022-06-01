@@ -15,12 +15,29 @@ export const LandingView = () => {
       <Splash.Content>
         <LogoEl src={IMAGES.LOGO.TEXT.COLOR.SVG} />
         <Text.Header splash>
-          Welcome to the Anika Legal rental support questionnaire.
+          Welcome to the Anika Legal intake form!
         </Text.Header>
         <Text.Body splash>
           We’re here to help you with your rental problem. In order for us to
-          help you, we need to ask you a series of simple questions. This
-          questionnaire takes approximately 10 minutes to complete.
+          help you, we need to ask you a series of simple questions to see
+          whether you're eligible. This questionnaire takes approximately 10
+          minutes to complete.
+        </Text.Body>
+        <Text.Body splash>
+          Before starting the intake form, please have the information ready
+          about:
+          <ul>
+            <li>Your rental property</li>
+            <li>Your rental provider</li>
+            <li>Your agent, if applicable</li>
+            <li>Your income</li>
+          </ul>
+          You can have a look at our{' '}
+          <a href="https://www.anikalegal.com/resources/collections-statement/">
+            collection statement
+          </a>{' '}
+          if you have any questions about why we need your information, and what
+          we do with it.
         </Text.Body>
         <Text.Header splash></Text.Header>
         <Splash.ButtonGroup>
