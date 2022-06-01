@@ -58,9 +58,31 @@ export const BONDS_QUESTIONS: Array<Field> = [
     ),
   },
   {
+    name: 'BOND_RTBA',
+    stage: 2,
+    askCondition: isBondsIssue,
+    effect: async (data: Data) => {
+      if (!data.BOND_RTBA) {
+        return ROUTES.BONDS_RECOVERY
+      }
+    },
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+    Prompt: <span>Is your bond still held by the RTBA?</span>,
+  },
+  {
     name: 'BONDS_LANDLORD_INTENTS_TO_MAKE_CLAIM',
     stage: 2,
     askCondition: isBondsIssue,
+    effect: async (data: Data) => {
+      if (!data.BONDS_LANDLORD_INTENTS_TO_MAKE_CLAIM) {
+        return ROUTES.BONDS_RECOVERY
+      }
+    },
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
@@ -78,6 +100,15 @@ export const BONDS_QUESTIONS: Array<Field> = [
     name: 'BONDS_HAS_LANDLORD_MADE_RTBA_APPLICATION',
     stage: 2,
     askCondition: isBondsIssueWithClaim,
+    effect: async (data: Data) => {
+      if (!data.BONDS_HAS_LANDLORD_MADE_RTBA_APPLICATION) {
+        return ROUTES.BONDS_RECOVERY
+      } else if (
+        data.BONDS_HAS_LANDLORD_MADE_RTBA_APPLICATION === "I don't know"
+      ) {
+        return ROUTES.BONDS_RECOVERY
+      }
+    },
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
