@@ -64,6 +64,7 @@ const _Button = styled.button`
   font-weight: 700;
   border-radius: 20px;
   border: none;
+  cursor: pointer;
   /* Default is secondary button */
   background-color: ${theme.color.teal.secondary};
 
