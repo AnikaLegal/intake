@@ -120,61 +120,6 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     ],
   },
   {
-    name: 'SPECIAL_CIRCUMSTANCES',
-    stage: 5,
-    required: false,
-    type: FIELD_TYPES.CHOICE_MULTI,
-    Prompt: <span>Do any of the following apply to you?</span>,
-    choices: [
-      {
-        label: 'I receive a Centrelink payment or have a concession card',
-        value: 'CENTRELINK',
-      },
-      {
-        label: 'I have a mental illness or intellectual disability',
-        value: 'MENTAL_ILLNESS_OR_DISABILITY',
-      },
-      {
-        label: 'I am currently living in public or community housing',
-        value: 'PUBLIC_HOUSING',
-      },
-      {
-        label: 'I am experiencing (or at risk of) family violence',
-        value: 'FAMILY_VIOLENCE',
-      },
-      {
-        label:
-          'I have a long-term health condition or a disability that affects my work or education',
-        value: 'HEALTH_CONDITION',
-      },
-      {
-        label: 'I have refugee or asylum seeker status',
-        value: 'REFUGEE',
-      },
-    ],
-  },
-  {
-    name: 'LEGAL_ACCESS_DIFFICULTIES',
-    stage: 5,
-    required: false,
-    type: FIELD_TYPES.CHOICE_MULTI,
-    Prompt: (
-      <span>
-        Do any of the following make it difficult for you to get legal help?
-      </span>
-    ),
-    choices: [
-      {
-        label: 'Substance abuse issues',
-        value: 'SUBSTANCE_ABUSE',
-      },
-      { label: 'Have parent/caring duties', value: 'CARING' },
-      { label: 'A physical disability', value: 'DISABILITY' },
-      { label: 'Other', value: 'OTHER' },
-    ],
-  },
-
-  {
     name: 'REFERRER_TYPE',
     stage: 5,
     required: true,
