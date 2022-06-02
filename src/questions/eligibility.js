@@ -27,10 +27,12 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     stage: 1,
     effect: async (data: Data) => {
       if (data.CENTRELINK_SUPPORT) {
-        window.location.href = 'http://localhost:3001/intake/form/12/'
+        window.location.href =
+          'https://test-intake.anikalegal.com/intake/form/14/'
         // Note: Need to change this for the test site and live site
-        // test site - https://test-intake.anikalegal.com/intake/form/12/
-        // live site - https://intake.anikalegal.com/intake/form/12/
+        // local site - http://localhost:3001/intake/form/14/
+        // test site - https://test-intake.anikalegal.com/intake/form/14/
+        // live site - https://intake.anikalegal.com/intake/form/14/
         // HOW DOES IT USUALLY KNOW WHICH ISSUE TO DIRECT TO ONCE ABOUT SECTION IS COMPLETE
         // here we need to direct them to the problem they selected
         // e.g. Bond recovery, rental repair, unpaid rent
