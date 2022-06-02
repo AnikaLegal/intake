@@ -33,11 +33,8 @@ jobs:
           # I don't know why we need this but AWS CLI breaks without it.
           AWS_EC2_METADATA_DISABLED: true
         run: |
-          if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
-            ./scripts/release/staging.sh
-          elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
+          if [ "${{ github.ref }}" = "refs/heads/master" ]; then
             ./scripts/release/prod.sh
           else
-            echo "Please specify either the develop branch for staging or master branch for prod"
-            exit 1
+            ./scripts/release/staging.sh
           fi
