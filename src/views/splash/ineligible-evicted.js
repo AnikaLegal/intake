@@ -12,7 +12,7 @@ export const IneligibleEvictedView = () => {
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          Unfortunately our evictions service is focussed on helping renters
+          Unfortunately our evictions service is focused on helping renters
           resist eviction by negotiating a payment plan. We are unable to assist
           if you have already been evicted from the property.
         </Text.Header>

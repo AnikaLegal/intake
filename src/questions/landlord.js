@@ -58,7 +58,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
     name: 'AGENT_NAME',
     stage: 4,
     askCondition: isManagerAgent,
-    required: true,
+    required: false,
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What is your landlord's agent's full name?</span>,
     Help: (
@@ -72,7 +72,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
     name: 'AGENT_ADDRESS',
     stage: 4,
     askCondition: isManagerAgent,
-    required: true,
+    required: false,
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What is your landlord's agent's address?</span>,
     Help: (
@@ -86,7 +86,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
     name: 'AGENT_EMAIL',
     stage: 4,
     askCondition: isManagerAgent,
-    required: true,
+    required: false,
     type: FIELD_TYPES.EMAIL,
     Prompt: <span>What is your landlord's agent's email?</span>,
 
@@ -101,7 +101,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
     name: 'AGENT_PHONE',
     stage: 4,
     askCondition: isManagerAgent,
-    required: true,
+    required: false,
     type: FIELD_TYPES.PHONE,
     Prompt: <span>What is your landlord's agent's phone number?</span>,
     Help: (
@@ -114,7 +114,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
   {
     name: 'LANDLORD_NAME',
     stage: 4,
-    required: true,
+    required: false,
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What is your landlord's full name?</span>,
     Help: (
@@ -128,7 +128,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
     name: 'LANDLORD_ADDRESS',
     stage: 4,
     askCondition: isManagerLandlord,
-    required: true,
+    required: false,
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What is your landlord's address?</span>,
     Help: (
@@ -142,7 +142,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
     name: 'LANDLORD_EMAIL',
     stage: 4,
     askCondition: isManagerLandlord,
-    required: true,
+    required: false,
     type: FIELD_TYPES.EMAIL,
     Prompt: <span>What is your landlord's email?</span>,
     Help: (
@@ -156,7 +156,7 @@ export const LANDLORD_QUESTIONS: Array<Field> = [
     name: 'LANDLORD_PHONE',
     stage: 4,
     askCondition: isManagerLandlord,
-    required: true,
+    required: false,
     type: FIELD_TYPES.PHONE,
     Prompt: <span>What is your landlord's phone number?</span>,
     Help: (

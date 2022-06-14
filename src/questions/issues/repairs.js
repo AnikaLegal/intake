@@ -9,6 +9,8 @@ import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
 
 const isRepairIssue = (data: Data) => data.ISSUES.includes('REPAIRS')
+const isRepairIssueWithVCAT = (data: Data) =>
+  isRepairIssue(data) && data.REPAIRS_VCAT.includes('APPLIED_VCAT')
 
 export const REPAIRS_QUESTIONS: Array<Field> = [
   {
@@ -59,9 +61,7 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     name: 'REPAIRS_VCAT',
     stage: 2,
     effect: async (data: Data) => {
-      if (data.REPAIRS_VCAT.includes('APPLIED_VCAT')) {
-        return ROUTES.INELIGIBLE_REPAIRS_APPLIED_VCAT
-      } else if (data.REPAIRS_VCAT.includes('GOTTEN_VCAT')) {
+      if (data.REPAIRS_VCAT.includes('GOTTEN_VCAT')) {
         return ROUTES.INELIGIBLE_REPAIRS_GOTTEN_VCAT
       }
     },
@@ -77,5 +77,31 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     ],
     Prompt: <span>Have you done any of the following?</span>,
     Help: <span>Please select all that apply</span>,
+  },
+  {
+    name: 'REPAIRS_APPLIED_VCAT',
+    stage: 2,
+    effect: async (data: Data) => {
+      if (!data.REPAIRS_APPLIED_VCAT) {
+        return ROUTES.INELIGIBLE_REPAIRS_APPLIED_VCAT
+      }
+    },
+    askCondition: isRepairIssueWithVCAT,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+    Prompt: (
+      <span>
+        Our Repairs service focusses on helping renters write a formal
+        compliance request to their real estate agent and/or rental provider.
+        Due to limited capacity, we can only provide support once the matter is
+        at VCAT stage by providing you with a self-representation guide. We
+        cannot represent you at VCAT.
+      </span>
+    ),
+    Help: <span>Would you still like to continue?</span>,
   },
 ]

@@ -12,7 +12,7 @@ export const IneligibleWrongReasonView = () => {
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          Unfortunately our evictions service is focussed on negotiating a
+          Unfortunately our evictions service is focused on negotiating a
           payment plan where the reason your landlord or real estate agent is
           attempting to evict you is for unpaid rent.
         </Text.Header>

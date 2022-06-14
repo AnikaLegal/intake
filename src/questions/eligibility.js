@@ -27,8 +27,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     stage: 1,
     effect: async (data: Data) => {
       if (data.CENTRELINK_SUPPORT) {
-        window.location.href =
-          'https://test-intake.anikalegal.com/intake/form/14/'
+        return data.ISSUES.includes('BONDS')
         // Note: Need to change this for the test site and live site
         // local site - http://localhost:3001/intake/form/14/
         // test site - https://test-intake.anikalegal.com/intake/form/14/
@@ -65,31 +64,22 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     stage: 1,
     effect: async (data: Data) => {
       if (
-        (data.DEPENDENTS === 0 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 1731 &&
-          data.APPLY.length === 0) ||
-        (data.DEPENDENTS === 1 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-          data.APPLY.length === 0) ||
-        (data.DEPENDENTS === 2 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-          data.APPLY.length === 0) ||
-        (data.DEPENDENTS === 3 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-          data.APPLY.length === 0) ||
-        (data.DEPENDENTS === 4 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-          data.APPLY.length === 0) ||
-        (data.DEPENDENTS === 5 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2981 &&
-          data.APPLY.length === 0)
+        (data.DEPENDENTS === 0 && data.WEEKLY_HOUSEHOLD_INCOME > 1731) ||
+        (data.DEPENDENTS === 1 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
+        (data.DEPENDENTS === 2 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
+        (data.DEPENDENTS === 3 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
+        (data.DEPENDENTS === 4 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
+        (data.DEPENDENTS === 5 && data.WEEKLY_HOUSEHOLD_INCOME > 2981)
       ) {
+        return ROUTES.INELIGIBLE_CHOICE
+      } else if (data.APPLY.length === 0) {
         // Currently a user can click an option then click skip and the option will still apply meaning they are actually ineligible but go through due to the skip button functionality not deselecting user input.
         return ROUTES.INELIGIBLE_CHOICE
       }
     },
     required: false,
     type: FIELD_TYPES.CHOICE_MULTI,
+    skipText: 'None of the above apply to me',
     choices: [
       {
         label: 'You live in public housing or community housing',
