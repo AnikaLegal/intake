@@ -6,6 +6,8 @@ import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import type { Field, Data } from 'types'
 
 const isEvictionIssue = (data: Data) => data.ISSUES.includes('EVICTION')
+const isEvictionIssueWithDate = (data: Data) =>
+  isEvictionIssue(data) && data.EVICTIONS_IS_VCAT_DATE
 
 export const EVICTION_QUESTIONS: Array<Field> = [
   {
@@ -121,7 +123,7 @@ export const EVICTION_QUESTIONS: Array<Field> = [
   {
     name: 'EVICTIONS_VCAT_DATE',
     stage: 2,
-    askCondition: isEvictionIssue,
+    askCondition: isEvictionIssueWithDate,
     effect: async (data: Data) => {
       var userDate = Date.parse(data.EVICTIONS_VCAT_DATE)
       var currentDate = Date.now()

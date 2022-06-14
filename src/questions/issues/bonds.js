@@ -135,7 +135,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
       { label: 'Yes', value: true },
       { label: 'No', value: false },
     ],
-    Prompt: <span>Do you have a copy of the RTBA or VCAT application?</span>,
+    Prompt: <span>Do you have a copy of the VCAT application?</span>,
   },
   {
     name: 'BONDS_RTBA_APPLICATION_UPLOAD',
@@ -147,7 +147,7 @@ export const BONDS_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.UPLOAD,
     Prompt: (
       <span>
-        Please upload the landlord/real estate agent's RTBA or VCAT application.
+        Please upload the landlord/real estate agent's VCAT application.
       </span>
     ),
   },

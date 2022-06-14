@@ -10,7 +10,7 @@ export const IneligibleRepairsGottenVCATView = () => {
   useScrollTop()
   return (
     <Splash.Container left>
-      <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
+      <Splash.Image src={IMAGES.HEROES.PAPER_GUY} />
       <Splash.Content>
         <Text.Header splash>
           Our Repairs service focusses on helping renters write a formal

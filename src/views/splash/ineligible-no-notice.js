@@ -16,10 +16,6 @@ export const IneligibleNoNoticeView = () => {
           real estate agent has begun the evictions process by sending you a
           Notice to Vacate. If that happens, please come back and let us know.
         </Text.Header>
-        <Text.Body splash>
-          If you wish to enquire further you can email us at
-          contact@anikalegal.com
-        </Text.Body>
         <Splash.ButtonGroup>
           <a href={LINKS.HOME}>
             <Splash.Button last>Return home</Splash.Button>
