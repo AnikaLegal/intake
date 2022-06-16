@@ -20,6 +20,7 @@ export type Field = {
   effect?: (data: Data) => Promise<string | void>,
   askCondition?: (data: Data) => boolean,
   skipText?: string,
+  placeholderText?: string,
   required: boolean,
   Prompt: React.Element<'span'>,
   Help?: React.Element<'span'>,
