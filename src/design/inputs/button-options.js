@@ -22,6 +22,7 @@ export const ButtonOptionsEl = styled.button`
   font-weight: 700;
   border-radius: 20px;
   outline: none;
+  margin-top: 10px;
 
   /* Default is secondary button */
   padding: 6px 38px 10px 38px;
@@ -38,12 +39,12 @@ export const ButtonOptionsEl = styled.button`
       border: none;
       background-color: ${theme.color.teal.primary};
       padding: 8px 40px;
+      cursor: pointer;
       &:active {
         outline: none;
         box-shadow: 0 0 0 1px ${theme.color.teal.primary};
         border: solid 1px ${theme.color.white};
         padding: 7px 39px;
-
       }
       `,
   })}
