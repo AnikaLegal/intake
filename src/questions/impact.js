@@ -47,8 +47,8 @@ export const IMPACT_QUESTIONS: Array<Field> = [
       { label: 'Female', value: 'FEMALE' },
       { label: 'Genderqueer or non-binary', value: 'GENDERQUEER' },
       { label: 'Prefer not to say', value: 'OMITTED' },
-      { label: 'Other', value: 'OTHER' },
     ],
+    placeholderText: 'Prefer to self-describe',
     Prompt: <span>What gender do you identify as?</span>,
   },
   {
@@ -82,13 +82,25 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     ),
   },
   {
+    name: 'INTERPRETER',
+    stage: 5,
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    Prompt: <span>Do you need an interpreter?</span>,
+    askCondition: (data) => data.CAN_SPEAK_NON_ENGLISH,
+    choices: [
+      { label: 'Yes', value: 'YES' },
+      { label: 'No', value: 'NO' },
+    ],
+  },
+  {
     name: 'FIRST_LANGUAGE',
     stage: 5,
     required: true,
     type: FIELD_TYPES.TEXT,
     Prompt: (
       <span>
-        What is your <strong>first</strong> language?
+        What is your <strong>preferred</strong> language other than English?
       </span>
     ),
     askCondition: (data) => data.CAN_SPEAK_NON_ENGLISH,
@@ -98,7 +110,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     stage: 5,
     required: true,
     Prompt: <span>Which best describes your work or study situation?</span>,
-    type: FIELD_TYPES.CHOICE_MULTI,
+    type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
       {
         label: 'Working part time or casually',
@@ -221,17 +233,6 @@ export const IMPACT_QUESTIONS: Array<Field> = [
       { label: 'Pintrest', value: 'Pintrest' },
       { label: 'Reddit', value: 'Reddit' },
       { label: 'Other', value: 'Other' },
-    ],
-  },
-  {
-    name: 'INTERPRETER',
-    stage: 5,
-    required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
-    Prompt: <span>Do you need an interpreter?</span>,
-    choices: [
-      { label: 'Yes', value: 'YES' },
-      { label: 'No', value: 'NO' },
     ],
   },
 ]
