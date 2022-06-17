@@ -9,6 +9,7 @@ import {
   ButtonOptions,
   TextInputOptions,
   Form,
+  theme,
 } from 'design'
 import { timeout } from 'utils'
 import type { FormFieldProps } from './types'
@@ -29,8 +30,7 @@ export const ChoiceSingleTextField = ({
   const [hasAttemptSubmit, setAttemptSubmit] = useState(false)
   const isSubmitDisabled = !value
   const onSubmit = (e) => {
-    e.preventDefault()
-    setAttemptSubmit(true)
+    onNext(e)
   }
 
   return (
@@ -38,15 +38,15 @@ export const ChoiceSingleTextField = ({
       <Form.Content>
         {children}
         <SelectInput value={value} onChange={onClick} options={field.choices} />
-        {field.name === 'GENDER' && (
-          <TextInputOptions
-            placeholder={field.placeholderText}
-            value={value}
-            onChange={onChange}
-            autoFocus={false}
-          />
-        )}
-        {field.name === 'GENDER' && (
+        <TextInputOptions
+          placeholder={field.placeholderText}
+          value={value}
+          onChange={onChange}
+          autoFocus={false}
+        />
+      </Form.Content>
+      <Form.Footer>
+        <FooterForm onSubmit={onSubmit}>
           <ButtonOptions
             primary
             disabled={isSubmitDisabled}
@@ -55,8 +55,12 @@ export const ChoiceSingleTextField = ({
           >
             {field.button ? field.button.text : 'OK'}
           </ButtonOptions>
-        )}
-      </Form.Content>
+        </FooterForm>
+      </Form.Footer>
     </Form.Outer>
   )
 }
+
+const FooterForm = styled.form`
+  ${theme.switch({ invalid: `opacity: 0; pointer-events: none;` })}
+`

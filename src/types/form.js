@@ -7,6 +7,7 @@ export type FieldType =
   | 'EMAIL'
   | 'DATE'
   | 'CHOICE_SINGLE'
+  | 'CHOICE_SINGLE_TEXT'
   | 'CHOICE_MULTI'
   | 'UPLOAD'
   | 'DISPLAY'
