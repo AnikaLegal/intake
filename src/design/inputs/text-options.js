@@ -7,7 +7,6 @@ import { theme } from '../theme'
 export const TextInputOptions = ({ value, onChange, ...props }: any) => (
   <TextInputOptionsEl
     type="text"
-    value={value || ''}
     onChange={(e) => onChange(e.target.value)}
     {...props}
   />

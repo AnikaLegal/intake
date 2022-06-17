@@ -41,7 +41,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     name: 'GENDER',
     stage: 5,
     required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
+    type: FIELD_TYPES.CHOICE_SINGLE_TEXT,
     choices: [
       { label: 'Male', value: 'MALE' },
       { label: 'Female', value: 'FEMALE' },

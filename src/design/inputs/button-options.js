@@ -22,7 +22,7 @@ export const ButtonOptionsEl = styled.button`
   font-weight: 700;
   border-radius: 20px;
   outline: none;
-  margin-top: 10px;
+  margin-top: -20px;
 
   /* Default is secondary button */
   padding: 6px 38px 10px 38px;
