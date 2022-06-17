@@ -26,16 +26,12 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     name: 'CENTRELINK_SUPPORT',
     stage: 1,
     effect: async (data: Data) => {
-      if (data.CENTRELINK_SUPPORT) {
-        return data.ISSUES.includes('BONDS')
-        // Note: Need to change this for the test site and live site
-        // local site - http://localhost:3001/intake/form/14/
-        // test site - https://test-intake.anikalegal.com/intake/form/14/
-        // live site - https://intake.anikalegal.com/intake/form/14/
-        // HOW DOES IT USUALLY KNOW WHICH ISSUE TO DIRECT TO ONCE ABOUT SECTION IS COMPLETE
-        // here we need to direct them to the problem they selected
-        // e.g. Bond recovery, rental repair, unpaid rent
-      }
+      window.location.href =
+        'https://test-intake.anikalegal.com/intake/form/14/'
+      // Note: Need to change this depending if it's local, test or live.
+      // local site - http://localhost:3001/intake/form/14/
+      // test site - https://test-intake.anikalegal.com/intake/form/14/
+      // live site - https://intake.anikalegal.com/intake/form/14/
     },
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
