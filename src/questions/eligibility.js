@@ -26,12 +26,14 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     name: 'CENTRELINK_SUPPORT',
     stage: 1,
     effect: async (data: Data) => {
-      window.location.href =
-        'https://test-intake.anikalegal.com/intake/form/14/'
-      // Note: Need to change this depending if it's local, test or live.
-      // local site - http://localhost:3001/intake/form/14/
-      // test site - https://test-intake.anikalegal.com/intake/form/14/
-      // live site - https://intake.anikalegal.com/intake/form/14/
+      if (data.CENTRELINK_SUPPORT) {
+        window.location.href =
+          'https://test-intake.anikalegal.com/intake/form/14/'
+        // Note: Need to change this depending if it's local, test or live.
+        // local site - http://localhost:3001/intake/form/14/
+        // test site - https://test-intake.anikalegal.com/intake/form/14/
+        // live site - https://intake.anikalegal.com/intake/form/14/
+      }
     },
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
