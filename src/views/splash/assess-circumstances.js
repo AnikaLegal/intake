@@ -66,6 +66,7 @@ export const AssessCircumstancesView = ({
     const validationErrors = validate(inputs)
     const noErrors = Object.keys(validationErrors).length === 0
     setErrors(validationErrors)
+    // Need to change this so instead of submitted a contact form the data values are saved to the existing users current intake form submission
     if (noErrors) {
       const finalData = { ...inputs }
       const subId = 1
@@ -103,11 +104,7 @@ export const AssessCircumstancesView = ({
               us if you have any other special circumstances that you would like
               us to consider.
             </Text.Header>
-            <form
-              className="form"
-              onSubmit={handleSubmit}
-              action="http://localhost:3001/intake/form/14/"
-            >
+            <form className="form" onSubmit={handleSubmit}>
               <InputText
                 contenteditable="true"
                 placeholder="Type response here..."
@@ -121,7 +118,11 @@ export const AssessCircumstancesView = ({
               <ButtonLink
                 primary
                 type="submit"
-                href="http://localhost:3001/intake/form/14/"
+                href=" https://test-intake.anikalegal.com/intake/form/14/"
+                // Note: Need to change this depending if it's local, test or live.
+                // local site - http://localhost:3001/intake/form/14/
+                // test site - https://test-intake.anikalegal.com/intake/form/14/
+                // live site - https://intake.anikalegal.com/intake/form/14/
               >
                 Proceed
               </ButtonLink>
