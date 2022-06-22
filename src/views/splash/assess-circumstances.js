@@ -103,7 +103,11 @@ export const AssessCircumstancesView = ({
               us if you have any other special circumstances that you would like
               us to consider.
             </Text.Header>
-            <form className="form" onSubmit={handleSubmit}>
+            <form
+              className="form"
+              onSubmit={handleSubmit}
+              action="http://localhost:3001/intake/form/14/"
+            >
               <InputText
                 contenteditable="true"
                 placeholder="Type response here..."
@@ -114,19 +118,13 @@ export const AssessCircumstancesView = ({
                 autoFocus={false}
                 required=""
               />
-              <Button
+              <ButtonLink
                 primary
                 type="submit"
-                style={{ cursor: 'pointer' }}
-                onClick={() => setModalShow(true)}
+                href="http://localhost:3001/intake/form/14/"
               >
-                Submit
-              </Button>
-              {formState && (
-                <p className="modal" show={modalShow}>
-                  Contact request submitted
-                </p>
-              )}
+                Proceed
+              </ButtonLink>
             </form>
           </OuterForm>
         </OuterContainer>
@@ -138,6 +136,63 @@ export const AssessCircumstancesView = ({
 const OuterContainer = styled.div`
   display: block;
   width: 100%;
+`
+
+const ButtonLink = styled.a`
+  height: 48px;
+  font-size: ${theme.text.title};
+  line-height: 32px;
+  font-weight: 700;
+  border-radius: 20px;
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+
+  /* Default is secondary button */
+  padding: 6px 38px 10px 38px;
+  color: ${theme.color.teal.secondary};
+  background-color: ${theme.color.white};
+  border: 2px solid ${theme.color.teal.secondary};
+  box-sizing: border-box;
+  &:hover {
+    box-shadow: ${theme.shadow};
+  }
+  ${theme.switch({
+    primary: `
+      color: ${theme.color.white};
+      border: none;
+      background-color: ${theme.color.teal.primary};
+      padding: 8px 40px;
+      &:active {
+        outline: none;
+        box-shadow: 0 0 0 1px ${theme.color.teal.primary};
+        border: solid 1px ${theme.color.white};
+        padding: 7px 39px;
+
+      }
+      `,
+  })}
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    opacity: 0.2;
+  }
+  & + & {
+    margin-left: 30px;
+  }
+  @media (max-width: ${theme.screen.mobile}) {
+    width: 100%;
+    & + & {
+      margin-left: 0px;
+      margin-top: 16px;
+    }
+  }
+  @media (max-width: ${theme.screen.small}) {
+    height: 40px;
+    line-height: 27px;
+    padding: 4px 38px 6px 38px;
+  }
 `
 
 const OuterForm = styled.div`
