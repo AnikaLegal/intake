@@ -17,11 +17,7 @@ export const IneligibleChoiceView = () => {
           Would you still like to continue?
         </Text.Header>
         <Splash.ButtonGroup>
-          <a href="https://test-intake.anikalegal.com/intake/form/14/">
-            {/* Note: Need to change this depending if it's local, test or live.
-              local site - http://localhost:3001/intake/form/14/
-              test site - https://test-intake.anikalegal.com/intake/form/14/
-              live site - https://intake.anikalegal.com/intake/form/14/ */}
+          <a href={ROUTES.ASSESS_CIRCUMSTANCES}>
             <Splash.Button>Yes</Splash.Button>
           </a>
           <a href={ROUTES.INELIGIBLE_MEANS}>
