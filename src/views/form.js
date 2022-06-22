@@ -96,6 +96,30 @@ export const FormView = () => {
     })
   }, [isNavigateNext])
 
+  const [isNavigateSkip, setIsNavigateSkip] = useState(false)
+  useEffect(() => {
+    if (!isNavigateSkip || !question) return
+    const latestData = { ...data }
+    latestData[question.name] = null
+    setData(latestData)
+    storeFormData(latestData)
+    const effectPromise = question.effect
+      ? question.effect(latestData)
+      : Promise.resolve()
+    effectPromise.then(async (effectNextUrl) => {
+      if (effectNextUrl) {
+        history.push(effectNextUrl)
+      } else {
+        setIsFormVisible(false)
+        await waitSeconds(ANIMATION_TIME / 2000)
+        const nextUrl = getNextURL(url, Number(qIdx) + 1)
+        history.push(nextUrl)
+        setIsNavigateSkip(false)
+        setIsFormVisible(true)
+      }
+    })
+  }, [isNavigateSkip])
+
   const onBack = () => {
     if (qIdx > 0) {
       const route = ROUTES.build(ROUTES.FORM, { ':qIdx': qIdx - 1 }, {})
@@ -109,6 +133,11 @@ export const FormView = () => {
   const onNext = (e) => {
     e?.preventDefault() // Don't submit HTML form.
     setIsNavigateNext(true)
+  }
+
+  const onSkip = (e) => {
+    e?.preventDefault()
+    setIsNavigateSkip(true)
   }
   // User enters some data.
   const onChange = (v) => {
@@ -133,7 +162,7 @@ export const FormView = () => {
         <FormField
           key={question.name}
           onNext={onNext}
-          onSkip={onNext}
+          onSkip={onSkip}
           field={question}
           data={data}
           value={value}
