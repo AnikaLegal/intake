@@ -58,28 +58,28 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     Prompt: <span>How much is your weekly household income?</span>,
   },
   {
-    name: 'APPLY',
+    name: 'LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES',
     stage: 1,
     effect: async (data: Data) => {
       if (
         (data.DEPENDENTS === 0 &&
           data.WEEKLY_HOUSEHOLD_INCOME > 1731 &&
-          data.APPLY === null) ||
+          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
         (data.DEPENDENTS === 1 &&
           data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-          data.APPLY === null) ||
+          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
         (data.DEPENDENTS === 2 &&
           data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-          data.APPLY === null) ||
+          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
         (data.DEPENDENTS === 3 &&
           data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-          data.APPLY === null) ||
+          data.APPLLEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
         (data.DEPENDENTS === 4 &&
           data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-          data.APPLY === null) ||
+          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
         (data.DEPENDENTS === 5 &&
           data.WEEKLY_HOUSEHOLD_INCOME > 2981 &&
-          data.APPLY === null)
+          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null)
       ) {
         return ROUTES.INELIGIBLE_CHOICE
         // Currently a user can click an option then click skip and the option will still apply meaning they are actually ineligible but go through due to the skip button functionality not deselecting user input.
@@ -119,7 +119,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
       },
       {
         label: 'You identify as an Aboriginal or Torres Strait Islander person',
-        value: 'IDENTIFY',
+        value: 'ABORIGINAL_OR_TORRES_STRAIT',
       },
       {
         label: 'You are renting in a remote or regional location',

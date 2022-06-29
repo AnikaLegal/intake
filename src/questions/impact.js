@@ -89,8 +89,8 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     Prompt: <span>Do you need an interpreter?</span>,
     askCondition: (data) => data.CAN_SPEAK_NON_ENGLISH,
     choices: [
-      { label: 'Yes', value: 'YES' },
-      { label: 'No', value: 'NO' },
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
     ],
   },
   {
@@ -158,7 +158,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     ],
   },
   {
-    name: 'LEGAL_CENTER_REFERRER',
+    name: 'LEGAL_CENTRE_REFERRER',
     stage: 5,
     required: true,
     askCondition: (data: Data) => data.REFERRER_TYPE == 'LEGAL_CENTRE',
