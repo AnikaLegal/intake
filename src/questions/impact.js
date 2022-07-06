@@ -158,7 +158,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     ],
   },
   {
-    name: 'LEGAL_CENTRE_REFERRER',
+    name: 'LEGAL_CENTER_REFERRER',
     stage: 5,
     required: true,
     askCondition: (data: Data) => data.REFERRER_TYPE == 'LEGAL_CENTRE',
