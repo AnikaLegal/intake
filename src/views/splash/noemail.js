@@ -68,7 +68,7 @@ export const NoEmailView = ({
     if (!inputs.phone_number) {
       // Phone Number Errors
       errors.phone_number = 'Hold on, a phone number is required'
-    } else if (inputs.phone_number.trim().length < 12) {
+    } else if (inputs.phone_number.trim().length < 10) {
       errors.phone_number = "Hold on, that phone number doesn't look valid"
     } else if (!inputs.phone_number.match(cond)) {
       errors.phone_number = "Hold on, that phone number doesn't look valid"
@@ -124,19 +124,7 @@ export const NoEmailView = ({
           to direct you to another organisation.
           <OuterContainer>
             <OuterForm>
-              <form
-                onSubmit={handleSubmit}
-                style={{
-                  boxShadow: '0px 4px 41px rgb(0 55 123 / 15%)',
-                  borderRadius: '12px',
-                  padding: '50px 55px 50px 55px',
-                  width: '100%',
-                  maxWidth: '630px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  boxSizing: 'border-box',
-                }}
-              >
+              <FormInner onSubmit={handleSubmit}>
                 <InputEl
                   placeholder="Name"
                   type="text"
@@ -190,7 +178,7 @@ export const NoEmailView = ({
                     Contact request submitted
                   </p>
                 )}
-              </form>
+              </FormInner>
             </OuterForm>
           </OuterContainer>
         </Text.Body>
@@ -198,7 +186,16 @@ export const NoEmailView = ({
     </Splash.Container>
   )
 }
-
+const FormInner = styled.form`
+  box-shadow: 0px 4px 41px rgb(0 55 123 / 15%);
+  border-radius: 12px;
+  padding: 50px 55px 50px 55px;
+  width: 100%;
+  max-width: 630px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+`
 const SplashButton = styled(BigButton)`
   margin-top: 50px;
 `
