@@ -43,10 +43,10 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE_TEXT,
     choices: [
-      { label: 'Male', value: 'Male' },
-      { label: 'Female', value: 'Female' },
-      { label: 'Genderqueer or non-binary', value: 'Genderqueer' },
-      { label: 'Prefer not to say', value: 'Omitted' },
+      { label: 'Male', value: 'MALE' },
+      { label: 'Female', value: 'FEMALE' },
+      { label: 'Genderqueer or non-binary', value: 'GENDERQUEER' },
+      { label: 'Prefer not to say', value: 'OMITTED' },
     ],
     placeholderText: 'Prefer to self-describe',
     Prompt: <span>What gender do you identify as?</span>,
@@ -158,7 +158,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     ],
   },
   {
-    name: 'LEGAL_CENTER_REFERRER',
+    name: 'LEGAL_CENTRE_REFERRER',
     stage: 5,
     required: true,
     askCondition: (data: Data) => data.REFERRER_TYPE == 'LEGAL_CENTRE',
