@@ -147,7 +147,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'ASSESS_CIRCUMSTANCE',
+    name: 'ELIGIBILITY_NOTES',
     stage: 1,
     askCondition: ineligibleChoice,
     required: true,
