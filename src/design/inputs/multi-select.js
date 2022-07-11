@@ -123,6 +123,6 @@ const SelectEl = styled.div`
 
 const MultiSelectEl = styled.div`
   min-width: 280px;
-  max-width: 550px;
+  max-width: 380px;
 `
 // Max-width 550px more appropriate for eligibility Q7
