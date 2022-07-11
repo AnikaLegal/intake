@@ -7,6 +7,28 @@ import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
 import { ISSUE_QUESTIONS } from './issues'
 
+const notCentrelinkSupport = (data: Data) => !data.CENTRELINK_SUPPORT
+const ineligibleCriteria = (data: Data) =>
+  (data.DEPENDENTS === 0 &&
+    data.WEEKLY_HOUSEHOLD_INCOME > 1731 &&
+    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
+  (data.DEPENDENTS === 1 &&
+    data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
+    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
+  (data.DEPENDENTS === 2 &&
+    data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
+    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
+  (data.DEPENDENTS === 3 &&
+    data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
+    data.APPLLEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
+  (data.DEPENDENTS === 4 &&
+    data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
+    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
+  (data.DEPENDENTS === 5 &&
+    data.WEEKLY_HOUSEHOLD_INCOME > 2981 &&
+    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null)
+const ineligibleChoice = (data: Data) => data.INELIGIBLE_CHOICE
+
 export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'ELIGIBILITY_INTRO',
@@ -25,16 +47,6 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'CENTRELINK_SUPPORT',
     stage: 1,
-    effect: async (data: Data) => {
-      if (data.CENTRELINK_SUPPORT) {
-        window.location.href =
-          'https://test-intake.anikalegal.com/intake/form/14/'
-        // Note: Need to change this depending if it's local, test or live.
-        // local site - http://localhost:3001/intake/form/14/
-        // test site - https://test-intake.anikalegal.com/intake/form/14/
-        // live site - https://intake.anikalegal.com/intake/form/14/
-      }
-    },
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
@@ -46,12 +58,14 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'DEPENDENTS',
     stage: 1,
+    askCondition: notCentrelinkSupport,
     required: true,
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>How many dependents do you have?</span>,
   },
   {
     name: 'WEEKLY_HOUSEHOLD_INCOME',
+    askCondition: notCentrelinkSupport,
     stage: 1,
     required: true,
     type: FIELD_TYPES.NUMBER,
@@ -60,31 +74,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES',
     stage: 1,
-    effect: async (data: Data) => {
-      if (
-        (data.DEPENDENTS === 0 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 1731 &&
-          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-        (data.DEPENDENTS === 1 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-        (data.DEPENDENTS === 2 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-        (data.DEPENDENTS === 3 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-          data.APPLLEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-        (data.DEPENDENTS === 4 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-        (data.DEPENDENTS === 5 &&
-          data.WEEKLY_HOUSEHOLD_INCOME > 2981 &&
-          data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null)
-      ) {
-        return ROUTES.INELIGIBLE_CHOICE
-        // Currently a user can click an option then click skip and the option will still apply meaning they are actually ineligible but go through due to the skip button functionality not deselecting user input.
-      }
-    },
+    askCondition: notCentrelinkSupport,
     required: false,
     type: FIELD_TYPES.CHOICE_MULTI,
     skipText: 'None of the above apply to me',
@@ -132,5 +122,46 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
       },
     ],
     Prompt: <span>Do any of the following apply to you?</span>,
+  },
+  {
+    name: 'INELIGIBLE_CHOICE',
+    stage: 1,
+    askCondition: ineligibleCriteria,
+    effect: async (data: Data) => {
+      if (!data.INELIGIBLE_CHOICE) {
+        return ROUTES.INELIGIBLE_MEANS
+      }
+    },
+    required: true,
+    type: FIELD_TYPES.CHOICE_SINGLE,
+    choices: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+    Prompt: (
+      <span>
+        It looks like you're not eligible for our service. If you continue with
+        our intake form, we cannot guarantee that we can assist you. Would you
+        still like to continue?
+      </span>
+    ),
+  },
+  {
+    name: 'ASSESS_CIRCUMSTANCE',
+    stage: 1,
+    askCondition: ineligibleChoice,
+    required: true,
+    type: FIELD_TYPES.TEXT,
+    choices: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+    Prompt: (
+      <span>
+        So that we can assess your circumstances holistically, please tell us if
+        you have any other special circumstances that you would like us to
+        consider.
+      </span>
+    ),
   },
 ]
