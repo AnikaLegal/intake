@@ -152,10 +152,6 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     askCondition: ineligibleChoice,
     required: true,
     type: FIELD_TYPES.TEXT,
-    choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
-    ],
     Prompt: (
       <span>
         So that we can assess your circumstances holistically, please tell us if
