@@ -67,13 +67,15 @@ export const FormView = () => {
 
   // Handle next page event
   const [isNavigateNext, setIsNavigateNext] = useState(false)
+  const [isNavigateSkip, setIsNavigateSkip] = useState(false)
   useEffect(() => {
-    if (!isNavigateNext || !question) return
+    if ((!isNavigateNext && !isNavigateSkip) || !question) return
     const latestData = { ...data }
     // Set non-required fields to null if no answer was given.
-    if (typeof latestData[question.name] === 'undefined') {
+    if (isNavigateSkip) {
       latestData[question.name] = null
       setData(latestData)
+      setIsNavigateSkip(false)
     }
     // Save form data to local storage when question answered
     storeFormData(latestData)
@@ -94,31 +96,7 @@ export const FormView = () => {
         setIsFormVisible(true)
       }
     })
-  }, [isNavigateNext])
-
-  const [isNavigateSkip, setIsNavigateSkip] = useState(false)
-  useEffect(() => {
-    if (!isNavigateSkip || !question) return
-    const latestData = { ...data }
-    latestData[question.name] = null
-    setData(latestData)
-    storeFormData(latestData)
-    const effectPromise = question.effect
-      ? question.effect(latestData)
-      : Promise.resolve()
-    effectPromise.then(async (effectNextUrl) => {
-      if (effectNextUrl) {
-        history.push(effectNextUrl)
-      } else {
-        setIsFormVisible(false)
-        await waitSeconds(ANIMATION_TIME / 2000)
-        const nextUrl = getNextURL(url, Number(qIdx) + 1)
-        history.push(nextUrl)
-        setIsNavigateSkip(false)
-        setIsFormVisible(true)
-      }
-    })
-  }, [isNavigateSkip])
+  }, [isNavigateNext, isNavigateSkip])
 
   const onBack = () => {
     if (qIdx > 0) {
