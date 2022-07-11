@@ -58,11 +58,11 @@ export const BONDS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'BONDS_IS_HELD_BY_RTBA',
+    name: 'BOND_RTBA',
     stage: 2,
     askCondition: isBondsIssue,
     effect: async (data: Data) => {
-      if (!data.BONDS_IS_HELD_BY_RTBA) {
+      if (!data.BOND_RTBA) {
         return ROUTES.BONDS_RECOVERY
       }
     },
