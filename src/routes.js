@@ -23,11 +23,9 @@ const ROUTE_VIEWS = {
   [ROUTES.INELIGIBLE_REPAIRS_GOTTEN_VCAT]:
     Views.IneligibleRepairsGottenVCATView,
   [ROUTES.INELIGIBLE_REPAIRS_VCAT_STAGE]: Views.IneligibleRepairsVCATStageView,
-  [ROUTES.INELIGIBLE_CHOICE]: Views.IneligibleChoiceView,
   [ROUTES.INELIGIBLE_WRONG_REASON]: Views.IneligibleWrongReasonView,
   [ROUTES.INELIGIBLE_VCAT_HEARING]: Views.IneligibleVcatHearingView,
   [ROUTES.INELIGIBLE_MEANS]: Views.IneligibleMeansView,
-  [ROUTES.ASSESS_CIRCUMSTANCES]: Views.AssessCircumstancesView,
   [ROUTES.INELIGIBLE_ALREADY_REMOVED]: Views.IneligibleAlreadyRemovedView,
   [ROUTES.SUBMITTED]: Views.SubmittedView,
   [ROUTES.NO_EMAIL]: Views.NoEmailView,
