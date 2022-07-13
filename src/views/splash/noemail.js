@@ -82,17 +82,8 @@ export const NoEmailView = ({
     const noErrors = Object.keys(validationErrors).length === 0
     setErrors(validationErrors)
     if (noErrors) {
-      console.log('me')
       const data = { ...inputs }
-      console.log('1')
-      const subId = 1
-      console.log('2')
-      let sub
-      console.log('3')
-      sub = await api.noemail.create(data)
-      console.log('4')
-      await api.noemail.submit(sub.id)
-      console.log('5')
+      await api.noemail.create(data)
       setFormState(true)
       console.log('Authenticated', inputs)
       handleReset()
@@ -102,10 +93,10 @@ export const NoEmailView = ({
   }
 
   const handleReset = () => {
-    setInputs({
+    setInputs(() => ({
       name: '',
       phone_number: '',
-    })
+    }))
   }
 
   const { handleInputChange } = useForm({
