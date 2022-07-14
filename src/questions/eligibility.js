@@ -27,7 +27,6 @@ const ineligibleCriteria = (data: Data) =>
   (data.DEPENDENTS === 5 &&
     data.WEEKLY_HOUSEHOLD_INCOME > 2981 &&
     data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null)
-const ineligibleChoice = (data: Data) => data.INELIGIBLE_CHOICE
 
 export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
@@ -149,7 +148,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'ELIGIBILITY_NOTES',
     stage: 1,
-    askCondition: ineligibleChoice,
+    askCondition: ineligibleCriteria,
     required: true,
     type: FIELD_TYPES.TEXT,
     Prompt: (
