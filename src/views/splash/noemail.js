@@ -189,6 +189,7 @@ const FormInner = styled.form`
   padding: 50px 55px 50px 55px;
   width: 100%;
   max-width: 630px;
+  background: #fff;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
