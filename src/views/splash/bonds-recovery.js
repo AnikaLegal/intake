@@ -23,8 +23,8 @@ export const BondsRecoveryView = () => {
         your situation, you may wish to have a look at our Bonds resources:
         <ul>
           <li>
-            <a target="_blank" href="#">
-              BLOG ARTICLE 1
+            <a target="_blank" href={LINKS.BONDS_RESOURCES}>
+              Information about bonds and bond recovery
             </a>
           </li>
         </ul>

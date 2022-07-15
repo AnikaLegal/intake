@@ -71,11 +71,15 @@ export const FormView = () => {
   useEffect(() => {
     if ((!isNavigateNext && !isNavigateSkip) || !question) return
     const latestData = { ...data }
-    // Set non-required fields to null if no answer was given.
     if (isNavigateSkip) {
+      // Handle skip
       latestData[question.name] = null
       setData(latestData)
       setIsNavigateSkip(false)
+    } else if (typeof latestData[question.name] === 'undefined') {
+      // Set non-required fields to null if no answer was given.
+      latestData[question.name] = null
+      setData(latestData)
     }
     // Save form data to local storage when question answered
     storeFormData(latestData)
