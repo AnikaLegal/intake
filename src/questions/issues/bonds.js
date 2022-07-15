@@ -72,7 +72,21 @@ export const BONDS_QUESTIONS: Array<Field> = [
       { label: 'Yes', value: true },
       { label: 'No', value: false },
     ],
-    Prompt: <span>Is your bond still held by the RTBA?</span>,
+    Help: (
+      <span>
+        Check your email for a RTBA bond receipt, and use it to check your bond
+        lodgment on the RTBA website. If in doubt, call the RTBA.
+      </span>
+    ),
+    Prompt: (
+      <span>
+        Is your bond still held by the{' '}
+        <a href={RTBA_LINK} target="_blank" nofollow="true" noreferrer="true">
+          RTBA
+        </a>
+        ?
+      </span>
+    ),
   },
   {
     name: 'BONDS_LANDLORD_INTENTS_TO_MAKE_CLAIM',
@@ -118,8 +132,11 @@ export const BONDS_QUESTIONS: Array<Field> = [
     ],
     Prompt: (
       <span>
-        Has your landlord/real estate agent made an application to VCAT for your
-        bond?
+        Has your landlord/real estate agent made an application to{' '}
+        <a href={VCAT_LINK} target="_blank" nofollow="true" noreferrer="true">
+          VCAT
+        </a>{' '}
+        for your bond?
       </span>
     ),
   },
@@ -135,7 +152,15 @@ export const BONDS_QUESTIONS: Array<Field> = [
       { label: 'Yes', value: true },
       { label: 'No', value: false },
     ],
-    Prompt: <span>Do you have a copy of the VCAT application?</span>,
+    Prompt: (
+      <span>
+        Do you have a copy of the{' '}
+        <a href={VCAT_LINK} target="_blank" nofollow="true" noreferrer="true">
+          VCAT
+        </a>{' '}
+        application?
+      </span>
+    ),
   },
   {
     name: 'BONDS_RTBA_APPLICATION_UPLOAD',
@@ -147,7 +172,11 @@ export const BONDS_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.UPLOAD,
     Prompt: (
       <span>
-        Please upload the landlord/real estate agent's VCAT application.
+        Please upload the landlord/real estate agent's{' '}
+        <a href={VCAT_LINK} target="_blank" nofollow="true" noreferrer="true">
+          VCAT
+        </a>{' '}
+        application.
       </span>
     ),
   },
