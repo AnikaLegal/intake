@@ -9,24 +9,24 @@ import { ISSUE_QUESTIONS } from './issues'
 
 const notCentrelinkSupport = (data: Data) => !data.CENTRELINK_SUPPORT
 const ineligibleCriteria = (data: Data) =>
-  (data.DEPENDENTS === 0 &&
+  (data.NUMBER_OF_DEPENDENTS === 0 &&
     data.WEEKLY_HOUSEHOLD_INCOME > 1731 &&
-    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-  (data.DEPENDENTS === 1 &&
+    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
+  (data.NUMBER_OF_DEPENDENTS === 1 &&
     data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-  (data.DEPENDENTS === 2 &&
+    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
+  (data.NUMBER_OF_DEPENDENTS === 2 &&
     data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-  (data.DEPENDENTS === 3 &&
+    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
+  (data.NUMBER_OF_DEPENDENTS === 3 &&
     data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-    data.APPLLEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-  (data.DEPENDENTS === 4 &&
+    data.APPLELIGIBILITY_CIRCUMSTANCES === null) ||
+  (data.NUMBER_OF_DEPENDENTS === 4 &&
     data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null) ||
-  (data.DEPENDENTS === 5 &&
+    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
+  (data.NUMBER_OF_DEPENDENTS === 5 &&
     data.WEEKLY_HOUSEHOLD_INCOME > 2981 &&
-    data.LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES === null)
+    data.ELIGIBILITY_CIRCUMSTANCES === null)
 
 export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
@@ -55,7 +55,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     Prompt: <span>Are you currently receiving Centrelink payment?</span>,
   },
   {
-    name: 'DEPENDENTS',
+    name: 'NUMBER_OF_DEPENDENTS',
     stage: 1,
     askCondition: notCentrelinkSupport,
     required: true,
@@ -71,7 +71,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     Prompt: <span>How much is your weekly household income?</span>,
   },
   {
-    name: 'LEGAL_ACCESS_AND_SPECIAL_CIRCUMSTANCES',
+    name: 'ELIGIBILITY_CIRCUMSTANCES',
     stage: 1,
     askCondition: notCentrelinkSupport,
     required: false,
