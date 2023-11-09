@@ -9,8 +9,8 @@ export const getQueryParams = () => parseQueryString(window.location.search)
 export const parseQueryString = (qs: string): { [string]: string } =>
   (qs.startsWith('?') ? qs.slice(1) : qs)
     .split('&')
-    .filter(param => param)
-    .map(paramString => paramString.split('='))
+    .filter((param) => param)
+    .map((paramString) => paramString.split('='))
     .reduce((obj, [k, v]) => ({ ...obj, [k]: v }), {})
 
 // Builds a querystring, including the ?, from obj params.

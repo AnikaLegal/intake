@@ -21,10 +21,10 @@ export const unique = (val: any, idx: number, self: Array<any>) =>
 // https://github.com/facebook/flow/issues/2174
 export const entries = <T>(obj: { [string]: T }): Array<[string, T]> => {
   const keys: string[] = Object.keys(obj)
-  return keys.map(key => [key, obj[key]])
+  return keys.map((key) => [key, obj[key]])
 }
 
 export const values = <T>(obj: { [string]: T }): Array<T> => {
   const keys: string[] = Object.keys(obj)
-  return keys.map(key => obj[key])
+  return keys.map((key) => obj[key])
 }
