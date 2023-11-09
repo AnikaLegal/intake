@@ -39,11 +39,6 @@ export const LandingView = () => {
           if you have any questions about why we need your information, and what
           we do with it.
         </Text.Body>
-        <WarningBody>
-          Please note that Anika Legal will be closed for the holiday period
-          from Tuesday 20th December 2022, and we will reopen on Monday 9th
-          January 2023. We wish you a safe and happy holiday season!
-        </WarningBody>
         <Text.Header splash></Text.Header>
         <Splash.ButtonGroup>
           <Link
