@@ -146,10 +146,9 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
-      { label: 'I am being evicted for unpaid rent', value: 'EVICTION' },
-      { label: 'I am being evicted for another reason', value: 'INELIGIBLE' },
-      { label: 'I need something repaired', value: 'REPAIRS' },
       { label: 'I want to claim my bond', value: 'BONDS' },
+      { label: 'I need something repaired', value: 'REPAIRS' },
+      { label: 'I am being evicted', value: 'INELIGIBLE' },
       {
         label: 'I want compensation from my landlord',
         value: 'INELIGIBLE_COMPENSATION',
@@ -168,16 +167,11 @@ export const ABOUT_QUESTIONS: Array<Field> = [
         Anika can help with{' '}
         <a target="_blank" href={LINKS.BONDS_INFO}>
           bond recovery
-        </a>
-        ,{' '}
-        <a target="_blank" href={LINKS.REPAIRS_INFO}>
-          rental repairs
         </a>{' '}
         and{' '}
-        <a target="_blank" href={LINKS.EVICTION_INFO}>
-          evictions
-        </a>{' '}
-        for unpaid rent.
+        <a target="_blank" href={LINKS.REPAIRS_INFO}>
+          rental repairs.
+        </a>
       </span>
     ),
   },

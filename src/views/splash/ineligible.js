@@ -18,12 +18,6 @@ export const IneligibleView = () => {
         <Text.Body splash>
           <ul>
             <li>
-              <a target="_blank" href={LINKS.EVICTION_INFO}>
-                Evictions
-              </a>{' '}
-              for unpaid rent
-            </li>
-            <li>
               <a target="_blank" href={LINKS.REPAIRS_INFO}>
                 Rental repairs
               </a>{' '}

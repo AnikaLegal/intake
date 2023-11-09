@@ -12,7 +12,6 @@ export const LINKS = {
     REPAIRS: 'https://form.jotform.com/201900961250850',
   },
   REPAIRS_INFO: `${SERVER}/services/rental-repairs/`,
-  EVICTION_INFO: `${SERVER}/services/eviction-support/`,
   BONDS_INFO: `${SERVER}/services/bond-recovery/`,
   CLOSED_CONTACT: `${SERVER}/closed-contact/`,
   BONDS_RESOURCES: 'https://www.anikalegal.com/blog/bonds-and-bond-recovery/',
