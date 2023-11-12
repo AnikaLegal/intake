@@ -13,9 +13,9 @@ export const LegalScopeEvictedView = () => {
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          As your matter is about being evicted for another reason, your issue
-          is outside of Anika’s current scope. Unfortunately, we are not able to
-          assist you at this time.
+          As your matter is about being evicted, your issue is outside of
+          Anika’s current scope. Unfortunately, we are not able to assist you at
+          this time.
         </Text.Header>
         <Text.Body splash>
           You may wish to contact your local community legal centres who will be
