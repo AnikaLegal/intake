@@ -6,7 +6,7 @@
   "author": "Matt Segal",
   "license": "MIT",
   "scripts": {
-    "story": "start-storybook --port 3001 -s ./public",
+    "story": "NODE_OPTIONS=--openssl-legacy-provider start-storybook --port 3001 -s ./public",
     "html": "mkdir -p dist && node template.js",
     "clean": "rm -rf dist && mkdir -p dist",
     "snap": "react-snap",
@@ -68,9 +68,10 @@
     "react-snap": "^1.23.0",
     "sass": "^1.52.1",
     "sass-loader": "^7.1.0",
+    "style-loader": "2.0.0",
     "terser-webpack-plugin": "^4.1.0",
     "url-loader": "^4.1.0",
-    "webpack": "^4.44.1",
+    "webpack": "^4.47.0",
     "webpack-bundle-tracker": "0.4.3",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
