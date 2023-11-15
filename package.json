@@ -16,6 +16,9 @@
     "format": "prettier --write \"src/**/*.js\""
   },
   "reactSnap": {
+    "puppeteerArgs": [
+      "--no-sandbox"
+    ],
     "include": [
       "/",
       "/download/",
