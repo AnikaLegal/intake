@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { events } from 'analytics'
 import { useScrollTop } from 'utils'
 import { LINKS } from 'consts'
+import moment from 'moment'
 
 export const LandingView = () => {
   useScrollTop()
@@ -39,6 +40,7 @@ export const LandingView = () => {
           if you have any questions about why we need your information, and what
           we do with it.
         </Text.Body>
+        <OfficeClosed />
         <Text.Header splash></Text.Header>
         <Splash.ButtonGroup>
           <Link
@@ -55,6 +57,23 @@ export const LandingView = () => {
       <Splash.Image src={IMAGES.HEROES.PHONE_LADY} />
     </Splash.Container>
   )
+}
+
+function OfficeClosed() {
+  const now = moment()
+  const close = moment('2023-12-23')
+  const reopen = moment('2024-01-09')
+  if (now.isSameOrAfter(close, 'day') && now.isBefore(reopen, 'day')) {
+    return (
+      <WarningBody>
+        Please note Anika Legal will be closed for the holiday season from {' '}
+        {close.format('dddd, MMMM Do YYYY')}, and will reopen on {' '}
+        {reopen.format('dddd, MMMM Do YYYY')}. We wish you a safe and happy
+        holiday season!
+      </WarningBody>
+    );
+  }
+  return null;
 }
 
 // Used for warning messages for stuff like Christmas closures.
