@@ -14,7 +14,7 @@ const SplashOuterEl = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   box-sizing: border-box;
   @media (max-width: ${theme.screen.mobile}) {
     overflow: auto;
@@ -28,7 +28,7 @@ const SplashInnerEl = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
+  height: auto;
   @media (max-width: ${theme.screen.mobile}) {
     height: auto;
     width: 100%;
