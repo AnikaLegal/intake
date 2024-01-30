@@ -41,7 +41,7 @@ const NavbarEl = styled.div`
   left: 16px;
   right: 16px;
   .logo {
-    height: 27.4px;
+    height: 48px;
     user-select: none;
   }
   svg {
@@ -49,9 +49,9 @@ const NavbarEl = styled.div`
   }
   @media (min-width: ${theme.screen.small}) {
     /* Larger than small mobile screen */
-    top: 40px;
+    top: 16px;
     .logo {
-      height: 32px;
+      height: 96px;
     }
     svg {
       height: 24px;
