@@ -80,4 +80,11 @@ export const PROPERTY_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.TEXT,
     Prompt: <span>What is your street address?</span>,
   },
+  {
+    name: 'WEEKLY_RENT',
+    stage: 3,
+    required: true,
+    type: FIELD_TYPES.NUMBER,
+    Prompt: <span>How much is your weekly rent?</span>,
+  },
 ]

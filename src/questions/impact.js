@@ -45,7 +45,10 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     choices: [
       { label: 'Male', value: 'MALE' },
       { label: 'Female', value: 'FEMALE' },
-      { label: 'Genderqueer or non-binary', value: 'GENDERQUEER' },
+      { label: 'Sistergirl', value: 'SISTERGIRL' },
+      { label: 'Brotherboy', value: 'BROTHERBOY' },
+      { label: 'Non-binary', value: 'NON_BINARY' },
+      { label: 'Gender diverse', value: 'GENDER_DIVERSE' },
       { label: 'Prefer not to say', value: 'OMITTED' },
     ],
     placeholderText: 'Prefer to self-describe',
@@ -57,12 +60,16 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     required: true,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
+      { label: 'No', value: 'NO' },
+      { label: 'Yes, Aboriginal', value: 'YES_ABORIGINAL' },
+      { label: 'Yes, Torres Strait Islander', value: 'YES_TSI' },
+      { label: 'Yes, Aboriginal and Torres Strait Islander', value: 'YES_ABORIGINAL_AND_TSI' },
+      { label: 'Prefer not to answer', value: 'PREFER_NOT_TO_ANSWER' },
+      { label: 'Not Stated', value: 'NOT_STATED' },
     ],
     Prompt: (
       <span>
-        You identify as an Aboriginal or Torres Strait Islander person
+        Do you identify as an Aboriginal and/or Torres Strait Islander person?
       </span>
     ),
   },
@@ -85,12 +92,15 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     name: 'INTERPRETER',
     stage: 5,
     required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE,
+    type: FIELD_TYPES.CHOICE_SINGLE_TEXT,
     Prompt: <span>Do you need an interpreter?</span>,
     askCondition: (data) => data.CAN_SPEAK_NON_ENGLISH,
     choices: [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false },
+      { label: 'No', value: 'NO' },
+      { label: 'Yes (written communication)', value: 'YES_WRITTEN' },
+      { label: 'Yes (spoken communiction)', value: 'YES_SPOKEN' },
+      { label: 'Yes (written and spoken)', value: 'YES_WRITTEN_SPOKEN' },
+      { label: 'Unknown', value: 'UNKNOWN' },
     ],
   },
   {
@@ -112,21 +122,16 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     Prompt: <span>Which best describes your work or study situation?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
-      {
-        label: 'Working part time or casually',
-        value: 'WORKING_PART_TIME',
-      },
       { label: 'Working full time', value: 'WORKING_FULL_TIME' },
+      { label: 'Working part time', value: 'WORKING_PART_TIME' },
+      { label: 'Working casually', value: 'WORKING_CASUALLY' },
+      { label: 'Temporary work', value: 'WORKING_TEMPORARY' },
       { label: 'Student', value: 'STUDENT' },
       { label: 'Apprentice or trainee', value: 'APPRENTICE' },
-      { label: 'Looking for work', value: 'LOOKING_FOR_WORK' },
-      {
-        label: 'Income reduced due to COVID-19',
-        value: 'INCOME_REDUCED_COVID',
-      },
       { label: 'Retired', value: 'RETIRED' },
       { label: 'Full time parent', value: 'PARENT' },
-      { label: 'Currently unemployed', value: 'UNEMPLOYED' },
+      { label: 'Temporarily unable to work', value: 'TEMPORARILY_UNABLE' },
+      { label: 'Looking for work', value: 'LOOKING_FOR_WORK' },
       { label: 'Not looking for work', value: 'NOT_LOOKING_FOR_WORK' },
       { label: 'None of the above', value: null },
     ],
@@ -147,7 +152,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
         value: 'LEGAL_CENTRE',
       },
       { label: 'Housing service', value: 'HOUSING_SERVICE' },
-      { label: 'Charity / non-profit', value: 'CHARITY' },
+      { label: 'Community Organisation', value: 'COMMUNITY_ORGANISATION' },
       { label: 'Social media', value: 'SOCIAL_MEDIA' },
       { label: 'Google search', value: 'SEARCH' },
       { label: 'Word of mouth', value: 'WORD_OF_MOUTH' },
@@ -155,6 +160,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
       { label: 'Radio', value: 'RADIO' },
       { label: 'Billboard', value: 'BILLBOARD' },
       { label: 'Poster', value: 'POSTER' },
+      { label: 'Returning client', value: 'RETURNING_CLIENT' },
     ],
   },
   {
@@ -197,11 +203,11 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     ],
   },
   {
-    name: 'CHARITY_REFERRER',
-    askCondition: (data: Data) => data.REFERRER_TYPE == 'CHARITY',
+    name: 'COMMUNITY_ORGANISATION_REFERRER',
+    askCondition: (data: Data) => data.REFERRER_TYPE == 'COMMUNITY_ORGANISATION',
     stage: 5,
     required: true,
-    Prompt: <span>Which charity or non-profit referred you?</span>,
+    Prompt: <span>Which community organisation referred you?</span>,
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
       {
