@@ -16,7 +16,7 @@ const SplashOuterEl = styled.div`
   position: relative;
   overflow: auto;
   box-sizing: border-box;
-  padding: 16px 16px 0 16px;
+  padding: 16px 16px 64px 16px;
   @media (max-width: ${theme.screen.mobile}) {
     overflow: auto;
   }
