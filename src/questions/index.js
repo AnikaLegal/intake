@@ -49,7 +49,6 @@ const SUBMIT_QUESTIONS: Field = {
         finalData[q.name] = null
       }
     }
-    console.log('Submitting data:', finalData)
     const subId = data['id']
     let sub
     if (subId) {
