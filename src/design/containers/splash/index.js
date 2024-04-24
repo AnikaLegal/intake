@@ -16,13 +16,14 @@ const SplashOuterEl = styled.div`
   position: relative;
   overflow: auto;
   box-sizing: border-box;
-  padding: 16px 16px 64px 16px;
+  padding: 16px 16px 0 16px;
   @media (max-width: ${theme.screen.mobile}) {
     overflow: auto;
   }
 `
 const SplashInnerEl = styled.div`
   width: 86vw;
+  padding-bottom: 64px;
   max-width: 1227px;
   margin: 0 auto 0;
   display: flex;
@@ -33,6 +34,7 @@ const SplashInnerEl = styled.div`
     height: auto;
     width: 100%;
     padding-top: 130px;
+    padding-bottom: 0;
     flex-direction: column-reverse;
     ${theme.switch({ left: `flex-direction: column;` })}
   }
