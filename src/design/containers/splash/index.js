@@ -23,6 +23,7 @@ const SplashOuterEl = styled.div`
 `
 const SplashInnerEl = styled.div`
   width: 86vw;
+  padding-bottom: 64px;
   max-width: 1227px;
   margin: 0 auto 0;
   display: flex;
@@ -33,6 +34,7 @@ const SplashInnerEl = styled.div`
     height: auto;
     width: 100%;
     padding-top: 130px;
+    padding-bottom: 0;
     flex-direction: column-reverse;
     ${theme.switch({ left: `flex-direction: column;` })}
   }
