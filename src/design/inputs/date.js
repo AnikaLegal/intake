@@ -29,13 +29,21 @@ export const DateInput = ({
   const [day, setDay] = useState<string | null>(null)
   const [month, setMonth] = useState<string | null>(null)
   const [year, setYear] = useState<number | null>(null)
+  
+  useEffect(() => {
+    if (date) {
+      setDay(date.get('date'))
+      setMonth(date.get('month') + 1)
+      setYear(date.get('year'))
+    }
+  }, [value])
 
   const onDayChange = (val) => {
     const newDay = Number(val);
     if (isNaN(newDay) || newDay > 31 || val.length > 2) return;
     const newDate = getDateFromVals(year, month, newDay);
     setDay(val);
-    onDateChange(newDate);
+    dateChange(newDate);
   }
 
   const onMonthChange = (val) => {
@@ -43,7 +51,7 @@ export const DateInput = ({
     if (isNaN(newMonth) || newMonth > 12 || val.length > 2) return
     const newDate = getDateFromVals(year, newMonth, day)
     setMonth(val)
-    onDateChange(newDate)
+    dateChange(newDate)
   }
 
   const onYearChange = (val) => {
@@ -51,10 +59,10 @@ export const DateInput = ({
     if (newYear > new Date().getFullYear() + 3) return
     const newDate = getDateFromVals(newYear, month, day)
     setYear(newYear)
-    onDateChange(newDate)
+    dateChange(newDate)
   }
 
-  const onDateChange = (newDate) => {
+  const dateChange = (newDate) => {
     if (newDate) {
       onChange(getStringFromDate(newDate))
       setValid(true)
@@ -109,8 +117,8 @@ const getDateFromString = (s) => {
 
 const getDateFromVals = (
   y: number | null,
-  m: number | null,
-  d: number | null
+  m: string | null,
+  d: string | null
 ) => {
   if (!d || !m || !y) return null
   const newMoment = moment([y, m, d].join('-'), 'Y-M-D')
