@@ -36,7 +36,7 @@ export const DateInput = ({
       setMonth(date.get('month') + 1)
       setYear(date.get('year'))
     }
-  }, [value])
+  }, [])
 
   const onDayChange = (val) => {
     const newDay = Number(val);
