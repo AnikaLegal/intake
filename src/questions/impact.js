@@ -98,7 +98,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     choices: [
       { label: 'No', value: 'NO' },
       { label: 'Yes (written communication)', value: 'YES_WRITTEN' },
-      { label: 'Yes (spoken communiction)', value: 'YES_SPOKEN' },
+      { label: 'Yes (spoken communication)', value: 'YES_SPOKEN' },
       { label: 'Yes (written and spoken)', value: 'YES_WRITTEN_SPOKEN' },
       { label: 'Unknown', value: 'UNKNOWN' },
     ],
@@ -236,7 +236,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
       { label: 'Instagram', value: 'Instagram' },
       { label: 'Twitter', value: 'Twitter' },
       { label: 'LinkedIn', value: 'LinkedIn' },
-      { label: 'Pintrest', value: 'Pintrest' },
+      { label: 'Pinterest', value: 'Pinterest' },
       { label: 'Reddit', value: 'Reddit' },
       { label: 'Other', value: 'Other' },
     ],
