@@ -211,6 +211,10 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.CHOICE_SINGLE,
     choices: [
       {
+        label: 'Council of Single Mothers and their Children',
+        value: 'Council of Single Mothers and their Children',
+      },
+      {
         label: 'Ethic Communities Council of Victoria',
         value: 'Ethic Communities Council of Victoria',
       },
