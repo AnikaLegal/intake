@@ -78,7 +78,8 @@ const _Button = styled.button`
     background-color: ${theme.color.teal.primary};
   }
   &:focus {
-    outline: none;
+    outline: 3px solid ${theme.color.teal.primary}  };
+    outline-offset: 3px;
   }
   &:active {
     outline: none;

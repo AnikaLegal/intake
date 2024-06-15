@@ -9,6 +9,7 @@ export const TextInput = ({ value, onChange, ...props }: any) => (
     type="text"
     value={value || ''}
     onChange={(e) => onChange(e.target.value)}
+    autoFocus
     {...props}
   />
 )

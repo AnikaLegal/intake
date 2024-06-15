@@ -32,7 +32,7 @@ export const SelectInput = ({ value, onChange, options }: Props) => {
   )
 }
 
-const SelectButtonEl = styled.div`
+const SelectButtonEl = styled.button`
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -46,6 +46,8 @@ const SelectButtonEl = styled.div`
   box-sizing: border-box;
   border-radius: 20px;
   padding: 8px 20px;
+  text-align: left;
+  width: 100%;
   & + & {
     margin-top: 8px;
   }
@@ -55,6 +57,10 @@ const SelectButtonEl = styled.div`
     border: 1.5px solid ${theme.color.teal.secondary};
     padding: 7.5px 19.5px;
     background-color: ${theme.color.teal.quaternary};
+  }
+  &:focus {
+    outline: 3px solid ${theme.color.teal.primary}  };
+    outline-offset: 3px;
   }
   ${theme.switch({
     selected: `
