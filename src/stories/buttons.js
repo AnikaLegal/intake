@@ -24,3 +24,16 @@ stories.add('Button', () => (
     <Button disabled={boolean('Disabled', false)}>Cancel</Button>
   </>
 ))
+
+stories.add('Loading Button', () => (
+  <>
+    <Button
+      disabled={boolean('Disabled', false)}
+      primary
+      Icon={Icon.LoadingSpinner}
+    >
+      Submitting
+    </Button>
+    <Button disabled={boolean('Disabled', false)}>Cancel</Button>
+  </>
+))

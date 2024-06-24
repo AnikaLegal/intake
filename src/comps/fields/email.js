@@ -21,6 +21,7 @@ export const EmailField = ({
   value,
   onChange,
   children,
+  isLoading,
 }: FormFieldProps) => {
   // Determine whether the confirm button is active
   const [hasAttemptSubmit, setAttemptSubmit] = useState(false)
@@ -63,7 +64,13 @@ export const EmailField = ({
             primary
             disabled={isSubmitDisabled}
             type="submit"
-            Icon={field.button ? field.button.Icon : Icon.Tick}
+            Icon={
+              isLoading
+                ? Icon.LoadingSpinner
+                : field.button
+                ? field.button.Icon
+                : Icon.Tick
+            }
           >
             {field.button ? field.button.text : 'OK'}
           </Button>
