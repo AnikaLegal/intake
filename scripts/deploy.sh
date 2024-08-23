@@ -37,10 +37,12 @@ else
 fi
 
 # Compress HTML, JS, CSS
+echo -e "\nCompressing files:"
 COMPRESS="html js css"
 for SUFFIX in $COMPRESS; do
     FILES=$(find dist/ -name "*.$SUFFIX")
     for FILE in $FILES; do
+        echo "Compressing $FILE"
         gzip $FILE
         mv ${FILE}.gz $FILE
     done
