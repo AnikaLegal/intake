@@ -12,10 +12,8 @@ export const http = {
   post: async (path: string, data: Data): Promise<Data> => {
     const resp = await fetch(url(path), {
       method: 'POST',
-      credentials: 'include',
       body: parseJsonBody(data),
       headers: {
-        'X-CSRFToken': '',
         'Content-Type': 'application/json',
       },
     })
@@ -25,10 +23,8 @@ export const http = {
   patch: async (path: string, data: Data): Promise<Data> => {
     const resp = await fetch(url(path), {
       method: 'PATCH',
-      credentials: 'include',
       body: parseJsonBody(data),
       headers: {
-        'X-CSRFToken': '',
         'Content-Type': 'application/json',
       },
     })
@@ -38,10 +34,8 @@ export const http = {
   put: async (path: string, data: Data): Promise<Data> => {
     const resp = await fetch(url(path), {
       method: 'PUT',
-      credentials: 'include',
       body: parseJsonBody(data),
       headers: {
-        'X-CSRFToken': '',
         'Content-Type': 'application/json',
       },
     })
@@ -50,9 +44,7 @@ export const http = {
   // DELETE a URL (delete resource)
   delete: async (path: string): Promise<Data> => {
     const resp = await fetch(url(path), {
-      method: 'DELETE',
-      credentials: 'include',
-      headers: { 'X-CSRFToken': '' },
+      method: 'DELETE'
     })
     return handleResponse(resp)
   },
