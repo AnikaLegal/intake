@@ -87,10 +87,51 @@ const Tick = ({ color, ...props }: any) => (
   </svg>
 )
 
+const LoadingSpinner = ({ ...props }: any) => {
+  return (
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 28 28"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="14"
+        cy="14"
+        r="10"
+        fill="none"
+        stroke="white"
+        strokeWidth="4"
+        opacity="0.5"
+      />
+      <circle
+        cx="14"
+        cy="14"
+        r="10"
+        fill="none"
+        stroke="white"
+        strokeWidth="4"
+        strokeDasharray="31.41592653589793 31.41592653589793"
+        strokeDashoffset="31.41592653589793"
+      >
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          from="0 14 14"
+          to="360 14 14"
+          dur="2s"
+          repeatCount="indefinite"
+        />
+      </circle>
+    </svg>
+  )
+}
+
 export const Icon = {
   Download,
   Back,
   Close,
   Tick,
   Error,
+  LoadingSpinner,
 }
