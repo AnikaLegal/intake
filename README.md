@@ -66,10 +66,9 @@ When making a change or bugfix, you should:
 - check your changes in the test environment
 - merge the `develop` into `master` and push to GitHub to release your change to prod
 
-Deployment is run automatically via GitHub Actions using the bash scripts in `/scripts`.
-They are triggered by changes to the develop or master branches on GitHub.
-
-Deployment can also be run manually using the bash scripts in `/scripts/release/`.
+Deployment is run on demand via GitHub Actions using the bash scripts in
+`/scripts`. Deployment can also be run manually using the bash scripts in
+`/scripts/release/`.
 
 ## Errors and Logging
 
