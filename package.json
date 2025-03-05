@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@sentry/browser": "^5.22.0",
-    "@sentry/cli": "^1.55.2",
+    "@sentry/cli": "^1.63.1",
     "camelize": "^1.0.0",
     "moment": "^2.27.0",
     "react": "^16.13.1",
