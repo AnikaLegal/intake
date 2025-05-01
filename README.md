@@ -47,7 +47,7 @@ yarn dev  # Run dev server on http://localhost:3000
 There are two environments, each of which has a corresponding backend:
 
 - [test frontend](https://test-intake.anikalegal.com), talks to [test backend](http://test-clerk.anikalegal.com)
-- [prod backend](https://intake.anikalegal.com), talks to [prod backend](http://clerk.anikalegal.com)
+- [prod frontend](https://intake.anikalegal.com), talks to [prod backend](http://clerk.anikalegal.com)
 
 Each of these environments correspond to a similarly named S3 bucket in the Anika AWS account.
 DNS is managed using Anika's CloudFlare account.
@@ -66,14 +66,13 @@ When making a change or bugfix, you should:
 - check your changes in the test environment
 - merge the `develop` into `master` and push to GitHub to release your change to prod
 
-Deployment is run automatically via GitHub Actions using the bash scripts in `/scripts`.
-They are triggered by changes to the develop or master branches on GitHub.
-
-Deployment can also be run manually using the bash scripts in `/scripts/release/`.
+Deployment is run on demand via GitHub Actions using the bash scripts in
+`/scripts`. Deployment can also be run manually using the bash scripts in
+`/scripts/release/`.
 
 ## Errors and Logging
 
-Errors are logged using Sentry can be viewed [here](https://sentry.io/organizations/anika-legal/projects/).
+Errors logged using Sentry can be viewed [here](https://sentry.io/organizations/anika-legal/projects/).
 
 Sentry is used via `@sentry/browser`. The `ErrorBoundary` component is used to catch and handle these errors.
 The `logException` utilities method can be used in both dev and prod to handle errors and report them to Sentry.

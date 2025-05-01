@@ -92,7 +92,7 @@ export const IMPACT_QUESTIONS: Array<Field> = [
     name: 'INTERPRETER',
     stage: 5,
     required: true,
-    type: FIELD_TYPES.CHOICE_SINGLE_TEXT,
+    type: FIELD_TYPES.CHOICE_SINGLE,
     Prompt: <span>Do you need an interpreter?</span>,
     askCondition: (data) => data.CAN_SPEAK_NON_ENGLISH,
     choices: [
