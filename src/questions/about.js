@@ -77,7 +77,8 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.TEXT,
     Prompt: (
       <span>
-        Do you have a <strong>preferred name</strong> that you would like us to use?
+        Do you have a <strong>preferred name</strong> that you would like us to
+        use?
       </span>
     ),
   },
@@ -159,7 +160,8 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     choices: [
       { label: 'I want to claim my bond', value: 'BONDS' },
       { label: 'I need something repaired', value: 'REPAIRS' },
-      { label: 'I am being evicted', value: 'INELIGIBLE' },
+      { label: 'I am being evicted for requesting repairs', value: 'EVICTION' },
+      { label: 'I am being evicted for another reason', value: 'INELIGIBLE' },
       {
         label: 'I want compensation from my landlord',
         value: 'INELIGIBLE_COMPENSATION',
@@ -179,10 +181,15 @@ export const ABOUT_QUESTIONS: Array<Field> = [
         <a target="_blank" href={LINKS.BONDS_INFO}>
           bond recovery
         </a>{' '}
-        and{' '}
+        {', '}
         <a target="_blank" href={LINKS.REPAIRS_INFO}>
-          rental repairs.
+          rental repairs
         </a>
+        {' and '}
+        <a target="_blank" href={LINKS.EVICTION_INFO}>
+          evictions
+        </a>{' '}
+        resulting from repair requests.
       </span>
     ),
   },
