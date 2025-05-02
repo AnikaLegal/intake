@@ -4,7 +4,9 @@ import styled from 'styled-components'
 
 import { theme } from './theme'
 
-const Header = styled.h2`
+const Header = styled('h2').withConfig({
+  shouldForwardProp: (props) => props !== 'splash',
+})`
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
@@ -41,7 +43,9 @@ const Header = styled.h2`
   }
 `
 
-const Body = styled.p`
+const Body = styled('p').withConfig({
+  shouldForwardProp: (props) => props !== 'splash',
+})`
   font-style: normal;
   font-weight: normal;
   font-size: 20px;

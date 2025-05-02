@@ -78,7 +78,9 @@ const ErrorWrapper = styled.div`
   bottom: -40px;
 `
 
-const FooterForm = styled.form`
+const FooterForm = styled('form').withConfig({
+  shouldForwardProp: (props) => props !== 'invalid',
+})`
   ${theme.switch({ invalid: `opacity: 0; pointer-events: none;` })}
 `
 

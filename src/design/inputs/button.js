@@ -59,7 +59,9 @@ export const BigButton = styled.button`
   }
 `
 
-const _Button = styled.button`
+const _Button = styled('button').withConfig({
+  shouldForwardProp: (props) => props !== 'primary',
+})`
   color: ${theme.color.white};
   font-weight: 700;
   border-radius: 20px;

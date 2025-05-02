@@ -38,7 +38,9 @@ const StepProgressEl = styled.div`
     display: none;
   }
 `
-const StepOuterEl = styled.div`
+const StepOuterEl = styled('div').withConfig({
+  shouldForwardProp: (props) => props !== 'active',
+})`
   border: 3px solid transparent;
   width: 39px;
   height: 39px;
