@@ -15,10 +15,14 @@ module.exports = {
   },
   module: { rules: rules.dev },
   devServer: {
-    disableHostCheck: true,
-    contentBase: [
-      path.join(__dirname, '../dist'),
-      path.join(__dirname, '../public'),
+    allowedHosts: 'all',
+    static: [
+      {
+        directory: path.join(__dirname, '../dist'),
+      },
+      {
+        directory: path.join(__dirname, '../public'),
+      },
     ],
     historyApiFallback: true,
     port: 3001,
@@ -31,7 +35,6 @@ module.exports = {
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new ReactRefreshWebpackPlugin(),
     new webpack.DefinePlugin({
       SERVER: JSON.stringify(`http://${HOST}:8000`),

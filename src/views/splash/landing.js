@@ -27,12 +27,14 @@ export const LandingView = () => {
         <Text.Body splash>
           Before starting the intake form, please have the information ready
           about:
-          <ul>
-            <li>Your rental property</li>
-            <li>Your rental provider</li>
-            <li>Your agent, if applicable</li>
-            <li>Your income</li>
-          </ul>
+        </Text.Body>
+        <ul>
+          <li>Your rental property</li>
+          <li>Your rental provider</li>
+          <li>Your agent, if applicable</li>
+          <li>Your income</li>
+        </ul>
+        <Text.Body splash>
           You can have a look at our{' '}
           <a href="https://www.anikalegal.com/resources/collections-statement/">
             collection statement
@@ -66,14 +68,14 @@ function OfficeClosed() {
   if (now.isSameOrAfter(close, 'day') && now.isBefore(reopen, 'day')) {
     return (
       <WarningBody>
-        Please note Anika Legal will be closed for the holiday season from {' '}
-        {close.format('dddd, MMMM Do YYYY')}, and will reopen on {' '}
+        Please note Anika Legal will be closed for the holiday season from{' '}
+        {close.format('dddd, MMMM Do YYYY')}, and will reopen on{' '}
         {reopen.format('dddd, MMMM Do YYYY')}. We wish you a safe and happy
         holiday season!
       </WarningBody>
-    );
+    )
   }
-  return null;
+  return null
 }
 
 // Used for warning messages for stuff like Christmas closures.

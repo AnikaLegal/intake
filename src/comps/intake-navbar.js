@@ -1,9 +1,8 @@
 // @flow
-import React from 'react'
-import { useHistory } from 'react-router-dom'
-
-import { PROGRESS, ROUTES } from 'consts'
-import { Navbar } from 'design'
+import { PROGRESS, ROUTES } from 'consts';
+import { Navbar } from 'design';
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   current: number,
@@ -11,9 +10,10 @@ type Props = {
 }
 
 export const IntakeNavbar = ({ current, onBack }: Props) => {
-  const history = useHistory()
-  const _onBack = () => (onBack ? onBack() : history.goBack())
-  const onClose = () => history.push(ROUTES.ABANDON)
+  const navigate = useNavigate();
+
+  const _onBack = () => (onBack ? onBack() : navigate(-1))
+  const onClose = () => navigate(ROUTES.ABANDON)
   const progress = { current: current, steps: PROGRESS.INTAKE }
   return <Navbar onBack={_onBack} onClose={onClose} progress={progress} />
 }

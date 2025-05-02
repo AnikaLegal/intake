@@ -1,9 +1,8 @@
 //@flow
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-
 import { ErrorBoundary } from 'comps'
 import { ROUTES } from 'consts'
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import * as Views from 'views'
 
 // Route to view mapping
@@ -42,15 +41,16 @@ const ROUTE_VIEWS = {
 
 export const AppRoutes = () => (
   <ErrorBoundary>
-    <Switch>
+    <Routes>
       {Object.keys(ROUTES)
         .filter((k) => k !== 'build')
         .map((k) => ROUTES[k])
         .map((p) => String(p))
-        .map((path) => (
-          <Route exact key={path} path={path} component={ROUTE_VIEWS[path]} />
-        ))}
-      <Route path="" component={Views.NotFoundView} />
-    </Switch>
+        .map((path) => {
+          const Element = ROUTE_VIEWS[path]
+          return <Route exact key={path} path={path} element={<Element />} />
+        })}
+      <Route path="" element={Views.NotFoundView} />
+    </Routes>
   </ErrorBoundary>
 )

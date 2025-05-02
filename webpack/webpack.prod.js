@@ -16,7 +16,7 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      new TerserPlugin({ sourceMap: true }),
+      new TerserPlugin({ terserOptions: { sourceMap: true } }),
       new OptimizeCSSAssetsPlugin(),
     ],
   },

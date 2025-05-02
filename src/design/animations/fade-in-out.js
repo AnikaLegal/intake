@@ -12,16 +12,7 @@ type Props = {
 export const ANIMATION_TIME = 400 // ms
 
 export const FadeInOut = ({ visible, children }: Props) => (
-  <AnimationStyles>
-    <CSSTransition
-      in={visible}
-      timeout={ANIMATION_TIME}
-      classNames="fade-in-out"
-      unmountOnExit
-    >
-      {children}
-    </CSSTransition>
-  </AnimationStyles>
+  <AnimationStyles>{children}</AnimationStyles>
 )
 
 const AnimationStyles = styled.div`
