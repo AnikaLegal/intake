@@ -64,13 +64,7 @@ export const EmailField = ({
             primary
             disabled={isSubmitDisabled}
             type="submit"
-            Icon={
-              isLoading
-                ? Icon.LoadingSpinner
-                : field.button
-                ? field.button.Icon
-                : Icon.Tick
-            }
+            Icon={ field.button ? (field.button.showLoading && isLoading ? Icon.LoadingSpinner : field.button.Icon) : Icon.Tick }
           >
             {field.button ? field.button.text : 'OK'}
           </Button>

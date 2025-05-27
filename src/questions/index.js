@@ -38,7 +38,7 @@ const SUBMIT_QUESTIONS: Field = {
       website <a href={LINKS.TERMS_OF_USE}>Terms of Use</a>.
     </span>
   ),
-  button: { text: 'Confirm', Icon: Icon.Tick },
+  button: { text: 'Confirm', Icon: Icon.Tick, showLoading: true },
   effect: async (data: Data) => {
     const finalData = { ...data }
     // Set all unasked questions to null.
