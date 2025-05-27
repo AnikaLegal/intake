@@ -78,7 +78,8 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.TEXT,
     Prompt: (
       <span>
-        Do you have a <strong>preferred name</strong> that you would like us to use?
+        Do you have a <strong>preferred name</strong> that you would like us to
+        use?
       </span>
     ),
   },

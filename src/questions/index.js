@@ -22,13 +22,13 @@ export const QUESTIONS: Array<Field> = [
   ...ISSUE_QUESTIONS,
   ...PROPERTY_QUESTIONS,
   ...LANDLORD_QUESTIONS,
-  ...IMPACT_QUESTIONS
-];
+  ...IMPACT_QUESTIONS,
+]
 
 const SUBMIT_QUESTIONS: Field = {
   name: 'SUBMIT',
   required: true,
-  stage: Math.max(...QUESTIONS.map(question => question.stage)),
+  stage: Math.max(...QUESTIONS.map((question) => question.stage)),
   type: FIELD_TYPES.DISPLAY,
   Prompt: (
     <span>
@@ -64,6 +64,6 @@ const SUBMIT_QUESTIONS: Field = {
     events.onFinishIntake()
     return ROUTES.SUBMITTED
   },
-};
+}
 
-QUESTIONS.push(SUBMIT_QUESTIONS);
+QUESTIONS.push(SUBMIT_QUESTIONS)

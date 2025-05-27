@@ -66,14 +66,14 @@ function OfficeClosed() {
   if (now.isSameOrAfter(close, 'day') && now.isBefore(reopen, 'day')) {
     return (
       <WarningBody>
-        Please note Anika Legal will be closed for the holiday season from {' '}
-        {close.format('dddd, MMMM Do YYYY')}, and will reopen on {' '}
+        Please note Anika Legal will be closed for the holiday season from{' '}
+        {close.format('dddd, MMMM Do YYYY')}, and will reopen on{' '}
         {reopen.format('dddd, MMMM Do YYYY')}. We wish you a safe and happy
         holiday season!
       </WarningBody>
-    );
+    )
   }
-  return null;
+  return null
 }
 
 // Used for warning messages for stuff like Christmas closures.

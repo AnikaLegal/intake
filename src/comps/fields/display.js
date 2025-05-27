@@ -22,10 +22,10 @@ export const DisplayField = ({
             type="submit"
             disabled={isLoading}
             Icon={
-              isLoading
-                ? Icon.LoadingSpinner
-                : field.button
-                ? field.button.Icon
+              field.button
+                ? field.button.showLoading && isLoading
+                  ? Icon.LoadingSpinner
+                  : field.button.Icon
                 : Icon.Tick
             }
           >
