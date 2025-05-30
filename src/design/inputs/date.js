@@ -29,7 +29,7 @@ export const DateInput = ({
   const [day, setDay] = useState<string | null>(null)
   const [month, setMonth] = useState<string | null>(null)
   const [year, setYear] = useState<number | null>(null)
-  
+
   useEffect(() => {
     if (date) {
       setDay(date.get('date'))
@@ -39,11 +39,11 @@ export const DateInput = ({
   }, [])
 
   const onDayChange = (val) => {
-    const newDay = Number(val);
-    if (isNaN(newDay) || newDay > 31 || val.length > 2) return;
-    const newDate = getDateFromVals(year, month, newDay);
-    setDay(val);
-    dateChange(newDate);
+    const newDay = Number(val)
+    if (isNaN(newDay) || newDay > 31 || val.length > 2) return
+    const newDate = getDateFromVals(year, month, newDay)
+    setDay(val)
+    dateChange(newDate)
   }
 
   const onMonthChange = (val) => {
@@ -75,7 +75,7 @@ export const DateInput = ({
   const isInvalid = !isValid && Boolean(day || month || year)
   return (
     <DateFieldEl>
-      <TextInput 
+      <TextInput
         placeholder="DD"
         disabled={disabled}
         onChange={onDayChange}

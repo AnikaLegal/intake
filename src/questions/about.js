@@ -4,6 +4,7 @@ import * as React from 'react'
 import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import { events } from 'analytics'
 import { api } from 'api'
+import { Icon } from 'design'
 import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
 
@@ -77,7 +78,8 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     type: FIELD_TYPES.TEXT,
     Prompt: (
       <span>
-        Do you have a <strong>preferred name</strong> that you would like us to use?
+        Do you have a <strong>preferred name</strong> that you would like us to
+        use?
       </span>
     ),
   },
@@ -98,6 +100,7 @@ export const ABOUT_QUESTIONS: Array<Field> = [
         questionnaire.
       </span>
     ),
+    button: { text: 'OK', Icon: Icon.Tick, showLoading: true },
     effect: async (data: Data) => {
       if (!data.EMAIL) {
         return ROUTES.NO_EMAIL

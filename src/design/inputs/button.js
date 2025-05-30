@@ -60,6 +60,9 @@ export const BigButton = styled.button`
 `
 
 const _Button = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: ${theme.color.white};
   font-weight: 700;
   border-radius: 20px;
@@ -107,7 +110,9 @@ const _Button = styled.button`
   }
 `
 
-const _IconWrapper = styled.span`
+const _IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
   margin-left: 8px;
 `
 

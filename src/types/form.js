@@ -29,5 +29,6 @@ export type Field = {
   button?: {
     text: string,
     Icon: any,
+    showLoading: boolean,
   },
 }

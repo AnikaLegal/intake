@@ -44,7 +44,7 @@ export const http = {
   // DELETE a URL (delete resource)
   delete: async (path: string): Promise<Data> => {
     const resp = await fetch(url(path), {
-      method: 'DELETE'
+      method: 'DELETE',
     })
     return handleResponse(resp)
   },
