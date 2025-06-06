@@ -11,4 +11,5 @@ export type FormFieldProps = {
   data: Data,
   value: any,
   children: React.Node,
+  isLoading: boolean,
 }

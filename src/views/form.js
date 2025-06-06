@@ -149,6 +149,7 @@ export const FormView = () => {
           value={value}
           onChange={onChange}
           onUpload={onUpload}
+          isLoading={isNavigateNext}
         >
           <Text.Header>{question.Prompt}</Text.Header>
           {question.Help && <Text.Body>{question.Help}</Text.Body>}

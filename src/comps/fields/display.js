@@ -10,6 +10,7 @@ export const DisplayField = ({
   field,
   onChange,
   children,
+  isLoading,
 }: FormFieldProps) => {
   return (
     <Form.Outer>
@@ -19,7 +20,14 @@ export const DisplayField = ({
           <Button
             primary
             type="submit"
-            Icon={field.button ? field.button.Icon : Icon.Tick}
+            disabled={isLoading}
+            Icon={
+              field.button
+                ? field.button.showLoading && isLoading
+                  ? Icon.LoadingSpinner
+                  : field.button.Icon
+                : Icon.Tick
+            }
           >
             {field.button ? field.button.text : 'OK'}
           </Button>

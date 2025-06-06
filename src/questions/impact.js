@@ -63,7 +63,10 @@ export const IMPACT_QUESTIONS: Array<Field> = [
       { label: 'No', value: 'NO' },
       { label: 'Yes, Aboriginal', value: 'YES_ABORIGINAL' },
       { label: 'Yes, Torres Strait Islander', value: 'YES_TSI' },
-      { label: 'Yes, Aboriginal and Torres Strait Islander', value: 'YES_ABORIGINAL_AND_TSI' },
+      {
+        label: 'Yes, Aboriginal and Torres Strait Islander',
+        value: 'YES_ABORIGINAL_AND_TSI',
+      },
       { label: 'Prefer not to answer', value: 'PREFER_NOT_TO_ANSWER' },
       { label: 'Not Stated', value: 'NOT_STATED' },
     ],
@@ -204,7 +207,8 @@ export const IMPACT_QUESTIONS: Array<Field> = [
   },
   {
     name: 'COMMUNITY_ORGANISATION_REFERRER',
-    askCondition: (data: Data) => data.REFERRER_TYPE == 'COMMUNITY_ORGANISATION',
+    askCondition: (data: Data) =>
+      data.REFERRER_TYPE == 'COMMUNITY_ORGANISATION',
     stage: 5,
     required: true,
     Prompt: <span>Which community organisation referred you?</span>,
