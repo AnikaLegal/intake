@@ -12,13 +12,13 @@ const isEvictionIssue = (data: Data) =>
 const notCentrelinkSupport = (data: Data) => !data.CENTRELINK_SUPPORT
 const ineligibleCriteria = (data: Data) =>
   notCentrelinkSupport(data) && (
-  (data.NUMBER_OF_DEPENDENTS === 0 && data.WEEKLY_HOUSEHOLD_INCOME > 1731) ||
-  (data.NUMBER_OF_DEPENDENTS === 1 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
-  (data.NUMBER_OF_DEPENDENTS === 2 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
-  (data.NUMBER_OF_DEPENDENTS === 3 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
-  (data.NUMBER_OF_DEPENDENTS === 4 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
-  (data.NUMBER_OF_DEPENDENTS === 5 && data.WEEKLY_HOUSEHOLD_INCOME > 2981)) && 
-    data.ELIGIBILITY_CIRCUMSTANCES === null
+    (data.NUMBER_OF_DEPENDENTS === 0 && data.WEEKLY_HOUSEHOLD_INCOME > 1731) ||
+    (data.NUMBER_OF_DEPENDENTS === 1 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
+    (data.NUMBER_OF_DEPENDENTS === 2 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
+    (data.NUMBER_OF_DEPENDENTS === 3 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
+    (data.NUMBER_OF_DEPENDENTS === 4 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
+    (data.NUMBER_OF_DEPENDENTS === 5 && data.WEEKLY_HOUSEHOLD_INCOME > 2981)) &&
+  data.ELIGIBILITY_CIRCUMSTANCES === null
 
 export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
@@ -28,7 +28,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     required: true,
     type: FIELD_TYPES.DISPLAY,
     Prompt: <span>
-      Anika Legal can help you with evictions if you believe the eviction is retaliatory. 
+      Anika Legal can help you with evictions if you believe the eviction is retaliatory.
     </span>,
     Help: (
       <span>
