@@ -11,24 +11,14 @@ const isEvictionIssue = (data: Data) =>
   data.ISSUES.includes('EVICTION_RETALIATORY')
 const notCentrelinkSupport = (data: Data) => !data.CENTRELINK_SUPPORT
 const ineligibleCriteria = (data: Data) =>
-  (data.NUMBER_OF_DEPENDENTS === 0 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 1731 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 1 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 2 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 3 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-    data.APPLELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 4 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 5 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2981 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null)
+  notCentrelinkSupport(data) && (
+  (data.NUMBER_OF_DEPENDENTS === 0 && data.WEEKLY_HOUSEHOLD_INCOME > 1731) ||
+  (data.NUMBER_OF_DEPENDENTS === 1 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
+  (data.NUMBER_OF_DEPENDENTS === 2 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
+  (data.NUMBER_OF_DEPENDENTS === 3 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
+  (data.NUMBER_OF_DEPENDENTS === 4 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
+  (data.NUMBER_OF_DEPENDENTS === 5 && data.WEEKLY_HOUSEHOLD_INCOME > 2981)) && 
+    data.ELIGIBILITY_CIRCUMSTANCES === null
 
 export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
@@ -76,7 +66,6 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'NUMBER_OF_DEPENDENTS',
     stage: 1,
-    askCondition: notCentrelinkSupport,
     required: true,
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>How many dependents do you have?</span>,
@@ -92,7 +81,6 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'ELIGIBILITY_CIRCUMSTANCES',
     stage: 1,
-    askCondition: notCentrelinkSupport,
     required: false,
     type: FIELD_TYPES.CHOICE_MULTI,
     skipText: 'None of the above apply to me',
