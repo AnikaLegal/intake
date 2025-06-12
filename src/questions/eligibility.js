@@ -27,13 +27,16 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.DISPLAY,
-    Prompt: <span>
-      Anika Legal can help you with evictions if you believe the eviction is retaliatory.
-    </span>,
+    Prompt: (
+      <span>
+        Anika Legal can only help you with evictions if you believe the eviction is retaliatory.
+      </span>
+    ),
     Help: (
       <span>
-        If your eviction isn't retaliatory, follow the link below to see what
-        other help is available in your area [Link to VLA]. Otherwise please continue.
+        If your eviction isn't retaliatory, see what <a
+          href="https://www.legalaid.vic.gov.au/">other legal help</a> is
+        available in your area. Otherwise please continue.
       </span>
     ),
     button: { text: 'Continue', Icon: null },
