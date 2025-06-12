@@ -5,7 +5,8 @@ import * as React from 'react'
 import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import type { Field, Data } from 'types'
 
-const isEvictionIssue = (data: Data) => data.ISSUES.includes('EVICTION')
+const isEvictionIssue = (data: Data) =>
+  data.ISSUES.includes('EVICTION_RETALIATORY')
 const isEvictionIssueWithDate = (data: Data) =>
   isEvictionIssue(data) && data.EVICTIONS_IS_VCAT_DATE
 

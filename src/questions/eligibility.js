@@ -7,6 +7,8 @@ import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
 import { ISSUE_QUESTIONS } from './issues'
 
+const isEvictionIssue = (data: Data) =>
+  data.ISSUES.includes('EVICTION_RETALIATORY')
 const notCentrelinkSupport = (data: Data) => !data.CENTRELINK_SUPPORT
 const ineligibleCriteria = (data: Data) =>
   (data.NUMBER_OF_DEPENDENTS === 0 &&
@@ -30,6 +32,23 @@ const ineligibleCriteria = (data: Data) =>
 
 export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
+    name: 'PRE_EVICTION_NOTICE',
+    stage: 1,
+    askCondition: isEvictionIssue,
+    required: true,
+    type: FIELD_TYPES.DISPLAY,
+    Prompt: <span>
+      Anika Legal can help you with evictions if you believe the eviction is retaliatory. 
+    </span>,
+    Help: (
+      <span>
+        If your eviction isn't retaliatory, follow the link below to see what
+        other help is available in your area [Link to VLA]. Otherwise please continue.
+      </span>
+    ),
+    button: { text: 'Continue', Icon: null },
+  },
+  {
     name: 'ELIGIBILITY_INTRO',
     stage: 1,
     required: true,
@@ -38,7 +57,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     Help: (
       <span>
         Before we ask you more about what you need help with, we need to check
-        you're eligibile for our service.
+        you're eligible for our service.
       </span>
     ),
     button: { text: 'Continue', Icon: null },
