@@ -92,6 +92,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
         label: 'You live in public housing or community housing',
         value: 'HOUSING',
       },
+      { label: 'You are a single parent', value: 'SINGLE_PARENT' },
       { label: 'You have a mental illness', value: 'MENTAL_ILLNESS' },
       {
         label: 'You have a intellectual disability',
