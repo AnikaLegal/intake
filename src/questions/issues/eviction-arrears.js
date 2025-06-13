@@ -6,11 +6,11 @@ import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import type { Field, Data } from 'types'
 
 const isEvictionIssue = (data: Data) =>
-  data.ISSUES.includes('EVICTION_RETALIATORY')
+  data.ISSUES.includes('EVICTION_ARREARS')
 const isEvictionIssueWithDate = (data: Data) =>
   isEvictionIssue(data) && data.EVICTIONS_IS_VCAT_DATE
 
-export const EVICTION_QUESTIONS: Array<Field> = [
+export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
   {
     name: 'EVICTIONS_INTRO',
     stage: 2,
