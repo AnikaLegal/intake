@@ -12,16 +12,15 @@ export const IneligibleAlreadyRemovedView = () => {
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          Unfortunately we are currently only able to help those who have not
-          been forcibly evicted yet.
+          Unfortunately, we are unable to assist if you have already been
+          evicted from the property.
         </Text.Header>
         <Text.Body splash>
-          If you wish to enquire further you can email us at
-          contact@anikalegal.com
+          For legal help, follow the link below to see what is available in your area.
         </Text.Body>
         <Splash.ButtonGroup>
-          <a href={LINKS.HOME}>
-            <Splash.Button last>Return home</Splash.Button>
+          <a href={LINKS.VIC_LEGAL_AID}>
+            <Splash.Button>Legal centres</Splash.Button>
           </a>
         </Splash.ButtonGroup>
       </Splash.Content>
