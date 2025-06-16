@@ -8,11 +8,11 @@ import type { Field, Data } from 'types'
 const isEvictionIssue = (data: Data) =>
   data.ISSUES.includes('EVICTION_ARREARS')
 const isEvictionIssueWithDate = (data: Data) =>
-  isEvictionIssue(data) && data.EVICTIONS_IS_VCAT_DATE
+  isEvictionIssue(data) && data.EVICTION_ARREARS_IS_VCAT_DATE
 
 export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
   {
-    name: 'EVICTIONS_INTRO',
+    name: 'EVICTION_ARREARS_INTRO',
     stage: 2,
     askCondition: isEvictionIssue,
 
@@ -29,11 +29,11 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
   },
   // Eligibility questions
   {
-    name: 'EVICTIONS_IS_ALREADY_REMOVED',
+    name: 'EVICTION_ARREARS_IS_ALREADY_REMOVED',
     stage: 2,
     askCondition: isEvictionIssue,
     effect: async (data: Data) => {
-      if (data.EVICTIONS_IS_ALREADY_REMOVED) {
+      if (data.EVICTION_ARREARS_IS_ALREADY_REMOVED) {
         return ROUTES.INELIGIBLE_EVICTED
       }
     },
@@ -46,11 +46,11 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     Prompt: <span>Have you been removed from your home?</span>,
   },
   {
-    name: 'EVICTIONS_HAS_NOTICE',
+    name: 'EVICTION_ARREARS_HAS_NOTICE',
     stage: 2,
     askCondition: isEvictionIssue,
     effect: async (data: Data) => {
-      if (!data.EVICTIONS_HAS_NOTICE) {
+      if (!data.EVICTION_ARREARS_HAS_NOTICE) {
         return ROUTES.INELIGIBLE_NO_EVICTIONS_NOTICE
       }
     },
@@ -74,7 +74,7 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'EVICTIONS_DOCUMENTS_UPLOAD',
+    name: 'EVICTION_ARREARS_DOCUMENTS_UPLOAD',
     stage: 2,
     askCondition: isEvictionIssue,
     required: true,
@@ -87,11 +87,11 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'EVICTIONS_IS_UNPAID_RENT',
+    name: 'EVICTION_ARREARS_IS_UNPAID_RENT',
     stage: 2,
     askCondition: isEvictionIssue,
     effect: async (data: Data) => {
-      if (!data.EVICTIONS_IS_UNPAID_RENT) {
+      if (!data.EVICTION_ARREARS_IS_UNPAID_RENT) {
         return ROUTES.INELIGIBLE_WRONG_REASON
       }
     },
@@ -108,7 +108,7 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'EVICTIONS_IS_VCAT_DATE',
+    name: 'EVICTION_ARREARS_IS_VCAT_DATE',
     stage: 2,
     askCondition: isEvictionIssue,
     required: true,
@@ -122,11 +122,11 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'EVICTIONS_VCAT_DATE',
+    name: 'EVICTION_ARREARS_VCAT_DATE',
     stage: 2,
     askCondition: isEvictionIssueWithDate,
     effect: async (data: Data) => {
-      var userDate = Date.parse(data.EVICTIONS_VCAT_DATE)
+      var userDate = Date.parse(data.EVICTION_ARREARS_VCAT_DATE)
       var currentDate = Date.now()
       var fortnightAway = currentDate + 12096e5 // 14 days in milliseconds
       if (userDate <= fortnightAway) {
@@ -139,7 +139,7 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     Prompt: <span>What date is the VCAT hearing?</span>,
   },
   {
-    name: 'EVICTIONS_NOTICE_VACATE_DATE',
+    name: 'EVICTION_ARREARS_NOTICE_VACATE_DATE',
     stage: 2,
     askCondition: isEvictionIssue,
     required: true,
@@ -156,7 +156,7 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'EVICTIONS_NOTICE_SEND_DATE',
+    name: 'EVICTION_ARREARS_NOTICE_SEND_DATE',
     stage: 2,
     askCondition: isEvictionIssue,
     required: true,
@@ -174,7 +174,7 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'EVICTIONS_DOC_DELIVERY_TIME_NOTICE_TO_VACATE',
+    name: 'EVICTION_ARREARS_DOC_DELIVERY_TIME_NOTICE_TO_VACATE',
     stage: 2,
     askCondition: isEvictionIssue,
     required: true,
@@ -186,7 +186,7 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'EVICTIONS_PAYMENT_FAIL_REASON',
+    name: 'EVICTION_ARREARS_PAYMENT_FAIL_REASON',
     stage: 2,
     askCondition: isEvictionIssue,
     required: true,
@@ -207,7 +207,7 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     ],
   },
   {
-    name: 'EVICTIONS_PAYMENT_FAIL_DESCRIPTION',
+    name: 'EVICTION_ARREARS_PAYMENT_FAIL_DESCRIPTION',
     stage: 2,
     askCondition: isEvictionIssue,
     required: false,
