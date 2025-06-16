@@ -16,4 +16,5 @@ export const LINKS = {
   BONDS_INFO: `${SERVER}/services/bond-recovery/`,
   CLOSED_CONTACT: `${SERVER}/closed-contact/`,
   BONDS_RESOURCES: 'https://www.anikalegal.com/blog/bonds-and-bond-recovery/',
+  VIC_LEGAL_AID: 'https://www.legalaid.vic.gov.au/',
 }
