@@ -6,9 +6,8 @@ import { api } from 'api'
 import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
 import { ISSUE_QUESTIONS } from './issues'
+import { isRetaliatoryEvictionIssue } from './issues/eviction-retaliatory'
 
-const isEvictionIssue = (data: Data) =>
-  data.ISSUES.includes('EVICTION_RETALIATORY')
 const notCentrelinkSupport = (data: Data) => !data.CENTRELINK_SUPPORT
 const ineligibleCriteria = (data: Data) =>
   notCentrelinkSupport(data) && (
@@ -24,7 +23,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'PRE_EVICTION_NOTICE',
     stage: 1,
-    askCondition: isEvictionIssue,
+    askCondition: isRetaliatoryEvictionIssue,
     required: true,
     type: FIELD_TYPES.DISPLAY,
     Prompt: (
@@ -35,8 +34,8 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     Help: (
       <span>
         If your eviction isn't retaliatory, see what <a
-          href="https://www.legalaid.vic.gov.au/">other legal help</a> is
-        available in your area. Otherwise please continue.
+          href={LINKS.VIC_LEGAL_AID}>other legal help</a> is available in your
+        area. Otherwise please continue.
       </span>
     ),
     button: { text: 'Continue', Icon: null },
@@ -69,9 +68,15 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'NUMBER_OF_DEPENDENTS',
     stage: 1,
-    required: true,
+    required: false,
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>How many dependents do you have?</span>,
+    skipText: 'I do not have any dependants',
+    effect: async (data: Data) => {
+      if (!data.NUMBER_OF_DEPENDENTS) {
+        data.NUMBER_OF_DEPENDENTS = 0
+      }
+    },
   },
   {
     name: 'WEEKLY_HOUSEHOLD_INCOME',
