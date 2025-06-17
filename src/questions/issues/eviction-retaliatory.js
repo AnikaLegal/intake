@@ -12,7 +12,7 @@ const isRetaliatoryReasonOther = (data: Data) =>
   isRetaliatoryEvictionIssue(data) && data.EVICTION_RETALIATORY_RETALIATORY_REASON.includes('Other')
 
 const isEvictionIssueWithDate = (data: Data) =>
-  isRetaliatoryEvictionIssue(data) && data.EVICTION_RETALIATORY_IS_VCAT_DATE
+  isRetaliatoryEvictionIssue(data) && data.EVICTION_RETALIATORY_VCAT_HEARING
 
 export const EVICTION_RETALIATORY_QUESTIONS: Array<Field> = [
   {
