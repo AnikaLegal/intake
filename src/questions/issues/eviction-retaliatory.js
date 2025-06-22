@@ -202,7 +202,7 @@ export const EVICTION_RETALIATORY_QUESTIONS: Array<Field> = [
     effect: async (data: Data) => {
       var userDate = Date.parse(data.EVICTION_RETALIATORY_VCAT_HEARING_DATE)
       var currentDate = Date.now()
-      var fortnightAway = currentDate + (7 * 24 * 60 * 60 * 1000) // 7 days in milliseconds.
+      var fortnightAway = currentDate + (14 * 24 * 60 * 60 * 1000) // 14 days in milliseconds.
       if (userDate <= fortnightAway) {
         return ROUTES.INELIGIBLE_VCAT_HEARING
       }
