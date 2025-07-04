@@ -1,15 +1,15 @@
 // @flow
-import React from 'react'
-import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import React from 'react';
+import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
 
-import { Splash, Text, BigButton } from 'design'
-import { IMAGES, LINKS } from 'consts'
-import { useScrollTop } from 'utils'
+import { IMAGES, LINKS } from 'consts';
+import { BigButton, Splash, Text } from 'design';
+import { useScrollTop } from 'utils';
 
 export const AbandonView = () => {
   useScrollTop()
-  const history = useHistory()
+  const navigate = useNavigate();
   return (
     <Splash.Container left>
       <Splash.Image src={IMAGES.HEROES.DESK_LADY} />
@@ -24,7 +24,7 @@ export const AbandonView = () => {
         </Text.Body>
 
         <Splash.ButtonGroup>
-          <Splash.Button primary onClick={() => history.goBack()}>
+          <Splash.Button primary onClick={() => navigate(-1)}>
             Continue
           </Splash.Button>
           <a href={LINKS.HOME}>

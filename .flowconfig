@@ -1,3 +1,6 @@
+[version]
+0.142.0
+
 [ignore]
 
 [include]
@@ -9,6 +12,7 @@ src/globals.js
 [lints]
 
 [options]
+types_first=false
 module.name_mapper='^analytics' ->'<PROJECT_ROOT>/src/analytics'
 module.name_mapper='^api' ->'<PROJECT_ROOT>/src/api'
 module.name_mapper='^comps' ->'<PROJECT_ROOT>/src/comps'
@@ -21,5 +25,4 @@ module.name_mapper='^styles' ->'<PROJECT_ROOT>/src/styles'
 module.name_mapper='^types' ->'<PROJECT_ROOT>/src/types'
 module.name_mapper='^utils' ->'<PROJECT_ROOT>/src/utils'
 module.name_mapper='^views' ->'<PROJECT_ROOT>/src/views'
-esproposal.optional_chaining=enable
 [strict]

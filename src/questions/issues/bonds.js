@@ -27,7 +27,6 @@ export const BONDS_QUESTIONS: Array<Field> = [
     name: 'BONDS_INTRO',
     stage: 2,
     askCondition: isBondsIssue,
-
     required: true,
     type: FIELD_TYPES.DISPLAY,
     Prompt: <span>Bond recovery</span>,

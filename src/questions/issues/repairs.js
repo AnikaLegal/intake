@@ -95,7 +95,7 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     ],
     Prompt: (
       <span>
-        Our Repairs service focusses on helping renters write a formal
+        Our Repairs service focuses on helping renters write a formal
         compliance request to their real estate agent and/or rental provider.
         Due to limited capacity, we can only provide support once the matter is
         at VCAT stage by providing you with a self-representation guide. We

@@ -1,5 +1,4 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const autoprefixer = require('autoprefixer')
 
 const babelRule = (isDev) => ({
   test: /\.js$/,
@@ -40,26 +39,14 @@ const styleRule = (isDev) => ({
   use: [
     isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
     'css-loader',
-    {
-      loader: 'postcss-loader',
-      options: {
-        ident: 'postcss',
-        plugins: [autoprefixer],
-      },
-    },
+    'postcss-loader',
     'sass-loader',
   ],
 })
 const fileRule = (isDev) => ({
   test: /\.(png|woff|woff2|eot|ttf|svg|pdf)$/,
-  use: [
-    {
-      loader: 'url-loader',
-      options: {
-        limit: 100000,
-      },
-    },
-  ],
+  type: 'asset/resource',
+  dependency: { not: ['url'] },
 })
 
 module.exports = {

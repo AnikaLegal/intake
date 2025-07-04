@@ -1,28 +1,27 @@
 // @flow
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import React, { useEffect, useState } from 'react';
 import {
-  useHistory,
-  useRouteMatch,
-  useParams,
   useLocation,
-} from 'react-router-dom'
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
+import styled from 'styled-components';
 
 // https://intake.anikalegal.com/resume/?sub=*|SUB_ID|*
-import { api } from 'api'
-import { FORM_FIELDS } from 'comps/fields'
-import { ROUTES } from 'consts'
-import { QUESTIONS } from 'questions'
-import { IntakeNavbar } from 'comps'
-import { FadeFooter, Text, FadeInOut, ANIMATION_TIME } from 'design'
-import { useScrollTop, waitSeconds, loadFormData, storeFormData } from 'utils'
-import type { Field, Data } from 'types'
+import { api } from 'api';
+import { IntakeNavbar } from 'comps';
+import { FORM_FIELDS } from 'comps/fields';
+import { ROUTES } from 'consts';
+import { ANIMATION_TIME, FadeFooter, FadeInOut, Text } from 'design';
+import { QUESTIONS } from 'questions';
+import type { Data, Field } from 'types';
+import { loadFormData, storeFormData, useScrollTop, waitSeconds } from 'utils';
 
 export const FormView = () => {
   // Scroll to the top on page change.
   useScrollTop()
-  const history = useHistory()
-  const { url } = useRouteMatch()
+  const navigate = useNavigate();
+  const { pathname } = useLocation()
   // Form data
   const [data, setData] = useState<Data>(loadFormData() || {})
 
@@ -61,7 +60,7 @@ export const FormView = () => {
       // User is looking at some garbage qIdx, send them to next question
       const newIdx = prevQs.length
       const route = ROUTES.build(ROUTES.FORM, { ':qIdx': newIdx }, {})
-      history.push(route)
+      navigate(route)
     }
   }, [qIdx])
 
@@ -90,12 +89,12 @@ export const FormView = () => {
     // Trigger animation.
     effectPromise.then(async (effectNextUrl) => {
       if (effectNextUrl) {
-        history.push(effectNextUrl)
+        navigate(effectNextUrl)
       } else {
         setIsFormVisible(false)
         await waitSeconds(ANIMATION_TIME / 2000)
-        const nextUrl = getNextURL(url, Number(qIdx) + 1)
-        history.push(nextUrl)
+        const nextUrl = getNextURL(pathname, Number(qIdx) + 1)
+        navigate(nextUrl)
         setIsNavigateNext(false)
         setIsFormVisible(true)
       }
@@ -105,10 +104,10 @@ export const FormView = () => {
   const onBack = () => {
     if (qIdx > 0) {
       const route = ROUTES.build(ROUTES.FORM, { ':qIdx': qIdx - 1 }, {})
-      history.push(route)
+      navigate(route)
     } else {
       const route = ROUTES.build(ROUTES.LANDING, {}, {})
-      history.push(route)
+      navigate(route)
     }
   }
   // Progress form to next question
@@ -134,7 +133,7 @@ export const FormView = () => {
   }
   const FormField = FORM_FIELDS[question.type]
   const value = data[question.name]
-  console.log('Form data', data, url)
+  console.log('Form data', data, pathname)
   console.log('Current question', question.name, value)
   if (!FormField) return null
   return (

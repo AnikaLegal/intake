@@ -75,7 +75,9 @@ const SplashButtonGroup = styled.div`
   }
 `
 
-const SplashButton = styled(BigButton)`
+const SplashButton = styled(BigButton).withConfig({
+  shouldForwardProp: (props) => props !== 'last' && props !== 'primary',
+})`
   cursor: pointer;
   margin-right: 30px;
   ${theme.switch({ last: `margin-right: 0;` })}

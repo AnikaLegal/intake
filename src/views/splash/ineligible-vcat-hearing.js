@@ -17,8 +17,9 @@ export const IneligibleVcatHearingView = () => {
           hearing.
         </Text.Header>
         <Text.Body splash>
-          You may wish to contact your local community legal centres who may be
-          better placed to look into your matter.
+          We suggest you contact <a
+          href="https://www.legalaid.vic.gov.au/node/11560">Victoria Legal Aid's Legal
+          Help</a> for advice.
         </Text.Body>
         <Splash.ButtonGroup>
           <a href={LINKS.HOME}>

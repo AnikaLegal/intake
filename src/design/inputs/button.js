@@ -59,7 +59,9 @@ export const BigButton = styled.button`
   }
 `
 
-const _Button = styled.button`
+const _Button = styled('button').withConfig({
+  shouldForwardProp: (props) => props !== 'primary',
+})`
   display: inline-flex;
   align-items: center;
   justify-content: center;

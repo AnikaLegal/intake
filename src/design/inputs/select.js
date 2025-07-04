@@ -57,13 +57,13 @@ const SelectButtonEl = styled.div`
     background-color: ${theme.color.teal.quaternary};
   }
   ${theme.switch({
-    selected: `
+  selected: `
       color: ${theme.color.teal.primary};
       border: 1.5px solid ${theme.color.teal.secondary};
       padding: 7.5px 19.5px;
       background-color: ${theme.color.teal.quaternary};
   `,
-  })}
+})}
 
   @media (max-width: ${theme.screen.mobile}) {
     font-size: 16px;
@@ -74,5 +74,6 @@ const SelectButtonEl = styled.div`
 `
 
 const SelectEl = styled.div`
-  max-width: 380px;
+  min-width: 280px;
+  max-width: 550px;
 `

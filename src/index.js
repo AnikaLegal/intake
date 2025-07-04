@@ -1,12 +1,13 @@
 import React from 'react'
-import { hydrate, render } from 'react-dom'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 
 import 'styles/index.scss'
 import { App } from './app'
 
 const rootEl = document.getElementById('app')
 if (rootEl.hasChildNodes()) {
-  hydrate(<App />, rootEl)
+  const root = hydrateRoot(rootEl, <App />)
 } else {
-  render(<App />, rootEl)
+  const root = createRoot(rootEl)
+  root.render(<App />)
 }

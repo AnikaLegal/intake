@@ -1,24 +1,24 @@
 // @flow
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { useHistory, useLocation } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { api } from 'api'
-import { FORM_FIELDS } from 'comps/fields'
-import { ROUTES } from 'consts'
-import { QUESTIONS } from 'questions'
-import { IntakeNavbar } from 'comps'
-import { FadeFooter, Text, FadeInOut, ANIMATION_TIME } from 'design'
-import { useScrollTop, waitSeconds, loadFormData, storeFormData } from 'utils'
-import type { Field, Data } from 'types'
-import { submission } from '../api/submission'
+import { api } from 'api';
+import { IntakeNavbar } from 'comps';
+import { FORM_FIELDS } from 'comps/fields';
+import { ROUTES } from 'consts';
+import { ANIMATION_TIME, FadeFooter, FadeInOut, Text } from 'design';
+import { QUESTIONS } from 'questions';
+import type { Data, Field } from 'types';
+import { loadFormData, storeFormData, useScrollTop, waitSeconds } from 'utils';
+import { submission } from '../api/submission';
 
 // View used to load client data from the server.
 // https://intake.anikalegal.com/resume/?sub=*|SUB_ID|*
 // http://localhost:3001/resume/?sub=0933d9a8-b8ad-46f5-abce-348eb586e7aa
 export const ResumeView = () => {
   // Scroll to the top on page change.
-  const history = useHistory()
+  const navigate = useNavigate();
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const sub = searchParams.get('sub')
@@ -34,7 +34,7 @@ export const ResumeView = () => {
     }
     promise.then(() => {
       const route = ROUTES.build(ROUTES.FORM, { ':qIdx': 0 }, {})
-      history.push(route)
+      navigate(route)
     })
   }, [])
   return null

@@ -21,7 +21,7 @@ export const IneligibleRepairsVCATStageView = () => {
           what is available in your area.
         </Text.Body>
         <Splash.ButtonGroup>
-          <a href="https://www.legalaid.vic.gov.au/">
+          <a href={LINKS.VIC_LEGAL_AID}>
             <Splash.Button>Legal centres</Splash.Button>
           </a>
         </Splash.ButtonGroup>

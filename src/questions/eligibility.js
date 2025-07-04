@@ -6,29 +6,40 @@ import { api } from 'api'
 import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
 import { ISSUE_QUESTIONS } from './issues'
+import { isRetaliatoryEvictionIssue } from './issues/eviction-retaliatory'
 
 const notCentrelinkSupport = (data: Data) => !data.CENTRELINK_SUPPORT
 const ineligibleCriteria = (data: Data) =>
-  (data.NUMBER_OF_DEPENDENTS === 0 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 1731 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 1 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 2 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2212 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 3 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-    data.APPLELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 4 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2693 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null) ||
-  (data.NUMBER_OF_DEPENDENTS === 5 &&
-    data.WEEKLY_HOUSEHOLD_INCOME > 2981 &&
-    data.ELIGIBILITY_CIRCUMSTANCES === null)
+  notCentrelinkSupport(data) && (
+    (data.NUMBER_OF_DEPENDENTS === 0 && data.WEEKLY_HOUSEHOLD_INCOME > 1731) ||
+    (data.NUMBER_OF_DEPENDENTS === 1 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
+    (data.NUMBER_OF_DEPENDENTS === 2 && data.WEEKLY_HOUSEHOLD_INCOME > 2212) ||
+    (data.NUMBER_OF_DEPENDENTS === 3 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
+    (data.NUMBER_OF_DEPENDENTS === 4 && data.WEEKLY_HOUSEHOLD_INCOME > 2693) ||
+    (data.NUMBER_OF_DEPENDENTS === 5 && data.WEEKLY_HOUSEHOLD_INCOME > 2981)) &&
+  data.ELIGIBILITY_CIRCUMSTANCES === null
 
 export const ELIGIBILITY_QUESTIONS: Array<Field> = [
+  {
+    name: 'PRE_EVICTION_NOTICE',
+    stage: 1,
+    askCondition: isRetaliatoryEvictionIssue,
+    required: true,
+    type: FIELD_TYPES.DISPLAY,
+    Prompt: (
+      <span>
+        Anika Legal can only help you with evictions if you believe the eviction is retaliatory.
+      </span>
+    ),
+    Help: (
+      <span>
+        If your eviction isn't retaliatory, see what <a
+          href={LINKS.VIC_LEGAL_AID}>other legal help</a> is available in your
+        area. Otherwise please continue.
+      </span>
+    ),
+    button: { text: 'Continue', Icon: null },
+  },
   {
     name: 'ELIGIBILITY_INTRO',
     stage: 1,
@@ -38,7 +49,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
     Help: (
       <span>
         Before we ask you more about what you need help with, we need to check
-        you're eligibile for our service.
+        you're eligible for our service.
       </span>
     ),
     button: { text: 'Continue', Icon: null },
@@ -57,10 +68,15 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'NUMBER_OF_DEPENDENTS',
     stage: 1,
-    askCondition: notCentrelinkSupport,
-    required: true,
+    required: false,
     type: FIELD_TYPES.NUMBER,
     Prompt: <span>How many dependents do you have?</span>,
+    skipText: 'I do not have any dependants',
+    effect: async (data: Data) => {
+      if (!data.NUMBER_OF_DEPENDENTS) {
+        data.NUMBER_OF_DEPENDENTS = 0
+      }
+    },
   },
   {
     name: 'WEEKLY_HOUSEHOLD_INCOME',
@@ -73,7 +89,6 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
   {
     name: 'ELIGIBILITY_CIRCUMSTANCES',
     stage: 1,
-    askCondition: notCentrelinkSupport,
     required: false,
     type: FIELD_TYPES.CHOICE_MULTI,
     skipText: 'None of the above apply to me',
@@ -82,6 +97,7 @@ export const ELIGIBILITY_QUESTIONS: Array<Field> = [
         label: 'You live in public housing or community housing',
         value: 'HOUSING',
       },
+      { label: 'You are a single parent', value: 'SINGLE_PARENT' },
       { label: 'You have a mental illness', value: 'MENTAL_ILLNESS' },
       {
         label: 'You have a intellectual disability',

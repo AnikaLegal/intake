@@ -162,16 +162,17 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     choices: [
       { label: 'I want to claim my bond', value: 'BONDS' },
       { label: 'I need something repaired', value: 'REPAIRS' },
-      { label: 'I am being evicted', value: 'INELIGIBLE' },
+      {
+        label: 'I am being evicted',
+        value: 'EVICTION_RETALIATORY',
+      },
       {
         label: 'I want compensation from my landlord',
         value: 'INELIGIBLE_COMPENSATION',
       },
     ],
     effect: async (data: Data) => {
-      if (data.ISSUES === 'INELIGIBLE') {
-        return ROUTES.LEGAL_SCOPE_EVICTED
-      } else if (data.ISSUES === 'INELIGIBLE_COMPENSATION') {
+      if (data.ISSUES === 'INELIGIBLE_COMPENSATION') {
         return ROUTES.LEGAL_SCOPE_COMPENSATION
       }
     },
@@ -182,10 +183,14 @@ export const ABOUT_QUESTIONS: Array<Field> = [
         <a target="_blank" href={LINKS.BONDS_INFO}>
           bond recovery
         </a>{' '}
-        and{' '}
+        {', '}
         <a target="_blank" href={LINKS.REPAIRS_INFO}>
-          rental repairs.
+          rental repairs
         </a>
+        {' and '}
+        <a target="_blank" href={LINKS.EVICTION_INFO}>
+          retaliatory evictions.
+        </a>{' '}
       </span>
     ),
   },
