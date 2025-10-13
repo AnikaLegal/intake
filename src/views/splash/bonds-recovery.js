@@ -12,7 +12,7 @@ export const BondsRecoveryView = () => {
       <Splash.Image src={IMAGES.HEROES.SHRUB_GUY} />
       <Splash.Content>
         <Text.Header splash>
-          Our Bonds Recovery service focusses on helping you negotiate a
+          Our Bonds Recovery service focuses on helping you negotiate a
           settlement with your landlord once they have applied to VCAT to claim
           your bond held at the RTBA.
         </Text.Header>
