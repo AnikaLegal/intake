@@ -130,7 +130,7 @@ export const ABOUT_QUESTIONS: Array<Field> = [
     ),
   },
   {
-    name: 'AVAILIBILITY',
+    name: 'AVAILABILITY',
     stage: 0,
     required: true,
     type: FIELD_TYPES.CHOICE_MULTI,
