@@ -63,8 +63,8 @@ export const LandingView = () => {
 
 function OfficeClosed() {
   const now = moment()
-  const close = moment('2024-12-20')
-  const reopen = moment('2025-01-06')
+  const close = moment('2025-12-19')
+  const reopen = moment('2026-01-05')
   if (now.isSameOrAfter(close, 'day') && now.isBefore(reopen, 'day')) {
     return (
       <WarningBody>
@@ -82,7 +82,8 @@ function OfficeClosed() {
 const WarningBody = styled(Text.Body)`
   background-color: #ffe1a6;
   color: ${theme.color.grey.dark};
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 700;
   line-height: 1.4;
   padding: 1rem;
   border-radius: 10px;
