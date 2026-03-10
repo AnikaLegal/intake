@@ -36,9 +36,7 @@ export const LandingView = () => {
         </ul>
         <Text.Body splash>
           You can have a look at our{' '}
-          <a href="https://www.anikalegal.com/resources/collections-statement/">
-            collection statement
-          </a>{' '}
+          <a href={LINKS.COLLECTIONS_STATEMENT}>collection statement</a>{' '}
           if you have any questions about why we need your information, and what
           we do with it.
         </Text.Body>

@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-S3_BUCKET_URL=s3://storybook.anikalegal.com
+S3_BUCKET_URL=s3://storybook.anikalegal.org.au
 
 mkdir -p story
 cp -R public/static story/static

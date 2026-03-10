@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 
-// https://intake.anikalegal.com/resume/?sub=*|SUB_ID|*
+// https://intake.anikalegal.org.au/resume/?sub=*|SUB_ID|*
 import { api } from 'api';
 import { IntakeNavbar } from 'comps';
 import { FORM_FIELDS } from 'comps/fields';
@@ -23,7 +23,7 @@ export const FormView = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation()
   // Form data
-  const [data, setData] = useState<Data>(loadFormData() || {})
+  const [data, setData] = useState < Data > (loadFormData() || {})
 
   // Handle form animation transition in / out
   const [isFormVisible, setIsFormVisible] = useState(false)
@@ -33,7 +33,7 @@ export const FormView = () => {
 
   // Find the next valid question to ask.
   const { qIdx } = useParams()
-  const [question, setQuestion] = useState<Field | null>(null)
+  const [question, setQuestion] = useState < Field | null > (null)
   useEffect(() => {
     let nextQuestion = null
     const prevQs = []

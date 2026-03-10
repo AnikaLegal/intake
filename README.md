@@ -2,12 +2,15 @@
 
 This is the Anika client intake form frontend.
 
-It is a React/Redux single page app, deployed as a static site which is hosted on AWS S3 at [intake.anikalegal.com](https://intake.anikalegal.com/repairs).
-The app depends on a backend API at [clerk.anikalegal.com](https://clerk.anikalegal.com).
+It is a React/Redux single page app, deployed as a static site which is hosted
+on AWS S3 at [intake.anikalegal.org.au](https://intake.anikalegal.org.au/). The
+app depends on a backend API at [anikalegal.org.au](https://anikalegal.org.au).
 
-Clients visit the webapp from the Anika [website](https://anikalegal.com), looking to get help with their rental repairs issue.
-They have to answer a bunch of questions so that we can begin their case. When they submit their answers, the webapp sends them to the backend,
-which then stores their case info and alerts Anika staff.
+Clients visit the webapp from the Anika [website](https://anikalegal.org.au),
+looking to get help with their rental repairs issue. They have to answer a bunch
+of questions so that we can begin their case. When they submit their answers,
+the webapp sends them to the backend, which then stores their case info and
+alerts Anika staff.
 
 ## Local Development
 
@@ -19,7 +22,8 @@ git rm --cached -r .
 git reset --hard
 ```
 
-Envars are stored in .env and encrypted using transcrypt. You can see encryoted files with `transcrypt --list`.
+Envars are stored in .env and encrypted using transcrypt. You can see encryoted
+files with `transcrypt --list`.
 
 To intialise the repository on cloning run
 
@@ -27,7 +31,8 @@ To intialise the repository on cloning run
 transcrypt -c aes-256-cbc -p $TRANSCRYPT_PASSWORD
 ```
 
-The values of these secrets will be provided to you if you need them. They should be available in the Tech team Bitwarden account.
+The values of these secrets will be provided to you if you need them. They
+should be available in the Tech team Bitwarden account.
 
 You will need Node (prefer v11+) and [yarn](https://yarnpkg.com/en/) installed locally.
 
@@ -46,11 +51,13 @@ yarn dev  # Run dev server on http://localhost:3000
 
 There are two environments, each of which has a corresponding backend:
 
-- [test frontend](https://test-intake.anikalegal.com), talks to [test backend](http://test-clerk.anikalegal.com)
-- [prod frontend](https://intake.anikalegal.com), talks to [prod backend](http://clerk.anikalegal.com)
+- [test frontend](https://intake-staging.anikalegal.org.au), talks to [test
+  backend](http://staging.anikalegal.org.au)
+- [prod frontend](https://intake.anikalegal.org.au), talks to [prod
+  backend](http://anikalegal.org.au)
 
-Each of these environments correspond to a similarly named S3 bucket in the Anika AWS account.
-DNS is managed using Anika's CloudFlare account.
+Each of these environments correspond to a similarly named S3 bucket in the
+Anika AWS account. DNS is managed using Anika's CloudFlare account.
 
 ## Deployment
 
@@ -61,10 +68,13 @@ These branches are used for deployment:
 
 When making a change or bugfix, you should:
 
-- create a feature branch from `develop` called feature/my-branch-name and test it locally
-- merge the branch into `develop` and push to GitHub to trigger a release to the test environment
+- create a feature branch from `develop` called feature/my-branch-name and test
+  it locally
+- merge the branch into `develop` and push to GitHub to trigger a release to the
+  test environment
 - check your changes in the test environment
-- merge the `develop` into `master` and push to GitHub to release your change to prod
+- merge the `develop` into `master` and push to GitHub to release your change to
+  prod
 
 Deployment is run on demand via GitHub Actions using the bash scripts in
 `/scripts`. Deployment can also be run manually using the bash scripts in
@@ -72,14 +82,18 @@ Deployment is run on demand via GitHub Actions using the bash scripts in
 
 ## Errors and Logging
 
-Errors logged using Sentry can be viewed [here](https://sentry.io/organizations/anika-legal/projects/).
+Errors logged using Sentry can be viewed
+[here](https://sentry.io/organizations/anika-legal/projects/).
 
-Sentry is used via `@sentry/browser`. The `ErrorBoundary` component is used to catch and handle these errors.
-The `logException` utilities method can be used in both dev and prod to handle errors and report them to Sentry.
+Sentry is used via `@sentry/browser`. The `ErrorBoundary` component is used to
+catch and handle these errors. The `logException` utilities method can be used
+in both dev and prod to handle errors and report them to Sentry.
 
 ## Project Structure
 
-The general idea is that the root app `App` renders the routes from `routes/`. Each route, defined in `routes/routes.js` renders a view, which can then render components and containers.
+The general idea is that the root app `App` renders the routes from `routes/`.
+Each route, defined in `routes/routes.js` renders a view, which can then render
+components and containers.
 
 ```
 ├── .circleci               CircleCI config
@@ -128,7 +142,10 @@ You can setup FlowJS support in VSCode, which is much better than using the CLI.
 
 ## Linting
 
-Linting is done with [Prettier](https://prettier.io/). Config lives in `.prettierrc`. We also use [eslint](https://eslint.org) in addition to Prettier, config lives in `.eslintrc.js`. ESlint is not used in CI builds - it's just for developer convenience.
+Linting is done with [Prettier](https://prettier.io/). Config lives in
+`.prettierrc`. We also use [eslint](https://eslint.org) in addition to Prettier,
+config lives in `.eslintrc.js`. ESlint is not used in CI builds - it's just for
+developer convenience.
 
 ```bash
 yarn format  # Format JS code (recommended)
@@ -141,10 +158,11 @@ There are no unit tests or integration tests.
 
 ## Storybook
 
-Ths project has [Storybook](https://storybook.js.org/docs/basics/introduction/) setup to allow us to build components independently of their UI.
-Config lives in `.storybook`.
+Ths project has [Storybook](https://storybook.js.org/docs/basics/introduction/)
+setup to allow us to build components independently of their UI. Config lives
+in `.storybook`.
 
-View the prod storybook [here](https://storybook.anikalegal.com/?).
+View the prod storybook [here](https://storybook.anikalegal.org.au/?).
 
 Run storybook on `http://localhost:3001` with
 
