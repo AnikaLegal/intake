@@ -2,8 +2,8 @@
 // All the questions in the questionnaire.
 import * as React from 'react'
 
-import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import { events } from 'analytics'
+import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import { api } from 'api'
 import { storeFormData } from 'utils'
 import type { Field, Data } from 'types'
@@ -19,6 +19,9 @@ export const REPAIRS_QUESTIONS: Array<Field> = [
     askCondition: isRepairIssue,
     required: true,
     type: FIELD_TYPES.DISPLAY,
+    effect: async (data: Data) => {
+      events.onEligibilityComplete()
+    },
     Prompt: <span>Rental repairs</span>,
     Help: (
       <span>

@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { events } from 'analytics'
 import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import type { Field, Data } from 'types'
 
@@ -29,6 +30,9 @@ export const BONDS_QUESTIONS: Array<Field> = [
     askCondition: isBondsIssue,
     required: true,
     type: FIELD_TYPES.DISPLAY,
+    effect: async (data: Data) => {
+      events.onEligibilityComplete()
+    },
     Prompt: <span>Bond recovery</span>,
     Help: (
       <span>

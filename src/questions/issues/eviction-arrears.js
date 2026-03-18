@@ -2,6 +2,7 @@
 // All the questions in the questionnaire.
 import * as React from 'react'
 
+import { events } from 'analytics'
 import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import type { Field, Data } from 'types'
 
@@ -15,9 +16,11 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     name: 'EVICTION_ARREARS_INTRO',
     stage: 2,
     askCondition: isEvictionIssue,
-
     required: true,
     type: FIELD_TYPES.DISPLAY,
+    effect: async (data: Data) => {
+      events.onEligibilityComplete()
+    },
     Prompt: <span>Eviction for unpaid rent</span>,
     Help: (
       <span>
