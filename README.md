@@ -162,8 +162,6 @@ Ths project has [Storybook](https://storybook.js.org/docs/basics/introduction/)
 setup to allow us to build components independently of their UI. Config lives
 in `.storybook`.
 
-View the prod storybook [here](https://storybook.anikalegal.org.au/?).
-
 Run storybook on `http://localhost:3001` with
 
 ```
