@@ -10,20 +10,20 @@ export const events = {
     })
   },
   onFirstSave: () => {
-    // User save the questionnaire for the 1st time
+    // When we first get the user's email and save the form for the first time.
     gtag('event', 'firstSave', {
       event_category: 'questionnaire',
     })
   },
-  // Intake / Section 1 Complete (Basic Details)
-  onBasicDetailsComplete: () => {
-    gtag('event', 'basicDetailsSection', {
+  // Intake / Section 1 Complete (Eligibility)
+  onEligibilityComplete: () => {
+    gtag('event', 'eligibilitySection', {
       event_category: 'questionnaire',
     })
   },
-  // Intake / Section 2 Complete (Eligibility)
-  onEligibilityComplete: () => {
-    gtag('event', 'eligibilitySection', {
+  // Intake / Section 2 Complete (Basic Details)
+  onBasicDetailsComplete: () => {
+    gtag('event', 'basicDetailsSection', {
       event_category: 'questionnaire',
     })
   },

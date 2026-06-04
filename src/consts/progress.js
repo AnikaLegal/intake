@@ -1,8 +1,8 @@
 //@flow
 export const PROGRESS = {
   INTAKE: [
+    'Getting started',
     'About you',
-    'Your eligibility',
     'Your problem',
     'Your home',
     'Your landlord',

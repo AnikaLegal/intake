@@ -19,7 +19,7 @@ const FormOuter = styled.div`
     display: grid;
     padding: 0 16px 0 16px;
     grid-template-columns: auto;
-    grid-template-rows: minmax(100px, min-content) 1fr min-content;
+    grid-template-rows: minmax(120px, min-content) 1fr min-content;
     grid-template-areas:
       '.'
       'main'

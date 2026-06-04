@@ -1,5 +1,7 @@
 //@flow
 // Store user's form data in local storage
+import { tidyData } from 'utils'
+
 const FORM_DATA_KEY = 'intakeFormData'
 
 export const loadFormData = (): Object | void => {
@@ -10,5 +12,6 @@ export const loadFormData = (): Object | void => {
 }
 
 export const storeFormData = (data: Object) => {
-  localStorage.setItem(FORM_DATA_KEY, JSON.stringify(data))
+  const tidy = tidyData(data)
+  localStorage.setItem(FORM_DATA_KEY, JSON.stringify(tidy))
 }

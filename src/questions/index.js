@@ -2,28 +2,29 @@
 // All the questions in the questionnaire.
 import * as React from 'react'
 
-import { FIELD_TYPES, ROUTES, LINKS } from 'consts'
 import { events } from 'analytics'
 import { api } from 'api'
-import { storeFormData } from 'utils'
-import type { Field, Data } from 'types'
+import { FIELD_TYPES, LINKS, ROUTES } from 'consts'
 import { Icon } from 'design'
+import type { Data, Field } from 'types'
+import { storeFormData, tidyData } from 'utils'
 
 import { ABOUT_QUESTIONS } from './about'
+import { ELIGIBILITY_QUESTIONS } from './eligibility'
+import { IMPACT_QUESTIONS } from './impact'
 import { ISSUE_QUESTIONS } from './issues'
 import { LANDLORD_QUESTIONS } from './landlord'
-import { IMPACT_QUESTIONS } from './impact'
 import { PROPERTY_QUESTIONS } from './property'
-import { ELIGIBILITY_QUESTIONS } from './eligibility'
 
 export const QUESTIONS: Array<Field> = [
-  ...ABOUT_QUESTIONS,
   ...ELIGIBILITY_QUESTIONS,
+  ...ABOUT_QUESTIONS,
   ...ISSUE_QUESTIONS,
   ...PROPERTY_QUESTIONS,
   ...LANDLORD_QUESTIONS,
   ...IMPACT_QUESTIONS,
 ]
+
 
 const SUBMIT_QUESTIONS: Field = {
   name: 'SUBMIT',
@@ -40,28 +41,14 @@ const SUBMIT_QUESTIONS: Field = {
   ),
   button: { text: 'Confirm', Icon: Icon.Tick, showLoading: true },
   effect: async (data: Data) => {
-    const finalData = { ...data }
-    // Set all unasked questions to null.
-    for (let q of QUESTIONS) {
-      const isUndef = typeof data[q.name] === 'undefined'
-      const isFailCondition = q.askCondition && !q.askCondition(data)
-      if (isUndef || isFailCondition) {
-        finalData[q.name] = null
-      }
-    }
-    const subId = data['id']
-    let sub
-    if (subId) {
-      // We have already created this submission
-      sub = await api.submission.update(subId, finalData)
-    } else {
-      // This is a new submission
-      sub = await api.submission.create(finalData)
-    }
-    await api.submission.submit(sub.id)
-    // Wipe stored data.
-    storeFormData('')
+    const tidy = tidyData(data)
+    const id = tidy['id']
+    const submission = id ? await api.submission.update(id, tidy) : await api.submission.create(tidy)
+    await api.submission.submit(submission.id)
     events.onFinishIntake()
+
+    // Clean up & finish
+    storeFormData({})
     return ROUTES.SUBMITTED
   },
 }

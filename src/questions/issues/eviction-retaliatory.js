@@ -22,9 +22,6 @@ export const EVICTION_RETALIATORY_QUESTIONS: Array<Field> = [
     askCondition: isRetaliatoryEvictionIssue,
     required: true,
     type: FIELD_TYPES.DISPLAY,
-    effect: async (data: Data) => {
-      events.onEligibilityComplete()
-    },
     Prompt: <span>Retaliatory Eviction</span>,
     Help: (
       <span>

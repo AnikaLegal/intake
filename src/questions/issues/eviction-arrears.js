@@ -18,9 +18,6 @@ export const EVICTION_ARREARS_QUESTIONS: Array<Field> = [
     askCondition: isEvictionIssue,
     required: true,
     type: FIELD_TYPES.DISPLAY,
-    effect: async (data: Data) => {
-      events.onEligibilityComplete()
-    },
     Prompt: <span>Eviction for unpaid rent</span>,
     Help: (
       <span>
