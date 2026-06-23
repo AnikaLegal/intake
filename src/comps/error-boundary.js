@@ -40,7 +40,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <Text.Header>Something broke, sorry!</Text.Header>
           <Text.Body>
             Try refreshing the page. If it's still broken, let us know at
-            contact@anikalegal.com
+            tech@anikalegal.org.au
           </Text.Body>
         </Error>
       )

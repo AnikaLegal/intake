@@ -30,7 +30,7 @@ export const IneligibleView = () => {
             </li>
           </ul>
           If you wish to enquire further you can email us at
-          contact@anikalegal.com
+          contact@anikalegal.org.au
         </Text.Body>
         <Splash.ButtonGroup>
           <a href={LINKS.HOME}>
