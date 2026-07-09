@@ -1,7 +1,6 @@
 //@flow
 export const LINKS = {
   NOTICE_TO_VACATE_PDF: '/static/notice-to-vacate-example.pdf',
-  SERVICES: `${SERVER}/services/`,
   HOME: SERVER,
   TERMS_OF_USE: `${SERVER}/resources/terms-of-use/`,
   PRIVACY_POLICY: `${SERVER}/resources/privacy-policy/`,
