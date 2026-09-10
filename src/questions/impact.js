@@ -184,6 +184,10 @@ export const IMPACT_QUESTIONS: Array<Field> = [
         label: 'Asylum Seeker Resource Centre',
         value: 'Asylum Seeker Resource Centre',
       },
+      {
+        label: 'Hume Riverina Community Legal Service',
+        value: 'Hume Riverina Community Legal Service',
+      },
       { label: 'Other', value: 'Other' },
     ],
   },
