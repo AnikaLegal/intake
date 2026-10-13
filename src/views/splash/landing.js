@@ -61,8 +61,8 @@ export const LandingView = () => {
 
 function OfficeClosed() {
   const now = moment()
-  const close = moment('2025-12-19')
-  const reopen = moment('2026-01-12')
+  const close = moment('2026-12-18')
+  const reopen = moment('2027-01-11')
   if (now.isSameOrAfter(close, 'day') && now.isBefore(reopen, 'day')) {
     return (
       <WarningBody>
