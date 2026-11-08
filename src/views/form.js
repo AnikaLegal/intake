@@ -133,8 +133,6 @@ export const FormView = () => {
   }
   const FormField = FORM_FIELDS[question.type]
   const value = data[question.name]
-  console.log('Form data', data, pathname)
-  console.log('Current question', question.name, value)
   if (!FormField) return null
   return (
     <FormEl>

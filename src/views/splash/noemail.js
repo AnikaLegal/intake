@@ -38,7 +38,6 @@ export const NoEmailView = ({
       if (e) {
         e.preventDefault()
       }
-      console.log(inputs)
     }
     const handleInputChange = (e) => {
       e.persist()
@@ -85,7 +84,6 @@ export const NoEmailView = ({
       const data = { ...inputs }
       await api.noemail.create(data)
       setFormState(true)
-      console.log('Authenticated', inputs)
       handleReset()
     } else {
       console.log('errors try again', validationErrors)

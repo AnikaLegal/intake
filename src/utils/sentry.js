@@ -7,6 +7,9 @@ if (SENTRY_JS_DSN) {
     dsn: SENTRY_JS_DSN,
     release: SENTRY_RELEASE,
     environment: SENTRY_ENV,
+    // Console output can hold client details, so don't send it to Sentry
+    // as breadcrumbs.
+    integrations: [Sentry.breadcrumbsIntegration({ console: false })],
   })
 }
 
