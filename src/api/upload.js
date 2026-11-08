@@ -4,6 +4,22 @@ import camelize from 'camelize'
 import { http } from './http'
 import type { Upload } from 'types'
 
+// Longest response body we keep on an UploadError, so a large error page
+// doesn't bloat the Sentry event.
+const MAX_BODY_LENGTH = 500
+
+export class UploadError extends Error {
+  status: number
+  responseBody: string
+
+  constructor(status: number, responseBody: string) {
+    super(`Upload failed with status ${status}`)
+    this.name = 'UploadError'
+    this.status = status
+    this.responseBody = responseBody
+  }
+}
+
 export const upload = {
   // Upload a new file upload to a submission.
   create: async (file: File): Promise<Upload> => {
@@ -12,10 +28,15 @@ export const upload = {
     form.append('file', file)
     const request = { method: 'POST', body: form }
     const resp = await fetch(`${SERVER}${url}`, request)
-    // Handle case where user tries to upload corrupt image,
-    // or renames their PDF to mydoc.png and tries to upload that.
-    if (resp.status == 400) {
-      throw 400
+    if (!resp.ok) {
+      // Keep the response body so Sentry shows why the upload failed.
+      let responseBody = ''
+      try {
+        responseBody = (await resp.text()).slice(0, MAX_BODY_LENGTH)
+      } catch (e) {
+        // The status alone is still worth reporting.
+      }
+      throw new UploadError(resp.status, responseBody)
     }
     const data = await resp.json()
     return camelize(data)

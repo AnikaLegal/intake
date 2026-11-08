@@ -64,9 +64,17 @@ export const UploadInput = ({
         setErrors([])
         onChange([...values, upload])
       } catch (err) {
-        logException(err)
+        // A 400 means the server rejected the file itself, which isn't a
+        // fault in our code, so report it as a warning rather than an error.
+        const isRejected = err?.status === 400
+        logException(err, {
+          level: isRejected ? 'warning' : 'error',
+          extra: { status: err?.status, responseBody: err?.responseBody },
+        })
         setLoading(false)
-        setErrors([`Could not upload ${f.name}`])
+        setErrors([
+          `We couldn't upload ${f.name}. Please try again or choose a different file.`,
+        ])
       }
     }
   }
