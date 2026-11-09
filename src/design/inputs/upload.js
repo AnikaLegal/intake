@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 import type { Upload } from 'types'
 import { IMAGES } from 'consts'
 import { logException } from 'utils'
+import { NO_RESPONSE_STATUS } from 'api/upload'
 
 import { Button } from './button'
 import { theme } from '../theme'
@@ -13,6 +14,10 @@ import { ErrorMessage } from '../message'
 const ALLOWED_FILE_TYPES = ['png', 'jpg', 'jpeg', 'pdf', 'docx']
 const IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg']
+// nginx rejects requests over 60 MB (client_max_body_size in clerk's infra).
+// Stay well under it, since the form data adds to the file's size.
+const MAX_FILE_SIZE_MB = 50
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
 
 type Props = {
   values: Array<Upload>,
@@ -55,6 +60,10 @@ export const UploadInput = ({
       const allowedList = ALLOWED_FILE_TYPES.map((t) => `.${t}`).join(', ')
       const msg = `The file ${f.name} cannot be uploaded. Please attach only files of type ${allowedList}.`
       setErrors([msg])
+    } else if (f.size > MAX_FILE_SIZE_BYTES) {
+      setErrors([
+        `The file ${f.name} is too large. Please choose a file smaller than ${MAX_FILE_SIZE_MB} MB.`,
+      ])
     } else {
       // Accept the file, upload it.
       setLoading(true)
@@ -64,12 +73,22 @@ export const UploadInput = ({
         setErrors([])
         onChange([...values, upload])
       } catch (err) {
-        // A 400 means the server rejected the file itself, which isn't a
-        // fault in our code, so report it as a warning rather than an error.
+        // A 400 means the server rejected the file itself, and no response
+        // usually means the client's network dropped. Neither is a fault in
+        // our code, so report them as warnings rather than errors.
         const isRejected = err?.status === 400
+        const isNoResponse = err?.status === NO_RESPONSE_STATUS
         logException(err, {
-          level: isRejected ? 'warning' : 'error',
-          extra: { status: err?.status, responseBody: err?.responseBody },
+          level: isRejected || isNoResponse ? 'warning' : 'error',
+          // File size and type help tell a too-large file from a dropped
+          // connection. Don't record the file name.
+          extra: {
+            status: err?.status,
+            responseBody: err?.responseBody,
+            fileSize: f.size,
+            fileType: f.type,
+            online: navigator.onLine,
+          },
         })
         setLoading(false)
         setErrors([

@@ -12,13 +12,17 @@ export class UploadError extends Error {
   status: number
   responseBody: string
 
-  constructor(status: number, responseBody: string) {
-    super(`Upload failed with status ${status}`)
+  constructor(status: number, responseBody: string, message?: string) {
+    super(message || `Upload failed with status ${status}`)
     this.name = 'UploadError'
     this.status = status
     this.responseBody = responseBody
   }
 }
+
+// Status for an upload that got no response we can read: the network dropped,
+// or the browser hid a response that had no CORS headers.
+export const NO_RESPONSE_STATUS = 0
 
 export const upload = {
   // Upload a new file upload to a submission.
@@ -27,7 +31,18 @@ export const upload = {
     const form = new FormData()
     form.append('file', file)
     const request = { method: 'POST', body: form }
-    const resp = await fetch(`${SERVER}${url}`, request)
+    let resp
+    try {
+      resp = await fetch(`${SERVER}${url}`, request)
+    } catch (e) {
+      // The browser's own message ("Failed to fetch", "Load failed") is all
+      // we get here.
+      throw new UploadError(
+        NO_RESPONSE_STATUS,
+        '',
+        `Upload failed with no response (${e?.message || 'unknown'})`
+      )
+    }
     if (!resp.ok) {
       // Keep the response body so Sentry shows why the upload failed.
       let responseBody = ''
