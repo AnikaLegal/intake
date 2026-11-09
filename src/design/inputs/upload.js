@@ -14,8 +14,8 @@ import { ErrorMessage } from '../message'
 const ALLOWED_FILE_TYPES = ['png', 'jpg', 'jpeg', 'pdf', 'docx']
 const IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg']
-// nginx rejects requests over 60 MB (client_max_body_size in clerk's infra).
-// Stay well under it, since the form data adds to the file's size.
+// Check the size before uploading, so a large file gets a clear message
+// instead of a failed upload. The form data adds a little to the file's size.
 const MAX_FILE_SIZE_MB = 50
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
 
